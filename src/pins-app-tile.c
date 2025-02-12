@@ -47,8 +47,6 @@ pins_app_tile_update_appearance (PinsAppTile *self,
     const gchar *title_key;
     gboolean invisible;
 
-    pins_app_icon_set_desktop_file (self->icon, desktop_file);
-
     title_key = _pins_join_key_locale (
         G_KEY_FILE_DESKTOP_KEY_NAME,
         pins_desktop_file_get_locale_for_key (desktop_file,
@@ -77,6 +75,8 @@ pins_app_tile_set_desktop_file (PinsAppTile *self,
 
     g_signal_connect_object (desktop_file, "key-set", G_CALLBACK (key_set_cb),
                              self, G_CONNECT_SWAPPED);
+
+    pins_app_icon_set_desktop_file (self->icon, desktop_file);
 
     pins_app_tile_update_appearance (self, desktop_file);
 }
