@@ -66,7 +66,7 @@ pins_desktop_file_new_from_user_file (GFile *file, GError **error)
         = g_object_new (PINS_TYPE_DESKTOP_FILE, NULL);
     GError *err = NULL;
 
-    desktop_file->user_file = file;
+    desktop_file->user_file = g_object_ref (file);
     desktop_file->system_file = NULL;
     desktop_file->autostart_file = g_file_new_build_filename (
         pins_desktop_file_autostart_path (), g_file_get_basename (file), NULL);
@@ -82,8 +82,6 @@ pins_desktop_file_new_from_user_file (GFile *file, GError **error)
     desktop_file->saved_data
         = g_key_file_to_data (desktop_file->key_file, NULL, NULL);
 
-    g_object_ref (G_OBJECT (desktop_file->user_file));
-
     return desktop_file;
 }
 
@@ -96,25 +94,18 @@ pins_desktop_file_new_from_system_file (GFile *file, GError **error)
 
     desktop_file->user_file = g_file_new_build_filename (
         pins_desktop_file_user_path (), g_file_get_basename (file), NULL);
-    desktop_file->system_file = file;
+    desktop_file->system_file = g_object_ref (file);
     desktop_file->autostart_file = g_file_new_build_filename (
         pins_desktop_file_autostart_path (), g_file_get_basename (file), NULL);
 
     if (g_file_query_exists (desktop_file->user_file, NULL))
-        {
-
-            g_key_file_load_from_file (
-                desktop_file->key_file,
-                g_file_get_path (desktop_file->user_file), KEY_FILE_FLAGS,
-                &err);
-        }
+        g_key_file_load_from_file (desktop_file->key_file,
+                                   g_file_get_path (desktop_file->user_file),
+                                   KEY_FILE_FLAGS, &err);
     else
-        {
-            g_key_file_load_from_file (
-                desktop_file->key_file,
-                g_file_get_path (desktop_file->system_file), KEY_FILE_FLAGS,
-                &err);
-        }
+        g_key_file_load_from_file (desktop_file->key_file,
+                                   g_file_get_path (desktop_file->system_file),
+                                   KEY_FILE_FLAGS, &err);
     if (err != NULL)
         {
             g_propagate_error (error, err);
@@ -131,9 +122,6 @@ pins_desktop_file_new_from_system_file (GFile *file, GError **error)
 
     desktop_file->saved_data
         = g_key_file_to_data (desktop_file->key_file, NULL, NULL);
-
-    g_object_ref (G_OBJECT (desktop_file->user_file));
-    g_object_ref (G_OBJECT (desktop_file->system_file));
 
     return desktop_file;
 }
@@ -154,7 +142,6 @@ pins_desktop_file_new_from_system_file (GFile *file, GError **error)
 PinsDesktopFile *
 pins_desktop_file_new_from_file (GFile *file, GError **error)
 {
-    PinsDesktopFile *desktop_file;
     gboolean file_is_user_file
         = g_file_equal (g_file_get_parent (file),
                         g_file_new_for_path (pins_desktop_file_user_path ()));
@@ -163,8 +150,6 @@ pins_desktop_file_new_from_file (GFile *file, GError **error)
         return pins_desktop_file_new_from_user_file (file, error);
     else
         return pins_desktop_file_new_from_system_file (file, error);
-
-    return desktop_file;
 }
 
 gboolean
