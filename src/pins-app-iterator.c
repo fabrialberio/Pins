@@ -136,6 +136,36 @@ pins_app_iterator_update_duplicates (GListModel *model, guint position,
         }
 }
 
+void
+pins_app_iterator_load (PinsAppIterator *self)
+{
+    GListStore *dir_list_store;
+    GtkFlattenListModel *flattened_dir_list;
+    g_auto (GStrv) paths;
+
+    paths = pins_desktop_file_search_paths ();
+    dir_list_store = g_list_store_new (GTK_TYPE_DIRECTORY_LIST);
+
+    for (int i = 0; i < g_strv_length (paths); i++)
+        {
+            GFile *file = g_file_new_for_path (paths[i]);
+            GtkDirectoryList *dir_list
+                = gtk_directory_list_new (DIR_LIST_FILE_ATTRIBUTES, file);
+
+            g_list_store_append (dir_list_store, dir_list);
+        }
+
+    flattened_dir_list
+        = gtk_flatten_list_model_new (G_LIST_MODEL (dir_list_store));
+
+    gtk_filter_list_model_set_model (self->filter_model,
+                                     G_LIST_MODEL (flattened_dir_list));
+
+    g_signal_connect_object (
+        G_LIST_MODEL (flattened_dir_list), "items-changed",
+        G_CALLBACK (pins_app_iterator_update_duplicates), self, 0);
+}
+
 gboolean
 pins_app_iterator_filter_match_func (gpointer file_info, gpointer user_data)
 {
@@ -245,42 +275,6 @@ desktop_file_model_items_changed_cb (GListModel *model, guint position,
     g_list_model_items_changed (G_LIST_MODEL (self), position, removed, added);
 }
 
-void
-pins_app_iterator_set_directory_list (PinsAppIterator *self,
-                                      GListModel *dir_list)
-{
-    gtk_filter_list_model_set_model (self->filter_model,
-                                     G_LIST_MODEL (dir_list));
-
-    g_signal_connect_object (G_LIST_MODEL (dir_list), "items-changed",
-                             G_CALLBACK (pins_app_iterator_update_duplicates),
-                             self, 0);
-}
-
-void
-pins_app_iterator_set_paths (PinsAppIterator *self, gchar **paths)
-{
-    GListStore *dir_list_store;
-    GtkFlattenListModel *flattened_dir_list;
-
-    dir_list_store = g_list_store_new (GTK_TYPE_DIRECTORY_LIST);
-
-    for (int i = 0; i < g_strv_length (paths); i++)
-        {
-            GFile *file = g_file_new_for_path (paths[i]);
-            GtkDirectoryList *dir_list
-                = gtk_directory_list_new (DIR_LIST_FILE_ATTRIBUTES, file);
-
-            g_list_store_append (dir_list_store, dir_list);
-        }
-
-    flattened_dir_list
-        = gtk_flatten_list_model_new (G_LIST_MODEL (dir_list_store));
-
-    pins_app_iterator_set_directory_list (self,
-                                          G_LIST_MODEL (flattened_dir_list));
-}
-
 static void
 pins_app_iterator_class_init (PinsAppIteratorClass *klass)
 {
@@ -324,8 +318,6 @@ pins_app_iterator_init (PinsAppIterator *self)
     g_signal_connect_object (self->model, "items-changed",
                              G_CALLBACK (desktop_file_model_items_changed_cb),
                              self, 0);
-
-    pins_app_iterator_set_paths (self, pins_desktop_file_search_paths ());
 }
 
 gpointer

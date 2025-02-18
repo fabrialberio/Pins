@@ -114,6 +114,8 @@ pins_app_view_set_app_iterator (PinsAppView *self,
     g_signal_connect_object (app_iterator, "file-created",
                              G_CALLBACK (app_iterator_file_created_cb), self,
                              G_CONNECT_SWAPPED);
+
+    pins_app_iterator_load (app_iterator);
 }
 
 static void
