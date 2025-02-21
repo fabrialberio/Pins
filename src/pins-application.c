@@ -104,7 +104,9 @@ pins_application_about_action (GSimpleAction *action, GVariant *parameter,
           "oscfdezdz (Spanish)\n "
           "gregorni (German)\n "
           "Mejans (Occitan)\n "
-          "Vistaus (Dutch)";
+          "Vistaus (Dutch)\n"
+          "johnpeteras19 (Portoguese) <johnppetersa@gmail.com>\n"
+          "Fabrizio Alberio (Italian)";
 
     PinsApplication *self = user_data;
     GtkWindow *window = NULL;
