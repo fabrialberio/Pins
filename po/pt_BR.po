@@ -1,0 +1,172 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the pinapp package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: pinapp\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-05 19:17+0100\n"
+"PO-Revision-Date: 2025-02-19 08:49-0300\n"
+"Last-Translator: johnpeter19 <johnppetersa@gmail.com>\n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+
+#: data/io.github.fabrialberio.pinapp.desktop.in:3 src/pins-window.ui:14
+msgid "Pins"
+msgstr "Pinos"
+
+#: data/io.github.fabrialberio.pinapp.desktop.in:4
+#: data/io.github.fabrialberio.pinapp.appdata.xml.in:9
+msgid "Create and edit app shortcuts"
+msgstr "Crie e edite atalhos de aplicativos"
+
+#: data/io.github.fabrialberio.pinapp.desktop.in:11
+msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
+msgstr "Gnome; gtk; apps; atalhos; ícones;"
+
+#: data/io.github.fabrialberio.pinapp.appdata.xml.in:15
+msgid "Pins allows you to customize your app menu by editing .desktop files."
+msgstr "Pinos permitem que você personalize o menu do aplicativo editando arquivos .DESKTOP."
+
+#: data/io.github.fabrialberio.pinapp.appdata.xml.in:16
+msgid "Some of the things you can do are:"
+msgstr "Algumas das coisas que você pode fazer são:"
+
+#: data/io.github.fabrialberio.pinapp.appdata.xml.in:18
+msgid "changing an app icon that doesn't fit in with your theme,"
+msgstr "Alterar um ícone de aplicativo que não se encaixa no seu tema,"
+
+#: data/io.github.fabrialberio.pinapp.appdata.xml.in:19
+msgid "creating custom shortcuts to websites,"
+msgstr "criando atalhos personalizados para sites,"
+
+#: data/io.github.fabrialberio.pinapp.appdata.xml.in:20
+msgid "hiding apps you don't want to see,"
+msgstr "escondendo aplicativos que você não quer ver,"
+
+#: data/io.github.fabrialberio.pinapp.appdata.xml.in:21
+msgid "editing properties in .desktop files."
+msgstr "Editando propriedades nos arquivos .desktop."
+
+#: src/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Em geral"
+
+#: src/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Mostre atalhos"
+
+#: src/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Desistir"
+
+#: src/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Add new app"
+msgstr "Adicione novo aplicativo"
+
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:101
+msgid "Add new app"
+msgstr "Adicione novo aplicativo"
+
+#: src/pins-app-view.ui:21
+msgid "Show menu"
+msgstr "Mostrar menu"
+
+#: src/pins-app-view.ui:28
+msgid "Search"
+msgstr "Procurar"
+
+#: src/pins-app-view.ui:74
+msgid "Loading apps…"
+msgstr "Carregando aplicativos…"
+
+#: src/pins-app-view.ui:89
+msgid "No apps found"
+msgstr "Nenhum aplicativo encontrado"
+
+#: src/pins-app-view.ui:120
+msgid "_Keyboard Shortcuts"
+msgstr "_Atalhos de teclado"
+
+#: src/pins-app-view.ui:124
+msgid "_About Pins"
+msgstr "_ Sobre os pinos"
+
+#: src/pins-file-view.ui:20
+msgid "Delete"
+msgstr "Deletar"
+
+#: src/pins-file-view.ui:64
+msgid "Edit icon"
+msgstr "Editar ícone"
+
+#: src/pins-file-view.ui:86
+msgid "Load icon from file"
+msgstr "Carregue o ícone do arquivo"
+
+#: src/pins-file-view.ui:131
+msgid "Autostart"
+msgstr "Autostart"
+
+#: src/pins-file-view.ui:134
+msgid "Launch this application on login"
+msgstr "Inicie este aplicativo no login"
+
+#: src/pins-file-view.ui:150
+msgid "Invisible"
+msgstr "Invisível"
+
+#: src/pins-file-view.ui:153
+msgid "Hide this application in the app menu"
+msgstr "Ocultar este aplicativo no menu do aplicativo"
+
+#: src/pins-file-view.ui:185
+msgid "Add key"
+msgstr "Adicione a chave"
+
+#: src/pins-key-row.ui:9
+msgid "Erase changes"
+msgstr "Apagar mudanças"
+
+#: src/pins-key-row.ui:21
+msgid "Remove key"
+msgstr "Remova a chave"
+
+#: src/pins-key-row.ui:32
+msgid "Select locale"
+msgstr "Selecione Locais"
+
+#: src/pins-add-key-dialog.c:79
+msgid "Add new key"
+msgstr "Adicione nova chave"
+
+#: src/pins-add-key-dialog.c:84
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: src/pins-add-key-dialog.c:85
+msgid "_Add"
+msgstr "_Adicionar"
+
+#: src/pins-add-key-dialog.c:94
+msgid "Key"
+msgstr "Chave"
+
+#: src/pins-file-view.c:349
+msgid "Load icon"
+msgstr "Carregar ícone"
+
+#: src/pins-key-row.c:26
+msgid "(Unlocalized)"
+msgstr "(Não localizado)"
