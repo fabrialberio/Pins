@@ -263,6 +263,10 @@ pins_file_view_get_desktop_file (PinsFileView *self)
 static void
 pins_file_view_dispose (GObject *object)
 {
+    PinsFileView *self = PINS_FILE_VIEW (object);
+
+    g_clear_object (&self->desktop_file);
+
     gtk_widget_dispose_template (GTK_WIDGET (object), PINS_TYPE_FILE_VIEW);
 
     G_OBJECT_CLASS (pins_file_view_parent_class)->dispose (object);
