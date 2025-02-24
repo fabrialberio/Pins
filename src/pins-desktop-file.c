@@ -60,60 +60,47 @@ static GParamSpec *properties[N_PROPS];
 static guint signals[N_SIGNALS];
 
 PinsDesktopFile *
-pins_desktop_file_new_from_user_file (GFile *file, GError **error)
+pins_desktop_file_new_full (GFile *user_file, GFile *system_file,
+                            GError **error)
 {
-    PinsDesktopFile *desktop_file
-        = g_object_new (PINS_TYPE_DESKTOP_FILE, NULL);
-    GError *err = NULL;
+    PinsDesktopFile *desktop_file = NULL;
+    g_autoptr (GError) err = NULL;
 
-    desktop_file->user_file = g_object_ref (file);
-    desktop_file->system_file = NULL;
-    desktop_file->autostart_file = g_file_new_build_filename (
-        pins_desktop_file_autostart_path (), g_file_get_basename (file), NULL);
+    g_assert_nonnull (user_file);
 
-    g_key_file_load_from_file (desktop_file->key_file, g_file_get_path (file),
-                               KEY_FILE_FLAGS, &err);
-    if (err != NULL)
+    desktop_file = g_object_new (PINS_TYPE_DESKTOP_FILE, NULL);
+    desktop_file->user_file = g_object_ref (user_file);
+    desktop_file->autostart_file
+        = g_file_new_build_filename (pins_desktop_file_autostart_path (),
+                                     g_file_get_basename (user_file), NULL);
+
+    if (system_file != NULL)
         {
-            g_propagate_error (error, err);
-            return NULL;
+            g_assert (!g_strcmp0 (g_file_get_basename (user_file),
+                                  g_file_get_basename (system_file)));
+
+            desktop_file->system_file = g_object_ref (system_file);
+
+            g_key_file_load_from_file (desktop_file->backup_key_file,
+                                       g_file_get_path (system_file),
+                                       KEY_FILE_FLAGS, &err);
+            if (err != NULL)
+                {
+                    g_propagate_error (error, err);
+                    return NULL;
+                }
         }
-
-    desktop_file->saved_data
-        = g_key_file_to_data (desktop_file->key_file, NULL, NULL);
-
-    return desktop_file;
-}
-
-PinsDesktopFile *
-pins_desktop_file_new_from_system_file (GFile *file, GError **error)
-{
-    PinsDesktopFile *desktop_file
-        = g_object_new (PINS_TYPE_DESKTOP_FILE, NULL);
-    GError *err = NULL;
-
-    desktop_file->user_file = g_file_new_build_filename (
-        pins_desktop_file_user_path (), g_file_get_basename (file), NULL);
-    desktop_file->system_file = g_object_ref (file);
-    desktop_file->autostart_file = g_file_new_build_filename (
-        pins_desktop_file_autostart_path (), g_file_get_basename (file), NULL);
 
     if (g_file_query_exists (desktop_file->user_file, NULL))
         g_key_file_load_from_file (desktop_file->key_file,
                                    g_file_get_path (desktop_file->user_file),
                                    KEY_FILE_FLAGS, &err);
-    else
+    else if (system_file != NULL)
         g_key_file_load_from_file (desktop_file->key_file,
                                    g_file_get_path (desktop_file->system_file),
                                    KEY_FILE_FLAGS, &err);
-    if (err != NULL)
-        {
-            g_propagate_error (error, err);
-            return NULL;
-        }
-
-    g_key_file_load_from_file (desktop_file->backup_key_file,
-                               g_file_get_path (file), KEY_FILE_FLAGS, &err);
+    else
+        g_assert_not_reached ();
     if (err != NULL)
         {
             g_propagate_error (error, err);
@@ -127,29 +114,40 @@ pins_desktop_file_new_from_system_file (GFile *file, GError **error)
 }
 
 /**
- * Given a `GFile`, it constructs a `PinsDesktopFile` with the following logic:
+ * Given a `GFile`, it constructs a `PinsDesktopFile` with the following
+ * logic:
  *  - If the file is in the system folder and a file with the same name is
- *    found in the user folder (`USER_APPS_DIR`), `PinsDesktopFile` is created
- *    with both a user and a system `GKeyFile`;
+ *    found in the user folder (`USER_APPS_DIR`), `PinsDesktopFile` is
+ * created with both a user and a system `GKeyFile`;
  *  - If the file is in the system folder and no file with the same name is
  *    found in the user folder, `PinsDesktopFile` is created without a user
  *    `GKeyFile`;
- *  - If the file is in the user folder, `PinsDesktopFile` is created without
- *    a system `GKeyFile`.
+ *  - If the file is in the user folder, `PinsDesktopFile` is created
+ * without a system `GKeyFile`.
  *
  * It is assumed that `file` exists.
  */
 PinsDesktopFile *
-pins_desktop_file_new_from_file (GFile *file, GError **error)
+pins_desktop_file_new (GFile *file, GError **error)
 {
-    gboolean file_is_user_file
+    gboolean file_is_user_file;
+
+    g_assert (g_file_query_exists (file, NULL));
+
+    file_is_user_file
         = g_file_equal (g_file_get_parent (file),
                         g_file_new_for_path (pins_desktop_file_user_path ()));
 
     if (file_is_user_file)
-        return pins_desktop_file_new_from_user_file (file, error);
+        return pins_desktop_file_new_full (file, NULL, error);
     else
-        return pins_desktop_file_new_from_system_file (file, error);
+        {
+            g_autoptr (GFile) user_file
+                = g_file_new_build_filename (pins_desktop_file_user_path (),
+                                             g_file_get_basename (file), NULL);
+
+            return pins_desktop_file_new_full (user_file, file, error);
+        }
 }
 
 gboolean
@@ -295,6 +293,7 @@ pins_desktop_file_dispose (GObject *object)
 
     g_clear_object (&self->user_file);
     g_clear_object (&self->system_file);
+    g_clear_object (&self->autostart_file);
     g_clear_object (&self->key_file);
     g_clear_object (&self->backup_key_file);
 }

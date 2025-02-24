@@ -37,9 +37,10 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (PinsDesktopFile, pins_desktop_file, PINS, DESKTOP_FILE,
                       GObject);
 
-PinsDesktopFile *pins_desktop_file_new_from_user_file (GFile *file,
-                                                       GError **error);
-PinsDesktopFile *pins_desktop_file_new_from_file (GFile *file, GError **error);
+PinsDesktopFile *pins_desktop_file_new_full (GFile *user_file,
+                                             GFile *system_file,
+                                             GError **error);
+PinsDesktopFile *pins_desktop_file_new (GFile *file, GError **error);
 
 gboolean pins_desktop_file_is_user_only (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_user_edited (PinsDesktopFile *self);

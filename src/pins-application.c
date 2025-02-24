@@ -69,7 +69,7 @@ pins_application_open (GApplication *app, GFile **files, gint n_files,
     window = PINS_WINDOW (
         gtk_application_get_active_window (GTK_APPLICATION (app)));
 
-    desktop_file = pins_desktop_file_new_from_user_file (files[0], &err);
+    desktop_file = pins_desktop_file_new_full (files[0], NULL, &err);
     if (err != NULL)
         {
             g_critical ("Error opening file at `%s`: %s",
