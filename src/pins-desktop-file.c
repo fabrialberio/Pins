@@ -401,21 +401,33 @@ pins_desktop_file_set_string (PinsDesktopFile *self, const gchar *key,
 }
 
 gchar *
-pins_desktop_file_get_locale_for_key (PinsDesktopFile *self, const gchar *key)
+get_locale_for_key_checked (GKeyFile *key_file, const gchar *key)
 {
     gchar *locale;
 
-    locale = g_key_file_get_locale_for_key (
-        self->key_file, G_KEY_FILE_DESKTOP_GROUP, key, NULL);
+    locale = g_key_file_get_locale_for_key (key_file, G_KEY_FILE_DESKTOP_GROUP,
+                                            key, NULL);
 
-    if (locale != NULL)
-        return locale;
+    if (!g_strcmp0 (locale, "C"))
+        {
+            g_free (locale);
+            return NULL;
+        }
 
-    if (self->system_file == NULL)
-        return NULL;
+    return locale;
+}
 
-    return g_key_file_get_locale_for_key (self->backup_key_file,
-                                          G_KEY_FILE_DESKTOP_GROUP, key, NULL);
+gchar *
+pins_desktop_file_get_locale_for_key (PinsDesktopFile *self, const gchar *key)
+{
+    g_autofree gchar *locale;
+
+    locale = get_locale_for_key_checked (self->key_file, key);
+
+    if (locale == NULL && self->system_file != NULL)
+        locale = get_locale_for_key_checked (self->backup_key_file, key);
+
+    return g_strdup (locale);
 }
 
 gboolean
