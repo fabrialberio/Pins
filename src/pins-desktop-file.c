@@ -334,7 +334,7 @@ pins_desktop_file_class_init (PinsDesktopFileClass *klass)
         NULL, NULL, G_TYPE_NONE, 1, G_TYPE_STRING);
 
     signals[FILE_DELETED] = g_signal_new (
-        "file-removed", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST, 0, NULL,
+        "file-deleted", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST, 0, NULL,
         NULL, NULL, G_TYPE_NONE, 0);
 }
 
