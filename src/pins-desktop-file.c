@@ -224,7 +224,6 @@ pins_desktop_file_save (PinsDesktopFile *self, GError **error)
     g_autoptr (GOutputStream) stream = NULL;
     g_autoptr (GError) err = NULL;
     gsize lenght;
-    int fd;
 
     if (!g_strcmp0 (g_key_file_to_data (self->key_file, NULL, NULL),
                     self->saved_data))
@@ -241,11 +240,8 @@ pins_desktop_file_save (PinsDesktopFile *self, GError **error)
             return;
         }
 
-    fd = open (g_file_get_path (self->user_file), O_WRONLY | O_CREAT | O_TRUNC,
-               S_IRWXU | S_IRWXG | S_IRWXO);
-
-    write (fd, self->saved_data, lenght);
-    close (fd);
+    g_file_replace_contents (self->user_file, self->saved_data, lenght, NULL,
+                             FALSE, G_FILE_CREATE_NONE, NULL, NULL, error);
 }
 
 void
@@ -338,7 +334,7 @@ pins_desktop_file_class_init (PinsDesktopFileClass *klass)
         NULL, NULL, G_TYPE_NONE, 1, G_TYPE_STRING);
 
     signals[FILE_DELETED] = g_signal_new (
-        "file-removed", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST, 0, NULL,
+        "file-deleted", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST, 0, NULL,
         NULL, NULL, G_TYPE_NONE, 0);
 }
 
