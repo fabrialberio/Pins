@@ -26,6 +26,7 @@
 
 #include "pins-app-grid.h"
 #include "pins-desktop-file.h"
+#include "pins-locale-utils-private.h"
 
 struct _PinsAppView
 {
@@ -256,12 +257,37 @@ show_all_filter_match_func (gpointer desktop_file, gpointer user_data)
                PINS_DESKTOP_FILE (desktop_file));
 }
 
+int
+sort_compare_func (gconstpointer a, gconstpointer b, gpointer user_data)
+{
+    PinsDesktopFile *first = PINS_DESKTOP_FILE ((gpointer)a);
+    PinsDesktopFile *second = PINS_DESKTOP_FILE ((gpointer)b);
+    const gchar *first_key, *second_key, *first_name, *second_name;
+
+    g_return_val_if_fail (PINS_IS_DESKTOP_FILE (first), 0);
+    g_return_val_if_fail (PINS_IS_DESKTOP_FILE (second), 0);
+
+    first_key = _pins_join_key_locale (
+        G_KEY_FILE_DESKTOP_KEY_NAME, pins_desktop_file_get_locale_for_key (
+                                         first, G_KEY_FILE_DESKTOP_KEY_NAME));
+    first_name = pins_desktop_file_get_string (first, first_key);
+
+    second_key = _pins_join_key_locale (
+        G_KEY_FILE_DESKTOP_KEY_NAME, pins_desktop_file_get_locale_for_key (
+                                         second, G_KEY_FILE_DESKTOP_KEY_NAME));
+    second_name = pins_desktop_file_get_string (second, second_key);
+
+    /// TODO: Use UTF8 compare
+    return g_strcmp0 (first_name, second_name);
+}
+
 static void
 pins_app_view_init (PinsAppView *self)
 {
     g_autoptr (GSettings) settings = NULL;
     g_autoptr (GSimpleActionGroup) group = NULL;
     g_autoptr (GAction) action = NULL;
+    GtkSortListModel *sort_model;
 
     settings = g_settings_new ("io.github.fabrialberio.pinapp");
     group = g_simple_action_group_new ();
@@ -288,9 +314,12 @@ pins_app_view_init (PinsAppView *self)
     self->show_all_apps_filter_model = gtk_filter_list_model_new (
         NULL, GTK_FILTER (self->show_all_apps_filter));
 
-    self->search_filter_model = gtk_filter_list_model_new (
+    sort_model = gtk_sort_list_model_new (
         G_LIST_MODEL (self->show_all_apps_filter_model),
-        GTK_FILTER (self->search_filter));
+        GTK_SORTER (gtk_custom_sorter_new (&sort_compare_func, NULL, NULL)));
+
+    self->search_filter_model = gtk_filter_list_model_new (
+        G_LIST_MODEL (sort_model), GTK_FILTER (self->search_filter));
 
     adw_view_stack_set_visible_child_name (self->view_stack,
                                            pages[PAGE_LOADING]);
