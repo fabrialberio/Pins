@@ -257,6 +257,12 @@ pins_desktop_file_set_autostart (PinsDesktopFile *self, gboolean value)
         g_file_delete (self->autostart_file, NULL, NULL);
 }
 
+gchar *
+pins_desktop_file_get_desktop_id (PinsDesktopFile *self)
+{
+    return g_file_get_basename (self->user_file);
+}
+
 gchar **
 pins_desktop_file_get_keys (PinsDesktopFile *self)
 {
