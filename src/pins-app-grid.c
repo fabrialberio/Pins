@@ -26,6 +26,7 @@ struct _PinsAppGrid
 {
     AdwBin parent_instance;
 
+    gboolean is_loaded;
     GtkGridView *grid_view;
 };
 
@@ -56,9 +57,15 @@ items_changed_cb (GListModel *model, guint position, guint removed,
                   guint added, PinsAppGrid *self)
 {
     // Fixes grid not being scrolled to the top when opening the app.
+    if (self->is_loaded)
+        return;
+
     if (g_list_model_get_n_items (model) > 0)
-        gtk_grid_view_scroll_to (self->grid_view, 0, GTK_LIST_SCROLL_NONE,
-                                 NULL);
+        {
+            gtk_grid_view_scroll_to (self->grid_view, 0, GTK_LIST_SCROLL_NONE,
+                                     NULL);
+            self->is_loaded = TRUE;
+        }
 }
 
 void
@@ -128,6 +135,8 @@ static void
 pins_app_grid_init (PinsAppGrid *self)
 {
     GtkListItemFactory *factory = gtk_signal_list_item_factory_new ();
+
+    self->is_loaded = FALSE;
 
     gtk_widget_init_template (GTK_WIDGET (self));
 
