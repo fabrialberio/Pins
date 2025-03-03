@@ -1,5 +1,5 @@
 data/io.github.fabrialberio.pinapp.desktop.in
-data/io.github.fabrialberio.pinapp.appdata.xml.in
+data/io.github.fabrialberio.pinapp.metainfo.xml.in
 data/io.github.fabrialberio.pinapp.gschema.xml
 
 src/help-overlay.ui
