@@ -1,6 +1,7 @@
 pinapp_sources = [
     'main.c',
     'pins-add-key-dialog.c',
+    'pins-app-filter.c',
     'pins-app-grid.c',
     'pins-app-icon.c',
     'pins-app-iterator.c',
