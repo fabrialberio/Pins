@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-05 19:17+0100\n"
-"PO-Revision-Date: 2025-02-05 19:18+0100\n"
+"POT-Creation-Date: 2025-03-03 16:33+0100\n"
+"PO-Revision-Date: 2025-03-03 16:35+0100\n"
 "Last-Translator: Fabrizio Alberio <fabrizio.alberio@gmail.com>\n"
 "Language-Team: Italian <fabrizio.alberio@gmail.com>\n"
 "Language: it\n"
@@ -23,7 +23,7 @@ msgid "Pins"
 msgstr "Pins"
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:4
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:9
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
 msgid "Create and edit app shortcuts"
 msgstr "Crea e modifica le scorciatoie delle tue applicazioni"
 
@@ -31,31 +31,52 @@ msgstr "Crea e modifica le scorciatoie delle tue applicazioni"
 msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
 msgstr "GNOME;GTK;Applicazioni;Scorciatoie;Icone;"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:15
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
 msgid "Pins allows you to customize your app menu by editing .desktop files."
 msgstr ""
 "Pins permette di personalizzare il menù delle applicazioni modificando i "
 "file .desktop."
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:16
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
 msgid "Some of the things you can do are:"
 msgstr "Alcuni dei possibili utilizzi sono:"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:18
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:18
 msgid "changing an app icon that doesn't fit in with your theme,"
 msgstr "cambiare l'icona di un'applicazione che stona con il tema,"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:19
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:19
 msgid "creating custom shortcuts to websites,"
 msgstr "creare scorciatoie personalizzate a siti web,"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:20
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:20
 msgid "hiding apps you don't want to see,"
 msgstr "nascondere applicazioni,"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:21
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:21
 msgid "editing properties in .desktop files."
 msgstr "modificare i file .desktop."
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:32
+msgid "Screenshot of Pins showing the app grid"
+msgstr "Schermata della griglia delle applicazioni di Pins"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:37
+msgid "Screenshot of Pins showing an opened file"
+msgstr "Schermata di un file aperto in Pins"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:42
+msgid "Screenshot of Pins showing an opened file on a small screen"
+msgstr "Schermata di un file aperto in Pins su uno schermo piccolo"
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:6
+msgid "Show all apps"
+msgstr "Mostra tutte le app"
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:17
+msgid "List of desktop file search paths in order of priority"
+msgstr ""
+"Lista di percorsi di ricerca delle applicazioni in ordine di priorità"
 
 #: src/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -77,7 +98,7 @@ msgctxt "shortcut window"
 msgid "Add new app"
 msgstr "Aggiunge una nuova applicazione"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:101
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:97
 msgid "Add new app"
 msgstr "Aggiungi applicazione"
 
@@ -89,19 +110,23 @@ msgstr "Mostra menu"
 msgid "Search"
 msgstr "Cerca"
 
-#: src/pins-app-view.ui:74
+#: src/pins-app-view.ui:70
 msgid "Loading apps…"
 msgstr "Caricamento applicazioni…"
 
-#: src/pins-app-view.ui:89
+#: src/pins-app-view.ui:85
 msgid "No apps found"
 msgstr "Nessuna applicazione trovata"
 
-#: src/pins-app-view.ui:120
+#: src/pins-app-view.ui:116
+msgid "Show _all apps"
+msgstr "Mostra tutte le _app"
+
+#: src/pins-app-view.ui:122
 msgid "_Keyboard Shortcuts"
 msgstr "_Scorciatoie da tastiera"
 
-#: src/pins-app-view.ui:124
+#: src/pins-app-view.ui:126
 msgid "_About Pins"
 msgstr "_Informazioni su Pins"
 
@@ -165,7 +190,7 @@ msgstr "Aggiungi"
 msgid "Key"
 msgstr "Chiave"
 
-#: src/pins-file-view.c:349
+#: src/pins-file-view.c:354
 msgid "Load icon"
 msgstr "Carica icona"
 
