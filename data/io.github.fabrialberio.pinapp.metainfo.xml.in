@@ -54,6 +54,22 @@
     <control>touch</control>
   </recommends>
   <releases>
+    <release version="2.1.0" date="2025-03-03">
+      <description translate="no">
+        <p>What's new</p>
+        <ul>
+          <li>Option to show or hide applications that are not visible in the app menu</li>
+          <li>Glyph to clearly distinguish invisible apps</li>
+          <li>@rene-coty updated the french translation</li>
+          <li>@johnpetersa19 added a Portoguese translation</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>App grid was not scrolled to the top when opening the app</li>
+          <li>App icons with custom paths are loaded using host filename</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.0.1" date="2025-02-10">
       <description translate="no">
         <p>Fixes</p>
