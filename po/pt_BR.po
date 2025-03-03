@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-05 19:17+0100\n"
+"POT-Creation-Date: 2025-03-03 16:33+0100\n"
 "PO-Revision-Date: 2025-02-19 08:49-0300\n"
 "Last-Translator: johnpeter19 <johnppetersa@gmail.com>\n"
 "Language-Team: \n"
@@ -23,7 +23,7 @@ msgid "Pins"
 msgstr "Pinos"
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:4
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:9
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
 msgid "Create and edit app shortcuts"
 msgstr "Crie e edite atalhos de aplicativos"
 
@@ -31,29 +31,51 @@ msgstr "Crie e edite atalhos de aplicativos"
 msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
 msgstr "Gnome; gtk; apps; atalhos; ícones;"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:15
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
 msgid "Pins allows you to customize your app menu by editing .desktop files."
-msgstr "Pinos permitem que você personalize o menu do aplicativo editando arquivos .DESKTOP."
+msgstr ""
+"Pinos permitem que você personalize o menu do aplicativo editando arquivos ."
+"DESKTOP."
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:16
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
 msgid "Some of the things you can do are:"
 msgstr "Algumas das coisas que você pode fazer são:"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:18
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:18
 msgid "changing an app icon that doesn't fit in with your theme,"
 msgstr "Alterar um ícone de aplicativo que não se encaixa no seu tema,"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:19
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:19
 msgid "creating custom shortcuts to websites,"
 msgstr "criando atalhos personalizados para sites,"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:20
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:20
 msgid "hiding apps you don't want to see,"
 msgstr "escondendo aplicativos que você não quer ver,"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:21
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:21
 msgid "editing properties in .desktop files."
 msgstr "Editando propriedades nos arquivos .desktop."
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:32
+msgid "Screenshot of Pins showing the app grid"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:37
+msgid "Screenshot of Pins showing an opened file"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:42
+msgid "Screenshot of Pins showing an opened file on a small screen"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:6
+msgid "Show all apps"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:17
+msgid "List of desktop file search paths in order of priority"
+msgstr ""
 
 #: src/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -75,7 +97,7 @@ msgctxt "shortcut window"
 msgid "Add new app"
 msgstr "Adicione novo aplicativo"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:101
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:97
 msgid "Add new app"
 msgstr "Adicione novo aplicativo"
 
@@ -87,19 +109,23 @@ msgstr "Mostrar menu"
 msgid "Search"
 msgstr "Procurar"
 
-#: src/pins-app-view.ui:74
+#: src/pins-app-view.ui:70
 msgid "Loading apps…"
 msgstr "Carregando aplicativos…"
 
-#: src/pins-app-view.ui:89
+#: src/pins-app-view.ui:85
 msgid "No apps found"
 msgstr "Nenhum aplicativo encontrado"
 
-#: src/pins-app-view.ui:120
+#: src/pins-app-view.ui:116
+msgid "Show _all apps"
+msgstr ""
+
+#: src/pins-app-view.ui:122
 msgid "_Keyboard Shortcuts"
 msgstr "_Atalhos de teclado"
 
-#: src/pins-app-view.ui:124
+#: src/pins-app-view.ui:126
 msgid "_About Pins"
 msgstr "_ Sobre os pinos"
 
@@ -163,7 +189,7 @@ msgstr "_Adicionar"
 msgid "Key"
 msgstr "Chave"
 
-#: src/pins-file-view.c:349
+#: src/pins-file-view.c:354
 msgid "Load icon"
 msgstr "Carregar ícone"
 

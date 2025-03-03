@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-05 19:17+0100\n"
+"POT-Creation-Date: 2025-03-03 16:33+0100\n"
 "PO-Revision-Date: 2025-02-11 18:00+0100\n"
 "Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
 "Language-Team: FrenchLanguage: fr\n"
@@ -24,7 +24,7 @@ msgid "Pins"
 msgstr "Pins"
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:4
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:9
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
 msgid "Create and edit app shortcuts"
 msgstr "Créez et modifiez les raccourcis d’applications"
 
@@ -32,29 +32,51 @@ msgstr "Créez et modifiez les raccourcis d’applications"
 msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
 msgstr "GNOME;GTK;Applications;Raccourcis;Icônes;"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:15
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
 msgid "Pins allows you to customize your app menu by editing .desktop files."
-msgstr "Pins vous permet de personnaliser votre grille d’applications en modifiant leurs fichiers .desktop."
+msgstr ""
+"Pins vous permet de personnaliser votre grille d’applications en modifiant "
+"leurs fichiers .desktop."
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:16
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
 msgid "Some of the things you can do are:"
 msgstr "Vous pouvez notamment :"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:18
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:18
 msgid "changing an app icon that doesn't fit in with your theme,"
 msgstr "changer l’icône d’une application qui ne correspond pas à votre thème,"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:19
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:19
 msgid "creating custom shortcuts to websites,"
 msgstr "créer des raccourcis personnalisés vers des sites web,"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:20
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:20
 msgid "hiding apps you don't want to see,"
 msgstr "masquer des applications que vous ne voulez pas voir,"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:21
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:21
 msgid "editing properties in .desktop files."
 msgstr "modifier les propriétés des fichiers .desktop."
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:32
+msgid "Screenshot of Pins showing the app grid"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:37
+msgid "Screenshot of Pins showing an opened file"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:42
+msgid "Screenshot of Pins showing an opened file on a small screen"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:6
+msgid "Show all apps"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:17
+msgid "List of desktop file search paths in order of priority"
+msgstr ""
 
 #: src/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -76,7 +98,7 @@ msgctxt "shortcut window"
 msgid "Add new app"
 msgstr "Ajouter une nouvelle application"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:101
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:97
 msgid "Add new app"
 msgstr "Ajouter une nouvelle application"
 
@@ -88,19 +110,23 @@ msgstr "Afficher le menu"
 msgid "Search"
 msgstr "Rechercher"
 
-#: src/pins-app-view.ui:74
+#: src/pins-app-view.ui:70
 msgid "Loading apps…"
 msgstr "Chargement des applications…"
 
-#: src/pins-app-view.ui:89
+#: src/pins-app-view.ui:85
 msgid "No apps found"
 msgstr "Aucune application trouvée"
 
-#: src/pins-app-view.ui:120
+#: src/pins-app-view.ui:116
+msgid "Show _all apps"
+msgstr ""
+
+#: src/pins-app-view.ui:122
 msgid "_Keyboard Shortcuts"
 msgstr "_Raccourcis clavier"
 
-#: src/pins-app-view.ui:124
+#: src/pins-app-view.ui:126
 msgid "_About Pins"
 msgstr "À _propos de Pins"
 
@@ -164,7 +190,7 @@ msgstr "_Ajouter"
 msgid "Key"
 msgstr "Clé"
 
-#: src/pins-file-view.c:349
+#: src/pins-file-view.c:354
 msgid "Load icon"
 msgstr "Charger une icône"
 
@@ -204,7 +230,8 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "If you unpin an app, your changes will be permanently lost."
-#~ msgstr "Si vous désépinglez cette application, elle sera supprimée pour toujours."
+#~ msgstr ""
+#~ "Si vous désépinglez cette application, elle sera supprimée pour toujours."
 
 #~ msgid "Unpin"
 #~ msgstr "Désépingler"

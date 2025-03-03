@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-05 18:01+0100\n"
+"POT-Creation-Date: 2025-03-03 16:33+0100\n"
 "PO-Revision-Date: 2025-02-05 18:05+0100\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -24,9 +24,8 @@ msgid "Pins"
 msgstr ""
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:4
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:9
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
 #, fuzzy
-#| msgid "Create and edit application shortcuts"
 msgid "Create and edit app shortcuts"
 msgstr "Создавайте и редактируйте ярлыки приложений"
 
@@ -34,38 +33,54 @@ msgstr "Создавайте и редактируйте ярлыки прило
 msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
 msgstr "GNOME;GTK;Приложения;Ярлыки;Иконки;"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:15
-msgid "PinApp is a simple application that lets you customize your app list."
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
+msgid "Pins allows you to customize your app menu by editing .desktop files."
 msgstr ""
-"PinApp - это простое приложение, позволяющее настраивать список приложений."
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:16
-msgid "Some of the possible uses are"
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
+#, fuzzy
+msgid "Some of the things you can do are:"
 msgstr "Некоторые из возможных вариантов использования"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:18
-msgid "Changing an app icon that doesn't fit in with your theme"
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:18
+#, fuzzy
+msgid "changing an app icon that doesn't fit in with your theme,"
 msgstr "Изменение иконки приложения, которая не соответствует вашей теме"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:19
-msgid "Creating custom shortcuts to websites"
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:19
+#, fuzzy
+msgid "creating custom shortcuts to websites,"
 msgstr "Создание пользовательских ярлыков на веб-сайтах"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:20
-msgid "Hiding apps you don't want to see"
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:20
+#, fuzzy
+msgid "hiding apps you don't want to see,"
 msgstr "Скрытие приложений, которые вы не хотите видеть"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:21
-msgid "Editing properties in .desktop files"
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:21
+#, fuzzy
+msgid "editing properties in .desktop files."
 msgstr "Редактирование свойств в файлах .desktop"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:23
-msgid ""
-"The app is made with Libadwaita and GTK4, with consideration for small-"
-"screen devices"
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:32
+msgid "Screenshot of Pins showing the app grid"
 msgstr ""
-"Приложение сделано на Libadwaita и GTK4 с учетом особенностей устройств с "
-"малым экраном"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:37
+msgid "Screenshot of Pins showing an opened file"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:42
+msgid "Screenshot of Pins showing an opened file on a small screen"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:6
+msgid "Show all apps"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:17
+msgid "List of desktop file search paths in order of priority"
+msgstr ""
 
 #: src/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -87,7 +102,7 @@ msgctxt "shortcut window"
 msgid "Add new app"
 msgstr "Добавить новое приложение"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:101
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:97
 msgid "Add new app"
 msgstr "Добавить новое приложение"
 
@@ -99,23 +114,25 @@ msgstr "Показать меню"
 msgid "Search"
 msgstr "Поиск"
 
-#: src/pins-app-view.ui:74
+#: src/pins-app-view.ui:70
 msgid "Loading apps…"
 msgstr "Загрузка приложений…"
 
-#: src/pins-app-view.ui:89
+#: src/pins-app-view.ui:85
 msgid "No apps found"
 msgstr "Приложения не найдены"
 
-#: src/pins-app-view.ui:120
+#: src/pins-app-view.ui:116
+msgid "Show _all apps"
+msgstr ""
+
+#: src/pins-app-view.ui:122
 #, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgid "_Keyboard Shortcuts"
 msgstr "Комбинации клавиш"
 
-#: src/pins-app-view.ui:124
+#: src/pins-app-view.ui:126
 #, fuzzy
-#| msgid "About PinApp"
 msgid "_About Pins"
 msgstr "О приложении"
 
@@ -149,13 +166,11 @@ msgstr ""
 
 #: src/pins-file-view.ui:185
 #, fuzzy
-#| msgid "Add new key"
 msgid "Add key"
 msgstr "Добавить новый ключ"
 
 #: src/pins-key-row.ui:9
 #, fuzzy
-#| msgid "Save changes?"
 msgid "Erase changes"
 msgstr "Сохранить изменения?"
 
@@ -173,7 +188,6 @@ msgstr "Добавить новый ключ"
 
 #: src/pins-add-key-dialog.c:84
 #, fuzzy
-#| msgid "Cancel"
 msgid "_Cancel"
 msgstr "Отменить"
 
@@ -185,15 +199,27 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: src/pins-file-view.c:349
+#: src/pins-file-view.c:354
 #, fuzzy
-#| msgid "Upload icon"
 msgid "Load icon"
 msgstr "Загрузить иконку"
 
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr ""
+
+#~ msgid ""
+#~ "PinApp is a simple application that lets you customize your app list."
+#~ msgstr ""
+#~ "PinApp - это простое приложение, позволяющее настраивать список "
+#~ "приложений."
+
+#~ msgid ""
+#~ "The app is made with Libadwaita and GTK4, with consideration for small-"
+#~ "screen devices"
+#~ msgstr ""
+#~ "Приложение сделано на Libadwaita и GTK4 с учетом особенностей устройств с "
+#~ "малым экраном"
 
 #~ msgid "PinApp"
 #~ msgstr "PinApp"

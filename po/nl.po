@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-05 18:01+0100\n"
+"POT-Creation-Date: 2025-03-03 16:33+0100\n"
 "PO-Revision-Date: 2025-02-05 18:05+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -22,9 +22,8 @@ msgid "Pins"
 msgstr ""
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:4
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:9
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
 #, fuzzy
-#| msgid "Create and edit application shortcuts"
 msgid "Create and edit app shortcuts"
 msgstr "Maak en bewerk snelkoppelingen"
 
@@ -32,34 +31,48 @@ msgstr "Maak en bewerk snelkoppelingen"
 msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
 msgstr "GNOME;GTK;Apps;Toepassingen;Programma's;Snelkoppelingen;Pictogrammen;"
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:15
-msgid "PinApp is a simple application that lets you customize your app list."
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
+msgid "Pins allows you to customize your app menu by editing .desktop files."
 msgstr ""
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:16
-msgid "Some of the possible uses are"
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
+msgid "Some of the things you can do are:"
 msgstr ""
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:18
-msgid "Changing an app icon that doesn't fit in with your theme"
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:18
+msgid "changing an app icon that doesn't fit in with your theme,"
 msgstr ""
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:19
-msgid "Creating custom shortcuts to websites"
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:19
+msgid "creating custom shortcuts to websites,"
 msgstr ""
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:20
-msgid "Hiding apps you don't want to see"
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:20
+msgid "hiding apps you don't want to see,"
 msgstr ""
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:21
-msgid "Editing properties in .desktop files"
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:21
+msgid "editing properties in .desktop files."
 msgstr ""
 
-#: data/io.github.fabrialberio.pinapp.appdata.xml.in:23
-msgid ""
-"The app is made with Libadwaita and GTK4, with consideration for small-"
-"screen devices"
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:32
+msgid "Screenshot of Pins showing the app grid"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:37
+msgid "Screenshot of Pins showing an opened file"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:42
+msgid "Screenshot of Pins showing an opened file on a small screen"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:6
+msgid "Show all apps"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:17
+msgid "List of desktop file search paths in order of priority"
 msgstr ""
 
 #: src/help-overlay.ui:11
@@ -82,7 +95,7 @@ msgctxt "shortcut window"
 msgid "Add new app"
 msgstr "Toepassing toevoegen"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:101
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:97
 msgid "Add new app"
 msgstr "Toepassing toevoegen"
 
@@ -94,23 +107,25 @@ msgstr "Menu tonen"
 msgid "Search"
 msgstr "Zoeken"
 
-#: src/pins-app-view.ui:74
+#: src/pins-app-view.ui:70
 msgid "Loading apps…"
 msgstr "Bezig met laden…"
 
-#: src/pins-app-view.ui:89
+#: src/pins-app-view.ui:85
 msgid "No apps found"
 msgstr "Er zĳn geen toepassingen beschikbaar"
 
-#: src/pins-app-view.ui:120
+#: src/pins-app-view.ui:116
+msgid "Show _all apps"
+msgstr ""
+
+#: src/pins-app-view.ui:122
 #, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgid "_Keyboard Shortcuts"
 msgstr "Sneltoetsen"
 
-#: src/pins-app-view.ui:124
+#: src/pins-app-view.ui:126
 #, fuzzy
-#| msgid "About PinApp"
 msgid "_About Pins"
 msgstr "Over PinApp"
 
@@ -144,13 +159,11 @@ msgstr ""
 
 #: src/pins-file-view.ui:185
 #, fuzzy
-#| msgid "Add new key"
 msgid "Add key"
 msgstr "Item toevoegen"
 
 #: src/pins-key-row.ui:9
 #, fuzzy
-#| msgid "Save changes?"
 msgid "Erase changes"
 msgstr "Wĳzigingen opslaan?"
 
@@ -168,7 +181,6 @@ msgstr "Item toevoegen"
 
 #: src/pins-add-key-dialog.c:84
 #, fuzzy
-#| msgid "Cancel"
 msgid "_Cancel"
 msgstr "Annuleren"
 
@@ -180,9 +192,8 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: src/pins-file-view.c:349
+#: src/pins-file-view.c:354
 #, fuzzy
-#| msgid "Upload icon"
 msgid "Load icon"
 msgstr "Pictogram bĳwerken"
 
