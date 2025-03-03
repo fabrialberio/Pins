@@ -54,12 +54,12 @@ pins_desktop_file_search_paths (void)
     g_auto (GStrv) search_paths
         = g_settings_get_strv (settings, "search-paths");
 
+    g_strv_builder_add (builder, pins_desktop_file_user_path ());
+
     for (int i = 0; i < g_strv_length (search_paths); i++)
         g_strv_builder_add (builder,
                             g_build_filename (parse_filename (search_paths[i]),
                                               "applications", NULL));
-
-    g_strv_builder_add (builder, pins_desktop_file_user_path ());
 
     return g_strv_builder_end (builder);
 }
