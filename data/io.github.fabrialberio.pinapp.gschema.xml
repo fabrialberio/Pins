@@ -7,13 +7,14 @@
     </key>
     <key name="search-paths" type="as">
       <default>[
-        "~/.local/share/xdg-desktop-portal",
-        "/var/lib/snapd/desktop",
-        "~/.local/share/flatpak/exports/share",
-        "/var/lib/flatpak/exports/share",
+        "/usr/share",
         "/run/host/usr/share",
-        "/usr/share"
+        "/var/lib/flatpak/exports/share",
+        "~/.local/share/flatpak/exports/share",
+        "~/.local/share/xdg-desktop-portal",
+        "/var/lib/snapd/desktop"
         ]</default>
+      <summary>List of desktop file search paths in order of priority</summary>
     </key>
     <key name="user-path" type="s">
       <default>"~/.local/share/applications"</default>
