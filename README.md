@@ -10,7 +10,4 @@
 - GTK4 & libadwaita
 
 ## Known issues
-Due to the limitations of the Flatpak sandbox, not all .desktop files are visible by default. It is still possible to open the files individually.
-This could be solved by using a different packaging format, and contributions are welcome.
-
 The app has ben rewritten, and some translations are no longer complete. Any help with that is greatly appreciated.
