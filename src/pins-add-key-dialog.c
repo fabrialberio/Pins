@@ -41,26 +41,6 @@ enum
 
 static gchar *responses[N_RESPONSES] = { "cancel", "add" };
 
-void
-response_cb (PinsAddKeyDialog *self, gchar *response)
-{
-    if (!g_strcmp0 (response, responses[ADD]))
-        {
-            const gchar *key
-                = gtk_editable_get_text (GTK_EDITABLE (self->key_row));
-
-            pins_desktop_file_set_string (self->desktop_file, key, "");
-        }
-}
-
-void
-update_response_enabled (PinsAddKeyDialog *self, AdwEntryRow *key_row)
-{
-    adw_alert_dialog_set_response_enabled (
-        ADW_ALERT_DIALOG (self), responses[ADD],
-        strlen (gtk_editable_get_text (GTK_EDITABLE (self->key_row))) > 0);
-}
-
 PinsAddKeyDialog *
 pins_add_key_dialog_new (PinsDesktopFile *desktop_file)
 {
@@ -98,6 +78,37 @@ pins_add_key_dialog_class_init (PinsAddKeyDialogClass *klass)
                                           key_row);
 }
 
+void
+response_cb (PinsAddKeyDialog *self, gchar *response)
+{
+    if (!g_strcmp0 (response, responses[ADD]))
+        {
+            const gchar *key
+                = gtk_editable_get_text (GTK_EDITABLE (self->key_row));
+
+            pins_desktop_file_set_string (self->desktop_file, key, "");
+        }
+}
+
+void
+key_entry_activated_cb (PinsAddKeyDialog *self, AdwEntryRow *key_row)
+{
+    if (adw_alert_dialog_get_response_enabled (ADW_ALERT_DIALOG (self),
+                                               responses[ADD]))
+        {
+            g_signal_emit_by_name (self, "response", responses[ADD]);
+            adw_dialog_close (ADW_DIALOG (self));
+        }
+}
+
+void
+update_response_enabled (PinsAddKeyDialog *self)
+{
+    adw_alert_dialog_set_response_enabled (
+        ADW_ALERT_DIALOG (self), responses[ADD],
+        strlen (gtk_editable_get_text (GTK_EDITABLE (self->key_row))) > 0);
+}
+
 static void
 pins_add_key_dialog_init (PinsAddKeyDialog *self)
 {
@@ -105,6 +116,9 @@ pins_add_key_dialog_init (PinsAddKeyDialog *self)
 
     g_signal_connect_object (self, "response", G_CALLBACK (response_cb), self,
                              0);
+    g_signal_connect_object (self->key_row, "entry-activated",
+                             G_CALLBACK (key_entry_activated_cb), self,
+                             G_CONNECT_SWAPPED);
     g_signal_connect_object (self->key_row, "changed",
                              G_CALLBACK (update_response_enabled), self,
                              G_CONNECT_SWAPPED);
