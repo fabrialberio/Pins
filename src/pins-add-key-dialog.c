@@ -104,9 +104,17 @@ key_entry_activated_cb (PinsAddKeyDialog *self, AdwEntryRow *key_row)
 void
 update_response_enabled (PinsAddKeyDialog *self)
 {
-    adw_alert_dialog_set_response_enabled (
-        ADW_ALERT_DIALOG (self), responses[ADD],
-        strlen (gtk_editable_get_text (GTK_EDITABLE (self->key_row))) > 0);
+    gboolean text_is_valid = FALSE;
+    const gchar *text = gtk_editable_get_text (GTK_EDITABLE (self->key_row));
+
+    text_is_valid = strlen (text) > 0
+                    && !g_strv_contains (
+                        (const gchar *const *)pins_desktop_file_get_keys (
+                            self->desktop_file),
+                        text);
+
+    adw_alert_dialog_set_response_enabled (ADW_ALERT_DIALOG (self),
+                                           responses[ADD], text_is_valid);
 }
 
 static void
