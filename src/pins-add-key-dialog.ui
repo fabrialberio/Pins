@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="PinsAddKeyDialog" parent="AdwAlertDialog">
+    <property name="heading" translatable="yes">Add new key</property>
+    <property name="default-response">add</property>
+    <property name="close-response">cancel</property>
+    <property name="extra-child">
+      <object class="AdwPreferencesGroup">
+        <child>
+          <object class="AdwEntryRow" id="key_row">
+            <property name="title" translatable="yes">Key</property>
+          </object>
+        </child>
+      </object>
+    </property>
+    <responses>
+      <response id="cancel" translatable="yes">_Cancel</response>
+      <response id="add" translatable="yes" appearance="suggested" enabled="false">_Add</response>
+    </responses>
+  </template>
+</interface>

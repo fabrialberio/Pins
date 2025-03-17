@@ -22,7 +22,7 @@
 
 #include "pins-file-view.h"
 
-#include "pins-add-key-dialog-private.h"
+#include "pins-add-key-dialog.h"
 #include "pins-app-icon.h"
 #include "pins-key-row.h"
 #include "pins-locale-utils-private.h"
@@ -368,9 +368,10 @@ load_icon_button_clicked_cb (PinsFileView *self)
 void
 add_key_button_clicked_cb (PinsFileView *self)
 {
-    _pins_add_key_dialog_present (
-        GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
-        self->desktop_file);
+    PinsAddKeyDialog *dialog = pins_add_key_dialog_new (self->desktop_file);
+
+    adw_dialog_present (ADW_DIALOG (dialog),
+                        GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self))));
 }
 
 void

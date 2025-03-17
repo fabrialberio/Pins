@@ -1,4 +1,4 @@
-/* pins-add-key-dialog-private.h
+/* pins-add-key-dialog.h
  *
  * Copyright 2024 Fabrizio
  *
@@ -22,11 +22,15 @@
 
 #include <adwaita.h>
 
-G_BEGIN_DECLS
-
 #include "pins-desktop-file.h"
 
-void _pins_add_key_dialog_present (GtkWindow *parent,
-                                   PinsDesktopFile *desktop_file);
+G_BEGIN_DECLS
+
+#define PINS_TYPE_ADD_KEY_DIALOG (pins_add_key_dialog_get_type ())
+
+G_DECLARE_FINAL_TYPE (PinsAddKeyDialog, pins_add_key_dialog, PINS,
+                      ADD_KEY_DIALOG, AdwAlertDialog)
+
+PinsAddKeyDialog *pins_add_key_dialog_new (PinsDesktopFile *desktop_file);
 
 G_END_DECLS

@@ -18,9 +18,19 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "pins-add-key-dialog-private.h"
+#include "pins-add-key-dialog.h"
 
 #include <glib/gi18n.h>
+
+struct _PinsAddKeyDialog
+{
+    AdwAlertDialog parent_instance;
+
+    PinsDesktopFile *desktop_file;
+    AdwEntryRow *key_row;
+};
+
+G_DEFINE_TYPE (PinsAddKeyDialog, pins_add_key_dialog, ADW_TYPE_ALERT_DIALOG);
 
 enum
 {
@@ -31,86 +41,77 @@ enum
 
 static gchar *responses[N_RESPONSES] = { "cancel", "add" };
 
-typedef struct
-{
-    PinsDesktopFile *desktop_file;
-    AdwEntryRow *key_row;
-} AddKeyRequest;
-
 void
-add_key_request_clear (gpointer data)
-{
-    AddKeyRequest *request = data;
-
-    g_clear_object (&request->desktop_file);
-    g_clear_object (&request->key_row);
-}
-
-void
-response_cb (AdwAlertDialog *dialog, gchar *response, AddKeyRequest *request)
+response_cb (PinsAddKeyDialog *self, gchar *response)
 {
     if (!g_strcmp0 (response, responses[ADD]))
         {
             const gchar *key
-                = gtk_editable_get_text (GTK_EDITABLE (request->key_row));
+                = gtk_editable_get_text (GTK_EDITABLE (self->key_row));
 
-            pins_desktop_file_set_string (request->desktop_file, key, "");
+            pins_desktop_file_set_string (self->desktop_file, key, "");
         }
     else
         {
-            GTask *task = g_object_get_data (G_OBJECT (dialog), "TASK");
+            GTask *task = g_object_get_data (G_OBJECT (self), "TASK");
             g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_CANCELLED,
                                      "The user cancelled the request");
         }
 }
 
 void
-update_response_enabled (AdwEntryRow *key_row, AdwAlertDialog *dialog)
+update_response_enabled (PinsAddKeyDialog *self, AdwEntryRow *key_row)
 {
     adw_alert_dialog_set_response_enabled (
-        dialog, responses[ADD],
-        strlen (gtk_editable_get_text (GTK_EDITABLE (key_row))) > 0);
+        ADW_ALERT_DIALOG (self), responses[ADD],
+        strlen (gtk_editable_get_text (GTK_EDITABLE (self->key_row))) > 0);
 }
 
-static AdwAlertDialog *
-_pins_add_key_dialog_new (GtkWindow *parent, PinsDesktopFile *desktop_file)
+PinsAddKeyDialog *
+pins_add_key_dialog_new (PinsDesktopFile *desktop_file)
 {
-    AdwAlertDialog *dialog
-        = ADW_ALERT_DIALOG (adw_alert_dialog_new (_ ("Add new key"), NULL));
-    GtkWidget *group = adw_preferences_group_new ();
-    GtkWidget *key_row = adw_entry_row_new ();
-    AddKeyRequest *request = g_malloc (sizeof (AddKeyRequest));
+    PinsAddKeyDialog *dialog = g_object_new (PINS_TYPE_ADD_KEY_DIALOG, NULL);
 
-    adw_alert_dialog_add_responses (dialog, responses[CANCEL], _ ("_Cancel"),
-                                    responses[ADD], _ ("_Add"), NULL);
-
-    adw_alert_dialog_set_close_response (dialog, responses[CANCEL]);
-    adw_alert_dialog_set_response_appearance (dialog, responses[ADD],
-                                              ADW_RESPONSE_SUGGESTED);
-    adw_alert_dialog_set_response_enabled (dialog, responses[ADD], FALSE);
-
-    adw_alert_dialog_set_extra_child (dialog, group);
-
-    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (key_row), _ ("Key"));
-    adw_preferences_group_add (ADW_PREFERENCES_GROUP (group), key_row);
-
-    request->desktop_file = g_object_ref (desktop_file);
-    request->key_row = g_object_ref (ADW_ENTRY_ROW (key_row));
-
-    g_signal_connect_data (dialog, "response", G_CALLBACK (response_cb),
-                           request, (GClosureNotify)add_key_request_clear, 0);
-    g_signal_connect_object (key_row, "changed",
-                             G_CALLBACK (update_response_enabled), dialog, 0);
+    dialog->desktop_file = g_object_ref (desktop_file);
 
     return dialog;
 }
 
 void
-_pins_add_key_dialog_present (GtkWindow *parent, PinsDesktopFile *desktop_file)
+pins_add_key_dialog_dispose (GObject *object)
 {
-    AdwAlertDialog *dialog;
+    PinsAddKeyDialog *self = PINS_ADD_KEY_DIALOG (object);
 
-    dialog = _pins_add_key_dialog_new (parent, desktop_file);
+    g_clear_object (&self->desktop_file);
 
-    adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (parent));
+    gtk_widget_dispose_template (GTK_WIDGET (object),
+                                 PINS_TYPE_ADD_KEY_DIALOG);
+
+    G_OBJECT_CLASS (pins_add_key_dialog_parent_class)->dispose (object);
+}
+
+static void
+pins_add_key_dialog_class_init (PinsAddKeyDialogClass *klass)
+{
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+    object_class->dispose = pins_add_key_dialog_dispose;
+
+    gtk_widget_class_set_template_from_resource (
+        widget_class, "/io/github/fabrialberio/pinapp/pins-add-key-dialog.ui");
+    gtk_widget_class_bind_template_child (widget_class, PinsAddKeyDialog,
+                                          key_row);
+}
+
+static void
+pins_add_key_dialog_init (PinsAddKeyDialog *self)
+{
+    gtk_widget_init_template (GTK_WIDGET (self));
+
+    g_signal_connect_object (self, "response", G_CALLBACK (response_cb), self,
+                             0);
+    g_signal_connect_object (self->key_row, "changed",
+                             G_CALLBACK (update_response_enabled), self,
+                             G_CONNECT_SWAPPED);
 }
