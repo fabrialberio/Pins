@@ -247,6 +247,7 @@ pins_file_view_set_desktop_file (PinsFileView *self,
                              G_CALLBACK (invisible_switch_state_set_cb), self,
                              G_CONNECT_SWAPPED);
 
+    /// TODO: Deleting files opened from a folder doesn't work
     gtk_widget_set_visible (
         GTK_WIDGET (self->delete_button),
         pins_desktop_file_is_user_only (self->desktop_file));
@@ -332,9 +333,16 @@ load_icon_dialog_closed_cb (GObject *dialog, GAsyncResult *res,
                             gpointer user_data)
 {
     PinsFileView *self = PINS_FILE_VIEW (user_data);
-    g_autoptr (GFile) sandbox_file
+    g_autoptr (GFile) sandbox_file = NULL;
+    g_autoptr (GFile) file = NULL;
+
+    sandbox_file
         = gtk_file_dialog_open_finish (GTK_FILE_DIALOG (dialog), res, NULL);
-    g_autoptr (GFile) file
+
+    if (sandbox_file == NULL)
+        return;
+
+    file
         = g_file_new_build_filename (g_get_user_data_dir (), "user-icons",
                                      g_file_get_basename (sandbox_file), NULL);
 
