@@ -51,12 +51,6 @@ response_cb (PinsAddKeyDialog *self, gchar *response)
 
             pins_desktop_file_set_string (self->desktop_file, key, "");
         }
-    else
-        {
-            GTask *task = g_object_get_data (G_OBJECT (self), "TASK");
-            g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_CANCELLED,
-                                     "The user cancelled the request");
-        }
 }
 
 void
