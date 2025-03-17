@@ -27,6 +27,8 @@ struct _PinsAppTile
 {
     GtkBox parent_instance;
 
+    PinsDesktopFile *desktop_file;
+
     PinsAppIcon *icon;
     AdwBin *invisible_glyph;
     GtkLabel *title;
@@ -73,17 +75,23 @@ pins_app_tile_set_desktop_file (PinsAppTile *self,
 {
     g_assert (PINS_IS_DESKTOP_FILE (desktop_file));
 
-    g_signal_connect_object (desktop_file, "key-set", G_CALLBACK (key_set_cb),
-                             self, G_CONNECT_SWAPPED);
+    self->desktop_file = g_object_ref (desktop_file);
 
-    pins_app_icon_set_desktop_file (self->icon, desktop_file);
+    g_signal_connect_object (self->desktop_file, "key-set",
+                             G_CALLBACK (key_set_cb), self, G_CONNECT_SWAPPED);
 
-    pins_app_tile_update_appearance (self, desktop_file);
+    pins_app_icon_set_desktop_file (self->icon, self->desktop_file);
+
+    pins_app_tile_update_appearance (self, self->desktop_file);
 }
 
 static void
 pins_app_tile_dispose (GObject *object)
 {
+    PinsAppTile *self = PINS_APP_TILE (object);
+
+    g_clear_object (&self->desktop_file);
+
     gtk_widget_dispose_template (GTK_WIDGET (object), PINS_TYPE_APP_TILE);
 
     G_OBJECT_CLASS (pins_app_tile_parent_class)->dispose (object);
@@ -107,8 +115,39 @@ pins_app_tile_class_init (PinsAppTileClass *klass)
     gtk_widget_class_bind_template_child (widget_class, PinsAppTile, title);
 }
 
+static GdkContentProvider *
+pins_app_tile_drag_prepare_cb (PinsAppTile *self, double x, double y,
+                               GtkDragSource *source)
+{
+    GFile *file = pins_desktop_get_copy_file (self->desktop_file);
+
+    return gdk_content_provider_new_typed (G_TYPE_FILE, file);
+}
+
+static void
+pins_app_tile_drag_begin_cb (PinsAppTile *self, GdkDrag *drag,
+                             GtkDragSource *source)
+{
+    g_autoptr (GdkPaintable) paintable = gtk_widget_paintable_new (
+        gtk_widget_get_first_child (GTK_WIDGET (self->icon)));
+    gtk_drag_source_set_icon (source, paintable, 0, 0);
+}
+
 static void
 pins_app_tile_init (PinsAppTile *self)
 {
+    GtkDragSource *drag_source = gtk_drag_source_new ();
+    gtk_drag_source_set_actions (drag_source, GDK_ACTION_LINK);
+
     gtk_widget_init_template (GTK_WIDGET (self));
+
+    g_signal_connect_object (drag_source, "prepare",
+                             G_CALLBACK (pins_app_tile_drag_prepare_cb), self,
+                             G_CONNECT_SWAPPED);
+    g_signal_connect_object (drag_source, "drag-begin",
+                             G_CALLBACK (pins_app_tile_drag_begin_cb), self,
+                             G_CONNECT_SWAPPED);
+
+    gtk_widget_add_controller (GTK_WIDGET (self),
+                               GTK_EVENT_CONTROLLER (drag_source));
 }

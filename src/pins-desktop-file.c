@@ -232,9 +232,8 @@ pins_desktop_file_save (PinsDesktopFile *self, GError **error)
     self->saved_data = g_key_file_to_data (self->key_file, &lenght, NULL);
 
     if (self->system_file != NULL
-        && g_strcmp0 (self->saved_data,
-                      g_key_file_to_data (self->backup_key_file, NULL, NULL))
-               == 0)
+        && !g_strcmp0 (self->saved_data,
+                       g_key_file_to_data (self->backup_key_file, NULL, NULL)))
         {
             g_file_delete (self->user_file, NULL, NULL);
             return;
@@ -261,6 +260,31 @@ gchar *
 pins_desktop_file_get_desktop_id (PinsDesktopFile *self)
 {
     return g_file_get_basename (self->user_file);
+}
+
+GFile *
+pins_desktop_file_get_copy_file (PinsDesktopFile *self)
+{
+    GFile *file = self->user_file;
+
+    // Copy system file to data folder to ensure apps other apps can access it
+    if (!g_file_query_exists (file, NULL))
+        {
+            file = g_file_new_build_filename (
+                g_get_user_data_dir (), "tmp-applications",
+                pins_desktop_file_get_desktop_id (self), NULL);
+
+            g_file_make_directory_with_parents (g_file_get_parent (file), NULL,
+                                                NULL);
+
+            g_warning ("Copied file to «%s»", g_file_get_path (file));
+
+            g_file_replace_contents (file, self->saved_data,
+                                     strlen (self->saved_data), NULL, FALSE,
+                                     G_FILE_CREATE_NONE, NULL, NULL, NULL);
+        }
+
+    return file;
 }
 
 gchar **

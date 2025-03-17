@@ -13,6 +13,7 @@
       <object class="GtkOverlay">
         <child>
           <object class="PinsAppIcon" id="icon">
+            <property name="halign">center</property>
             <property name="pixel-size">64</property>
           </object>
         </child>
