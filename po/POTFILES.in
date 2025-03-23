@@ -3,12 +3,12 @@ data/io.github.fabrialberio.pinapp.metainfo.xml.in
 data/io.github.fabrialberio.pinapp.gschema.xml
 
 src/help-overlay.ui
+src/pins-add-key-dialog.ui
 src/pins-app-view.ui
 src/pins-file-view.ui
 src/pins-key-row.ui
 src/pins-window.ui
 
-src/pins-add-key-dialog.c
 src/pins-application.c
 src/pins-file-view.c
 src/pins-key-row.c
