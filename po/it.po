@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 16:33+0100\n"
+"POT-Creation-Date: 2025-03-23 22:42+0100\n"
 "PO-Revision-Date: 2025-03-03 16:35+0100\n"
 "Last-Translator: Fabrizio Alberio <fabrizio.alberio@gmail.com>\n"
 "Language-Team: Italian <fabrizio.alberio@gmail.com>\n"
@@ -75,8 +75,7 @@ msgstr "Mostra tutte le app"
 
 #: data/io.github.fabrialberio.pinapp.gschema.xml:17
 msgid "List of desktop file search paths in order of priority"
-msgstr ""
-"Lista di percorsi di ricerca delle applicazioni in ordine di priorità"
+msgstr "Lista di percorsi di ricerca delle applicazioni in ordine di priorità"
 
 #: src/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -97,6 +96,22 @@ msgstr "Chiude la finestra"
 msgctxt "shortcut window"
 msgid "Add new app"
 msgstr "Aggiunge una nuova applicazione"
+
+#: src/pins-add-key-dialog.ui:4
+msgid "Add new key"
+msgstr "Aggiungi chiave"
+
+#: src/pins-add-key-dialog.ui:11
+msgid "Key"
+msgstr "Chiave"
+
+#: src/pins-add-key-dialog.ui:17
+msgid "_Cancel"
+msgstr "Annulla"
+
+#: src/pins-add-key-dialog.ui:18
+msgid "_Add"
+msgstr "Aggiungi"
 
 #: src/pins-app-view.ui:15 src/pins-app-view.ui:97
 msgid "Add new app"
@@ -174,23 +189,7 @@ msgstr "Rimuovi chiave"
 msgid "Select locale"
 msgstr "Seleziona localizzazione"
 
-#: src/pins-add-key-dialog.c:79
-msgid "Add new key"
-msgstr "Aggiungi chiave"
-
-#: src/pins-add-key-dialog.c:84
-msgid "_Cancel"
-msgstr "Annulla"
-
-#: src/pins-add-key-dialog.c:85
-msgid "_Add"
-msgstr "Aggiungi"
-
-#: src/pins-add-key-dialog.c:94
-msgid "Key"
-msgstr "Chiave"
-
-#: src/pins-file-view.c:354
+#: src/pins-file-view.c:362
 msgid "Load icon"
 msgstr "Carica icona"
 

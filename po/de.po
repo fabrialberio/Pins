@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 16:33+0100\n"
+"POT-Creation-Date: 2025-03-23 22:42+0100\n"
 "PO-Revision-Date: 2025-02-05 18:03+0100\n"
 "Last-Translator: gregorni <gregorniehl@web.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -95,6 +95,23 @@ msgctxt "shortcut window"
 msgid "Add new app"
 msgstr "Neue Anwendung hinzufügen"
 
+#: src/pins-add-key-dialog.ui:4
+msgid "Add new key"
+msgstr "Neuen Schlüssel hinzufügen"
+
+#: src/pins-add-key-dialog.ui:11
+msgid "Key"
+msgstr ""
+
+#: src/pins-add-key-dialog.ui:17
+#, fuzzy
+msgid "_Cancel"
+msgstr "Abbrechen"
+
+#: src/pins-add-key-dialog.ui:18
+msgid "_Add"
+msgstr ""
+
 #: src/pins-app-view.ui:15 src/pins-app-view.ui:97
 msgid "Add new app"
 msgstr "Neue Anwendung hinzufügen"
@@ -174,24 +191,7 @@ msgstr ""
 msgid "Select locale"
 msgstr ""
 
-#: src/pins-add-key-dialog.c:79
-msgid "Add new key"
-msgstr "Neuen Schlüssel hinzufügen"
-
-#: src/pins-add-key-dialog.c:84
-#, fuzzy
-msgid "_Cancel"
-msgstr "Abbrechen"
-
-#: src/pins-add-key-dialog.c:85
-msgid "_Add"
-msgstr ""
-
-#: src/pins-add-key-dialog.c:94
-msgid "Key"
-msgstr ""
-
-#: src/pins-file-view.c:354
+#: src/pins-file-view.c:362
 #, fuzzy
 msgid "Load icon"
 msgstr "Symbol laden"

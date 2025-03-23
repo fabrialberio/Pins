@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 16:33+0100\n"
+"POT-Creation-Date: 2025-03-23 22:42+0100\n"
 "PO-Revision-Date: 2025-03-23 22:19+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -94,6 +94,22 @@ msgctxt "shortcut window"
 msgid "Add new app"
 msgstr "Toepassing toevoegen"
 
+#: src/pins-add-key-dialog.ui:4
+msgid "Add new key"
+msgstr "Veld toevoegen"
+
+#: src/pins-add-key-dialog.ui:11
+msgid "Key"
+msgstr "Veld"
+
+#: src/pins-add-key-dialog.ui:17
+msgid "_Cancel"
+msgstr "_Annuleren"
+
+#: src/pins-add-key-dialog.ui:18
+msgid "_Add"
+msgstr "_Toevoegen"
+
 #: src/pins-app-view.ui:15 src/pins-app-view.ui:97
 msgid "Add new app"
 msgstr "Toepassing toevoegen"
@@ -170,23 +186,7 @@ msgstr "Veld verwijderen"
 msgid "Select locale"
 msgstr "Taal kiezen"
 
-#: src/pins-add-key-dialog.c:79
-msgid "Add new key"
-msgstr "Veld toevoegen"
-
-#: src/pins-add-key-dialog.c:84
-msgid "_Cancel"
-msgstr "_Annuleren"
-
-#: src/pins-add-key-dialog.c:85
-msgid "_Add"
-msgstr "_Toevoegen"
-
-#: src/pins-add-key-dialog.c:94
-msgid "Key"
-msgstr "Veld"
-
-#: src/pins-file-view.c:354
+#: src/pins-file-view.c:362
 msgid "Load icon"
 msgstr "Pictogram laden"
 

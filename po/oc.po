@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 16:33+0100\n"
+"POT-Creation-Date: 2025-03-23 22:42+0100\n"
 "PO-Revision-Date: 2025-02-05 18:05+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: \n"
@@ -95,6 +95,23 @@ msgctxt "shortcut window"
 msgid "Add new app"
 msgstr "Apondre apli novèla"
 
+#: src/pins-add-key-dialog.ui:4
+msgid "Add new key"
+msgstr "Apondre una clau novèla"
+
+#: src/pins-add-key-dialog.ui:11
+msgid "Key"
+msgstr ""
+
+#: src/pins-add-key-dialog.ui:17
+#, fuzzy
+msgid "_Cancel"
+msgstr "Anullar"
+
+#: src/pins-add-key-dialog.ui:18
+msgid "_Add"
+msgstr ""
+
 #: src/pins-app-view.ui:15 src/pins-app-view.ui:97
 msgid "Add new app"
 msgstr "Apondre apli novèla"
@@ -175,24 +192,7 @@ msgstr ""
 msgid "Select locale"
 msgstr ""
 
-#: src/pins-add-key-dialog.c:79
-msgid "Add new key"
-msgstr "Apondre una clau novèla"
-
-#: src/pins-add-key-dialog.c:84
-#, fuzzy
-msgid "_Cancel"
-msgstr "Anullar"
-
-#: src/pins-add-key-dialog.c:85
-msgid "_Add"
-msgstr ""
-
-#: src/pins-add-key-dialog.c:94
-msgid "Key"
-msgstr ""
-
-#: src/pins-file-view.c:354
+#: src/pins-file-view.c:362
 #, fuzzy
 msgid "Load icon"
 msgstr "Mandar icòna"

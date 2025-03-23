@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-03 16:33+0100\n"
+"POT-Creation-Date: 2025-03-23 22:42+0100\n"
 "PO-Revision-Date: 2025-02-11 18:00+0100\n"
 "Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
 "Language-Team: FrenchLanguage: fr\n"
@@ -98,6 +98,22 @@ msgctxt "shortcut window"
 msgid "Add new app"
 msgstr "Ajouter une nouvelle application"
 
+#: src/pins-add-key-dialog.ui:4
+msgid "Add new key"
+msgstr "Ajouter une nouvelle clé"
+
+#: src/pins-add-key-dialog.ui:11
+msgid "Key"
+msgstr "Clé"
+
+#: src/pins-add-key-dialog.ui:17
+msgid "_Cancel"
+msgstr "A_nnuler"
+
+#: src/pins-add-key-dialog.ui:18
+msgid "_Add"
+msgstr "_Ajouter"
+
 #: src/pins-app-view.ui:15 src/pins-app-view.ui:97
 msgid "Add new app"
 msgstr "Ajouter une nouvelle application"
@@ -174,23 +190,7 @@ msgstr "Supprimer la clé"
 msgid "Select locale"
 msgstr "Sélectionner une langue"
 
-#: src/pins-add-key-dialog.c:79
-msgid "Add new key"
-msgstr "Ajouter une nouvelle clé"
-
-#: src/pins-add-key-dialog.c:84
-msgid "_Cancel"
-msgstr "A_nnuler"
-
-#: src/pins-add-key-dialog.c:85
-msgid "_Add"
-msgstr "_Ajouter"
-
-#: src/pins-add-key-dialog.c:94
-msgid "Key"
-msgstr "Clé"
-
-#: src/pins-file-view.c:354
+#: src/pins-file-view.c:362
 msgid "Load icon"
 msgstr "Charger une icône"
 
