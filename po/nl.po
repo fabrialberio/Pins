@@ -8,22 +8,21 @@ msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-03 16:33+0100\n"
-"PO-Revision-Date: 2025-02-05 18:05+0100\n"
+"PO-Revision-Date: 2025-03-23 22:19+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:3 src/pins-window.ui:14
 msgid "Pins"
-msgstr ""
+msgstr "Snelkoppelingen"
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:4
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
-#, fuzzy
 msgid "Create and edit app shortcuts"
 msgstr "Maak en bewerk snelkoppelingen"
 
@@ -33,47 +32,47 @@ msgstr "GNOME;GTK;Apps;Toepassingen;Programma's;Snelkoppelingen;Pictogrammen;"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
 msgid "Pins allows you to customize your app menu by editing .desktop files."
-msgstr ""
+msgstr "Met behulp van Snelkoppelingen kunt u het toepassingsmenu naar eigen hand zetten."
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
 msgid "Some of the things you can do are:"
-msgstr ""
+msgstr "Enkele mogelijkheden:"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:18
 msgid "changing an app icon that doesn't fit in with your theme,"
-msgstr ""
+msgstr "pas een toepassingspictogram aan als die niet bij het thema past;"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:19
 msgid "creating custom shortcuts to websites,"
-msgstr ""
+msgstr "maak snelkoppelingen naar websites (webapps);"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:20
 msgid "hiding apps you don't want to see,"
-msgstr ""
+msgstr "verberg apps die u niet wilt zien;"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:21
 msgid "editing properties in .desktop files."
-msgstr ""
+msgstr "bewerk de eigenschappen van .desktop-bestanden."
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:32
 msgid "Screenshot of Pins showing the app grid"
-msgstr ""
+msgstr "Schermfoto van Snelkoppelingen met het toepassingsoverzicht"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:37
 msgid "Screenshot of Pins showing an opened file"
-msgstr ""
+msgstr "Schermfoto van Snelkoppelingen met een geopend bestand"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:42
 msgid "Screenshot of Pins showing an opened file on a small screen"
-msgstr ""
+msgstr "Schermfoto van Snelkoppelingen met een geopend bestand op een klein scherm"
 
 #: data/io.github.fabrialberio.pinapp.gschema.xml:6
 msgid "Show all apps"
-msgstr ""
+msgstr "Alle toepassingen tonen"
 
 #: data/io.github.fabrialberio.pinapp.gschema.xml:17
 msgid "List of desktop file search paths in order of priority"
-msgstr ""
+msgstr "Lijst met zoekpaden, gesorteerd op prioriteit"
 
 #: src/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -117,89 +116,83 @@ msgstr "Er zĳn geen toepassingen beschikbaar"
 
 #: src/pins-app-view.ui:116
 msgid "Show _all apps"
-msgstr ""
+msgstr "_Alle toepassingen tonen"
 
 #: src/pins-app-view.ui:122
-#, fuzzy
 msgid "_Keyboard Shortcuts"
-msgstr "Sneltoetsen"
+msgstr "_Sneltoetsen"
 
 #: src/pins-app-view.ui:126
-#, fuzzy
 msgid "_About Pins"
-msgstr "Over PinApp"
+msgstr "_Over Snelkoppelingen"
 
 #: src/pins-file-view.ui:20
 msgid "Delete"
-msgstr ""
+msgstr "Verwĳderen"
 
 #: src/pins-file-view.ui:64
 msgid "Edit icon"
-msgstr ""
+msgstr "Pictogram aanpassen"
 
 #: src/pins-file-view.ui:86
 msgid "Load icon from file"
-msgstr ""
+msgstr "Pictogram laden uit bestand"
 
 #: src/pins-file-view.ui:131
 msgid "Autostart"
-msgstr ""
+msgstr "Automatisch opstarten"
 
 #: src/pins-file-view.ui:134
 msgid "Launch this application on login"
-msgstr ""
+msgstr "Start de toepassing na het aanmelden"
 
 #: src/pins-file-view.ui:150
 msgid "Invisible"
-msgstr ""
+msgstr "Onzichtbaar"
 
 #: src/pins-file-view.ui:153
 msgid "Hide this application in the app menu"
-msgstr ""
+msgstr "Verberg deze toepassing in het menu"
 
 #: src/pins-file-view.ui:185
-#, fuzzy
 msgid "Add key"
-msgstr "Item toevoegen"
+msgstr "Veld toevoegen"
 
 #: src/pins-key-row.ui:9
-#, fuzzy
 msgid "Erase changes"
-msgstr "Wĳzigingen opslaan?"
+msgstr "Wĳzigingen wissen"
 
 #: src/pins-key-row.ui:21
 msgid "Remove key"
-msgstr ""
+msgstr "Veld verwijderen"
 
 #: src/pins-key-row.ui:32
 msgid "Select locale"
-msgstr ""
+msgstr "Taal kiezen"
 
 #: src/pins-add-key-dialog.c:79
 msgid "Add new key"
-msgstr "Item toevoegen"
+msgstr "Veld toevoegen"
 
 #: src/pins-add-key-dialog.c:84
-#, fuzzy
 msgid "_Cancel"
-msgstr "Annuleren"
+msgstr "_Annuleren"
 
 #: src/pins-add-key-dialog.c:85
 msgid "_Add"
-msgstr ""
+msgstr "_Toevoegen"
 
 #: src/pins-add-key-dialog.c:94
 msgid "Key"
-msgstr ""
+msgstr "Veld"
 
 #: src/pins-file-view.c:354
-#, fuzzy
 msgid "Load icon"
-msgstr "Pictogram bĳwerken"
+msgstr "Pictogram laden"
 
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
-msgstr ""
+msgstr "(onvertaald)"
 
 #~ msgctxt "shortcut window"
 #~ msgid "Search"
@@ -231,12 +224,8 @@ msgstr ""
 #~ msgid "Unpin"
 #~ msgstr "Losmaken"
 
-#~ msgid ""
-#~ "If you leave without pinning the file, your changes will be permanently "
-#~ "lost."
-#~ msgstr ""
-#~ "Als u afsluit zonder het bestand vast te maken, dan worden alle "
-#~ "aanpassingen gewist."
+#~ msgid "If you leave without pinning the file, your changes will be permanently lost."
+#~ msgstr "Als u afsluit zonder het bestand vast te maken, dan worden alle aanpassingen gewist."
 
 #~ msgid "Discard"
 #~ msgstr "Verwerpen"
