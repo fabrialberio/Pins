@@ -54,6 +54,20 @@
     <control>touch</control>
   </recommends>
   <releases>
+    <release version="2.2.0" date="2025-03-23">
+      <description translate="no">
+        <p>What's new</p>
+        <ul>
+          <li>Added abililty to drag and drop apps from Pins</li>
+          <li>Improvements to "Add new key" dialog accessibility (thanks to @abrusle)</li>
+          <li>Update to GNOME platform version 48</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Undesired behaviour when closing icon picker dialog without selecting a file</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.1.0" date="2025-03-03">
       <description translate="no">
         <p>What's new</p>
