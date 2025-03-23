@@ -60,6 +60,7 @@
         <ul>
           <li>Added abililty to drag and drop apps from Pins</li>
           <li>Improvements to "Add new key" dialog accessibility (thanks to @abrusle)</li>
+          <li>@Vistaus updated the Dutch translation</li>
           <li>Update to GNOME platform version 48</li>
         </ul>
         <p>Fixes</p>
