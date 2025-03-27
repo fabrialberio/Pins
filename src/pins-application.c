@@ -100,11 +100,13 @@ pins_application_about_action (GSimpleAction *action, GVariant *parameter,
           "Fyodor Sobolev (Russian)\n "
           "David Lapshin (Russian)\n "
           "Alexmelman88 (Russian)\n "
+          "vmkspv (Russian)\n"
           "josushu0 (Spanish)\n "
           "oscfdezdz (Spanish)\n "
           "gregorni (German)\n "
           "Mejans (Occitan)\n "
           "Vistaus (Dutch)\n"
+          "Tuba2 (Portoguese)\n"
           "johnpeteras19 (Portoguese) <johnppetersa@gmail.com>\n"
           "Fabrizio Alberio (Italian)";
 
