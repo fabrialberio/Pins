@@ -18,6 +18,10 @@
               <object class="GtkButton" id="delete_button">
                 <property name="icon-name">user-trash-symbolic</property>
                 <property name="tooltip-text" translatable="yes">Delete</property>
+                <style>
+                  <class name="destructive-action" />
+                  <class name="flat" />
+                </style>
               </object>
             </child>
           </object>
