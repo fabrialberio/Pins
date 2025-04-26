@@ -23,7 +23,7 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title" translatable="yes" context="shortcut window">Add new app</property>
+                <property name="title" translatable="yes" context="shortcut window">Add New App</property>
                 <property name="action-name">win.new-app</property>
               </object>
             </child>
