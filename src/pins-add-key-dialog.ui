@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="PinsAddKeyDialog" parent="AdwAlertDialog">
-    <property name="heading" translatable="yes">Add new key</property>
+    <property name="heading" translatable="yes">Add New Key</property>
     <property name="close-response">cancel</property>
     <property name="default-response">add</property>
     <property name="extra-child">

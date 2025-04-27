@@ -65,7 +65,7 @@
                                 </style>
                                 <property name="child">
                                   <object class="GtkButton" id="edit_icon_button">
-                                    <property name="tooltip-text" translatable="yes">Edit icon</property>
+                                    <property name="tooltip-text" translatable="yes">Edit Icon</property>
                                     <property name="focusable">True</property>
                                     <property name="icon-name">document-edit-symbolic</property>
                                     <style>
@@ -87,7 +87,7 @@
                                   <object class="GtkButton" id="load_icon_button">
                                     <property
                                       name="tooltip-text"
-                                      translatable="yes">Load icon from file</property>
+                                      translatable="yes">Load Icon From File</property>
                                     <property name="focusable">True</property>
                                     <property name="icon-name">folder-open-symbolic</property>
                                     <style>
@@ -186,7 +186,7 @@
                         </style>
                         <child>
                           <object class="AdwButtonRow" id="add_key_button">
-                            <property name="title" translatable="yes">Add key</property>
+                            <property name="title" translatable="yes">Add Key</property>
                             <property name="start-icon-name">list-add-symbolic</property>
                           </object>
                         </child>

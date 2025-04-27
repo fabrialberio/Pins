@@ -21,7 +21,7 @@
         </child>
         <child>
           <object class="AdwNavigationPage">
-            <property name="title">File page</property>
+            <property name="title">File Page</property>
             <property name="tag">file-page</property>
             <property name="child">
               <object class="PinsFileView" id="file_view">

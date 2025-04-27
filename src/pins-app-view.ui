@@ -12,13 +12,13 @@
                 <child type="start">
                   <object class="GtkButton">
                     <property name="icon-name">list-add-symbolic</property>
-                    <property name="tooltip-text" translatable="yes">Add new app</property>
+                    <property name="tooltip-text" translatable="yes">Add New App</property>
                     <property name="action-name">win.new-app</property>
                   </object>
                 </child>
                 <child type="end">
                   <object class="GtkMenuButton" id="menu_button">
-                    <property name="tooltip-text" translatable="yes">Show menu</property>
+                    <property name="tooltip-text" translatable="yes">Show Menu</property>
                     <property name="icon-name">open-menu-symbolic</property>
                     <property name="menu-model">primary_menu</property>
                   </object>
@@ -67,7 +67,7 @@
                 <property name="name">loading</property>
                 <property name="child">
                   <object class="AdwStatusPage" id="status_loading">
-                    <property name="title" translatable="yes">Loading apps…</property>
+                    <property name="title" translatable="yes">Loading Apps</property>
                     <property name="paintable">
                       <object class="AdwSpinnerPaintable">
                         <property name="widget">status_loading</property>
@@ -82,7 +82,7 @@
                 <property name="name">empty</property>
                 <property name="child">
                   <object class="AdwStatusPage" id="status_empty">
-                    <property name="title" translatable="yes">No apps found</property>
+                    <property name="title" translatable="yes">No Apps Found</property>
                     <property name="icon-name">system-search-symbolic</property>
                     <property name="child">
                       <object class="GtkButton" id="new_app_button">
@@ -94,7 +94,7 @@
                         </style>
                         <property name="child">
                           <object class="AdwButtonContent">
-                            <property name="label" translatable="yes">Add new app</property>
+                            <property name="label" translatable="yes">Add New App</property>
                             <property name="icon-name">list-add-symbolic</property>
                           </object>
                         </property>
@@ -113,7 +113,7 @@
   <menu id="primary_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Show _all apps</attribute>
+        <attribute name="label" translatable="yes">Show _All Apps</attribute>
         <attribute name="action">app-view.show-all-apps</attribute>
       </item>
     </section>
