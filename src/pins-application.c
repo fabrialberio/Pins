@@ -104,6 +104,7 @@ pins_application_about_action (GSimpleAction *action, GVariant *parameter,
           "josushu0 (Spanish)\n "
           "oscfdezdz (Spanish)\n "
           "gregorni (German)\n "
+          "Gabriel Brand (German) <gabr.brand@gmail.com>\n "
           "Mejans (Occitan)\n "
           "Vistaus (Dutch)\n"
           "Tuba2 (Portoguese)\n"
