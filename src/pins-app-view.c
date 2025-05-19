@@ -34,7 +34,6 @@ struct _PinsAppView
 
     PinsAppFilter *app_filter;
 
-    GtkToggleButton *search_button;
     GtkSearchBar *search_bar;
     GtkSearchEntry *search_entry;
     AdwViewStack *view_stack;
@@ -128,8 +127,6 @@ pins_app_view_class_init (PinsAppViewClass *klass)
         widget_class, "/io/github/fabrialberio/pinapp/pins-app-view.ui");
     g_type_ensure (PINS_TYPE_APP_GRID);
 
-    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
-                                          search_button);
     gtk_widget_class_bind_template_child (widget_class, PinsAppView,
                                           search_bar);
     gtk_widget_class_bind_template_child (widget_class, PinsAppView,
