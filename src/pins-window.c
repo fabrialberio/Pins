@@ -171,7 +171,7 @@ static void
 pins_window_init (PinsWindow *self)
 {
     PinsAppIterator *app_iterator;
-    GSimpleAction *action;
+    GSimpleAction *new_app_action, *search_action;
 
     gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -179,12 +179,17 @@ pins_window_init (PinsWindow *self)
 
     app_iterator = pins_app_iterator_new ();
 
-    action = g_simple_action_new ("new-app", NULL);
-    g_signal_connect_object (action, "activate",
+    new_app_action = g_simple_action_new ("new-app", NULL);
+    g_signal_connect_object (new_app_action, "activate",
                              G_CALLBACK (pins_window_add_new_app_cb),
                              app_iterator, 0);
-    g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (action));
-    g_object_unref (G_OBJECT (action));
+    g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (new_app_action));
+    g_object_unref (G_OBJECT (new_app_action));
+
+    search_action = g_simple_action_new_stateful (
+        "search", NULL, g_variant_new_boolean (false));
+    g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (search_action));
+    g_object_unref (G_OBJECT (search_action));
 
     pins_app_view_set_app_iterator (self->app_view, app_iterator);
 

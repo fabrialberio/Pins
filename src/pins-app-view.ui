@@ -27,6 +27,7 @@
                   <object class="GtkToggleButton" id="search_button">
                     <property name="tooltip-text" translatable="yes">Search</property>
                     <property name="icon-name">system-search-symbolic</property>
+                    <property name="action-name">win.search</property>
                   </object>
                 </child>
               </object>
