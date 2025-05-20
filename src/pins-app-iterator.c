@@ -197,6 +197,8 @@ pins_app_iterator_create_user_file (PinsAppIterator *self, gchar *basename,
 
     file = g_file_new_build_filename (pins_desktop_file_user_path (), filename,
                                       NULL);
+    g_file_make_directory_with_parents (g_file_get_parent (file), NULL, NULL);
+
     g_file_replace_contents (file, PINS_DESKTOP_FILE_DEFAULT_CONTENT,
                              strlen (PINS_DESKTOP_FILE_DEFAULT_CONTENT), NULL,
                              FALSE, G_FILE_CREATE_NONE, NULL, NULL, &err);
