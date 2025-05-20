@@ -54,6 +54,23 @@
     <control>touch</control>
   </recommends>
   <releases>
+    <release version="2.3.0" date="2025-05-20">
+      <description translate="no">
+        <p>What's new</p>
+        <ul>
+          <li>@Tuba2 updated the Portoguese translation</li>
+          <li>@vmkspv updated the Russian translation</li>
+          <li>Gabriel Brand updated the German translation</li>
+          <li>Tweaked file view appearance</li>
+          <li>Added "Ctrl+F" shortcut to open search</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>Use proper header capitalization in labels thanks to @ARAKHN1D</li>
+          <li>Ensure user apps folder exists before creating a new app</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.2.0" date="2025-03-23">
       <description translate="no">
         <p>What's new</p>
