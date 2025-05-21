@@ -1,4 +1,4 @@
-# Ukranian translations for pinapp package.
+# Ukrainian translations for pinapp package.
 # Copyright (C) 2025 THE PINS' COPYRIGHT HOLDER
 # This file is distributed under the same license as the pinapp package.
 # Oleksii "Grinka" <grinka@tuta.io>, 2025.
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: https://github.com/fabrialberio/Pins/issues\n"
 "POT-Creation-Date: 2025-05-21 13:16+0300\n"
-"PO-Revision-Date: 2025-05-21 16:13+0300\n"
+"PO-Revision-Date: 2025-05-21 16:31+0300\n"
 "Last-Translator: Oleksii Grinka <grinka@tuta.io>\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
