@@ -1,0 +1,197 @@
+# Ukrainian translations for pinapp package.
+# Copyright (C) 2025 THE PINS' COPYRIGHT HOLDER
+# This file is distributed under the same license as the pinapp package.
+# Oleksii "Grinka" <grinka@tuta.io>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pinapp\n"
+"Report-Msgid-Bugs-To: https://github.com/fabrialberio/Pins/issues\n"
+"POT-Creation-Date: 2025-05-21 13:16+0300\n"
+"PO-Revision-Date: 2025-05-21 16:31+0300\n"
+"Last-Translator: Oleksii Grinka <grinka@tuta.io>\n"
+"Language-Team: Ukrainian\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: data/io.github.fabrialberio.pinapp.desktop.in:3 src/pins-window.ui:14
+msgid "Pins"
+msgstr "Pins"
+
+#: data/io.github.fabrialberio.pinapp.desktop.in:4
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
+msgid "Create and edit app shortcuts"
+msgstr "Створюйте та редагуйте ярлики програм"
+
+#: data/io.github.fabrialberio.pinapp.desktop.in:11
+msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
+msgstr "GNOME;GTK;Програми;Ярлики;Піктограми;"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
+msgid "Pins allows you to customize your app menu by editing .desktop files."
+msgstr "Pins дозволяє вам налаштувати ваше меню програм шляхом редагування файлів"
+" .desktop."
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
+msgid "Some of the things you can do are:"
+msgstr "Ось що ви можете зробити:"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:18
+msgid "changing an app icon that doesn't fit in with your theme,"
+msgstr "змінювати піктограми програм, які не підходять вашій темі,"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:19
+msgid "creating custom shortcuts to websites,"
+msgstr "створювати власні ярлики для веб-сайтів,"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:20
+msgid "hiding apps you don't want to see,"
+msgstr "ховати програми, які ви не хочете бачити,"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:21
+msgid "editing properties in .desktop files."
+msgstr "редагувати властивості у файлах .desktop"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:32
+msgid "Screenshot of Pins showing the app grid"
+msgstr "Знімок екрану Pins, що показує сітку програм"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:37
+msgid "Screenshot of Pins showing an opened file"
+msgstr "Знімок екрану Pins, що показує відкритий файл"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:42
+msgid "Screenshot of Pins showing an opened file on a small screen"
+msgstr "Знімок екрану Pins, що показує відкритий файл на маленькому екрані"
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:6
+msgid "Show all apps"
+msgstr "Показати усі програми"
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:17
+msgid "List of desktop file search paths in order of priority"
+msgstr "Список шляхів пошуку файлу .desktop в порядку пріоритетності"
+
+#: src/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Загальне"
+
+#: src/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Показати Клавіатурні Скорочення"
+
+#: src/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Закрити вікно"
+
+#: src/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Add new app"
+msgstr "Додати нову програму"
+
+#: src/pins-add-key-dialog.ui:4
+msgid "Add new key"
+msgstr "Додати новий ключ"
+
+#: src/pins-add-key-dialog.ui:11
+msgid "Key"
+msgstr "Ключ"
+
+#: src/pins-add-key-dialog.ui:17
+msgid "_Cancel"
+msgstr "_Скасувати"
+
+#: src/pins-add-key-dialog.ui:18
+msgid "_Add"
+msgstr "_Додати"
+
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:97
+msgid "Add new app"
+msgstr "Додати нову програму"
+
+#: src/pins-app-view.ui:21
+msgid "Show menu"
+msgstr "Головне меню"
+
+#: src/pins-app-view.ui:28
+msgid "Search"
+msgstr "Пошук"
+
+#: src/pins-app-view.ui:70
+msgid "Loading apps…"
+msgstr "Завантаження програм..."
+
+#: src/pins-app-view.ui:85
+msgid "No apps found"
+msgstr "Не знайдено програм"
+
+#: src/pins-app-view.ui:116
+msgid "Show _all apps"
+msgstr "Показати _усі програми"
+
+#: src/pins-app-view.ui:122
+msgid "_Keyboard Shortcuts"
+msgstr "_Клавіатурні скорочення"
+
+#: src/pins-app-view.ui:126
+msgid "_About Pins"
+msgstr "_Про «Pins»"
+
+#: src/pins-file-view.ui:20
+msgid "Delete"
+msgstr "Вилучити"
+
+#: src/pins-file-view.ui:64
+msgid "Edit icon"
+msgstr "Редагувати піктограму"
+
+#: src/pins-file-view.ui:86
+msgid "Load icon from file"
+msgstr "Завантажити піктограму з файлу"
+
+#: src/pins-file-view.ui:131
+msgid "Autostart"
+msgstr "Автозапуск"
+
+#: src/pins-file-view.ui:134
+msgid "Launch this application on login"
+msgstr "Запускати цю програму під час входу"
+
+#: src/pins-file-view.ui:150
+msgid "Invisible"
+msgstr "Невидимий"
+
+#: src/pins-file-view.ui:153
+msgid "Hide this application in the app menu"
+msgstr "Сховати цю програму в меню програм"
+
+#: src/pins-file-view.ui:185
+msgid "Add key"
+msgstr "Додати ключ"
+
+#: src/pins-key-row.ui:9
+msgid "Erase changes"
+msgstr "Скинути зміни"
+
+#: src/pins-key-row.ui:21
+msgid "Remove key"
+msgstr "Вилучити ключ"
+
+#: src/pins-key-row.ui:32
+msgid "Select locale"
+msgstr "Обрати локаль"
+
+#: src/pins-file-view.c:362
+msgid "Load icon"
+msgstr "Завантажити піктограму"
+
+#: src/pins-key-row.c:26
+msgid "(Unlocalized)"
+msgstr "(Не локалізовано)"
