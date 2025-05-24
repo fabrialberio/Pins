@@ -12,7 +12,8 @@
         "/var/lib/flatpak/exports/share",
         "~/.local/share/flatpak/exports/share",
         "~/.local/share/xdg-desktop-portal",
-        "/var/lib/snapd/desktop"
+        "/var/lib/snapd/desktop",
+        "/run/current-system/sw/share"
         ]</default>
       <summary>List of desktop file search paths in order of priority</summary>
     </key>
