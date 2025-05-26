@@ -105,7 +105,7 @@ pins_application_about_action (GSimpleAction *action, GVariant *parameter,
           "oscfdezdz (Spanish)\n "
           "gregorni (German)\n "
           "Gabriel Brand (German) <gabr.brand@gmail.com>\n "
-          "Oleksii \"Grinka\" (Ukranian) <grinka@tuta.io>\n"
+          "Oleksii \"Grinka\" (Ukrainian) <grinka@tuta.io>\n"
           "Mejans (Occitan)\n "
           "Vistaus (Dutch)\n"
           "Tuba2 (Portoguese)\n"
