@@ -16,6 +16,7 @@
         "--filesystem=xdg-data/flatpak:ro",
         "--filesystem=/var/lib/flatpak:ro",
         "--filesystem=/var/lib/snapd:ro",
+        "--filesystem=/run/current-system/sw/share:ro",
         "--filesystem=~/.local/share/xdg-desktop-portal:ro"
     ],
     "cleanup": [
