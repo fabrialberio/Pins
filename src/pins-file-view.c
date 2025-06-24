@@ -26,6 +26,7 @@
 #include "pins-app-icon.h"
 #include "pins-key-row.h"
 #include "pins-locale-utils-private.h"
+#include "pins-pick-icon-dialog.h"
 
 struct _PinsFileView
 {
@@ -38,8 +39,7 @@ struct _PinsFileView
     AdwWindowTitle *window_title;
     GtkScrolledWindow *scrolled_window;
     PinsAppIcon *icon;
-    GtkButton *edit_icon_button;
-    GtkButton *load_icon_button;
+    GtkButton *pick_icon_button;
     PinsKeyRow *name_row;
     PinsKeyRow *comment_row;
     GtkSwitch *autostart_switch;
@@ -294,9 +294,7 @@ pins_file_view_class_init (PinsFileViewClass *klass)
                                           scrolled_window);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView, icon);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
-                                          edit_icon_button);
-    gtk_widget_class_bind_template_child (widget_class, PinsFileView,
-                                          load_icon_button);
+                                          pick_icon_button);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           name_row);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
@@ -316,53 +314,13 @@ pins_file_view_class_init (PinsFileViewClass *klass)
 }
 
 void
-edit_icon_button_clicked_cb (PinsFileView *self)
+pick_icon_button_clicked_cb (PinsFileView *self)
 {
-    if (!pins_desktop_file_has_key (self->desktop_file,
-                                    G_KEY_FILE_DESKTOP_KEY_ICON))
-        {
-            pins_desktop_file_set_string (self->desktop_file,
-                                          G_KEY_FILE_DESKTOP_KEY_ICON, "");
-        }
+    PinsPickIconDialog *dialog
+        = pins_pick_icon_dialog_new (self->desktop_file);
 
-    pins_file_view_focus_key_row (self, G_KEY_FILE_DESKTOP_KEY_ICON);
-}
-
-void
-load_icon_dialog_closed_cb (GObject *dialog, GAsyncResult *res,
-                            gpointer user_data)
-{
-    PinsFileView *self = PINS_FILE_VIEW (user_data);
-    g_autoptr (GFile) sandbox_file = NULL;
-    g_autoptr (GFile) file = NULL;
-
-    sandbox_file
-        = gtk_file_dialog_open_finish (GTK_FILE_DIALOG (dialog), res, NULL);
-
-    if (sandbox_file == NULL)
-        return;
-
-    file
-        = g_file_new_build_filename (g_get_user_data_dir (), "user-icons",
-                                     g_file_get_basename (sandbox_file), NULL);
-
-    g_file_make_directory_with_parents (g_file_get_parent (file), NULL, NULL);
-    g_file_copy (sandbox_file, file, G_FILE_COPY_NONE, NULL, NULL, NULL, NULL);
-
-    pins_desktop_file_set_string (self->desktop_file,
-                                  G_KEY_FILE_DESKTOP_KEY_ICON,
-                                  g_file_get_path (file));
-}
-
-void
-load_icon_button_clicked_cb (PinsFileView *self)
-{
-    GtkFileDialog *dialog = gtk_file_dialog_new ();
-
-    gtk_file_dialog_set_title (dialog, _ ("Load icon"));
-    gtk_file_dialog_open (dialog,
-                          GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
-                          NULL, load_icon_dialog_closed_cb, self);
+    adw_dialog_present (ADW_DIALOG (dialog),
+                        GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self))));
 }
 
 void
@@ -399,11 +357,8 @@ pins_file_view_init (PinsFileView *self)
 {
     gtk_widget_init_template (GTK_WIDGET (self));
 
-    g_signal_connect_object (self->edit_icon_button, "clicked",
-                             G_CALLBACK (edit_icon_button_clicked_cb), self,
-                             G_CONNECT_SWAPPED);
-    g_signal_connect_object (self->load_icon_button, "clicked",
-                             G_CALLBACK (load_icon_button_clicked_cb), self,
+    g_signal_connect_object (self->pick_icon_button, "clicked",
+                             G_CALLBACK (pick_icon_button_clicked_cb), self,
                              G_CONNECT_SWAPPED);
 
     g_signal_connect_object (self->add_key_button, "activated",

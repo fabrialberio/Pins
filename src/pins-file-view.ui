@@ -64,32 +64,10 @@
                                   <class name="background" />
                                 </style>
                                 <property name="child">
-                                  <object class="GtkButton" id="edit_icon_button">
-                                    <property name="tooltip-text" translatable="yes">Edit Icon</property>
+                                  <object class="GtkButton" id="pick_icon_button">
+                                    <property name="tooltip-text" translatable="yes">Pick Icon</property>
                                     <property name="focusable">True</property>
                                     <property name="icon-name">document-edit-symbolic</property>
-                                    <style>
-                                      <class name="circular" />
-                                    </style>
-                                  </object>
-                                </property>
-                              </object>
-                            </child>
-                            <child type="overlay">
-                              <object class="AdwBin">
-                                <property name="halign">end</property>
-                                <property name="valign">start</property>
-                                <style>
-                                  <class name="cutout" />
-                                  <class name="background" />
-                                </style>
-                                <property name="child">
-                                  <object class="GtkButton" id="load_icon_button">
-                                    <property
-                                      name="tooltip-text"
-                                      translatable="yes">Load Icon From File</property>
-                                    <property name="focusable">True</property>
-                                    <property name="icon-name">folder-open-symbolic</property>
                                     <style>
                                       <class name="circular" />
                                     </style>
