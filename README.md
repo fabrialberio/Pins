@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/fabrialberio/pinapp/master/data/appstream/2.png">
+  <img src="https://github.com/fabrialberio/Pins/blob/33129b3c4da9d4d192dc01a893991ca1b6b30162/data/appstream/2.png">
 </div>
 
 ## Features
