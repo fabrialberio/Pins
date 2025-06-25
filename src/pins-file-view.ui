@@ -58,6 +58,27 @@
                             <child type="overlay">
                               <object class="AdwBin">
                                 <property name="halign">end</property>
+                                <property name="valign">start</property>
+                                <style>
+                                  <class name="cutout" />
+                                  <class name="background" />
+                                </style>
+                                <property name="child">
+                                  <object class="GtkButton" id="reset_icon_button">
+                                    <property name="visible">false</property>
+                                    <property name="tooltip-text" translatable="yes">Erase Changes</property>
+                                    <property name="focusable">True</property>
+                                    <property name="icon-name">erase-symbolic</property>
+                                    <style>
+                                      <class name="circular" />
+                                    </style>
+                                  </object>
+                                </property>
+                              </object>
+                            </child>
+                            <child type="overlay">
+                              <object class="AdwBin">
+                                <property name="halign">end</property>
                                 <property name="valign">end</property>
                                 <style>
                                   <class name="cutout" />

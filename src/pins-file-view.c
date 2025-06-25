@@ -39,6 +39,7 @@ struct _PinsFileView
     AdwWindowTitle *window_title;
     GtkScrolledWindow *scrolled_window;
     PinsAppIcon *icon;
+    GtkButton *reset_icon_button;
     GtkButton *pick_icon_button;
     PinsKeyRow *name_row;
     PinsKeyRow *comment_row;
@@ -71,6 +72,15 @@ pins_file_view_update_title (PinsFileView *self)
         self->window_title,
         pins_desktop_file_get_string (self->desktop_file,
                                       G_KEY_FILE_DESKTOP_KEY_NAME));
+}
+
+void
+pins_file_view_update_reset_icon_button_visible (PinsFileView *self)
+{
+    gboolean icon_edited = pins_desktop_file_is_key_edited (
+        self->desktop_file, G_KEY_FILE_DESKTOP_KEY_ICON);
+
+    gtk_widget_set_visible (GTK_WIDGET (self->reset_icon_button), icon_edited);
 }
 
 void
@@ -147,6 +157,8 @@ pins_file_view_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
                         self);
                 }
         }
+    else if (!g_strcmp0 (key, G_KEY_FILE_DESKTOP_KEY_ICON))
+        pins_file_view_update_reset_icon_button_visible (self);
 }
 
 void
@@ -226,6 +238,7 @@ pins_file_view_set_desktop_file (PinsFileView *self,
     self->keys = pins_desktop_file_get_keys (self->desktop_file);
 
     pins_file_view_update_title (self);
+    pins_file_view_update_reset_icon_button_visible (self);
     pins_app_icon_set_desktop_file (self->icon, self->desktop_file);
     gtk_switch_set_active (
         self->autostart_switch,
@@ -296,6 +309,8 @@ pins_file_view_class_init (PinsFileViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           pick_icon_button);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
+                                          reset_icon_button);
+    gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           name_row);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           comment_row);
@@ -311,6 +326,13 @@ pins_file_view_class_init (PinsFileViewClass *klass)
                                           delete_button);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           breakpoint);
+}
+
+void
+reset_icon_button_clicked_cb (PinsFileView *self)
+{
+    pins_desktop_file_reset_key (self->desktop_file,
+                                 G_KEY_FILE_DESKTOP_KEY_ICON);
 }
 
 void
@@ -357,6 +379,9 @@ pins_file_view_init (PinsFileView *self)
 {
     gtk_widget_init_template (GTK_WIDGET (self));
 
+    g_signal_connect_object (self->reset_icon_button, "clicked",
+                             G_CALLBACK (reset_icon_button_clicked_cb), self,
+                             G_CONNECT_SWAPPED);
     g_signal_connect_object (self->pick_icon_button, "clicked",
                              G_CALLBACK (pick_icon_button_clicked_cb), self,
                              G_CONNECT_SWAPPED);
