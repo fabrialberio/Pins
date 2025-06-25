@@ -2,7 +2,8 @@
 <interface>
   <template class="PinsPickIconDialog" parent="AdwDialog">
     <property name="title" translatable="yes">Pick Icon</property>
-    <property name="content-width">600</property>
+    <property name="content-width">480</property>
+    <property name="content-height">480</property>
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
@@ -32,8 +33,9 @@
             <property name="child">
               <object class="GtkGridView" id="grid_view">
                 <property name="single-click-activate">true</property>
+                <property name="max-columns">9</property>
                 <style>
-                  <class name="app-grid" />
+                  <class name="icon-grid" />
                 </style>
               </object>
             </property>

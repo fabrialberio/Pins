@@ -32,6 +32,17 @@
     margin-right: 6px;
 }
 
+.icon-grid {
+    padding: 6px;
+    background: transparent;
+}
+
+.icon-grid>child {
+    min-height: 42px;
+    min-width: 42px;
+    border-radius: 8px;
+}
+
 .glyph {
     color: var(--dark-1);
 }
