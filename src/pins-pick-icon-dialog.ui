@@ -15,14 +15,8 @@
               </object>
             </child>
             <property name="title-widget">
-              <object class="GtkBox">
-                <property name="orientation">horizontal</property>
-                <property name="spacing">6</property>
-                <child>
-                  <object class="GtkSearchEntry" id="search_entry">
-                    <property name="placeholder-text" translatable="yes">Search for icons</property>
-                  </object>
-                </child>
+              <object class="GtkSearchEntry" id="search_entry">
+                <property name="placeholder-text" translatable="yes">Search for icons by name</property>
               </object>
             </property>
           </object>
