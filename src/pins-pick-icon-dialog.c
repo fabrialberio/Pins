@@ -150,6 +150,7 @@ icon_setup_cb (GtkSignalListItemFactory *factory, GtkListItem *item)
 {
     GtkWidget *icon = gtk_image_new ();
     gtk_image_set_pixel_size (GTK_IMAGE (icon), 32);
+    gtk_widget_add_css_class (icon, "icon-dropshadow");
 
     gtk_list_item_set_child (item, icon);
 }
