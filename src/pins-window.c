@@ -187,7 +187,7 @@ pins_window_init (PinsWindow *self)
     g_object_unref (G_OBJECT (new_app_action));
 
     search_action = g_simple_action_new_stateful (
-        "search", NULL, g_variant_new_boolean (false));
+        "search", NULL, g_variant_new_boolean (FALSE));
     g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (search_action));
     g_object_unref (G_OBJECT (search_action));
 

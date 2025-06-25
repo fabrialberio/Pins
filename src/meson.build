@@ -13,6 +13,7 @@ pinapp_sources = [
     'pins-file-view.c',
     'pins-key-row.c',
     'pins-locale-utils.c',
+    'pins-pick-icon-dialog.c',
     'pins-window.c',
 ]
 
