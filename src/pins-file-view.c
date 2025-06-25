@@ -80,7 +80,9 @@ pins_file_view_update_reset_icon_button_visible (PinsFileView *self)
     gboolean icon_edited = pins_desktop_file_is_key_edited (
         self->desktop_file, G_KEY_FILE_DESKTOP_KEY_ICON);
 
-    gtk_widget_set_visible (GTK_WIDGET (self->reset_icon_button), icon_edited);
+    gtk_widget_set_visible (
+        GTK_WIDGET (self->reset_icon_button),
+        icon_edited && !pins_desktop_file_is_user_only (self->desktop_file));
 }
 
 void
