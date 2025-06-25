@@ -67,7 +67,6 @@ pins_desktop_file_search_paths (void)
 void
 pins_inject_icon_search_paths (void)
 {
-    GStrvBuilder *builder = g_strv_builder_new ();
     g_autoptr (GSettings) settings
         = g_settings_new ("io.github.fabrialberio.pinapp");
     g_auto (GStrv) search_paths
@@ -76,13 +75,7 @@ pins_inject_icon_search_paths (void)
         = gtk_icon_theme_get_for_display (gdk_display_get_default ());
 
     for (int i = 0; i < g_strv_length (search_paths); i++)
-        g_strv_builder_add (builder,
-                            g_build_filename (parse_filename (search_paths[i]),
-                                              "icons", NULL));
-
-    g_strv_builder_addv (
-        builder, (const gchar **)gtk_icon_theme_get_search_path (theme));
-
-    gtk_icon_theme_set_search_path (
-        theme, (const gchar *const *)g_strv_builder_end (builder));
+        gtk_icon_theme_add_search_path (
+            theme, g_build_filename (parse_filename (search_paths[i]), "icons",
+                                     NULL));
 }
