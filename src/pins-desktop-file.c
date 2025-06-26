@@ -86,7 +86,9 @@ pins_desktop_file_new_full (GFile *user_file, GFile *system_file,
                                        KEY_FILE_FLAGS, &err);
             if (err != NULL)
                 {
-                    g_propagate_error (error, err);
+                    // g_propagate_error caused a panic with error code 139.
+                    g_set_error (error, err->domain, err->code, "%s",
+                                 err->message);
                     return NULL;
                 }
         }
@@ -103,7 +105,8 @@ pins_desktop_file_new_full (GFile *user_file, GFile *system_file,
         g_assert_not_reached ();
     if (err != NULL)
         {
-            g_propagate_error (error, err);
+            // g_propagate_error caused a panic with error code 139.
+            g_set_error (error, err->domain, err->code, "%s", err->message);
             return NULL;
         }
 
@@ -116,16 +119,14 @@ pins_desktop_file_new_full (GFile *user_file, GFile *system_file,
 /**
  * Given a `GFile`, it constructs a `PinsDesktopFile` with the following
  * logic:
- *  - If the file is in the system folder and a file with the same name is
- *    found in the user folder (`USER_APPS_DIR`), `PinsDesktopFile` is
- * created with both a user and a system `GKeyFile`;
- *  - If the file is in the system folder and no file with the same name is
- *    found in the user folder, `PinsDesktopFile` is created without a user
- *    `GKeyFile`;
- *  - If the file is in the user folder, `PinsDesktopFile` is created
- * without a system `GKeyFile`.
- *
- * It is assumed that `file` exists.
+ *  -  If the file is in the system folder and a file with the same name is
+ *     found in the user folder, `PinsDesktopFile` is created with both a user
+ *     and a system `GKeyFile`;
+ *  -  If the file is in the system folder and no file with the same name is
+ *     found in the user folder, `PinsDesktopFile` is created without a user
+ *     `GKeyFile`;
+ *  -  If the file is in the user folder, `PinsDesktopFile` is created
+ *     without a system `GKeyFile`.
  */
 PinsDesktopFile *
 pins_desktop_file_new (GFile *file, GError **error)
