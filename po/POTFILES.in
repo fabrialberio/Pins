@@ -7,6 +7,7 @@ src/pins-add-key-dialog.ui
 src/pins-app-view.ui
 src/pins-file-view.ui
 src/pins-key-row.ui
+src/pins-pick-icon-dialog.ui
 src/pins-window.ui
 
 src/pins-application.c

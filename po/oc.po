@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-23 22:42+0100\n"
+"POT-Creation-Date: 2025-06-26 11:38+0200\n"
 "PO-Revision-Date: 2025-02-05 18:05+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: \n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:3 src/pins-window.ui:14
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-window.ui:14
 msgid "Pins"
 msgstr ""
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:4
+#: data/io.github.fabrialberio.pinapp.desktop.in:3
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
 #, fuzzy
 msgid "Create and edit app shortcuts"
 msgstr "Crear e modificar d’acorchis d’aplicacions"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:11
+#: data/io.github.fabrialberio.pinapp.desktop.in:10
 msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
 msgstr "GNOME;GTK;Aplicacion;acorchi;abracat;icòna;"
 
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Show all apps"
 msgstr ""
 
-#: data/io.github.fabrialberio.pinapp.gschema.xml:17
+#: data/io.github.fabrialberio.pinapp.gschema.xml:18
 msgid "List of desktop file search paths in order of priority"
 msgstr ""
 
@@ -91,12 +91,19 @@ msgid "Quit"
 msgstr "Sortir"
 
 #: src/help-overlay.ui:26
+#, fuzzy
 msgctxt "shortcut window"
-msgid "Add new app"
+msgid "Add New App"
 msgstr "Apondre apli novèla"
 
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Recercar"
+
 #: src/pins-add-key-dialog.ui:4
-msgid "Add new key"
+#, fuzzy
+msgid "Add New Key"
 msgstr "Apondre una clau novèla"
 
 #: src/pins-add-key-dialog.ui:11
@@ -112,36 +119,40 @@ msgstr "Anullar"
 msgid "_Add"
 msgstr ""
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:97
-msgid "Add new app"
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:98
+#, fuzzy
+msgid "Add New App"
 msgstr "Apondre apli novèla"
 
 #: src/pins-app-view.ui:21
-msgid "Show menu"
+#, fuzzy
+msgid "Show Menu"
 msgstr "Mostrar lo menú"
 
 #: src/pins-app-view.ui:28
 msgid "Search"
 msgstr "Recercar"
 
-#: src/pins-app-view.ui:70
-msgid "Loading apps…"
+#: src/pins-app-view.ui:71
+#, fuzzy
+msgid "Loading Apps"
 msgstr "Cargament de las aplicacions…"
 
-#: src/pins-app-view.ui:85
-msgid "No apps found"
+#: src/pins-app-view.ui:86
+#, fuzzy
+msgid "No Apps Found"
 msgstr "Cap d'aplicacion pas trobada"
 
-#: src/pins-app-view.ui:116
-msgid "Show _all apps"
+#: src/pins-app-view.ui:117
+msgid "Show _All Apps"
 msgstr ""
 
-#: src/pins-app-view.ui:122
+#: src/pins-app-view.ui:123
 #, fuzzy
 msgid "_Keyboard Shortcuts"
 msgstr "Acorchis de clavièr"
 
-#: src/pins-app-view.ui:126
+#: src/pins-app-view.ui:127
 #, fuzzy
 msgid "_About Pins"
 msgstr "A prepaus de PinApp"
@@ -150,60 +161,60 @@ msgstr "A prepaus de PinApp"
 msgid "Delete"
 msgstr ""
 
-#: src/pins-file-view.ui:64
-msgid "Edit icon"
-msgstr ""
+#: src/pins-file-view.ui:69 src/pins-key-row.ui:9
+#, fuzzy
+msgid "Erase Changes"
+msgstr "Enregistrar las modificacions ?"
 
-#: src/pins-file-view.ui:86
-msgid "Load icon from file"
-msgstr ""
-
-#: src/pins-file-view.ui:131
-msgid "Autostart"
+#: src/pins-file-view.ui:89 src/pins-pick-icon-dialog.ui:4
+msgid "Pick Icon"
 msgstr ""
 
 #: src/pins-file-view.ui:134
+msgid "Autostart"
+msgstr ""
+
+#: src/pins-file-view.ui:137
 msgid "Launch this application on login"
 msgstr ""
 
-#: src/pins-file-view.ui:150
+#: src/pins-file-view.ui:153
 msgid "Invisible"
 msgstr ""
 
-#: src/pins-file-view.ui:153
+#: src/pins-file-view.ui:156
 msgid "Hide this application in the app menu"
 msgstr ""
 
-#: src/pins-file-view.ui:185
+#: src/pins-file-view.ui:188
 #, fuzzy
-msgid "Add key"
+msgid "Add Key"
 msgstr "Apondre una clau novèla"
 
-#: src/pins-key-row.ui:9
-#, fuzzy
-msgid "Erase changes"
-msgstr "Enregistrar las modificacions ?"
-
 #: src/pins-key-row.ui:21
-msgid "Remove key"
+msgid "Remove Key"
 msgstr ""
 
 #: src/pins-key-row.ui:32
-msgid "Select locale"
+#, fuzzy
+msgid "Select Locale"
+msgstr "Lenga"
+
+#: src/pins-pick-icon-dialog.ui:13
+msgid "Load Icon from File"
 msgstr ""
 
-#: src/pins-file-view.c:362
-#, fuzzy
-msgid "Load icon"
-msgstr "Mandar icòna"
+#: src/pins-pick-icon-dialog.ui:19
+msgid "Search for icons"
+msgstr ""
 
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr ""
 
-#~ msgctxt "shortcut window"
-#~ msgid "Search"
-#~ msgstr "Recercar"
+#, fuzzy
+#~ msgid "Load icon"
+#~ msgstr "Mandar icòna"
 
 #~ msgctxt "shortcut window"
 #~ msgid "App editing"
@@ -212,9 +223,6 @@ msgstr ""
 #~ msgctxt "shortcut window"
 #~ msgid "Close"
 #~ msgstr "Tampar"
-
-#~ msgid "Locale"
-#~ msgstr "Lenga"
 
 #~ msgid "Key name"
 #~ msgstr "Nom de clau"

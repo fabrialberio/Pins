@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
-"Report-Msgid-Bugs-To: https://github.com/fabrialberio/Pins/issues\n"
-"POT-Creation-Date: 2025-05-21 13:16+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-26 11:38+0200\n"
 "PO-Revision-Date: 2025-05-21 16:31+0300\n"
 "Last-Translator: Oleksii Grinka <grinka@tuta.io>\n"
 "Language-Team: Ukrainian\n"
@@ -18,23 +18,24 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:3 src/pins-window.ui:14
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-window.ui:14
 msgid "Pins"
 msgstr "Pins"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:4
+#: data/io.github.fabrialberio.pinapp.desktop.in:3
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
 msgid "Create and edit app shortcuts"
 msgstr "Створюйте та редагуйте ярлики програм"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:11
+#: data/io.github.fabrialberio.pinapp.desktop.in:10
 msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
 msgstr "GNOME;GTK;Програми;Ярлики;Піктограми;"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
 msgid "Pins allows you to customize your app menu by editing .desktop files."
-msgstr "Pins дозволяє вам налаштувати ваше меню програм шляхом редагування файлів"
-" .desktop."
+msgstr ""
+"Pins дозволяє вам налаштувати ваше меню програм шляхом редагування "
+"файлів .desktop."
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
 msgid "Some of the things you can do are:"
@@ -72,7 +73,7 @@ msgstr "Знімок екрану Pins, що показує відкритий �
 msgid "Show all apps"
 msgstr "Показати усі програми"
 
-#: data/io.github.fabrialberio.pinapp.gschema.xml:17
+#: data/io.github.fabrialberio.pinapp.gschema.xml:18
 msgid "List of desktop file search paths in order of priority"
 msgstr "Список шляхів пошуку файлу .desktop в порядку пріоритетності"
 
@@ -92,12 +93,20 @@ msgid "Quit"
 msgstr "Закрити вікно"
 
 #: src/help-overlay.ui:26
+#, fuzzy
 msgctxt "shortcut window"
-msgid "Add new app"
+msgid "Add New App"
 msgstr "Додати нову програму"
 
+#: src/help-overlay.ui:32
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Пошук"
+
 #: src/pins-add-key-dialog.ui:4
-msgid "Add new key"
+#, fuzzy
+msgid "Add New Key"
 msgstr "Додати новий ключ"
 
 #: src/pins-add-key-dialog.ui:11
@@ -112,35 +121,40 @@ msgstr "_Скасувати"
 msgid "_Add"
 msgstr "_Додати"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:97
-msgid "Add new app"
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:98
+#, fuzzy
+msgid "Add New App"
 msgstr "Додати нову програму"
 
 #: src/pins-app-view.ui:21
-msgid "Show menu"
+#, fuzzy
+msgid "Show Menu"
 msgstr "Головне меню"
 
 #: src/pins-app-view.ui:28
 msgid "Search"
 msgstr "Пошук"
 
-#: src/pins-app-view.ui:70
-msgid "Loading apps…"
+#: src/pins-app-view.ui:71
+#, fuzzy
+msgid "Loading Apps"
 msgstr "Завантаження програм..."
 
-#: src/pins-app-view.ui:85
-msgid "No apps found"
+#: src/pins-app-view.ui:86
+#, fuzzy
+msgid "No Apps Found"
 msgstr "Не знайдено програм"
 
-#: src/pins-app-view.ui:116
-msgid "Show _all apps"
+#: src/pins-app-view.ui:117
+#, fuzzy
+msgid "Show _All Apps"
 msgstr "Показати _усі програми"
 
-#: src/pins-app-view.ui:122
+#: src/pins-app-view.ui:123
 msgid "_Keyboard Shortcuts"
 msgstr "_Клавіатурні скорочення"
 
-#: src/pins-app-view.ui:126
+#: src/pins-app-view.ui:127
 msgid "_About Pins"
 msgstr "_Про «Pins»"
 
@@ -148,50 +162,61 @@ msgstr "_Про «Pins»"
 msgid "Delete"
 msgstr "Вилучити"
 
-#: src/pins-file-view.ui:64
-msgid "Edit icon"
-msgstr "Редагувати піктограму"
+#: src/pins-file-view.ui:69 src/pins-key-row.ui:9
+#, fuzzy
+msgid "Erase Changes"
+msgstr "Скинути зміни"
 
-#: src/pins-file-view.ui:86
-msgid "Load icon from file"
-msgstr "Завантажити піктограму з файлу"
+#: src/pins-file-view.ui:89 src/pins-pick-icon-dialog.ui:4
+msgid "Pick Icon"
+msgstr ""
 
-#: src/pins-file-view.ui:131
+#: src/pins-file-view.ui:134
 msgid "Autostart"
 msgstr "Автозапуск"
 
-#: src/pins-file-view.ui:134
+#: src/pins-file-view.ui:137
 msgid "Launch this application on login"
 msgstr "Запускати цю програму під час входу"
 
-#: src/pins-file-view.ui:150
+#: src/pins-file-view.ui:153
 msgid "Invisible"
 msgstr "Невидимий"
 
-#: src/pins-file-view.ui:153
+#: src/pins-file-view.ui:156
 msgid "Hide this application in the app menu"
 msgstr "Сховати цю програму в меню програм"
 
-#: src/pins-file-view.ui:185
-msgid "Add key"
+#: src/pins-file-view.ui:188
+#, fuzzy
+msgid "Add Key"
 msgstr "Додати ключ"
 
-#: src/pins-key-row.ui:9
-msgid "Erase changes"
-msgstr "Скинути зміни"
-
 #: src/pins-key-row.ui:21
-msgid "Remove key"
+#, fuzzy
+msgid "Remove Key"
 msgstr "Вилучити ключ"
 
 #: src/pins-key-row.ui:32
-msgid "Select locale"
+#, fuzzy
+msgid "Select Locale"
 msgstr "Обрати локаль"
 
-#: src/pins-file-view.c:362
-msgid "Load icon"
-msgstr "Завантажити піктограму"
+#: src/pins-pick-icon-dialog.ui:13
+#, fuzzy
+msgid "Load Icon from File"
+msgstr "Завантажити піктограму з файлу"
+
+#: src/pins-pick-icon-dialog.ui:19
+msgid "Search for icons"
+msgstr ""
 
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr "(Не локалізовано)"
+
+#~ msgid "Edit icon"
+#~ msgstr "Редагувати піктограму"
+
+#~ msgid "Load icon"
+#~ msgstr "Завантажити піктограму"

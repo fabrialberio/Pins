@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-23 22:42+0100\n"
+"POT-Creation-Date: 2025-06-26 11:38+0200\n"
 "PO-Revision-Date: 2025-03-26 02:44-0300\n"
 "Last-Translator: Filipe Motta <luizfilipemotta@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -19,24 +19,24 @@ msgstr ""
 "X-Generator: Gtranslator 48.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:3 src/pins-window.ui:14
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-window.ui:14
 msgid "Pins"
 msgstr "Pins"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:4
+#: data/io.github.fabrialberio.pinapp.desktop.in:3
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
 msgid "Create and edit app shortcuts"
 msgstr "Crie e edite atalhos de aplicativos"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:11
+#: data/io.github.fabrialberio.pinapp.desktop.in:10
 msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
 msgstr "GNOME;GTK;Apps;Aplicativos;Shortcuts;Atalhos;Icons;Ícones;"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
 msgid "Pins allows you to customize your app menu by editing .desktop files."
 msgstr ""
-"O Pins permite que você personalize o menu de aplicativos editando arquivos ."
-"desktop."
+"O Pins permite que você personalize o menu de aplicativos editando "
+"arquivos .desktop."
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
 msgid "Some of the things you can do are:"
@@ -75,7 +75,7 @@ msgstr ""
 msgid "Show all apps"
 msgstr "Mostrar todos os aplicativos"
 
-#: data/io.github.fabrialberio.pinapp.gschema.xml:17
+#: data/io.github.fabrialberio.pinapp.gschema.xml:18
 msgid "List of desktop file search paths in order of priority"
 msgstr ""
 "Lista de caminhos para busca de arquivos .desktop, em ordem de prioridade"
@@ -96,12 +96,20 @@ msgid "Quit"
 msgstr "Sair"
 
 #: src/help-overlay.ui:26
+#, fuzzy
 msgctxt "shortcut window"
-msgid "Add new app"
+msgid "Add New App"
 msgstr "Adicionar novo aplicativo"
 
+#: src/help-overlay.ui:32
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Pesquisar"
+
 #: src/pins-add-key-dialog.ui:4
-msgid "Add new key"
+#, fuzzy
+msgid "Add New Key"
 msgstr "Adicionar nova chave"
 
 #: src/pins-add-key-dialog.ui:11
@@ -116,35 +124,40 @@ msgstr "_Cancelar"
 msgid "_Add"
 msgstr "_Adicionar"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:97
-msgid "Add new app"
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:98
+#, fuzzy
+msgid "Add New App"
 msgstr "Adicionar novo aplicativo"
 
 #: src/pins-app-view.ui:21
-msgid "Show menu"
+#, fuzzy
+msgid "Show Menu"
 msgstr "Mostrar menu"
 
 #: src/pins-app-view.ui:28
 msgid "Search"
 msgstr "Pesquisar"
 
-#: src/pins-app-view.ui:70
-msgid "Loading apps…"
+#: src/pins-app-view.ui:71
+#, fuzzy
+msgid "Loading Apps"
 msgstr "Carregando aplicativos…"
 
-#: src/pins-app-view.ui:85
-msgid "No apps found"
+#: src/pins-app-view.ui:86
+#, fuzzy
+msgid "No Apps Found"
 msgstr "Nenhum aplicativo encontrado"
 
-#: src/pins-app-view.ui:116
-msgid "Show _all apps"
+#: src/pins-app-view.ui:117
+#, fuzzy
+msgid "Show _All Apps"
 msgstr "Mostrar _todos os aplicativos"
 
-#: src/pins-app-view.ui:122
+#: src/pins-app-view.ui:123
 msgid "_Keyboard Shortcuts"
 msgstr "Atalhos de _teclado"
 
-#: src/pins-app-view.ui:126
+#: src/pins-app-view.ui:127
 msgid "_About Pins"
 msgstr "_ Sobre o Pins"
 
@@ -152,50 +165,61 @@ msgstr "_ Sobre o Pins"
 msgid "Delete"
 msgstr "Excluir"
 
-#: src/pins-file-view.ui:64
-msgid "Edit icon"
-msgstr "Editar ícone"
+#: src/pins-file-view.ui:69 src/pins-key-row.ui:9
+#, fuzzy
+msgid "Erase Changes"
+msgstr "Apagar mudanças"
 
-#: src/pins-file-view.ui:86
-msgid "Load icon from file"
-msgstr "Carregar ícone de um arquivo"
+#: src/pins-file-view.ui:89 src/pins-pick-icon-dialog.ui:4
+msgid "Pick Icon"
+msgstr ""
 
-#: src/pins-file-view.ui:131
+#: src/pins-file-view.ui:134
 msgid "Autostart"
 msgstr "Início automático"
 
-#: src/pins-file-view.ui:134
+#: src/pins-file-view.ui:137
 msgid "Launch this application on login"
 msgstr "Inicie este aplicativo ao fazer login"
 
-#: src/pins-file-view.ui:150
+#: src/pins-file-view.ui:153
 msgid "Invisible"
 msgstr "Invisível"
 
-#: src/pins-file-view.ui:153
+#: src/pins-file-view.ui:156
 msgid "Hide this application in the app menu"
 msgstr "Ocultar este aplicativo no menu de aplicativos"
 
-#: src/pins-file-view.ui:185
-msgid "Add key"
+#: src/pins-file-view.ui:188
+#, fuzzy
+msgid "Add Key"
 msgstr "Adicionar chave"
 
-#: src/pins-key-row.ui:9
-msgid "Erase changes"
-msgstr "Apagar mudanças"
-
 #: src/pins-key-row.ui:21
-msgid "Remove key"
+#, fuzzy
+msgid "Remove Key"
 msgstr "Remover chave"
 
 #: src/pins-key-row.ui:32
-msgid "Select locale"
+#, fuzzy
+msgid "Select Locale"
 msgstr "Selecionar localidade"
 
-#: src/pins-file-view.c:362
-msgid "Load icon"
-msgstr "Carregar ícone"
+#: src/pins-pick-icon-dialog.ui:13
+#, fuzzy
+msgid "Load Icon from File"
+msgstr "Carregar ícone de um arquivo"
+
+#: src/pins-pick-icon-dialog.ui:19
+msgid "Search for icons"
+msgstr ""
 
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr "(Não localizado)"
+
+#~ msgid "Edit icon"
+#~ msgstr "Editar ícone"
+
+#~ msgid "Load icon"
+#~ msgstr "Carregar ícone"

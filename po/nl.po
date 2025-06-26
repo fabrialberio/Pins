@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-23 22:42+0100\n"
+"POT-Creation-Date: 2025-06-26 11:38+0200\n"
 "PO-Revision-Date: 2025-03-23 22:19+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -17,22 +17,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.5\n"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:3 src/pins-window.ui:14
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-window.ui:14
 msgid "Pins"
 msgstr "Snelkoppelingen"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:4
+#: data/io.github.fabrialberio.pinapp.desktop.in:3
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
 msgid "Create and edit app shortcuts"
 msgstr "Maak en bewerk snelkoppelingen"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:11
+#: data/io.github.fabrialberio.pinapp.desktop.in:10
 msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
 msgstr "GNOME;GTK;Apps;Toepassingen;Programma's;Snelkoppelingen;Pictogrammen;"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
 msgid "Pins allows you to customize your app menu by editing .desktop files."
-msgstr "Met behulp van Snelkoppelingen kunt u het toepassingsmenu naar eigen hand zetten."
+msgstr ""
+"Met behulp van Snelkoppelingen kunt u het toepassingsmenu naar eigen hand "
+"zetten."
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
 msgid "Some of the things you can do are:"
@@ -64,13 +66,14 @@ msgstr "Schermfoto van Snelkoppelingen met een geopend bestand"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:42
 msgid "Screenshot of Pins showing an opened file on a small screen"
-msgstr "Schermfoto van Snelkoppelingen met een geopend bestand op een klein scherm"
+msgstr ""
+"Schermfoto van Snelkoppelingen met een geopend bestand op een klein scherm"
 
 #: data/io.github.fabrialberio.pinapp.gschema.xml:6
 msgid "Show all apps"
 msgstr "Alle toepassingen tonen"
 
-#: data/io.github.fabrialberio.pinapp.gschema.xml:17
+#: data/io.github.fabrialberio.pinapp.gschema.xml:18
 msgid "List of desktop file search paths in order of priority"
 msgstr "Lijst met zoekpaden, gesorteerd op prioriteit"
 
@@ -90,12 +93,19 @@ msgid "Quit"
 msgstr "Afsluiten"
 
 #: src/help-overlay.ui:26
+#, fuzzy
 msgctxt "shortcut window"
-msgid "Add new app"
+msgid "Add New App"
 msgstr "Toepassing toevoegen"
 
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Zoeken"
+
 #: src/pins-add-key-dialog.ui:4
-msgid "Add new key"
+#, fuzzy
+msgid "Add New Key"
 msgstr "Veld toevoegen"
 
 #: src/pins-add-key-dialog.ui:11
@@ -110,35 +120,40 @@ msgstr "_Annuleren"
 msgid "_Add"
 msgstr "_Toevoegen"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:97
-msgid "Add new app"
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:98
+#, fuzzy
+msgid "Add New App"
 msgstr "Toepassing toevoegen"
 
 #: src/pins-app-view.ui:21
-msgid "Show menu"
+#, fuzzy
+msgid "Show Menu"
 msgstr "Menu tonen"
 
 #: src/pins-app-view.ui:28
 msgid "Search"
 msgstr "Zoeken"
 
-#: src/pins-app-view.ui:70
-msgid "Loading apps…"
+#: src/pins-app-view.ui:71
+#, fuzzy
+msgid "Loading Apps"
 msgstr "Bezig met laden…"
 
-#: src/pins-app-view.ui:85
-msgid "No apps found"
+#: src/pins-app-view.ui:86
+#, fuzzy
+msgid "No Apps Found"
 msgstr "Er zĳn geen toepassingen beschikbaar"
 
-#: src/pins-app-view.ui:116
-msgid "Show _all apps"
+#: src/pins-app-view.ui:117
+#, fuzzy
+msgid "Show _All Apps"
 msgstr "_Alle toepassingen tonen"
 
-#: src/pins-app-view.ui:122
+#: src/pins-app-view.ui:123
 msgid "_Keyboard Shortcuts"
 msgstr "_Sneltoetsen"
 
-#: src/pins-app-view.ui:126
+#: src/pins-app-view.ui:127
 msgid "_About Pins"
 msgstr "_Over Snelkoppelingen"
 
@@ -146,57 +161,64 @@ msgstr "_Over Snelkoppelingen"
 msgid "Delete"
 msgstr "Verwĳderen"
 
-#: src/pins-file-view.ui:64
-msgid "Edit icon"
-msgstr "Pictogram aanpassen"
+#: src/pins-file-view.ui:69 src/pins-key-row.ui:9
+#, fuzzy
+msgid "Erase Changes"
+msgstr "Wĳzigingen wissen"
 
-#: src/pins-file-view.ui:86
-msgid "Load icon from file"
-msgstr "Pictogram laden uit bestand"
+#: src/pins-file-view.ui:89 src/pins-pick-icon-dialog.ui:4
+msgid "Pick Icon"
+msgstr ""
 
-#: src/pins-file-view.ui:131
+#: src/pins-file-view.ui:134
 msgid "Autostart"
 msgstr "Automatisch opstarten"
 
-#: src/pins-file-view.ui:134
+#: src/pins-file-view.ui:137
 msgid "Launch this application on login"
 msgstr "Start de toepassing na het aanmelden"
 
-#: src/pins-file-view.ui:150
+#: src/pins-file-view.ui:153
 msgid "Invisible"
 msgstr "Onzichtbaar"
 
-#: src/pins-file-view.ui:153
+#: src/pins-file-view.ui:156
 msgid "Hide this application in the app menu"
 msgstr "Verberg deze toepassing in het menu"
 
-#: src/pins-file-view.ui:185
-msgid "Add key"
+#: src/pins-file-view.ui:188
+#, fuzzy
+msgid "Add Key"
 msgstr "Veld toevoegen"
 
-#: src/pins-key-row.ui:9
-msgid "Erase changes"
-msgstr "Wĳzigingen wissen"
-
 #: src/pins-key-row.ui:21
-msgid "Remove key"
+#, fuzzy
+msgid "Remove Key"
 msgstr "Veld verwijderen"
 
 #: src/pins-key-row.ui:32
-msgid "Select locale"
+#, fuzzy
+msgid "Select Locale"
 msgstr "Taal kiezen"
 
-#: src/pins-file-view.c:362
-msgid "Load icon"
-msgstr "Pictogram laden"
+#: src/pins-pick-icon-dialog.ui:13
+#, fuzzy
+msgid "Load Icon from File"
+msgstr "Pictogram laden uit bestand"
+
+#: src/pins-pick-icon-dialog.ui:19
+msgid "Search for icons"
+msgstr ""
 
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr "(onvertaald)"
 
-#~ msgctxt "shortcut window"
-#~ msgid "Search"
-#~ msgstr "Zoeken"
+#~ msgid "Edit icon"
+#~ msgstr "Pictogram aanpassen"
+
+#~ msgid "Load icon"
+#~ msgstr "Pictogram laden"
 
 #~ msgctxt "shortcut window"
 #~ msgid "App editing"
@@ -224,8 +246,12 @@ msgstr "(onvertaald)"
 #~ msgid "Unpin"
 #~ msgstr "Losmaken"
 
-#~ msgid "If you leave without pinning the file, your changes will be permanently lost."
-#~ msgstr "Als u afsluit zonder het bestand vast te maken, dan worden alle aanpassingen gewist."
+#~ msgid ""
+#~ "If you leave without pinning the file, your changes will be permanently "
+#~ "lost."
+#~ msgstr ""
+#~ "Als u afsluit zonder het bestand vast te maken, dan worden alle "
+#~ "aanpassingen gewist."
 
 #~ msgid "Discard"
 #~ msgstr "Verwerpen"

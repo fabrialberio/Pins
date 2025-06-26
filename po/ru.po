@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
-"Report-Msgid-Bugs-To: https://github.com/fabrialberio/Pins/issues\n"
-"POT-Creation-Date: 2025-03-23 22:42+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-26 11:38+0200\n"
 "PO-Revision-Date: 2025-03-25 13:00+0300\n"
 "Last-Translator: Vladimir Kosolapov\n"
 "Language-Team: Russian\n"
@@ -18,16 +18,16 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:3 src/pins-window.ui:14
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-window.ui:14
 msgid "Pins"
 msgstr "Pins"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:4
+#: data/io.github.fabrialberio.pinapp.desktop.in:3
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
 msgid "Create and edit app shortcuts"
 msgstr "Создавайте и редактируйте ярлыки приложений"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:11
+#: data/io.github.fabrialberio.pinapp.desktop.in:10
 msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
 msgstr "GNOME;GTK;Приложения;Ярлыки;Иконки;"
 
@@ -73,7 +73,7 @@ msgstr "Скриншот Pins, демонстрирующий открытый �
 msgid "Show all apps"
 msgstr "Показать все приложения"
 
-#: data/io.github.fabrialberio.pinapp.gschema.xml:17
+#: data/io.github.fabrialberio.pinapp.gschema.xml:18
 msgid "List of desktop file search paths in order of priority"
 msgstr "Список путей для поиска .desktop файлов по приоритетности"
 
@@ -93,12 +93,20 @@ msgid "Quit"
 msgstr "Выход"
 
 #: src/help-overlay.ui:26
+#, fuzzy
 msgctxt "shortcut window"
-msgid "Add new app"
+msgid "Add New App"
 msgstr "Добавить новое приложение"
 
+#: src/help-overlay.ui:32
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Поиск"
+
 #: src/pins-add-key-dialog.ui:4
-msgid "Add new key"
+#, fuzzy
+msgid "Add New Key"
 msgstr "Добавить новый ключ"
 
 #: src/pins-add-key-dialog.ui:11
@@ -113,35 +121,40 @@ msgstr "_Отмена"
 msgid "_Add"
 msgstr "_Добавить"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:97
-msgid "Add new app"
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:98
+#, fuzzy
+msgid "Add New App"
 msgstr "Добавить новое приложение"
 
 #: src/pins-app-view.ui:21
-msgid "Show menu"
+#, fuzzy
+msgid "Show Menu"
 msgstr "Показать меню"
 
 #: src/pins-app-view.ui:28
 msgid "Search"
 msgstr "Поиск"
 
-#: src/pins-app-view.ui:70
-msgid "Loading apps…"
+#: src/pins-app-view.ui:71
+#, fuzzy
+msgid "Loading Apps"
 msgstr "Загрузка приложений…"
 
-#: src/pins-app-view.ui:85
-msgid "No apps found"
+#: src/pins-app-view.ui:86
+#, fuzzy
+msgid "No Apps Found"
 msgstr "Приложения не найдены"
 
-#: src/pins-app-view.ui:116
-msgid "Show _all apps"
+#: src/pins-app-view.ui:117
+#, fuzzy
+msgid "Show _All Apps"
 msgstr "Показать _все приложения"
 
-#: src/pins-app-view.ui:122
+#: src/pins-app-view.ui:123
 msgid "_Keyboard Shortcuts"
 msgstr "_Комбинации клавиш"
 
-#: src/pins-app-view.ui:126
+#: src/pins-app-view.ui:127
 msgid "_About Pins"
 msgstr "_О приложении"
 
@@ -149,50 +162,61 @@ msgstr "_О приложении"
 msgid "Delete"
 msgstr "Удалить"
 
-#: src/pins-file-view.ui:64
-msgid "Edit icon"
-msgstr "Изменить иконку"
+#: src/pins-file-view.ui:69 src/pins-key-row.ui:9
+#, fuzzy
+msgid "Erase Changes"
+msgstr "Отменить изменения"
 
-#: src/pins-file-view.ui:86
-msgid "Load icon from file"
-msgstr "Загрузить иконку из файла"
+#: src/pins-file-view.ui:89 src/pins-pick-icon-dialog.ui:4
+msgid "Pick Icon"
+msgstr ""
 
-#: src/pins-file-view.ui:131
+#: src/pins-file-view.ui:134
 msgid "Autostart"
 msgstr "Автозапуск"
 
-#: src/pins-file-view.ui:134
+#: src/pins-file-view.ui:137
 msgid "Launch this application on login"
 msgstr "Запускать это приложение при входе в систему"
 
-#: src/pins-file-view.ui:150
+#: src/pins-file-view.ui:153
 msgid "Invisible"
 msgstr "Невидимый"
 
-#: src/pins-file-view.ui:153
+#: src/pins-file-view.ui:156
 msgid "Hide this application in the app menu"
 msgstr "Скрыть этот ярлык в меню приложений"
 
-#: src/pins-file-view.ui:185
-msgid "Add key"
+#: src/pins-file-view.ui:188
+#, fuzzy
+msgid "Add Key"
 msgstr "Добавить ключ"
 
-#: src/pins-key-row.ui:9
-msgid "Erase changes"
-msgstr "Отменить изменения"
-
 #: src/pins-key-row.ui:21
-msgid "Remove key"
+#, fuzzy
+msgid "Remove Key"
 msgstr "Удалить ключ"
 
 #: src/pins-key-row.ui:32
-msgid "Select locale"
+#, fuzzy
+msgid "Select Locale"
 msgstr "Выбрать язык"
 
-#: src/pins-file-view.c:362
-msgid "Load icon"
-msgstr "Загрузить иконку"
+#: src/pins-pick-icon-dialog.ui:13
+#, fuzzy
+msgid "Load Icon from File"
+msgstr "Загрузить иконку из файла"
+
+#: src/pins-pick-icon-dialog.ui:19
+msgid "Search for icons"
+msgstr ""
 
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr "(Без локализации)"
+
+#~ msgid "Edit icon"
+#~ msgstr "Изменить иконку"
+
+#~ msgid "Load icon"
+#~ msgstr "Загрузить иконку"
