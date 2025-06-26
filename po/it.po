@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-23 22:42+0100\n"
-"PO-Revision-Date: 2025-03-03 16:35+0100\n"
+"POT-Creation-Date: 2025-06-26 11:38+0200\n"
+"PO-Revision-Date: 2025-06-26 11:38+0200\n"
 "Last-Translator: Fabrizio Alberio <fabrizio.alberio@gmail.com>\n"
 "Language-Team: Italian <fabrizio.alberio@gmail.com>\n"
 "Language: it\n"
@@ -16,18 +16,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:3 src/pins-window.ui:14
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-window.ui:14
 msgid "Pins"
 msgstr "Pins"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:4
+#: data/io.github.fabrialberio.pinapp.desktop.in:3
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
 msgid "Create and edit app shortcuts"
 msgstr "Crea e modifica le scorciatoie delle tue applicazioni"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:11
+#: data/io.github.fabrialberio.pinapp.desktop.in:10
 msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
 msgstr "GNOME;GTK;Applicazioni;Scorciatoie;Icone;"
 
@@ -73,7 +73,7 @@ msgstr "Schermata di un file aperto in Pins su uno schermo piccolo"
 msgid "Show all apps"
 msgstr "Mostra tutte le app"
 
-#: data/io.github.fabrialberio.pinapp.gschema.xml:17
+#: data/io.github.fabrialberio.pinapp.gschema.xml:18
 msgid "List of desktop file search paths in order of priority"
 msgstr "Lista di percorsi di ricerca delle applicazioni in ordine di priorità"
 
@@ -94,11 +94,16 @@ msgstr "Chiude la finestra"
 
 #: src/help-overlay.ui:26
 msgctxt "shortcut window"
-msgid "Add new app"
-msgstr "Aggiunge una nuova applicazione"
+msgid "Add New App"
+msgstr "Aggiungi una nuova applicazione"
+
+#: src/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Cerca"
 
 #: src/pins-add-key-dialog.ui:4
-msgid "Add new key"
+msgid "Add New Key"
 msgstr "Aggiungi chiave"
 
 #: src/pins-add-key-dialog.ui:11
@@ -113,35 +118,35 @@ msgstr "Annulla"
 msgid "_Add"
 msgstr "Aggiungi"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:97
-msgid "Add new app"
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:98
+msgid "Add New App"
 msgstr "Aggiungi applicazione"
 
 #: src/pins-app-view.ui:21
-msgid "Show menu"
+msgid "Show Menu"
 msgstr "Mostra menu"
 
 #: src/pins-app-view.ui:28
 msgid "Search"
 msgstr "Cerca"
 
-#: src/pins-app-view.ui:70
-msgid "Loading apps…"
+#: src/pins-app-view.ui:71
+msgid "Loading Apps"
 msgstr "Caricamento applicazioni…"
 
-#: src/pins-app-view.ui:85
-msgid "No apps found"
+#: src/pins-app-view.ui:86
+msgid "No Apps Found"
 msgstr "Nessuna applicazione trovata"
 
-#: src/pins-app-view.ui:116
-msgid "Show _all apps"
-msgstr "Mostra tutte le _app"
+#: src/pins-app-view.ui:117
+msgid "Show _All Apps"
+msgstr "_Mostra tutte le app"
 
-#: src/pins-app-view.ui:122
+#: src/pins-app-view.ui:123
 msgid "_Keyboard Shortcuts"
 msgstr "_Scorciatoie da tastiera"
 
-#: src/pins-app-view.ui:126
+#: src/pins-app-view.ui:127
 msgid "_About Pins"
 msgstr "_Informazioni su Pins"
 
@@ -149,53 +154,59 @@ msgstr "_Informazioni su Pins"
 msgid "Delete"
 msgstr "Elimina"
 
-#: src/pins-file-view.ui:64
-msgid "Edit icon"
-msgstr "Modifica icona"
+#: src/pins-file-view.ui:69 src/pins-key-row.ui:9
+msgid "Erase Changes"
+msgstr "Cancella modifiche"
 
-#: src/pins-file-view.ui:86
-msgid "Load icon from file"
-msgstr "Carica icona da file"
+#: src/pins-file-view.ui:89 src/pins-pick-icon-dialog.ui:4
+msgid "Pick Icon"
+msgstr "Scegli icona"
 
-#: src/pins-file-view.ui:131
+#: src/pins-file-view.ui:134
 msgid "Autostart"
 msgstr "Avvio automatico"
 
-#: src/pins-file-view.ui:134
+#: src/pins-file-view.ui:137
 msgid "Launch this application on login"
 msgstr "Avvia quest'applicazione all'accesso"
 
-#: src/pins-file-view.ui:150
+#: src/pins-file-view.ui:153
 msgid "Invisible"
 msgstr "Invisibile"
 
-#: src/pins-file-view.ui:153
+#: src/pins-file-view.ui:156
 msgid "Hide this application in the app menu"
 msgstr "Nascondi quest'applicazione nel menu"
 
-#: src/pins-file-view.ui:185
-msgid "Add key"
+#: src/pins-file-view.ui:188
+msgid "Add Key"
 msgstr "Aggiungi chiave"
 
-#: src/pins-key-row.ui:9
-msgid "Erase changes"
-msgstr "Cancella modifiche"
-
 #: src/pins-key-row.ui:21
-msgid "Remove key"
+msgid "Remove Key"
 msgstr "Rimuovi chiave"
 
 #: src/pins-key-row.ui:32
-msgid "Select locale"
+msgid "Select Locale"
 msgstr "Seleziona localizzazione"
 
-#: src/pins-file-view.c:362
-msgid "Load icon"
-msgstr "Carica icona"
+#: src/pins-pick-icon-dialog.ui:13
+msgid "Load Icon from File"
+msgstr "Carica icona da file"
+
+#: src/pins-pick-icon-dialog.ui:19
+msgid "Search for icons"
+msgstr "Cerca tra le icone"
 
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr "(Non localizzato)"
+
+#~ msgid "Edit icon"
+#~ msgstr "Modifica icona"
+
+#~ msgid "Load icon"
+#~ msgstr "Carica icona"
 
 #~ msgid ""
 #~ "PinApp is a simple application that lets you customize your app list."
@@ -221,10 +232,6 @@ msgstr "(Non localizzato)"
 
 #~ msgid "PinApp"
 #~ msgstr "PinApp"
-
-#~ msgctxt "shortcut window"
-#~ msgid "Search"
-#~ msgstr "Cerca"
 
 #~ msgctxt "shortcut window"
 #~ msgid "App editing"
