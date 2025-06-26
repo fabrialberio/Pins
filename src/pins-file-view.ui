@@ -7,8 +7,7 @@
     <child>
       <object class="AdwToolbarView" id="toolbar_view">
         <child type="top">
-          <object class="AdwHeaderBar" id="header_bar">
-            <property name="show-title">false</property>
+          <object class="AdwHeaderBar">
             <property name="title-widget">
               <object class="AdwWindowTitle" id="window_title">
               </object>

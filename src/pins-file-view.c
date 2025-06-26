@@ -35,7 +35,6 @@ struct _PinsFileView
     PinsDesktopFile *desktop_file;
     gchar **keys;
 
-    AdwHeaderBar *header_bar;
     AdwWindowTitle *window_title;
     GtkScrolledWindow *scrolled_window;
     PinsAppIcon *icon;
@@ -68,10 +67,16 @@ pins_file_view_setup_row (PinsKeyRow *row, PinsDesktopFile *desktop_file,
 void
 pins_file_view_update_title (PinsFileView *self)
 {
-    adw_window_title_set_title (
-        self->window_title,
-        pins_desktop_file_get_string (self->desktop_file,
-                                      G_KEY_FILE_DESKTOP_KEY_NAME));
+    GtkAdjustment *adjustment
+        = gtk_scrolled_window_get_vadjustment (self->scrolled_window);
+
+    if (gtk_adjustment_get_value (adjustment) > 0)
+        adw_window_title_set_title (
+            self->window_title,
+            pins_desktop_file_get_string (self->desktop_file,
+                                          G_KEY_FILE_DESKTOP_KEY_NAME));
+    else
+        adw_window_title_set_title (self->window_title, "");
 }
 
 void
@@ -168,16 +173,6 @@ pins_file_view_key_removed_cb (PinsDesktopFile *desktop_file, gchar *key,
                                PinsFileView *self)
 {
     pins_file_view_set_desktop_file (self, self->desktop_file);
-}
-
-void
-pins_file_view_update_title_visible_cb (GtkAdjustment *adjustment,
-                                        PinsFileView *self)
-{
-    g_assert (PINS_IS_FILE_VIEW (self));
-
-    adw_header_bar_set_show_title (self->header_bar,
-                                   gtk_adjustment_get_value (adjustment) > 0);
 }
 
 void
@@ -302,8 +297,6 @@ pins_file_view_class_init (PinsFileViewClass *klass)
     g_type_ensure (PINS_TYPE_KEY_ROW);
 
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
-                                          header_bar);
-    gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           window_title);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           scrolled_window);
@@ -404,6 +397,6 @@ pins_file_view_init (PinsFileView *self)
 
     g_signal_connect_object (
         gtk_scrolled_window_get_vadjustment (self->scrolled_window),
-        "value-changed", G_CALLBACK (pins_file_view_update_title_visible_cb),
-        self, 0);
+        "value-changed", G_CALLBACK (pins_file_view_update_title), self,
+        G_CONNECT_SWAPPED);
 }
