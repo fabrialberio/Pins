@@ -16,7 +16,7 @@
             </child>
             <property name="title-widget">
               <object class="GtkSearchEntry" id="search_entry">
-                <property name="placeholder-text" translatable="yes">Search for icons by name</property>
+                <property name="placeholder-text" translatable="yes">Search for icons</property>
               </object>
             </property>
           </object>
