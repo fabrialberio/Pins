@@ -31,6 +31,6 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (PinsWindow, pins_window, PINS, WINDOW,
                       AdwApplicationWindow)
 
-void pins_window_load_file (PinsWindow *self, PinsDesktopFile *desktop_file);
+void pins_window_open_file (PinsWindow *self, GFile *file);
 
 G_END_DECLS
