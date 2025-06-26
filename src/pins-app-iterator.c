@@ -116,7 +116,8 @@ load_file_checked (PinsAppIterator *self, GFileInfo *info, GFile *file)
     desktop_file = pins_desktop_file_new (file, &err);
     if (err != NULL)
         {
-            g_warning ("Error loading file: %s", err->message);
+            g_warning ("Error loading file «%s»: %s", g_file_get_path (file),
+                       err->message);
             return;
         }
 
