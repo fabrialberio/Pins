@@ -21,8 +21,6 @@
 #include "pins-pick-icon-dialog.h"
 #include "pins-desktop-file.h"
 
-#include <glib/gi18n.h>
-
 struct _PinsPickIconDialog
 {
     AdwDialog parent_instance;
