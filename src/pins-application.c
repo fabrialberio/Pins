@@ -59,25 +59,13 @@ pins_application_open (GApplication *app, GFile **files, gint n_files,
                        const gchar *hint)
 {
     PinsWindow *window;
-    PinsDesktopFile *desktop_file;
-    GError *err = NULL;
-
-    g_return_if_fail (g_file_query_exists (files[0], NULL));
 
     g_application_activate (app);
 
     window = PINS_WINDOW (
         gtk_application_get_active_window (GTK_APPLICATION (app)));
 
-    desktop_file = pins_desktop_file_new_full (files[0], NULL, &err);
-    if (err != NULL)
-        {
-            g_critical ("Error opening file at `%s`: %s",
-                        g_file_get_path (files[0]), err->message);
-            return;
-        }
-
-    pins_window_load_file (window, desktop_file);
+    pins_window_open_file (window, files[0]);
 }
 
 static void

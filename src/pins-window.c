@@ -32,6 +32,7 @@ struct _PinsWindow
     AdwNavigationView *navigation_view;
     PinsAppView *app_view;
     PinsFileView *file_view;
+    AdwStatusPage *error_status_page;
 };
 
 G_DEFINE_FINAL_TYPE (PinsWindow, pins_window, ADW_TYPE_APPLICATION_WINDOW)
@@ -40,12 +41,14 @@ enum
 {
     PAGE_APPS,
     PAGE_FILE,
+    PAGE_ERROR,
     N_PAGES,
 };
 
 static gchar *pages[N_PAGES] = {
     "apps-page",
     "file-page",
+    "error-page",
 };
 
 PinsDesktopFile *
@@ -99,6 +102,8 @@ pins_window_class_init (PinsWindowClass *klass)
                                           navigation_view);
     gtk_widget_class_bind_template_child (widget_class, PinsWindow, app_view);
     gtk_widget_class_bind_template_child (widget_class, PinsWindow, file_view);
+    gtk_widget_class_bind_template_child (widget_class, PinsWindow,
+                                          error_status_page);
 }
 
 void
@@ -114,7 +119,7 @@ pins_window_file_deleted_cb (PinsDesktopFile *desktop_file, PinsWindow *self)
 }
 
 void
-pins_window_load_file (PinsWindow *self, PinsDesktopFile *desktop_file)
+pins_window_set_desktop_file (PinsWindow *self, PinsDesktopFile *desktop_file)
 {
     g_assert (PINS_IS_WINDOW (self));
     g_assert (PINS_IS_DESKTOP_FILE (desktop_file));
@@ -133,6 +138,25 @@ pins_window_load_file (PinsWindow *self, PinsDesktopFile *desktop_file)
                              0);
 
     adw_navigation_view_push_by_tag (self->navigation_view, pages[PAGE_FILE]);
+}
+
+void
+pins_window_open_file (PinsWindow *self, GFile *file)
+{
+    PinsDesktopFile *desktop_file;
+    GError *err = NULL;
+
+    desktop_file = pins_desktop_file_new_full (file, NULL, &err);
+    if (err != NULL)
+        {
+            adw_status_page_set_description (self->error_status_page,
+                                             err->message);
+            adw_navigation_view_push_by_tag (self->navigation_view,
+                                             pages[PAGE_ERROR]);
+            return;
+        }
+
+    pins_window_set_desktop_file (self, desktop_file);
 }
 
 void
@@ -194,7 +218,7 @@ pins_window_init (PinsWindow *self)
     pins_app_view_set_app_iterator (self->app_view, app_iterator);
 
     g_signal_connect_object (self->app_view, "activate",
-                             G_CALLBACK (pins_window_load_file), self,
+                             G_CALLBACK (pins_window_set_desktop_file), self,
                              G_CONNECT_SWAPPED);
 
     g_signal_connect_object (
