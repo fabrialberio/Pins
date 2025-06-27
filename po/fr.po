@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-26 11:38+0200\n"
+"POT-Creation-Date: 2025-06-27 10:55+0200\n"
 "PO-Revision-Date: 2025-02-11 18:00+0100\n"
 "Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
 "Language-Team: FrenchLanguage: fr\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.5\n"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-window.ui:14
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-app-view.ui:21
 msgid "Pins"
 msgstr "Pins"
 
@@ -122,72 +122,72 @@ msgstr "A_nnuler"
 msgid "_Add"
 msgstr "_Ajouter"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:98
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:103
 #, fuzzy
 msgid "Add New App"
 msgstr "Ajouter une nouvelle application"
 
-#: src/pins-app-view.ui:21
+#: src/pins-app-view.ui:26
 #, fuzzy
 msgid "Show Menu"
 msgstr "Afficher le menu"
 
-#: src/pins-app-view.ui:28
+#: src/pins-app-view.ui:33
 msgid "Search"
 msgstr "Rechercher"
 
-#: src/pins-app-view.ui:71
+#: src/pins-app-view.ui:76
 #, fuzzy
 msgid "Loading Apps"
 msgstr "Chargement des applications…"
 
-#: src/pins-app-view.ui:86
+#: src/pins-app-view.ui:91
 #, fuzzy
 msgid "No Apps Found"
 msgstr "Aucune application trouvée"
 
-#: src/pins-app-view.ui:117
+#: src/pins-app-view.ui:122
 msgid "Show _All Apps"
 msgstr ""
 
-#: src/pins-app-view.ui:123
+#: src/pins-app-view.ui:128
 msgid "_Keyboard Shortcuts"
 msgstr "_Raccourcis clavier"
 
-#: src/pins-app-view.ui:127
+#: src/pins-app-view.ui:132
 msgid "_About Pins"
 msgstr "À _propos de Pins"
 
-#: src/pins-file-view.ui:20
+#: src/pins-file-view.ui:19
 msgid "Delete"
 msgstr "Supprimer"
 
-#: src/pins-file-view.ui:69 src/pins-key-row.ui:9
+#: src/pins-file-view.ui:68 src/pins-key-row.ui:9
 #, fuzzy
 msgid "Erase Changes"
 msgstr "Effacer les changements"
 
-#: src/pins-file-view.ui:89 src/pins-pick-icon-dialog.ui:4
+#: src/pins-file-view.ui:88 src/pins-pick-icon-dialog.ui:4
 msgid "Pick Icon"
 msgstr ""
 
-#: src/pins-file-view.ui:134
+#: src/pins-file-view.ui:133
 msgid "Autostart"
 msgstr "Démarrage automatique"
 
-#: src/pins-file-view.ui:137
+#: src/pins-file-view.ui:136
 msgid "Launch this application on login"
 msgstr "Lancer cette application au démarrage"
 
-#: src/pins-file-view.ui:153
+#: src/pins-file-view.ui:152
 msgid "Invisible"
 msgstr "Invisible"
 
-#: src/pins-file-view.ui:156
+#: src/pins-file-view.ui:155
 msgid "Hide this application in the app menu"
 msgstr "Masquer cette application dans la grille des applications"
 
-#: src/pins-file-view.ui:188
+#: src/pins-file-view.ui:187
 #, fuzzy
 msgid "Add Key"
 msgstr "Ajouter une clé"
@@ -202,13 +202,26 @@ msgstr "Supprimer la clé"
 msgid "Select Locale"
 msgstr "Sélectionner une langue"
 
-#: src/pins-pick-icon-dialog.ui:13
+#: src/pins-pick-icon-dialog.ui:13 src/pins-pick-icon-dialog.c:118
 #, fuzzy
 msgid "Load Icon from File"
 msgstr "Charger une icône depuis un fichier"
 
 #: src/pins-pick-icon-dialog.ui:19
 msgid "Search for icons"
+msgstr ""
+
+#: src/pins-window.ui:14
+msgid "All Apps"
+msgstr ""
+
+#: src/pins-window.ui:46
+msgid "Error Opening File"
+msgstr ""
+
+#: src/pins-desktop-file.c:107
+#, c-format
+msgid "Could not open file."
 msgstr ""
 
 #: src/pins-key-row.c:26

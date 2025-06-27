@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.fabrialberio.pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-26 11:38+0200\n"
+"POT-Creation-Date: 2025-06-27 10:55+0200\n"
 "PO-Revision-Date: 2025-02-05 18:05+0100\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-window.ui:14
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-app-view.ui:21
 msgid "Pins"
 msgstr ""
 
@@ -128,74 +128,74 @@ msgstr "İptal"
 msgid "_Add"
 msgstr ""
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:98
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:103
 #, fuzzy
 msgid "Add New App"
 msgstr "Yeni Uygulama Ekle"
 
-#: src/pins-app-view.ui:21
+#: src/pins-app-view.ui:26
 #, fuzzy
 msgid "Show Menu"
 msgstr "Menüyü göster"
 
-#: src/pins-app-view.ui:28
+#: src/pins-app-view.ui:33
 msgid "Search"
 msgstr "Ara"
 
-#: src/pins-app-view.ui:71
+#: src/pins-app-view.ui:76
 #, fuzzy
 msgid "Loading Apps"
 msgstr "Uygulamalar yükleniyor…"
 
-#: src/pins-app-view.ui:86
+#: src/pins-app-view.ui:91
 #, fuzzy
 msgid "No Apps Found"
 msgstr "Hiçbir uygulama bulunamadı"
 
-#: src/pins-app-view.ui:117
+#: src/pins-app-view.ui:122
 msgid "Show _All Apps"
 msgstr ""
 
-#: src/pins-app-view.ui:123
+#: src/pins-app-view.ui:128
 #, fuzzy
 msgid "_Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
-#: src/pins-app-view.ui:127
+#: src/pins-app-view.ui:132
 #, fuzzy
 msgid "_About Pins"
 msgstr "PinApp Hakkında"
 
-#: src/pins-file-view.ui:20
+#: src/pins-file-view.ui:19
 msgid "Delete"
 msgstr ""
 
-#: src/pins-file-view.ui:69 src/pins-key-row.ui:9
+#: src/pins-file-view.ui:68 src/pins-key-row.ui:9
 #, fuzzy
 msgid "Erase Changes"
 msgstr "Değişiklikler kaydedilsin mi?"
 
-#: src/pins-file-view.ui:89 src/pins-pick-icon-dialog.ui:4
+#: src/pins-file-view.ui:88 src/pins-pick-icon-dialog.ui:4
 msgid "Pick Icon"
 msgstr ""
 
-#: src/pins-file-view.ui:134
+#: src/pins-file-view.ui:133
 msgid "Autostart"
 msgstr ""
 
-#: src/pins-file-view.ui:137
+#: src/pins-file-view.ui:136
 msgid "Launch this application on login"
 msgstr ""
 
-#: src/pins-file-view.ui:153
+#: src/pins-file-view.ui:152
 msgid "Invisible"
 msgstr ""
 
-#: src/pins-file-view.ui:156
+#: src/pins-file-view.ui:155
 msgid "Hide this application in the app menu"
 msgstr ""
 
-#: src/pins-file-view.ui:188
+#: src/pins-file-view.ui:187
 #, fuzzy
 msgid "Add Key"
 msgstr "Yeni anahtar ekle"
@@ -209,12 +209,27 @@ msgstr ""
 msgid "Select Locale"
 msgstr "Yerel"
 
-#: src/pins-pick-icon-dialog.ui:13
+#: src/pins-pick-icon-dialog.ui:13 src/pins-pick-icon-dialog.c:118
 msgid "Load Icon from File"
 msgstr ""
 
 #: src/pins-pick-icon-dialog.ui:19
 msgid "Search for icons"
+msgstr ""
+
+#: src/pins-window.ui:14
+#, fuzzy
+msgid "All Apps"
+msgstr "Uygulamaları Yeniden Yükle"
+
+#: src/pins-window.ui:46
+#, fuzzy
+msgid "Error Opening File"
+msgstr "Dosya açarken hata"
+
+#: src/pins-desktop-file.c:107
+#, c-format
+msgid "Could not open file."
 msgstr ""
 
 #: src/pins-key-row.c:26
@@ -307,9 +322,6 @@ msgstr ""
 #~ msgid "Boolean Values"
 #~ msgstr "Mantıksal Değerler"
 
-#~ msgid "Error opening file"
-#~ msgstr "Dosya açarken hata"
-
 #~ msgid "Duplicate file"
 #~ msgstr "Dosyayı Çoğalt"
 
@@ -318,9 +330,6 @@ msgstr ""
 
 #~ msgid "Installed"
 #~ msgstr "Kurulu"
-
-#~ msgid "Reload Apps"
-#~ msgstr "Uygulamaları Yeniden Yükle"
 
 #~ msgid "Applications you install will appear here"
 #~ msgstr "Kurduğunuz uygulamalar burada görünür"

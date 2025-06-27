@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-26 11:38+0200\n"
+"POT-Creation-Date: 2025-06-27 10:55+0200\n"
 "PO-Revision-Date: 2025-05-21 16:31+0300\n"
 "Last-Translator: Oleksii Grinka <grinka@tuta.io>\n"
 "Language-Team: Ukrainian\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-window.ui:14
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-app-view.ui:21
 msgid "Pins"
 msgstr "Pins"
 
@@ -121,73 +121,73 @@ msgstr "_Скасувати"
 msgid "_Add"
 msgstr "_Додати"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:98
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:103
 #, fuzzy
 msgid "Add New App"
 msgstr "Додати нову програму"
 
-#: src/pins-app-view.ui:21
+#: src/pins-app-view.ui:26
 #, fuzzy
 msgid "Show Menu"
 msgstr "Головне меню"
 
-#: src/pins-app-view.ui:28
+#: src/pins-app-view.ui:33
 msgid "Search"
 msgstr "Пошук"
 
-#: src/pins-app-view.ui:71
+#: src/pins-app-view.ui:76
 #, fuzzy
 msgid "Loading Apps"
 msgstr "Завантаження програм..."
 
-#: src/pins-app-view.ui:86
+#: src/pins-app-view.ui:91
 #, fuzzy
 msgid "No Apps Found"
 msgstr "Не знайдено програм"
 
-#: src/pins-app-view.ui:117
+#: src/pins-app-view.ui:122
 #, fuzzy
 msgid "Show _All Apps"
 msgstr "Показати _усі програми"
 
-#: src/pins-app-view.ui:123
+#: src/pins-app-view.ui:128
 msgid "_Keyboard Shortcuts"
 msgstr "_Клавіатурні скорочення"
 
-#: src/pins-app-view.ui:127
+#: src/pins-app-view.ui:132
 msgid "_About Pins"
 msgstr "_Про «Pins»"
 
-#: src/pins-file-view.ui:20
+#: src/pins-file-view.ui:19
 msgid "Delete"
 msgstr "Вилучити"
 
-#: src/pins-file-view.ui:69 src/pins-key-row.ui:9
+#: src/pins-file-view.ui:68 src/pins-key-row.ui:9
 #, fuzzy
 msgid "Erase Changes"
 msgstr "Скинути зміни"
 
-#: src/pins-file-view.ui:89 src/pins-pick-icon-dialog.ui:4
+#: src/pins-file-view.ui:88 src/pins-pick-icon-dialog.ui:4
 msgid "Pick Icon"
 msgstr ""
 
-#: src/pins-file-view.ui:134
+#: src/pins-file-view.ui:133
 msgid "Autostart"
 msgstr "Автозапуск"
 
-#: src/pins-file-view.ui:137
+#: src/pins-file-view.ui:136
 msgid "Launch this application on login"
 msgstr "Запускати цю програму під час входу"
 
-#: src/pins-file-view.ui:153
+#: src/pins-file-view.ui:152
 msgid "Invisible"
 msgstr "Невидимий"
 
-#: src/pins-file-view.ui:156
+#: src/pins-file-view.ui:155
 msgid "Hide this application in the app menu"
 msgstr "Сховати цю програму в меню програм"
 
-#: src/pins-file-view.ui:188
+#: src/pins-file-view.ui:187
 #, fuzzy
 msgid "Add Key"
 msgstr "Додати ключ"
@@ -202,13 +202,27 @@ msgstr "Вилучити ключ"
 msgid "Select Locale"
 msgstr "Обрати локаль"
 
-#: src/pins-pick-icon-dialog.ui:13
+#: src/pins-pick-icon-dialog.ui:13 src/pins-pick-icon-dialog.c:118
 #, fuzzy
 msgid "Load Icon from File"
 msgstr "Завантажити піктограму з файлу"
 
 #: src/pins-pick-icon-dialog.ui:19
 msgid "Search for icons"
+msgstr ""
+
+#: src/pins-window.ui:14
+#, fuzzy
+msgid "All Apps"
+msgstr "Показати _усі програми"
+
+#: src/pins-window.ui:46
+msgid "Error Opening File"
+msgstr ""
+
+#: src/pins-desktop-file.c:107
+#, c-format
+msgid "Could not open file."
 msgstr ""
 
 #: src/pins-key-row.c:26
