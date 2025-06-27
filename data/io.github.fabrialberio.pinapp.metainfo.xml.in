@@ -28,17 +28,20 @@
   <screenshots>
     <screenshot type="default">
       <image>
-        https://raw.githubusercontent.com/fabrialberio/Pins/3003a5825e155df7fff4bdedec12b478165d7de8/data/appstream/1.png</image>
+        https://github.com/fabrialberio/Pins/blob/c9425e1c8062bab60319dd77710ab6f05f5e2a8c/data/appstream/1.png
+      </image>
       <caption>Screenshot of Pins showing the app grid</caption>
     </screenshot>
     <screenshot>
       <image>
-        https://raw.githubusercontent.com/fabrialberio/Pins/3003a5825e155df7fff4bdedec12b478165d7de8/data/appstream/2.png</image>
+        https://github.com/fabrialberio/Pins/blob/c9425e1c8062bab60319dd77710ab6f05f5e2a8c/data/appstream/2.png
+      </image>
       <caption>Screenshot of Pins showing an opened file</caption>
     </screenshot>
     <screenshot>
       <image>
-        https://raw.githubusercontent.com/fabrialberio/Pins/3003a5825e155df7fff4bdedec12b478165d7de8/data/appstream/3.png</image>
+        https://github.com/fabrialberio/Pins/blob/c9425e1c8062bab60319dd77710ab6f05f5e2a8c/data/appstream/3.png
+      </image>
       <caption>Screenshot of Pins showing an opened file on a small screen</caption>
     </screenshot>
   </screenshots>
