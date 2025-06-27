@@ -56,240 +56,56 @@
   <releases>
     <release version="2.4.0" date="2025-06-27">
       <description translate="no">
-        <p>What's new</p>
+        <p>What's new:</p>
         <ul>
-          <li>@agvantibo-again fixed loading apps on NixOS</li>
-          <li>@OleksiiGrinka added Ukrainian translation</li>
-          <li>Added icon picker dialog</li>
-          <li>A new error page is shown when a file can't be opened</li>
+          <li>@agvantibo-again fixed loading apps on NixOS;</li>
+          <li>@OleksiiGrinka added Ukrainian translation;</li>
+          <li>added icon picker dialog;</li>
+          <li>a new error page is shown when a file can't be opened.</li>
         </ul>
-        <p>Fixes</p>
+        <p>Fixes:</p>
         <ul>
-          <li>App crashes when it does not have read access to a file</li>
+          <li>app crashes when it does not have read access to a file.</li>
         </ul>
       </description>
     </release>
     <release version="2.3.1" date="2025-05-21">
       <description translate="no">
-        <p>Fixes</p>
+        <p>Fixes:</p>
         <ul>
-          <li>Really ensure user apps folder exists before creating a new app</li>
+          <li>really ensure user apps folder exists before creating a new app.</li>
         </ul>
       </description>
     </release>
     <release version="2.3.0" date="2025-05-20">
       <description translate="no">
-        <p>What's new</p>
+        <p>What's new:</p>
         <ul>
-          <li>@Tuba2 updated the Portoguese translation</li>
-          <li>@vmkspv updated the Russian translation</li>
-          <li>Gabriel Brand updated the German translation</li>
-          <li>Tweaked file view appearance</li>
-          <li>Added "Ctrl+F" shortcut to open search</li>
+          <li>@Tuba2 updated the Portoguese translation;</li>
+          <li>@vmkspv updated the Russian translation;</li>
+          <li>Gabriel Brand updated the German translation;</li>
+          <li>tweaked file view appearance;</li>
+          <li>added "Ctrl+F" shortcut to open search.</li>
         </ul>
-        <p>Fixes</p>
+        <p>Fixes:</p>
         <ul>
-          <li>Use proper header capitalization in labels thanks to @ARAKHN1D</li>
-          <li>Ensure user apps folder exists before creating a new app</li>
+          <li>use proper header capitalization in labels thanks to @ARAKHN1D;</li>
+          <li>ensure user apps folder exists before creating a new app.</li>
         </ul>
       </description>
     </release>
     <release version="2.2.0" date="2025-03-23">
       <description translate="no">
-        <p>What's new</p>
+        <p>What's new:</p>
         <ul>
-          <li>Added abililty to drag and drop apps from Pins</li>
-          <li>Improvements to "Add new key" dialog accessibility (thanks to @abrusle)</li>
-          <li>@Vistaus updated the Dutch translation</li>
-          <li>Update to GNOME platform version 48</li>
+          <li>added abililty to drag and drop apps from Pins;</li>
+          <li>improvements to "Add new key" dialog accessibility (thanks to @abrusle);</li>
+          <li>@Vistaus updated the Dutch translation;</li>
+          <li>update to GNOME platform version 48.</li>
         </ul>
-        <p>Fixes</p>
+        <p>Fixes:</p>
         <ul>
-          <li>Undesired behaviour when closing icon picker dialog without selecting a file</li>
-        </ul>
-      </description>
-    </release>
-    <release version="2.1.0" date="2025-03-03">
-      <description translate="no">
-        <p>What's new</p>
-        <ul>
-          <li>Option to show or hide applications that are not visible in the app menu</li>
-          <li>Glyph to clearly distinguish invisible apps</li>
-          <li>@rene-coty updated the french translation</li>
-          <li>@johnpetersa19 added a Portoguese translation</li>
-        </ul>
-        <p>Fixes</p>
-        <ul>
-          <li>App grid was not scrolled to the top when opening the app</li>
-          <li>App icons with custom paths are loaded using host filename</li>
-        </ul>
-      </description>
-    </release>
-    <release version="2.0.1" date="2025-02-10">
-      <description translate="no">
-        <p>Fixes</p>
-        <ul>
-          <li>Some system apps didn't appear</li>
-          <li>Saving changes did not work properly</li>
-          <li>Directory for loaded icons was not created</li>
-        </ul>
-      </description>
-    </release>
-    <release version="2.0.0" date="2025-02-05">
-      <description translate="no">
-        <p>What's changed</p>
-        <ul>
-          <li>New app grid view</li>
-          <li>New app icon editing shortcuts</li>
-          <li>Added autostart application support</li>
-          <li>New quick toggle to hide applications</li>
-          <li>New "erase changes" option for system files</li>
-          <li>Added support for GNOME Web webapps</li>
-          <li>Revised desktop file backend</li>
-          <li>Improved performance by removing Python</li>
-        </ul>
-      </description>
-    </release>
-    <release version="1.3.0" date="2024-12-31">
-      <description translate="no">
-        <p>What's changed</p>
-        <ul>
-          <li>@Alexmelman88 updated the Russian translation</li>
-          <li>@Mejans added an Occitan translation</li>
-          <li>@Vistaus added a Dutch translation</li>
-          <li>@oscfdezdz updated the Spanish translation</li>
-        </ul>
-      </description>
-    </release>
-    <release version="1.2.0" date="2022-09-04">
-      <description translate="no">
-        <p>What's changed</p>
-        <ul>
-          <li>Implemented autosave</li>
-          <li>UI overhaul with new libadwaita 1.4 widgets</li>
-          <li>Simplified creation of new files</li>
-          <li>Added ability to rename and duplicate pinned files</li>
-          <li>Snap apps are now supported</li>
-          <li>Added german translation thanks to @gregorni</li>
-          <li>Added spanish translation thanks to @josushu0</li>
-          <li>Improved russian translation thanks to @daudix-UFO and @fsobolev</li>
-          <li>Improvements to better comply with GNOME design guidelines thanks to @TheEvilSkeleton
-            and @daudix-UFO</li>
-        </ul>
-        <p>Fixes</p>
-        <ul>
-          <li>Localization was prone to errors with mixed locales. Fixed thanks to @fsobolev</li>
-          <li>Using Ctrl+F to enter search always cleared the search entry and was generally
-            unreliable</li>
-          <li>Wording of unpin dialog was unclear</li>
-          <li>On Silverblue icons disappeared on reboot. Fixed by copying icons to app directory, as
-            suggested by @thatLeaflet.</li>
-        </ul>
-      </description>
-    </release>
-    <release version="1.1.7" date="2022-12-31">
-      <description translate="no">
-        <p>What's changed</p>
-        <ul>
-          <li>Added russian translation thanks to @fsobolev</li>
-          <li>Added a keyboard shortcut to open search (Ctrl + F)</li>
-          <li>Various minor improvements in search behaviour</li>
-        </ul>
-        <p>Fixes</p>
-        <ul>
-          <li>App got stuck loading when trying to open files with duplicate keys or other syntax
-            errors</li>
-        </ul>
-        <p>Other</p>
-        <ul>
-          <li>Added .json manifest to the project @fsobolev</li>
-        </ul>
-      </description>
-    </release>
-    <release version="1.1.6" date="2022-11-27">
-      <description translate="no">
-        <p>What's changed</p>
-        <ul>
-          <li>Added functionality to search for apps by file content</li>
-          <li>Added french translation thanks to Irénée Thirion</li>
-          <li>Added turkish translation thanks to Sabri Ünal</li>
-        </ul>
-        <p>Fixes</p>
-        <ul>
-          <li>Reloading apps always shows "Your pins"</li>
-        </ul>
-      </description>
-    </release>
-    <release version="1.1.5" date="2022-10-22">
-      <description translate="no">
-        <p>What's changed</p>
-        <ul>
-          <li>Added translation template</li>
-          <li>Localized rows use the current locale by default</li>
-          <li>Added italian translation</li>
-        </ul>
-        <p>Fixes</p>
-        <ul>
-          <li>Not all system apps were loaded, fixed by accessing them trough the host filesystem
-            path</li>
-          <li>Applications were not completely sorted alphabetically</li>
-        </ul>
-      </description>
-    </release>
-    <release version="1.1.4" date="2022-10-14">
-      <description translate="no">
-        <p>What's changed</p>
-        <ul>
-          <li>More consinstent app icon behaviour for non-existing paths or names</li>
-          <li>Improved application banner styling with custom CSS</li>
-        </ul>
-        <p>Fixes</p>
-        <ul>
-          <li>Previous release broke file saving in some occasions, now fixed</li>
-        </ul>
-      </description>
-    </release>
-    <release version="1.1.3" date="2022-10-14">
-      <description translate="no">
-        <p>What's changed</p>
-        <ul>
-          <li>Changed appearance of missing icon to match system app list</li>
-          <li>Added adaptive and mobile-friendly version of file view</li>
-          <li>Added button to upload an icon from a file</li>
-        </ul>
-        <p>Fixes</p>
-        <ul>
-          <li>Empty fields are now correctly updated and written to file</li>
-          <li>Special xml charachters are now escaped in application name and comment</li>
-          <li>Icons for user Flatpak applications are now visible</li>
-        </ul>
-      </description>
-    </release>
-    <release version="1.1.2" date="2022-10-09">
-      <description translate="no">
-        <p>What's changed</p>
-        <ul>
-          <li>Better wording in various dialogs and buttons</li>
-          <li>Improved file viewing ui</li>
-          <li>It is now possible to add a new localized value</li>
-          <li>Simplified display of localized values</li>
-        </ul>
-        <p>Fixes</p>
-        <ul>
-          <li>Empty values are no longer written to file after saving</li>
-        </ul>
-      </description>
-    </release>
-    <release version="1.1.1" date="2022-10-02">
-      <description translate="no">
-        <p>What's changed</p>
-        <ul>
-          <li>Simplified app navigation with Adw.ViewSwitcher</li>
-          <li>Responsive navigation with Adw.ViewSwitcherBar</li>
-        </ul>
-        <p>Fixes</p>
-        <ul>
-          <li>The listbox containing applications had styling issues</li>
+          <li>undesired behaviour when closing icon picker dialog without selecting a file.</li>
         </ul>
       </description>
     </release>
