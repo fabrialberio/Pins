@@ -54,6 +54,21 @@
     <control>touch</control>
   </recommends>
   <releases>
+    <release version="2.4.0" date="2025-06-27">
+      <description translate="no">
+        <p>What's new</p>
+        <ul>
+          <li>@agvantibo-again fixed loading apps on NixOS</li>
+          <li>@OleksiiGrinka added Ukrainian translation</li>
+          <li>Added icon picker dialog</li>
+          <li>A new error page is shown when a file can't be opened</li>
+        </ul>
+        <p>Fixes</p>
+        <ul>
+          <li>App crashes when it does not have read access to a file</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.3.1" date="2025-05-21">
       <description translate="no">
         <p>Fixes</p>
