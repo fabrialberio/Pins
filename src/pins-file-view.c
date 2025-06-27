@@ -68,14 +68,19 @@ pins_file_view_setup_row (PinsKeyRow *row, PinsDesktopFile *desktop_file,
 void
 pins_file_view_update_title (PinsFileView *self)
 {
+    const gchar *title_key;
     GtkAdjustment *adjustment
         = gtk_scrolled_window_get_vadjustment (self->scrolled_window);
+
+    title_key = _pins_join_key_locale (
+        G_KEY_FILE_DESKTOP_KEY_NAME,
+        pins_desktop_file_get_locale_for_key (self->desktop_file,
+                                              G_KEY_FILE_DESKTOP_KEY_NAME));
 
     if (gtk_adjustment_get_value (adjustment) > 0)
         adw_window_title_set_title (
             self->window_title,
-            pins_desktop_file_get_string (self->desktop_file,
-                                          G_KEY_FILE_DESKTOP_KEY_NAME));
+            pins_desktop_file_get_string (self->desktop_file, title_key));
     else
         adw_window_title_set_title (self->window_title, "");
 }
