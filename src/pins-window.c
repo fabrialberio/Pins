@@ -119,7 +119,8 @@ pins_window_file_deleted_cb (PinsDesktopFile *desktop_file, PinsWindow *self)
 }
 
 void
-pins_window_set_desktop_file (PinsWindow *self, PinsDesktopFile *desktop_file)
+pins_window_set_desktop_file (PinsWindow *self, PinsDesktopFile *desktop_file,
+                              GFile *opened_from_file)
 {
     g_assert (PINS_IS_WINDOW (self));
     g_assert (PINS_IS_DESKTOP_FILE (desktop_file));
@@ -131,7 +132,8 @@ pins_window_set_desktop_file (PinsWindow *self, PinsDesktopFile *desktop_file)
                 pins_window_file_deleted_cb, self);
         }
 
-    pins_file_view_set_desktop_file (self->file_view, desktop_file);
+    pins_file_view_set_desktop_file (self->file_view, desktop_file,
+                                     opened_from_file);
 
     g_signal_connect_object (desktop_file, "file-deleted",
                              G_CALLBACK (pins_window_file_deleted_cb), self,
@@ -156,7 +158,7 @@ pins_window_open_file (PinsWindow *self, GFile *file)
             return;
         }
 
-    pins_window_set_desktop_file (self, desktop_file);
+    pins_window_set_desktop_file (self, desktop_file, file);
 }
 
 void
@@ -191,6 +193,12 @@ pins_window_add_new_app_cb (GSimpleAction *action, GVariant *param,
     pins_app_iterator_create_user_file (app_iterator, "pinned-app", NULL);
 }
 
+void
+pins_window_file_activated_cb (PinsWindow *self, PinsDesktopFile *desktop_file)
+{
+    pins_window_set_desktop_file (self, desktop_file, NULL);
+}
+
 static void
 pins_window_init (PinsWindow *self)
 {
@@ -218,7 +226,7 @@ pins_window_init (PinsWindow *self)
     pins_app_view_set_app_iterator (self->app_view, app_iterator);
 
     g_signal_connect_object (self->app_view, "activate",
-                             G_CALLBACK (pins_window_set_desktop_file), self,
+                             G_CALLBACK (pins_window_file_activated_cb), self,
                              G_CONNECT_SWAPPED);
 
     g_signal_connect_object (

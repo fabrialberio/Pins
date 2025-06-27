@@ -33,6 +33,7 @@ struct _PinsFileView
     AdwBin parent_instance;
 
     PinsDesktopFile *desktop_file;
+    GFile *opened_from_file;
     gchar **keys;
 
     AdwWindowTitle *window_title;
@@ -140,7 +141,8 @@ pins_file_view_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
 
     if (!g_strv_contains ((const gchar *const *)self->keys, key))
         {
-            pins_file_view_set_desktop_file (self, self->desktop_file);
+            pins_file_view_set_desktop_file (self, self->desktop_file,
+                                             self->opened_from_file);
             pins_file_view_focus_key_row (self, key);
         }
 
@@ -172,7 +174,8 @@ void
 pins_file_view_key_removed_cb (PinsDesktopFile *desktop_file, gchar *key,
                                PinsFileView *self)
 {
-    pins_file_view_set_desktop_file (self, self->desktop_file);
+    pins_file_view_set_desktop_file (self, self->desktop_file,
+                                     self->opened_from_file);
 }
 
 void
@@ -217,7 +220,8 @@ pins_file_view_setup_keys_listbox (PinsFileView *self)
 
 void
 pins_file_view_set_desktop_file (PinsFileView *self,
-                                 PinsDesktopFile *desktop_file)
+                                 PinsDesktopFile *desktop_file,
+                                 GFile *opened_from_file)
 {
     if (self->desktop_file != NULL)
         {
@@ -232,6 +236,7 @@ pins_file_view_set_desktop_file (PinsFileView *self,
         }
 
     self->desktop_file = g_object_ref (desktop_file);
+    self->opened_from_file = opened_from_file;
     self->keys = pins_desktop_file_get_keys (self->desktop_file);
 
     pins_file_view_update_title (self);
@@ -257,10 +262,9 @@ pins_file_view_set_desktop_file (PinsFileView *self,
                              G_CALLBACK (invisible_switch_state_set_cb), self,
                              G_CONNECT_SWAPPED);
 
-    /// TODO: Deleting files opened from a folder doesn't work
-    gtk_widget_set_visible (
-        GTK_WIDGET (self->delete_button),
-        pins_desktop_file_is_user_only (self->desktop_file));
+    gtk_widget_set_visible (GTK_WIDGET (self->delete_button),
+                            pins_desktop_file_is_user_only (self->desktop_file)
+                                && self->opened_from_file == NULL);
 
     pins_file_view_setup_keys_listbox (self);
 }
