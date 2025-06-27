@@ -102,7 +102,11 @@ pins_desktop_file_new_full (GFile *user_file, GFile *system_file,
                                    g_file_get_path (desktop_file->system_file),
                                    KEY_FILE_FLAGS, &err);
     else
-        g_assert_not_reached ();
+        {
+            g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_ACCES,
+                         _ ("Could not open file."));
+            return NULL;
+        }
     if (err != NULL)
         {
             // g_propagate_error caused a panic with error code 139.
