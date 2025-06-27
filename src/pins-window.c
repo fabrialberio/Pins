@@ -148,6 +148,8 @@ pins_window_open_file (PinsWindow *self, GFile *file)
     PinsDesktopFile *desktop_file;
     GError *err = NULL;
 
+    adw_navigation_view_pop (self->navigation_view);
+
     desktop_file = pins_desktop_file_new_full (file, NULL, &err);
     if (err != NULL)
         {
