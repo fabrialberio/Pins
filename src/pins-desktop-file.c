@@ -282,8 +282,6 @@ pins_desktop_file_get_copy_file (PinsDesktopFile *self)
             g_file_make_directory_with_parents (g_file_get_parent (file), NULL,
                                                 NULL);
 
-            g_warning ("Copied file to «%s»", g_file_get_path (file));
-
             g_file_replace_contents (file, self->saved_data,
                                      strlen (self->saved_data), NULL, FALSE,
                                      G_FILE_CREATE_NONE, NULL, NULL, NULL);
