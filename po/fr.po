@@ -60,23 +60,23 @@ msgstr "modifier les propriétés des fichiers .desktop."
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:32
 msgid "Screenshot of Pins showing the app grid"
-msgstr ""
+msgstr "Capture d'écran de Pins affichant la grille d'applications"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:37
 msgid "Screenshot of Pins showing an opened file"
-msgstr ""
+msgstr "Capture d'écran de Pins affichant un fichier ouvert"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:42
 msgid "Screenshot of Pins showing an opened file on a small screen"
-msgstr ""
+msgstr "Capture d'écran de Pins affichant un fichier ouvert sur un petit écran"
 
 #: data/io.github.fabrialberio.pinapp.gschema.xml:6
 msgid "Show all apps"
-msgstr ""
+msgstr "Afficher toutes les applications"
 
 #: data/io.github.fabrialberio.pinapp.gschema.xml:18
 msgid "List of desktop file search paths in order of priority"
-msgstr ""
+msgstr "Liste des chemins où chercher les fichiers desktop, par ordre de priorité"
 
 #: src/help-overlay.ui:11
 msgctxt "shortcut window"
@@ -148,7 +148,7 @@ msgstr "Aucune application trouvée"
 
 #: src/pins-app-view.ui:122
 msgid "Show _All Apps"
-msgstr ""
+msgstr "Afficher toutes les applications"
 
 #: src/pins-app-view.ui:128
 msgid "_Keyboard Shortcuts"
@@ -169,7 +169,7 @@ msgstr "Effacer les changements"
 
 #: src/pins-file-view.ui:88 src/pins-pick-icon-dialog.ui:4
 msgid "Pick Icon"
-msgstr ""
+msgstr "Choisir une icône"
 
 #: src/pins-file-view.ui:133
 msgid "Autostart"
@@ -209,24 +209,24 @@ msgstr "Charger une icône depuis un fichier"
 
 #: src/pins-pick-icon-dialog.ui:19
 msgid "Search for icons"
-msgstr ""
+msgstr "Rechercher des icônes"
 
 #: src/pins-window.ui:14
 msgid "All Apps"
-msgstr ""
+msgstr "Toutes les applications"
 
 #: src/pins-window.ui:46
 msgid "Error Opening File"
-msgstr ""
+msgstr "Error lors de l'ouverture du fichier"
 
 #: src/pins-desktop-file.c:107
 #, c-format
 msgid "Could not open file."
-msgstr ""
+msgstr "Impossible d'ouvrir le fichier."
 
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
-msgstr ""
+msgstr "(Non-localisé)"
 
 #~ msgid "Edit icon"
 #~ msgstr "Modifier l’icône"
