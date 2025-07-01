@@ -37,6 +37,7 @@ struct _PinsFileView
     gchar **keys;
 
     AdwWindowTitle *window_title;
+    AdwBanner *not_editable_banner;
     GtkScrolledWindow *scrolled_window;
     PinsAppIcon *icon;
     GtkButton *reset_icon_button;
@@ -173,6 +174,12 @@ pins_file_view_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
         }
     else if (!g_strcmp0 (key, G_KEY_FILE_DESKTOP_KEY_ICON))
         pins_file_view_update_reset_icon_button_visible (self);
+
+    adw_banner_set_revealed (
+        self->not_editable_banner,
+        !pins_desktop_file_is_editable (self->desktop_file)
+            && self->opened_from_file != NULL
+            && pins_desktop_file_is_key_edited (self->desktop_file, key));
 }
 
 void
@@ -244,6 +251,7 @@ pins_file_view_set_desktop_file (PinsFileView *self,
     self->opened_from_file = opened_from_file;
     self->keys = pins_desktop_file_get_keys (self->desktop_file);
 
+    adw_banner_set_revealed (self->not_editable_banner, FALSE);
     pins_file_view_update_title (self);
     pins_file_view_update_reset_icon_button_visible (self);
     pins_app_icon_set_desktop_file (self->icon, self->desktop_file);
@@ -308,6 +316,8 @@ pins_file_view_class_init (PinsFileViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           window_title);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
+                                          not_editable_banner);
+    gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           scrolled_window);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView, icon);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
@@ -330,6 +340,46 @@ pins_file_view_class_init (PinsFileViewClass *klass)
                                           delete_button);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           breakpoint);
+}
+
+void
+save_as_dialog_closed_cb (GObject *dialog, GAsyncResult *res,
+                          gpointer user_data)
+{
+    PinsFileView *self = PINS_FILE_VIEW (user_data);
+    g_autoptr (GFile) source = NULL;
+    g_autoptr (GFile) destination = NULL;
+    g_autoptr (GError) err = NULL;
+
+    source = pins_desktop_file_get_copy_file (self->desktop_file);
+    destination
+        = gtk_file_dialog_save_finish (GTK_FILE_DIALOG (dialog), res, NULL);
+
+    if (destination == NULL)
+        return;
+
+    g_file_move (source, destination, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL,
+                 &err);
+    if (err != NULL)
+        {
+            g_warning ("Could not move file from «%s» to «%s»: %s",
+                       g_file_get_path (source), g_file_get_path (destination),
+                       err->message);
+            return;
+        }
+}
+
+void
+not_editable_banner_button_clicked_cb (PinsFileView *self)
+{
+    GtkFileDialog *dialog = gtk_file_dialog_new ();
+
+    if (self->opened_from_file != NULL)
+        gtk_file_dialog_set_initial_file (dialog, self->opened_from_file);
+
+    gtk_file_dialog_save (dialog,
+                          GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
+                          NULL, save_as_dialog_closed_cb, self);
 }
 
 void
@@ -383,6 +433,10 @@ pins_file_view_init (PinsFileView *self)
 {
     gtk_widget_init_template (GTK_WIDGET (self));
 
+    g_signal_connect_object (
+        self->not_editable_banner, "button-clicked",
+        G_CALLBACK (not_editable_banner_button_clicked_cb), self,
+        G_CONNECT_SWAPPED);
     g_signal_connect_object (self->reset_icon_button, "clicked",
                              G_CALLBACK (reset_icon_button_clicked_cb), self,
                              G_CONNECT_SWAPPED);

@@ -26,166 +26,180 @@
           </object>
         </child>
         <property name="content">
-          <object class="GtkScrolledWindow" id="scrolled_window">
+          <object class="GtkBox">
             <property name="vexpand">true</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="AdwClamp">
+              <object class="AdwBanner" id="not_editable_banner">
+                <property name="revealed">true</property>
+                <property name="button-label" translatable="yes">Save As…</property>
+                <property name="title" translatable="yes">This file cannot be edited directly</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="scrolled_window">
+                <property name="vexpand">true</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">12</property>
-                    <property name="margin-bottom">24</property>
-                    <property name="margin-top">12</property>
-                    <property name="margin-start">12</property>
-                    <property name="margin-end">12</property>
+                  <object class="AdwClamp">
                     <child>
-                      <object class="GtkBox" id="banner_box">
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
                         <property name="spacing">12</property>
-                        <property name="orientation">horizontal</property>
+                        <property name="margin-bottom">24</property>
+                        <property name="margin-top">12</property>
+                        <property name="margin-start">12</property>
+                        <property name="margin-end">12</property>
                         <child>
-                          <object class="GtkOverlay">
-                            <property name="halign">center</property>
+                          <object class="GtkBox" id="banner_box">
+                            <property name="spacing">12</property>
+                            <property name="orientation">horizontal</property>
                             <child>
-                              <object class="PinsAppIcon" id="icon">
-                                <property name="margin-start">12</property>
-                                <property name="margin-end">12</property>
-                                <property name="margin-top">12</property>
-                                <property name="margin-bottom">12</property>
-                                <property name="pixel-size">96</property>
+                              <object class="GtkOverlay">
+                                <property name="halign">center</property>
+                                <child>
+                                  <object class="PinsAppIcon" id="icon">
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="margin-top">12</property>
+                                    <property name="margin-bottom">12</property>
+                                    <property name="pixel-size">96</property>
+                                  </object>
+                                </child>
+                                <child type="overlay">
+                                  <object class="AdwBin">
+                                    <property name="halign">end</property>
+                                    <property name="valign">start</property>
+                                    <style>
+                                      <class name="cutout" />
+                                      <class name="background" />
+                                    </style>
+                                    <property name="child">
+                                      <object class="GtkButton" id="reset_icon_button">
+                                        <property name="visible">false</property>
+                                        <property name="tooltip-text" translatable="yes">Erase
+                                          Changes</property>
+                                        <property name="focusable">True</property>
+                                        <property name="icon-name">erase-symbolic</property>
+                                        <style>
+                                          <class name="circular" />
+                                        </style>
+                                      </object>
+                                    </property>
+                                  </object>
+                                </child>
+                                <child type="overlay">
+                                  <object class="AdwBin">
+                                    <property name="halign">end</property>
+                                    <property name="valign">end</property>
+                                    <style>
+                                      <class name="cutout" />
+                                      <class name="background" />
+                                    </style>
+                                    <property name="child">
+                                      <object class="GtkButton" id="pick_icon_button">
+                                        <property name="tooltip-text" translatable="yes">Pick Icon</property>
+                                        <property name="focusable">True</property>
+                                        <property name="icon-name">document-edit-symbolic</property>
+                                        <style>
+                                          <class name="circular" />
+                                        </style>
+                                      </object>
+                                    </property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
-                            <child type="overlay">
-                              <object class="AdwBin">
-                                <property name="halign">end</property>
-                                <property name="valign">start</property>
+                            <child>
+                              <object class="GtkListBox">
+                                <property name="valign">center</property>
+                                <property name="hexpand">true</property>
+                                <property name="selection-mode">none</property>
                                 <style>
-                                  <class name="cutout" />
-                                  <class name="background" />
+                                  <class name="app-banner-listbox" />
                                 </style>
-                                <property name="child">
-                                  <object class="GtkButton" id="reset_icon_button">
-                                    <property name="visible">false</property>
-                                    <property name="tooltip-text" translatable="yes">Erase Changes</property>
-                                    <property name="focusable">True</property>
-                                    <property name="icon-name">erase-symbolic</property>
+                                <child>
+                                  <object class="PinsKeyRow" id="name_row">
+                                    <property name="margin-bottom">6</property>
+                                    <property name="height-request">64</property>
                                     <style>
-                                      <class name="circular" />
+                                      <class name="app-banner-entry" />
+                                      <class name="title-1-row" />
                                     </style>
                                   </object>
-                                </property>
-                              </object>
-                            </child>
-                            <child type="overlay">
-                              <object class="AdwBin">
-                                <property name="halign">end</property>
-                                <property name="valign">end</property>
-                                <style>
-                                  <class name="cutout" />
-                                  <class name="background" />
-                                </style>
-                                <property name="child">
-                                  <object class="GtkButton" id="pick_icon_button">
-                                    <property name="tooltip-text" translatable="yes">Pick Icon</property>
-                                    <property name="focusable">True</property>
-                                    <property name="icon-name">document-edit-symbolic</property>
+                                </child>
+                                <child>
+                                  <object class="PinsKeyRow" id="comment_row">
                                     <style>
-                                      <class name="circular" />
+                                      <class name="app-banner-entry" />
                                     </style>
                                   </object>
-                                </property>
+                                </child>
                               </object>
                             </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwPreferencesGroup">
+                            <child>
+                              <object class="AdwActionRow">
+                                <property name="title" translatable="yes">Autostart</property>
+                                <property
+                                  name="subtitle"
+                                  translatable="yes">Launch this application on login</property>
+                                <property name="activatable-widget">autostart_switch</property>
+                                <child type="prefix">
+                                  <object class="GtkImage">
+                                    <property name="icon-name">media-playback-start-symbolic</property>
+                                  </object>
+                                </child>
+                                <child type="suffix">
+                                  <object class="GtkSwitch" id="autostart_switch">
+                                    <property name="valign">center</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="AdwActionRow">
+                                <property name="title" translatable="yes">Invisible</property>
+                                <property
+                                  name="subtitle"
+                                  translatable="yes">Hide this application in the app menu</property>
+                                <property name="activatable-widget">invisible_switch</property>
+                                <child type="prefix">
+                                  <object class="GtkImage">
+                                    <property name="icon-name">view-conceal-symbolic</property>
+                                  </object>
+                                </child>
+                                <child type="suffix">
+                                  <object class="GtkSwitch" id="invisible_switch">
+                                    <property name="valign">center</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkListBox" id="keys_listbox">
+                            <property name="selection-mode">none</property>
+                            <style>
+                              <class name="boxed-list" />
+                            </style>
                           </object>
                         </child>
                         <child>
                           <object class="GtkListBox">
-                            <property name="valign">center</property>
-                            <property name="hexpand">true</property>
                             <property name="selection-mode">none</property>
                             <style>
-                              <class name="app-banner-listbox" />
+                              <class name="boxed-list" />
                             </style>
                             <child>
-                              <object class="PinsKeyRow" id="name_row">
-                                <property name="margin-bottom">6</property>
-                                <property name="height-request">64</property>
-                                <style>
-                                  <class name="app-banner-entry" />
-                                  <class name="title-1-row" />
-                                </style>
+                              <object class="AdwButtonRow" id="add_key_button">
+                                <property name="title" translatable="yes">Add Key</property>
+                                <property name="start-icon-name">list-add-symbolic</property>
                               </object>
                             </child>
-                            <child>
-                              <object class="PinsKeyRow" id="comment_row">
-                                <style>
-                                  <class name="app-banner-entry" />
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwPreferencesGroup">
-                        <child>
-                          <object class="AdwActionRow">
-                            <property name="title" translatable="yes">Autostart</property>
-                            <property
-                              name="subtitle"
-                              translatable="yes">Launch this application on login</property>
-                            <property name="activatable-widget">autostart_switch</property>
-                            <child type="prefix">
-                              <object class="GtkImage">
-                                <property name="icon-name">media-playback-start-symbolic</property>
-                              </object>
-                            </child>
-                            <child type="suffix">
-                              <object class="GtkSwitch" id="autostart_switch">
-                                <property name="valign">center</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="AdwActionRow">
-                            <property name="title" translatable="yes">Invisible</property>
-                            <property
-                              name="subtitle"
-                              translatable="yes">Hide this application in the app menu</property>
-                            <property name="activatable-widget">invisible_switch</property>
-                            <child type="prefix">
-                              <object class="GtkImage">
-                                <property name="icon-name">view-conceal-symbolic</property>
-                              </object>
-                            </child>
-                            <child type="suffix">
-                              <object class="GtkSwitch" id="invisible_switch">
-                                <property name="valign">center</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkListBox" id="keys_listbox">
-                        <property name="selection-mode">none</property>
-                        <style>
-                          <class name="boxed-list" />
-                        </style>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkListBox">
-                        <property name="selection-mode">none</property>
-                        <style>
-                          <class name="boxed-list" />
-                        </style>
-                        <child>
-                          <object class="AdwButtonRow" id="add_key_button">
-                            <property name="title" translatable="yes">Add Key</property>
-                            <property name="start-icon-name">list-add-symbolic</property>
                           </object>
                         </child>
                       </object>
