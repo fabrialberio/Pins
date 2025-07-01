@@ -211,6 +211,24 @@ pins_desktop_file_is_shown (PinsDesktopFile *self)
     return TRUE;
 }
 
+gboolean
+pins_desktop_file_is_editable (PinsDesktopFile *self)
+{
+    g_autoptr (GFileInfo) user_file_info = NULL;
+
+    if (self->user_file == NULL)
+        return TRUE;
+    if (!g_file_query_exists (self->user_file, NULL))
+        return TRUE;
+
+    user_file_info = g_file_query_info (self->user_file,
+                                        G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE,
+                                        G_FILE_QUERY_INFO_NONE, NULL, NULL);
+
+    return g_file_info_get_attribute_boolean (
+        user_file_info, G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE);
+}
+
 void
 pins_desktop_file_trash (PinsDesktopFile *self)
 {
@@ -272,7 +290,7 @@ pins_desktop_file_get_copy_file (PinsDesktopFile *self)
 {
     GFile *file = self->user_file;
 
-    // Copy system file to data folder to ensure apps other apps can access it
+    // Copy system file to data folder to ensure other apps can access it
     if (!g_file_query_exists (file, NULL))
         {
             file = g_file_new_build_filename (
