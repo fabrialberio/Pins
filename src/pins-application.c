@@ -83,22 +83,23 @@ pins_application_about_action (GSimpleAction *action, GVariant *parameter,
     static const char *developers[] = { "Fabrizio", NULL };
     // This would be better handled as _("translator-credits")
     static const char *translators
-        = "Irénée Thirion (French) <irenee.thirion@e.email>\n "
-          "Sabri Ünal (Turkish) <libreajans@gmail.com>\n "
+        = "gregorni (German) <gregorniehl@web.de>\n "
+          "Gabriel Brand (German) <gabr.brand@gmail.com>\n "
+          "Josué Martell (Spanish) <josue.martell17@gmail.com>\n "
+          "Óscar Fernández Díaz (Spanish) <oscfdezdz@tuta.io>\n "
+          "Irénée Thirion (French) <irenee.thirion@e.email>\n "
+          "abrusle (French)\n "
+          "Fabrizio Alberio (Italian)"
+          "Heimen Stoffels (Dutch) <vistausss@fastmail.com>\n"
+          "Mejans (Occitan)\n "
+          "Filipe Motta (Portoguese) <luizfilipemotta@gmail.com>\n"
+          "johnpeter19 (Portoguese) <johnppetersa@gmail.com>\n"
           "Fyodor Sobolev (Russian)\n "
           "David Lapshin (Russian)\n "
           "Alexmelman88 (Russian)\n "
-          "vmkspv (Russian)\n"
-          "josushu0 (Spanish)\n "
-          "oscfdezdz (Spanish)\n "
-          "gregorni (German)\n "
-          "Gabriel Brand (German) <gabr.brand@gmail.com>\n "
-          "Oleksii \"Grinka\" (Ukrainian) <grinka@tuta.io>\n"
-          "Mejans (Occitan)\n "
-          "Vistaus (Dutch)\n"
-          "Tuba2 (Portoguese)\n"
-          "johnpeteras19 (Portoguese) <johnppetersa@gmail.com>\n"
-          "Fabrizio Alberio (Italian)";
+          "Vladimir Kosolapov (Russian)\n"
+          "Sabri Ünal (Turkish) <libreajans@gmail.com>\n "
+          "Oleksii \"Grinka\" (Ukrainian) <grinka@tuta.io>\n";
 
     PinsApplication *self = user_data;
     GtkWindow *window = NULL;
