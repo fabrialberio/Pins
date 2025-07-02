@@ -245,7 +245,8 @@ pins_desktop_file_save (PinsDesktopFile *self, GError **error)
         }
 
     g_file_replace_contents (self->user_file, self->saved_data, lenght, NULL,
-                             FALSE, G_FILE_CREATE_NONE, NULL, NULL, error);
+                             FALSE, G_FILE_CREATE_REPLACE_DESTINATION, NULL,
+                             NULL, error);
 }
 
 void
