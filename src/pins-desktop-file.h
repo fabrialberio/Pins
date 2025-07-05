@@ -37,6 +37,13 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (PinsDesktopFile, pins_desktop_file, PINS, DESKTOP_FILE,
                       GObject);
 
+typedef enum
+{
+    PINS_DESKTOP_FILE_NOT_EDITABLE,
+    PINS_DESKTOP_FILE_EDITABLE,
+    PINS_DESKTOP_FILE_EDITABLE_WITH_BACKUP,
+} PinsDesktopFileEditability;
+
 PinsDesktopFile *pins_desktop_file_new_full (GFile *user_file,
                                              GFile *system_file,
                                              GError **error);
@@ -46,7 +53,8 @@ gboolean pins_desktop_file_is_user_only (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_user_edited (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_autostart (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_shown (PinsDesktopFile *self);
-gboolean pins_desktop_file_is_editable (PinsDesktopFile *self);
+PinsDesktopFileEditability
+pins_desktop_file_get_editability (PinsDesktopFile *self);
 
 void pins_desktop_file_save (PinsDesktopFile *self, GError **error);
 void pins_desktop_file_trash (PinsDesktopFile *self);
