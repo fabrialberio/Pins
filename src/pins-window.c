@@ -183,7 +183,7 @@ pins_window_close_request_cb (PinsWindow *self, gpointer user_data)
     if (g_strcmp0 (current_page_tag, pages[PAGE_FILE]) == 0)
         pins_window_save_current_desktop_file (self);
 
-    gtk_window_close (GTK_WINDOW (self));
+    gtk_window_destroy (GTK_WINDOW (self));
 }
 
 void
