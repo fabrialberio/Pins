@@ -83,7 +83,8 @@ pins_application_about_action (GSimpleAction *action, GVariant *parameter,
     static const char *developers[] = { "Fabrizio", NULL };
     // This would be better handled as _("translator-credits")
     static const char *translators
-        = "gregorni (German) <gregorniehl@web.de>\n "
+        = "Ahmed Najmawi (Arabic) <iramosu@protonmail.com>\n "
+          "gregorni (German) <gregorniehl@web.de>\n "
           "Gabriel Brand (German) <gabr.brand@gmail.com>\n "
           "Josué Martell (Spanish) <josue.martell17@gmail.com>\n "
           "Óscar Fernández Díaz (Spanish) <oscfdezdz@tuta.io>\n "
