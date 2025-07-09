@@ -79,7 +79,7 @@ static void
 pins_application_about_action (GSimpleAction *action, GVariant *parameter,
                                gpointer user_data)
 {
-    static const char *developers[] = { "Fabrizio", NULL };
+    static const char *developers[] = { "Fabrizio Alberio", NULL };
     // This would be better handled as _("translator-credits")
     static const char *translators
         = "Ahmed Najmawi (Arabic) <iramosu@protonmail.com>\n "
@@ -89,7 +89,7 @@ pins_application_about_action (GSimpleAction *action, GVariant *parameter,
           "Óscar Fernández Díaz (Spanish) <oscfdezdz@tuta.io>\n "
           "Irénée Thirion (French) <irenee.thirion@e.email>\n "
           "abrusle (French)\n "
-          "Fabrizio Alberio (Italian)"
+          "Fabrizio Alberio (Italian)\n"
           "Heimen Stoffels (Dutch) <vistausss@fastmail.com>\n"
           "Mejans (Occitan)\n "
           "Filipe Motta (Portoguese) <luizfilipemotta@gmail.com>\n"
@@ -99,7 +99,7 @@ pins_application_about_action (GSimpleAction *action, GVariant *parameter,
           "Alexmelman88 (Russian)\n "
           "Vladimir Kosolapov (Russian)\n"
           "Sabri Ünal (Turkish) <libreajans@gmail.com>\n "
-          "Oleksii \"Grinka\" (Ukrainian) <grinka@tuta.io>\n";
+          "Oleksii \"Grinka\" (Ukrainian) <grinka@tuta.io>";
 
     PinsApplication *self = user_data;
     GtkWindow *window = NULL;
