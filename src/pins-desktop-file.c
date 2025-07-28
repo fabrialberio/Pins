@@ -211,8 +211,8 @@ pins_desktop_file_is_shown (PinsDesktopFile *self)
     return TRUE;
 }
 
-gboolean
-pins_desktop_file_is_editable (PinsDesktopFile *self)
+PinsDesktopFileEditMode
+pins_desktop_file_get_edit_mode (PinsDesktopFile *self)
 {
     g_autoptr (GFileInfo) user_file_info = NULL;
 

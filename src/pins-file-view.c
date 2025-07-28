@@ -177,7 +177,8 @@ pins_file_view_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
 
     adw_banner_set_revealed (
         self->not_editable_banner,
-        !pins_desktop_file_is_editable (self->desktop_file)
+        pins_desktop_file_get_edit_mode (self->desktop_file)
+                == PINS_DESKTOP_FILE_NOT_EDITABLE
             && self->opened_from_file != NULL
             && pins_desktop_file_is_key_edited (self->desktop_file, key));
 }

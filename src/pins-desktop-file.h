@@ -42,7 +42,7 @@ typedef enum
     PINS_DESKTOP_FILE_NOT_EDITABLE,
     PINS_DESKTOP_FILE_EDITABLE,
     PINS_DESKTOP_FILE_EDITABLE_WITH_BACKUP,
-} PinsDesktopFileEditability;
+} PinsDesktopFileEditMode;
 
 PinsDesktopFile *pins_desktop_file_new_full (GFile *user_file,
                                              GFile *system_file,
@@ -53,8 +53,8 @@ gboolean pins_desktop_file_is_user_only (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_user_edited (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_autostart (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_shown (PinsDesktopFile *self);
-PinsDesktopFileEditability
-pins_desktop_file_get_editability (PinsDesktopFile *self);
+PinsDesktopFileEditMode
+pins_desktop_file_get_edit_mode (PinsDesktopFile *self);
 
 void pins_desktop_file_save (PinsDesktopFile *self, GError **error);
 void pins_desktop_file_trash (PinsDesktopFile *self);
