@@ -177,7 +177,7 @@ pins_app_iterator_load (PinsAppIterator *self)
 
 void
 pins_app_iterator_create_user_file (PinsAppIterator *self, gchar *basename,
-                                    GError **error)
+                                    const gchar *contents, GError **error)
 {
     gchar increment[8] = "";
     g_autoptr (GFile) file;
@@ -198,9 +198,8 @@ pins_app_iterator_create_user_file (PinsAppIterator *self, gchar *basename,
 
     file = g_file_new_build_filename (pins_desktop_file_user_path (), filename,
                                       NULL);
-    g_file_replace_contents (file, PINS_DESKTOP_FILE_DEFAULT_CONTENT,
-                             strlen (PINS_DESKTOP_FILE_DEFAULT_CONTENT), NULL,
-                             FALSE, G_FILE_CREATE_NONE, NULL, NULL, &err);
+    g_file_replace_contents (file, contents, strlen (contents), NULL, FALSE,
+                             G_FILE_CREATE_NONE, NULL, NULL, &err);
     if (err != NULL)
         {
             g_propagate_error (error, err);

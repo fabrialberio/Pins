@@ -192,7 +192,8 @@ pins_window_add_new_app_cb (GSimpleAction *action, GVariant *param,
 {
     g_assert (PINS_IS_APP_ITERATOR (app_iterator));
 
-    pins_app_iterator_create_user_file (app_iterator, "pinned-app", NULL);
+    pins_app_iterator_create_user_file (
+        app_iterator, "pinned-app", PINS_DESKTOP_FILE_DEFAULT_CONTENT, NULL);
 }
 
 void
