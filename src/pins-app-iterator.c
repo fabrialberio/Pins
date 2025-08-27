@@ -35,6 +35,7 @@ struct _PinsAppIterator
     GObject parent_instance;
 
     GHashTable *desktop_files_by_id;
+    GHashTable *files_by_id;
     GPtrArray *desktop_files_array;
 };
 
@@ -85,16 +86,20 @@ pins_app_iterator_file_deleted_cb (PinsAppIterator *self,
     g_ptr_array_find (self->desktop_files_array, desktop_file, &position);
 
     g_assert (g_hash_table_remove (self->desktop_files_by_id, desktop_id));
+    g_assert (g_hash_table_remove (self->files_by_id, desktop_id));
     g_assert (g_ptr_array_remove_index (self->desktop_files_array, position));
 
     g_list_model_items_changed (G_LIST_MODEL (self), position, 1, 0);
 }
 
 void
-desktop_files_by_id_insert_file (PinsAppIterator *self, gchar *desktop_id,
+desktop_files_by_id_insert_file (PinsAppIterator *self, GFile *file,
                                  PinsDesktopFile *desktop_file)
 {
+    gchar *desktop_id = g_file_get_basename (file);
+
     g_hash_table_insert (self->desktop_files_by_id, desktop_id, desktop_file);
+    g_hash_table_insert (self->files_by_id, g_strdup (desktop_id), file);
 
     g_signal_connect_object (desktop_file, "key-set",
                              G_CALLBACK (pins_app_iterator_key_set_cb), self,
@@ -121,8 +126,7 @@ load_file_checked (PinsAppIterator *self, GFileInfo *info, GFile *file)
             return;
         }
 
-    desktop_files_by_id_insert_file (self, g_file_get_basename (file),
-                                     g_object_ref (desktop_file));
+    desktop_files_by_id_insert_file (self, file, g_object_ref (desktop_file));
 }
 
 void
@@ -137,6 +141,7 @@ pins_app_iterator_load (PinsAppIterator *self)
     g_signal_emit (self, signals[LOADING], 0, TRUE);
 
     g_hash_table_remove_all (self->desktop_files_by_id);
+    g_hash_table_remove_all (self->files_by_id);
     g_ptr_array_free (self->desktop_files_array, TRUE);
 
     paths = pins_desktop_file_search_paths ();
@@ -176,7 +181,8 @@ pins_app_iterator_load (PinsAppIterator *self)
 }
 
 void
-pins_app_iterator_create_user_file (PinsAppIterator *self, gchar *basename,
+pins_app_iterator_create_user_file (PinsAppIterator *self,
+                                    const gchar *basename,
                                     const gchar *contents, GError **error)
 {
     gchar increment[8] = "";
@@ -201,14 +207,11 @@ pins_app_iterator_create_user_file (PinsAppIterator *self, gchar *basename,
     g_file_replace_contents (file, contents, strlen (contents), NULL, FALSE,
                              G_FILE_CREATE_NONE, NULL, NULL, &err);
     if (err != NULL)
-        {
-            g_propagate_error (error, err);
-            return;
-        }
+        return g_propagate_error (error, err);
 
     desktop_file = pins_desktop_file_new (file, NULL);
 
-    desktop_files_by_id_insert_file (self, filename, desktop_file);
+    desktop_files_by_id_insert_file (self, file, desktop_file);
     g_assert (g_hash_table_contains (self->desktop_files_by_id, filename));
 
     g_ptr_array_add (self->desktop_files_array, desktop_file);
@@ -218,12 +221,37 @@ pins_app_iterator_create_user_file (PinsAppIterator *self, gchar *basename,
     g_signal_emit (self, signals[FILE_CREATED], 0, desktop_file);
 }
 
+void
+pins_app_iterator_duplicate_file (PinsAppIterator *self,
+                                  const gchar *desktop_id, GError **error)
+{
+    GFile *file = g_hash_table_lookup (self->files_by_id, desktop_id);
+    GError *err = NULL;
+    gchar *contents = NULL, *basename = NULL;
+    g_auto (GStrv) split_desktop_id = NULL;
+
+    g_file_get_contents (g_file_get_path (file), &contents, NULL, &err);
+    if (err != NULL)
+        return g_propagate_error (error, err);
+
+    // Remove ".desktop" suffix from desktop_id.
+    split_desktop_id = g_strsplit (desktop_id, ".", -1);
+    split_desktop_id[g_strv_length (split_desktop_id) - 1] = NULL;
+    basename = g_strjoinv (".", split_desktop_id);
+
+    g_warning ("desktop_id: %s\nbasename: %s", desktop_id, basename);
+
+    return pins_app_iterator_create_user_file (self, basename, contents,
+                                               error);
+}
+
 static void
 pins_app_iterator_dispose (GObject *object)
 {
     PinsAppIterator *self = PINS_APP_ITERATOR (object);
 
     g_hash_table_unref (self->desktop_files_by_id);
+    g_hash_table_unref (self->files_by_id);
     g_ptr_array_unref (self->desktop_files_array);
 }
 
@@ -248,6 +276,8 @@ pins_app_iterator_init (PinsAppIterator *self)
 {
     self->desktop_files_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                        g_free, g_object_unref);
+    self->files_by_id = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
+                                               g_object_unref);
     self->desktop_files_array = g_ptr_array_new ();
 }
 

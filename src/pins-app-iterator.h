@@ -33,8 +33,11 @@ PinsAppIterator *pins_app_iterator_new (void);
 
 void pins_app_iterator_load (PinsAppIterator *self);
 void pins_app_iterator_create_user_file (PinsAppIterator *self,
-                                         gchar *basename,
+                                         const gchar *basename,
                                          const gchar *contents,
                                          GError **error);
+void pins_app_iterator_duplicate_file (PinsAppIterator *self,
+                                       const gchar *desktop_id,
+                                       GError **error);
 
 G_END_DECLS
