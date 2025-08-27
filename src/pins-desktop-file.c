@@ -273,7 +273,7 @@ pins_desktop_file_get_copy_file (PinsDesktopFile *self)
 {
     GFile *file = self->user_file;
 
-    // Copy system file to data folder to ensure apps other apps can access it
+    // Copy system file to data folder to ensure other apps can access it
     if (!g_file_query_exists (file, NULL))
         {
             file = g_file_new_build_filename (
