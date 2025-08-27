@@ -145,7 +145,11 @@ pins_window_set_desktop_file (PinsWindow *self, PinsDesktopFile *desktop_file,
                              G_CALLBACK (pins_window_file_deleted_cb), self,
                              0);
 
-    adw_navigation_view_push_by_tag (self->navigation_view, pages[PAGE_FILE]);
+    if (g_strcmp0 (
+            adw_navigation_view_get_visible_page_tag (self->navigation_view),
+            pages[PAGE_FILE]))
+        adw_navigation_view_push_by_tag (self->navigation_view,
+                                         pages[PAGE_FILE]);
 }
 
 void
