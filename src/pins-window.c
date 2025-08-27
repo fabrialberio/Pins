@@ -190,10 +190,28 @@ void
 pins_window_add_new_app_cb (GSimpleAction *action, GVariant *param,
                             PinsAppIterator *app_iterator)
 {
+    GError *err = NULL;
+
     g_assert (PINS_IS_APP_ITERATOR (app_iterator));
 
     pins_app_iterator_create_user_file (
-        app_iterator, "pinned-app", PINS_DESKTOP_FILE_DEFAULT_CONTENT, NULL);
+        app_iterator, "pinned-app", PINS_DESKTOP_FILE_DEFAULT_CONTENT, &err);
+    if (err != NULL)
+        g_warning ("Error creating file: %s", err->message);
+}
+
+void
+pins_window_duplicate_app_cb (GSimpleAction *action, GVariant *param,
+                              PinsAppIterator *app_iterator)
+{
+    const gchar *desktop_id = g_variant_get_string (param, NULL);
+    GError *err = NULL;
+
+    g_assert (PINS_IS_APP_ITERATOR (app_iterator));
+
+    pins_app_iterator_duplicate_file (app_iterator, desktop_id, &err);
+    if (err != NULL)
+        g_warning ("Error duplicating file: %s", err->message);
 }
 
 void
@@ -206,7 +224,9 @@ static void
 pins_window_init (PinsWindow *self)
 {
     PinsAppIterator *app_iterator;
-    GSimpleAction *new_app_action, *search_action;
+    g_autoptr (GSimpleAction) new_app_action = NULL,
+                              duplicate_app_action = NULL,
+                              search_action = NULL;
 
     gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -219,12 +239,18 @@ pins_window_init (PinsWindow *self)
                              G_CALLBACK (pins_window_add_new_app_cb),
                              app_iterator, 0);
     g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (new_app_action));
-    g_object_unref (G_OBJECT (new_app_action));
+
+    duplicate_app_action
+        = g_simple_action_new ("duplicate-app", G_VARIANT_TYPE_STRING);
+    g_signal_connect_object (duplicate_app_action, "activate",
+                             G_CALLBACK (pins_window_duplicate_app_cb), self,
+                             0);
+    g_action_map_add_action (G_ACTION_MAP (self),
+                             G_ACTION (duplicate_app_action));
 
     search_action = g_simple_action_new_stateful (
         "search", NULL, g_variant_new_boolean (FALSE));
     g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (search_action));
-    g_object_unref (G_OBJECT (search_action));
 
     pins_app_view_set_app_iterator (self->app_view, app_iterator);
 
