@@ -239,8 +239,6 @@ pins_app_iterator_duplicate_file (PinsAppIterator *self,
     split_desktop_id[g_strv_length (split_desktop_id) - 1] = NULL;
     basename = g_strjoinv (".", split_desktop_id);
 
-    g_warning ("desktop_id: %s\nbasename: %s", desktop_id, basename);
-
     return pins_app_iterator_create_user_file (self, basename, contents,
                                                error);
 }
