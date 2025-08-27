@@ -12,7 +12,12 @@
               <object class="AdwWindowTitle" id="window_title">
               </object>
             </property>
-            <!-- TODO: Implement duplicating files -->
+            <child type="end">
+              <object class="GtkButton" id="duplicate_button">
+                <property name="icon-name">edit-copy-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Duplicate</property>
+              </object>
+            </child>
             <child type="end">
               <object class="GtkButton" id="delete_button">
                 <property name="icon-name">user-trash-symbolic</property>
