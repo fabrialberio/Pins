@@ -57,6 +57,16 @@
     <control>touch</control>
   </recommends>
   <releases>
+    <release version="2.4.2" date="2025-08-27">
+      <description translate="no">
+        <p>What's new:</p>
+        <ul>
+          <li>@Vistaus updated the Dutch translation;</li>
+          <li>@OleksiiGrinka updated the Ukrainian translation;</li>
+          <li>added ability to duplicate apps.</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.4.1" date="2025-07-28">
       <description translate="no">
         <p>What's new:</p>
@@ -91,23 +101,6 @@
         <p>Fixes:</p>
         <ul>
           <li>really ensure user apps folder exists before creating a new app.</li>
-        </ul>
-      </description>
-    </release>
-    <release version="2.3.0" date="2025-05-20">
-      <description translate="no">
-        <p>What's new:</p>
-        <ul>
-          <li>@Tuba2 updated the Portoguese translation;</li>
-          <li>@vmkspv updated the Russian translation;</li>
-          <li>Gabriel Brand updated the German translation;</li>
-          <li>tweaked file view appearance;</li>
-          <li>added "Ctrl+F" shortcut to open search.</li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li>use proper header capitalization in labels thanks to @ARAKHN1D;</li>
-          <li>ensure user apps folder exists before creating a new app.</li>
         </ul>
       </description>
     </release>
