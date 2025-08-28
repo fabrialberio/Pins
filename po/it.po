@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-27 10:55+0200\n"
+"POT-Creation-Date: 2025-08-28 12:02+0200\n"
 "PO-Revision-Date: 2025-06-27 10:57+0200\n"
 "Last-Translator: Fabrizio Alberio <fabrizio.alberio@gmail.com>\n"
 "Language-Team: Italian <fabrizio.alberio@gmail.com>\n"
@@ -57,15 +57,15 @@ msgstr "nascondere applicazioni,"
 msgid "editing properties in .desktop files."
 msgstr "modificare i file .desktop."
 
-#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:32
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:33
 msgid "Screenshot of Pins showing the app grid"
 msgstr "Schermata della griglia delle applicazioni di Pins"
 
-#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:37
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:39
 msgid "Screenshot of Pins showing an opened file"
 msgstr "Schermata di un file aperto in Pins"
 
-#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:42
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
 msgid "Screenshot of Pins showing an opened file on a small screen"
 msgstr "Schermata di un file aperto in Pins su uno schermo piccolo"
 
@@ -123,8 +123,8 @@ msgid "Add New App"
 msgstr "Aggiungi applicazione"
 
 #: src/pins-app-view.ui:26
-msgid "Show Menu"
-msgstr "Mostra menu"
+msgid "Main Menu"
+msgstr ""
 
 #: src/pins-app-view.ui:33
 msgid "Search"
@@ -150,35 +150,40 @@ msgstr "_Scorciatoie da tastiera"
 msgid "_About Pins"
 msgstr "_Informazioni su Pins"
 
-#: src/pins-file-view.ui:19
+#: src/pins-file-view.ui:18
+#, fuzzy
+msgid "Duplicate"
+msgstr "Duplica file"
+
+#: src/pins-file-view.ui:24
 msgid "Delete"
 msgstr "Elimina"
 
-#: src/pins-file-view.ui:68 src/pins-key-row.ui:9
+#: src/pins-file-view.ui:73 src/pins-key-row.ui:9
 msgid "Erase Changes"
 msgstr "Cancella modifiche"
 
-#: src/pins-file-view.ui:88 src/pins-pick-icon-dialog.ui:4
+#: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
 msgid "Pick Icon"
 msgstr "Scegli icona"
 
-#: src/pins-file-view.ui:133
+#: src/pins-file-view.ui:138
 msgid "Autostart"
 msgstr "Avvio automatico"
 
-#: src/pins-file-view.ui:136
+#: src/pins-file-view.ui:141
 msgid "Launch this application on login"
 msgstr "Avvia quest'applicazione all'accesso"
 
-#: src/pins-file-view.ui:152
+#: src/pins-file-view.ui:157
 msgid "Invisible"
 msgstr "Invisibile"
 
-#: src/pins-file-view.ui:155
+#: src/pins-file-view.ui:160
 msgid "Hide this application in the app menu"
 msgstr "Nascondi quest'applicazione nel menu"
 
-#: src/pins-file-view.ui:187
+#: src/pins-file-view.ui:192
 msgid "Add Key"
 msgstr "Aggiungi chiave"
 
@@ -214,6 +219,9 @@ msgstr "Impossibile aprire file."
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr "(Non localizzato)"
+
+#~ msgid "Show Menu"
+#~ msgstr "Mostra menu"
 
 #~ msgid "Edit icon"
 #~ msgstr "Modifica icona"
@@ -306,9 +314,6 @@ msgstr "(Non localizzato)"
 
 #~ msgid "Boolean Values"
 #~ msgstr "Valori Booleani"
-
-#~ msgid "Duplicate file"
-#~ msgstr "Duplica file"
 
 #~ msgid "Your pins"
 #~ msgstr "Appuntate"

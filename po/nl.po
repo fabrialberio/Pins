@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-27 10:55+0200\n"
+"POT-Creation-Date: 2025-08-28 12:02+0200\n"
 "PO-Revision-Date: 2025-07-30 21:37+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -56,15 +56,15 @@ msgstr "verberg apps die u niet wilt zien;"
 msgid "editing properties in .desktop files."
 msgstr "bewerk de eigenschappen van .desktop-bestanden."
 
-#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:32
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:33
 msgid "Screenshot of Pins showing the app grid"
 msgstr "Schermfoto van Snelkoppelingen met het toepassingsoverzicht"
 
-#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:37
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:39
 msgid "Screenshot of Pins showing an opened file"
 msgstr "Schermfoto van Snelkoppelingen met een geopend bestand"
 
-#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:42
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
 msgid "Screenshot of Pins showing an opened file on a small screen"
 msgstr ""
 "Schermfoto van Snelkoppelingen met een geopend bestand op een klein scherm"
@@ -123,8 +123,8 @@ msgid "Add New App"
 msgstr "Toepassing toevoegen"
 
 #: src/pins-app-view.ui:26
-msgid "Show Menu"
-msgstr "Menu tonen"
+msgid "Main Menu"
+msgstr ""
 
 #: src/pins-app-view.ui:33
 msgid "Search"
@@ -150,35 +150,39 @@ msgstr "_Sneltoetsen"
 msgid "_About Pins"
 msgstr "_Over Snelkoppelingen"
 
-#: src/pins-file-view.ui:19
+#: src/pins-file-view.ui:18
+msgid "Duplicate"
+msgstr ""
+
+#: src/pins-file-view.ui:24
 msgid "Delete"
 msgstr "Verwĳderen"
 
-#: src/pins-file-view.ui:68 src/pins-key-row.ui:9
+#: src/pins-file-view.ui:73 src/pins-key-row.ui:9
 msgid "Erase Changes"
 msgstr "Wĳzigingen wissen"
 
-#: src/pins-file-view.ui:88 src/pins-pick-icon-dialog.ui:4
+#: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
 msgid "Pick Icon"
 msgstr "Kies een pictogram"
 
-#: src/pins-file-view.ui:133
+#: src/pins-file-view.ui:138
 msgid "Autostart"
 msgstr "Automatisch opstarten"
 
-#: src/pins-file-view.ui:136
+#: src/pins-file-view.ui:141
 msgid "Launch this application on login"
 msgstr "Start de toepassing na het aanmelden"
 
-#: src/pins-file-view.ui:152
+#: src/pins-file-view.ui:157
 msgid "Invisible"
 msgstr "Onzichtbaar"
 
-#: src/pins-file-view.ui:155
+#: src/pins-file-view.ui:160
 msgid "Hide this application in the app menu"
 msgstr "Verberg deze toepassing in het menu"
 
-#: src/pins-file-view.ui:187
+#: src/pins-file-view.ui:192
 msgid "Add Key"
 msgstr "Veld toevoegen"
 
@@ -214,6 +218,9 @@ msgstr "Het bestand kan niet worden geopend."
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr "(onvertaald)"
+
+#~ msgid "Show Menu"
+#~ msgstr "Menu tonen"
 
 #~ msgid "Edit icon"
 #~ msgstr "Pictogram aanpassen"

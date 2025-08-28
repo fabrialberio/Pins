@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-27 10:55+0200\n"
+"POT-Creation-Date: 2025-08-28 12:02+0200\n"
 "PO-Revision-Date: 2025-07-09 07:39+0300\n"
 "Last-Translator: Ahmed Najmawi <iramosu@protonmail.com>\n"
 "Language-Team: \n"
@@ -55,15 +55,15 @@ msgstr "إخفاء التطبيقات التي لا تريد رؤيتها،"
 msgid "editing properties in .desktop files."
 msgstr "تعديل الخصائص في ملفات desktop."
 
-#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:32
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:33
 msgid "Screenshot of Pins showing the app grid"
 msgstr "لقطة شاشة لتطبيق ”دبابيس“ تُظهر شبكة التطبيقات"
 
-#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:37
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:39
 msgid "Screenshot of Pins showing an opened file"
 msgstr "لقطة شاشة لتطبيق ”دبابيس“ تُظهر ملفًا مفتوحًا"
 
-#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:42
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
 msgid "Screenshot of Pins showing an opened file on a small screen"
 msgstr "لقطة شاشة لتطبيق ”دبابيس“ تُظهر ملفًا مفتوحًا على شاشة صغيرة"
 
@@ -121,8 +121,8 @@ msgid "Add New App"
 msgstr "أضف تطبيقًا جديدًا"
 
 #: src/pins-app-view.ui:26
-msgid "Show Menu"
-msgstr "أظهر القائمة"
+msgid "Main Menu"
+msgstr ""
 
 #: src/pins-app-view.ui:33
 msgid "Search"
@@ -148,35 +148,39 @@ msgstr "ا_ختصارات لوحة المفاتيح"
 msgid "_About Pins"
 msgstr "_عن دبابيس"
 
-#: src/pins-file-view.ui:19
+#: src/pins-file-view.ui:18
+msgid "Duplicate"
+msgstr ""
+
+#: src/pins-file-view.ui:24
 msgid "Delete"
 msgstr "احذف"
 
-#: src/pins-file-view.ui:68 src/pins-key-row.ui:9
+#: src/pins-file-view.ui:73 src/pins-key-row.ui:9
 msgid "Erase Changes"
 msgstr "امسح التغييرات"
 
-#: src/pins-file-view.ui:88 src/pins-pick-icon-dialog.ui:4
+#: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
 msgid "Pick Icon"
 msgstr "اختر أيقونة"
 
-#: src/pins-file-view.ui:133
+#: src/pins-file-view.ui:138
 msgid "Autostart"
 msgstr "التشغيل التلقائي"
 
-#: src/pins-file-view.ui:136
+#: src/pins-file-view.ui:141
 msgid "Launch this application on login"
 msgstr "شغّل هذا التطبيق عند الولوج"
 
-#: src/pins-file-view.ui:152
+#: src/pins-file-view.ui:157
 msgid "Invisible"
 msgstr "مخفي"
 
-#: src/pins-file-view.ui:155
+#: src/pins-file-view.ui:160
 msgid "Hide this application in the app menu"
 msgstr "أخفِ هذا التطبيق من قائمة التطبيقات"
 
-#: src/pins-file-view.ui:187
+#: src/pins-file-view.ui:192
 msgid "Add Key"
 msgstr "أضف مفتاحًا"
 
@@ -212,3 +216,6 @@ msgstr "تعذّر فتح الملف."
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr "(غير مُوطّن)"
+
+#~ msgid "Show Menu"
+#~ msgstr "أظهر القائمة"
