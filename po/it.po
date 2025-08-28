@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-28 12:02+0200\n"
-"PO-Revision-Date: 2025-06-27 10:57+0200\n"
+"PO-Revision-Date: 2025-08-28 12:05+0200\n"
 "Last-Translator: Fabrizio Alberio <fabrizio.alberio@gmail.com>\n"
 "Language-Team: Italian <fabrizio.alberio@gmail.com>\n"
 "Language: it\n"
@@ -124,7 +124,7 @@ msgstr "Aggiungi applicazione"
 
 #: src/pins-app-view.ui:26
 msgid "Main Menu"
-msgstr ""
+msgstr "Menù principale"
 
 #: src/pins-app-view.ui:33
 msgid "Search"
@@ -151,9 +151,8 @@ msgid "_About Pins"
 msgstr "_Informazioni su Pins"
 
 #: src/pins-file-view.ui:18
-#, fuzzy
 msgid "Duplicate"
-msgstr "Duplica file"
+msgstr "Duplica"
 
 #: src/pins-file-view.ui:24
 msgid "Delete"
@@ -181,7 +180,7 @@ msgstr "Invisibile"
 
 #: src/pins-file-view.ui:160
 msgid "Hide this application in the app menu"
-msgstr "Nascondi quest'applicazione nel menu"
+msgstr "Nascondi quest'applicazione nel menù"
 
 #: src/pins-file-view.ui:192
 msgid "Add Key"
