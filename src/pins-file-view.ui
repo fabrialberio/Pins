@@ -142,6 +142,7 @@
                             <property name="activatable-widget">autostart_switch</property>
                             <child type="prefix">
                               <object class="GtkImage">
+                                <property name="accessible-role">presentation</property>
                                 <property name="icon-name">media-playback-start-symbolic</property>
                               </object>
                             </child>
@@ -162,6 +163,7 @@
                             <child type="prefix">
                               <object class="GtkImage">
                                 <property name="icon-name">view-conceal-symbolic</property>
+                                <property name="accessible-role">presentation</property>
                               </object>
                             </child>
                             <child type="suffix">

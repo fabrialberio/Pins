@@ -160,7 +160,9 @@ pins_app_icon_class_init (PinsAppIconClass *klass)
 static void
 pins_app_icon_init (PinsAppIcon *self)
 {
-    self->image = GTK_IMAGE (gtk_image_new_from_icon_name (DEFAULT_ICON_NAME));
+    self->image = GTK_IMAGE (g_object_new (
+        GTK_TYPE_IMAGE, "accessible-role", GTK_ACCESSIBLE_ROLE_PRESENTATION,
+        "icon-name", DEFAULT_ICON_NAME, NULL));
     gtk_widget_set_parent (GTK_WIDGET (self->image), GTK_WIDGET (self));
 
     gtk_widget_add_css_class (GTK_WIDGET (self->image), "icon-dropshadow");
