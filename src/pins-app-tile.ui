@@ -25,6 +25,7 @@
             <property name="visible">false</property>
             <property name="child">
               <object class="GtkImage">
+                <property name="accessible-role">presentation</property>
                 <property name="icon-name">view-conceal-symbolic</property>
                 <style>
                   <class name="glyph" />
