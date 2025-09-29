@@ -57,6 +57,15 @@
     <control>touch</control>
   </recommends>
   <releases>
+    <release version="2.4.3" date="2025-09-29">
+      <description translate="no">
+        <p>What's new:</p>
+        <ul>
+          <li>new Libadwaita 1.8 keyboard shortcuts dialog;</li>
+          <li>minor accessibility improvements.</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.4.2" date="2025-08-27">
       <description translate="no">
         <p>What's new:</p>
@@ -93,14 +102,6 @@
         <p>Fixes:</p>
         <ul>
           <li>app crashes when it does not have read access to a file.</li>
-        </ul>
-      </description>
-    </release>
-    <release version="2.3.1" date="2025-05-21">
-      <description translate="no">
-        <p>Fixes:</p>
-        <ul>
-          <li>really ensure user apps folder exists before creating a new app.</li>
         </ul>
       </description>
     </release>
