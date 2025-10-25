@@ -1,0 +1,7 @@
+update pot template file:
+    cd _build/
+    meson compile pinapp-pot
+
+update all po language files:
+  cd _build/
+  meson compile pinapp-update-po
