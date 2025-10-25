@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 12:02+0200\n"
+"POT-Creation-Date: 2025-10-25 19:33+0200\n"
 "PO-Revision-Date: 2025-07-09 07:39+0300\n"
 "Last-Translator: Ahmed Najmawi <iramosu@protonmail.com>\n"
 "Language-Team: \n"
@@ -75,31 +75,6 @@ msgstr "أظهر كل التطبيقات"
 msgid "List of desktop file search paths in order of priority"
 msgstr "قائمة مسارات البحث عن ملفات سطح المكتب مرتبة حسب الأولوية"
 
-#: src/help-overlay.ui:11
-msgctxt "shortcut window"
-msgid "General"
-msgstr "عام"
-
-#: src/help-overlay.ui:14
-msgctxt "shortcut window"
-msgid "Show Shortcuts"
-msgstr "أظهر الاختصارات"
-
-#: src/help-overlay.ui:20
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "اخرج"
-
-#: src/help-overlay.ui:26
-msgctxt "shortcut window"
-msgid "Add New App"
-msgstr "أضف تطبيقًا جديدًا"
-
-#: src/help-overlay.ui:32
-msgctxt "shortcut window"
-msgid "Search"
-msgstr "ابحث"
-
 #: src/pins-add-key-dialog.ui:4
 msgid "Add New Key"
 msgstr "أضف مفتاحًا جديدًا"
@@ -116,7 +91,7 @@ msgstr "ا_لغِ"
 msgid "_Add"
 msgstr "أَ_ضف"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:103
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:103 src/shortcuts-dialog.ui:21
 msgid "Add New App"
 msgstr "أضف تطبيقًا جديدًا"
 
@@ -124,7 +99,7 @@ msgstr "أضف تطبيقًا جديدًا"
 msgid "Main Menu"
 msgstr ""
 
-#: src/pins-app-view.ui:33
+#: src/pins-app-view.ui:33 src/shortcuts-dialog.ui:27
 msgid "Search"
 msgstr "ابحث"
 
@@ -172,15 +147,15 @@ msgstr "التشغيل التلقائي"
 msgid "Launch this application on login"
 msgstr "شغّل هذا التطبيق عند الولوج"
 
-#: src/pins-file-view.ui:157
+#: src/pins-file-view.ui:158
 msgid "Invisible"
 msgstr "مخفي"
 
-#: src/pins-file-view.ui:160
+#: src/pins-file-view.ui:161
 msgid "Hide this application in the app menu"
 msgstr "أخفِ هذا التطبيق من قائمة التطبيقات"
 
-#: src/pins-file-view.ui:192
+#: src/pins-file-view.ui:194
 msgid "Add Key"
 msgstr "أضف مفتاحًا"
 
@@ -208,6 +183,21 @@ msgstr "كل التطبيقات"
 msgid "Error Opening File"
 msgstr "خطأ في فتح الملف"
 
+#: src/shortcuts-dialog.ui:6
+#, fuzzy
+msgid "General"
+msgstr "عام"
+
+#: src/shortcuts-dialog.ui:9
+#, fuzzy
+msgid "Show Shortcuts"
+msgstr "أظهر الاختصارات"
+
+#: src/shortcuts-dialog.ui:15
+#, fuzzy
+msgid "Quit"
+msgstr "اخرج"
+
 #: src/pins-desktop-file.c:107
 #, c-format
 msgid "Could not open file."
@@ -216,6 +206,14 @@ msgstr "تعذّر فتح الملف."
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr "(غير مُوطّن)"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Add New App"
+#~ msgstr "أضف تطبيقًا جديدًا"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Search"
+#~ msgstr "ابحث"
 
 #~ msgid "Show Menu"
 #~ msgstr "أظهر القائمة"

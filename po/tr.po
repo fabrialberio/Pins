@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.fabrialberio.pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 12:02+0200\n"
+"POT-Creation-Date: 2025-10-25 19:33+0200\n"
 "PO-Revision-Date: 2025-02-05 18:05+0100\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
@@ -82,34 +82,6 @@ msgstr ""
 msgid "List of desktop file search paths in order of priority"
 msgstr ""
 
-#: src/help-overlay.ui:11
-msgctxt "shortcut window"
-msgid "General"
-msgstr "Genel"
-
-#: src/help-overlay.ui:14
-msgctxt "shortcut window"
-msgid "Show Shortcuts"
-msgstr "Kısayolları Göster"
-
-#: src/help-overlay.ui:20
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "Çık"
-
-# Kısayol sayfasında Başlık Düzeni tercih et
-#: src/help-overlay.ui:26
-#, fuzzy
-msgctxt "shortcut window"
-msgid "Add New App"
-msgstr "Yeni Uygulama Ekle"
-
-# Kısayol sayfasında Başlık Düzeni tercih et
-#: src/help-overlay.ui:32
-msgctxt "shortcut window"
-msgid "Search"
-msgstr "Ara"
-
 #: src/pins-add-key-dialog.ui:4
 #, fuzzy
 msgid "Add New Key"
@@ -128,7 +100,7 @@ msgstr "İptal"
 msgid "_Add"
 msgstr ""
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:103
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:103 src/shortcuts-dialog.ui:21
 #, fuzzy
 msgid "Add New App"
 msgstr "Yeni Uygulama Ekle"
@@ -137,7 +109,7 @@ msgstr "Yeni Uygulama Ekle"
 msgid "Main Menu"
 msgstr ""
 
-#: src/pins-app-view.ui:33
+#: src/pins-app-view.ui:33 src/shortcuts-dialog.ui:27
 msgid "Search"
 msgstr "Ara"
 
@@ -191,15 +163,15 @@ msgstr ""
 msgid "Launch this application on login"
 msgstr ""
 
-#: src/pins-file-view.ui:157
+#: src/pins-file-view.ui:158
 msgid "Invisible"
 msgstr ""
 
-#: src/pins-file-view.ui:160
+#: src/pins-file-view.ui:161
 msgid "Hide this application in the app menu"
 msgstr ""
 
-#: src/pins-file-view.ui:192
+#: src/pins-file-view.ui:194
 #, fuzzy
 msgid "Add Key"
 msgstr "Yeni anahtar ekle"
@@ -231,6 +203,21 @@ msgstr "Uygulamaları Yeniden Yükle"
 msgid "Error Opening File"
 msgstr "Dosya açarken hata"
 
+#: src/shortcuts-dialog.ui:6
+#, fuzzy
+msgid "General"
+msgstr "Genel"
+
+#: src/shortcuts-dialog.ui:9
+#, fuzzy
+msgid "Show Shortcuts"
+msgstr "Kısayolları Göster"
+
+#: src/shortcuts-dialog.ui:15
+#, fuzzy
+msgid "Quit"
+msgstr "Çık"
+
 #: src/pins-desktop-file.c:107
 #, c-format
 msgid "Could not open file."
@@ -239,6 +226,17 @@ msgstr ""
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr ""
+
+# Kısayol sayfasında Başlık Düzeni tercih et
+#, fuzzy
+#~ msgctxt "shortcut window"
+#~ msgid "Add New App"
+#~ msgstr "Yeni Uygulama Ekle"
+
+# Kısayol sayfasında Başlık Düzeni tercih et
+#~ msgctxt "shortcut window"
+#~ msgid "Search"
+#~ msgstr "Ara"
 
 #, fuzzy
 #~ msgid "Show Menu"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 12:02+0200\n"
+"POT-Creation-Date: 2025-10-25 19:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,31 +74,6 @@ msgstr ""
 msgid "List of desktop file search paths in order of priority"
 msgstr ""
 
-#: src/help-overlay.ui:11
-msgctxt "shortcut window"
-msgid "General"
-msgstr ""
-
-#: src/help-overlay.ui:14
-msgctxt "shortcut window"
-msgid "Show Shortcuts"
-msgstr ""
-
-#: src/help-overlay.ui:20
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr ""
-
-#: src/help-overlay.ui:26
-msgctxt "shortcut window"
-msgid "Add New App"
-msgstr ""
-
-#: src/help-overlay.ui:32
-msgctxt "shortcut window"
-msgid "Search"
-msgstr ""
-
 #: src/pins-add-key-dialog.ui:4
 msgid "Add New Key"
 msgstr ""
@@ -115,7 +90,7 @@ msgstr ""
 msgid "_Add"
 msgstr ""
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:103
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:103 src/shortcuts-dialog.ui:21
 msgid "Add New App"
 msgstr ""
 
@@ -123,7 +98,7 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
-#: src/pins-app-view.ui:33
+#: src/pins-app-view.ui:33 src/shortcuts-dialog.ui:27
 msgid "Search"
 msgstr ""
 
@@ -171,15 +146,15 @@ msgstr ""
 msgid "Launch this application on login"
 msgstr ""
 
-#: src/pins-file-view.ui:157
+#: src/pins-file-view.ui:158
 msgid "Invisible"
 msgstr ""
 
-#: src/pins-file-view.ui:160
+#: src/pins-file-view.ui:161
 msgid "Hide this application in the app menu"
 msgstr ""
 
-#: src/pins-file-view.ui:192
+#: src/pins-file-view.ui:194
 msgid "Add Key"
 msgstr ""
 
@@ -205,6 +180,18 @@ msgstr ""
 
 #: src/pins-window.ui:46
 msgid "Error Opening File"
+msgstr ""
+
+#: src/shortcuts-dialog.ui:6
+msgid "General"
+msgstr ""
+
+#: src/shortcuts-dialog.ui:9
+msgid "Show Shortcuts"
+msgstr ""
+
+#: src/shortcuts-dialog.ui:15
+msgid "Quit"
 msgstr ""
 
 #: src/pins-desktop-file.c:107

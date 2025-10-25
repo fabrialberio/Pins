@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 12:02+0200\n"
-"PO-Revision-Date: 2025-08-28 12:05+0200\n"
+"POT-Creation-Date: 2025-10-25 19:33+0200\n"
+"PO-Revision-Date: 2025-10-25 19:35+0200\n"
 "Last-Translator: Fabrizio Alberio <fabrizio.alberio@gmail.com>\n"
 "Language-Team: Italian <fabrizio.alberio@gmail.com>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-app-view.ui:21
 msgid "Pins"
@@ -77,31 +77,6 @@ msgstr "Mostra tutte le app"
 msgid "List of desktop file search paths in order of priority"
 msgstr "Lista di percorsi di ricerca delle applicazioni in ordine di priorità"
 
-#: src/help-overlay.ui:11
-msgctxt "shortcut window"
-msgid "General"
-msgstr "Generale"
-
-#: src/help-overlay.ui:14
-msgctxt "shortcut window"
-msgid "Show Shortcuts"
-msgstr "Mostra scorciatoie"
-
-#: src/help-overlay.ui:20
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "Chiude la finestra"
-
-#: src/help-overlay.ui:26
-msgctxt "shortcut window"
-msgid "Add New App"
-msgstr "Aggiungi una nuova applicazione"
-
-#: src/help-overlay.ui:32
-msgctxt "shortcut window"
-msgid "Search"
-msgstr "Cerca"
-
 #: src/pins-add-key-dialog.ui:4
 msgid "Add New Key"
 msgstr "Aggiungi chiave"
@@ -118,7 +93,7 @@ msgstr "Annulla"
 msgid "_Add"
 msgstr "Aggiungi"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:103
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:103 src/shortcuts-dialog.ui:21
 msgid "Add New App"
 msgstr "Aggiungi applicazione"
 
@@ -126,7 +101,7 @@ msgstr "Aggiungi applicazione"
 msgid "Main Menu"
 msgstr "Menù principale"
 
-#: src/pins-app-view.ui:33
+#: src/pins-app-view.ui:33 src/shortcuts-dialog.ui:27
 msgid "Search"
 msgstr "Cerca"
 
@@ -174,15 +149,15 @@ msgstr "Avvio automatico"
 msgid "Launch this application on login"
 msgstr "Avvia quest'applicazione all'accesso"
 
-#: src/pins-file-view.ui:157
+#: src/pins-file-view.ui:158
 msgid "Invisible"
 msgstr "Invisibile"
 
-#: src/pins-file-view.ui:160
+#: src/pins-file-view.ui:161
 msgid "Hide this application in the app menu"
 msgstr "Nascondi quest'applicazione nel menù"
 
-#: src/pins-file-view.ui:192
+#: src/pins-file-view.ui:194
 msgid "Add Key"
 msgstr "Aggiungi chiave"
 
@@ -210,6 +185,18 @@ msgstr "Tutte le app"
 msgid "Error Opening File"
 msgstr "Errore nell'apertura del file"
 
+#: src/shortcuts-dialog.ui:6
+msgid "General"
+msgstr "Generale"
+
+#: src/shortcuts-dialog.ui:9
+msgid "Show Shortcuts"
+msgstr "Mostra scorciatoie"
+
+#: src/shortcuts-dialog.ui:15
+msgid "Quit"
+msgstr "Esci"
+
 #: src/pins-desktop-file.c:107
 #, c-format
 msgid "Could not open file."
@@ -218,6 +205,14 @@ msgstr "Impossibile aprire file."
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr "(Non localizzato)"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Add New App"
+#~ msgstr "Aggiungi una nuova applicazione"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Search"
+#~ msgstr "Cerca"
 
 #~ msgid "Show Menu"
 #~ msgstr "Mostra menu"

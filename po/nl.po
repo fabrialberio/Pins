@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 12:02+0200\n"
+"POT-Creation-Date: 2025-10-25 19:33+0200\n"
 "PO-Revision-Date: 2025-07-30 21:37+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -77,31 +77,6 @@ msgstr "Alle toepassingen tonen"
 msgid "List of desktop file search paths in order of priority"
 msgstr "Lijst met zoekpaden, gesorteerd op prioriteit"
 
-#: src/help-overlay.ui:11
-msgctxt "shortcut window"
-msgid "General"
-msgstr "Algemeen"
-
-#: src/help-overlay.ui:14
-msgctxt "shortcut window"
-msgid "Show Shortcuts"
-msgstr "Sneltoetsen tonen"
-
-#: src/help-overlay.ui:20
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "Afsluiten"
-
-#: src/help-overlay.ui:26
-msgctxt "shortcut window"
-msgid "Add New App"
-msgstr "Toepassing toevoegen"
-
-#: src/help-overlay.ui:32
-msgctxt "shortcut window"
-msgid "Search"
-msgstr "Zoeken"
-
 #: src/pins-add-key-dialog.ui:4
 msgid "Add New Key"
 msgstr "Veld toevoegen"
@@ -118,7 +93,7 @@ msgstr "_Annuleren"
 msgid "_Add"
 msgstr "_Toevoegen"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:103
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:103 src/shortcuts-dialog.ui:21
 msgid "Add New App"
 msgstr "Toepassing toevoegen"
 
@@ -126,7 +101,7 @@ msgstr "Toepassing toevoegen"
 msgid "Main Menu"
 msgstr ""
 
-#: src/pins-app-view.ui:33
+#: src/pins-app-view.ui:33 src/shortcuts-dialog.ui:27
 msgid "Search"
 msgstr "Zoeken"
 
@@ -174,15 +149,15 @@ msgstr "Automatisch opstarten"
 msgid "Launch this application on login"
 msgstr "Start de toepassing na het aanmelden"
 
-#: src/pins-file-view.ui:157
+#: src/pins-file-view.ui:158
 msgid "Invisible"
 msgstr "Onzichtbaar"
 
-#: src/pins-file-view.ui:160
+#: src/pins-file-view.ui:161
 msgid "Hide this application in the app menu"
 msgstr "Verberg deze toepassing in het menu"
 
-#: src/pins-file-view.ui:192
+#: src/pins-file-view.ui:194
 msgid "Add Key"
 msgstr "Veld toevoegen"
 
@@ -210,6 +185,21 @@ msgstr "Alle toepassingen"
 msgid "Error Opening File"
 msgstr "Bestand openen mislukt"
 
+#: src/shortcuts-dialog.ui:6
+#, fuzzy
+msgid "General"
+msgstr "Algemeen"
+
+#: src/shortcuts-dialog.ui:9
+#, fuzzy
+msgid "Show Shortcuts"
+msgstr "Sneltoetsen tonen"
+
+#: src/shortcuts-dialog.ui:15
+#, fuzzy
+msgid "Quit"
+msgstr "Afsluiten"
+
 #: src/pins-desktop-file.c:107
 #, c-format
 msgid "Could not open file."
@@ -218,6 +208,14 @@ msgstr "Het bestand kan niet worden geopend."
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr "(onvertaald)"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Add New App"
+#~ msgstr "Toepassing toevoegen"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Search"
+#~ msgstr "Zoeken"
 
 #~ msgid "Show Menu"
 #~ msgstr "Menu tonen"

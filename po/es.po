@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-28 12:02+0200\n"
+"POT-Creation-Date: 2025-10-25 19:33+0200\n"
 "PO-Revision-Date: 2025-02-05 18:04+0100\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>\n"
 "Language-Team: Spanish\n"
@@ -82,32 +82,6 @@ msgstr ""
 msgid "List of desktop file search paths in order of priority"
 msgstr ""
 
-#: src/help-overlay.ui:11
-msgctxt "shortcut window"
-msgid "General"
-msgstr "General"
-
-#: src/help-overlay.ui:14
-msgctxt "shortcut window"
-msgid "Show Shortcuts"
-msgstr "Mostrar atajos"
-
-#: src/help-overlay.ui:20
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "Salir"
-
-#: src/help-overlay.ui:26
-#, fuzzy
-msgctxt "shortcut window"
-msgid "Add New App"
-msgstr "Añadir aplicación nueva"
-
-#: src/help-overlay.ui:32
-msgctxt "shortcut window"
-msgid "Search"
-msgstr "Buscar"
-
 #: src/pins-add-key-dialog.ui:4
 #, fuzzy
 msgid "Add New Key"
@@ -126,7 +100,7 @@ msgstr "Cancelar"
 msgid "_Add"
 msgstr ""
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:103
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:103 src/shortcuts-dialog.ui:21
 #, fuzzy
 msgid "Add New App"
 msgstr "Añadir aplicación nueva"
@@ -135,7 +109,7 @@ msgstr "Añadir aplicación nueva"
 msgid "Main Menu"
 msgstr ""
 
-#: src/pins-app-view.ui:33
+#: src/pins-app-view.ui:33 src/shortcuts-dialog.ui:27
 msgid "Search"
 msgstr "Buscar"
 
@@ -188,15 +162,15 @@ msgstr ""
 msgid "Launch this application on login"
 msgstr ""
 
-#: src/pins-file-view.ui:157
+#: src/pins-file-view.ui:158
 msgid "Invisible"
 msgstr ""
 
-#: src/pins-file-view.ui:160
+#: src/pins-file-view.ui:161
 msgid "Hide this application in the app menu"
 msgstr ""
 
-#: src/pins-file-view.ui:192
+#: src/pins-file-view.ui:194
 #, fuzzy
 msgid "Add Key"
 msgstr "Añadir clave nueva"
@@ -228,6 +202,21 @@ msgstr "Recargar aplicaciones"
 msgid "Error Opening File"
 msgstr "Error al abrir el archivo"
 
+#: src/shortcuts-dialog.ui:6
+#, fuzzy
+msgid "General"
+msgstr "General"
+
+#: src/shortcuts-dialog.ui:9
+#, fuzzy
+msgid "Show Shortcuts"
+msgstr "Mostrar atajos"
+
+#: src/shortcuts-dialog.ui:15
+#, fuzzy
+msgid "Quit"
+msgstr "Salir"
+
 #: src/pins-desktop-file.c:107
 #, c-format
 msgid "Could not open file."
@@ -236,6 +225,15 @@ msgstr ""
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
 msgstr ""
+
+#, fuzzy
+#~ msgctxt "shortcut window"
+#~ msgid "Add New App"
+#~ msgstr "Añadir aplicación nueva"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Search"
+#~ msgstr "Buscar"
 
 #, fuzzy
 #~ msgid "Show Menu"
