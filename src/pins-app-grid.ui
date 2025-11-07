@@ -5,11 +5,20 @@
       <object class="GtkScrolledWindow">
         <property name="vexpand">true</property>
         <property name="child">
-          <object class="AdwClampScrollable">
+          <object class="AdwClamp">
             <property name="maximum-size">960</property>
             <child>
-              <object class="GtkGridView" id="grid_view">
-                <property name="single-click-activate">true</property>
+              <object class="GtkFlowBox" id="flow_box">
+                <property name="activate-on-single-click">true</property>
+                <property name="column-spacing">6</property>
+                <property name="homogeneous">true</property>
+                <property name="margin-start">12</property>
+                <property name="margin-end">12</property>
+                <property name="margin-top">12</property>
+                <property name="margin-bottom">12</property>
+                <property name="min-children-per-line">3</property>
+                <property name="row-spacing">6</property>
+                <property name="selection-mode">none</property>
                 <style>
                   <class name="app-grid" />
                 </style>

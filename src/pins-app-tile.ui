@@ -3,7 +3,6 @@
   <template class="PinsAppTile" parent="GtkBox">
     <property name="orientation">vertical</property>
     <property name="hexpand">true</property>
-    <property name="width-request">96</property>
     <property name="margin-top">8</property>
     <property name="margin-bottom">8</property>
     <property name="margin-start">6</property>
@@ -39,6 +38,7 @@
     <child>
       <object class="GtkLabel" id="title">
         <property name="ellipsize">end</property>
+        <property name="max-width-chars">12</property>
       </object>
     </child>
   </template>

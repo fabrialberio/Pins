@@ -26,8 +26,7 @@ struct _PinsAppGrid
 {
     AdwBin parent_instance;
 
-    gboolean is_loaded;
-    GtkGridView *grid_view;
+    GtkFlowBox *flow_box;
 };
 
 G_DEFINE_TYPE (PinsAppGrid, pins_app_grid, ADW_TYPE_BIN);
@@ -46,41 +45,34 @@ pins_app_grid_new (void)
     return g_object_new (PINS_TYPE_APP_GRID, NULL);
 }
 
-void
-item_activated_cb (PinsAppGrid *self, guint position)
+GtkWidget *
+create_widget_func (gpointer item, gpointer user_data)
 {
-    g_signal_emit (self, signals[ACTIVATE], 0, position);
+    PinsDesktopFile *desktop_file = PINS_DESKTOP_FILE (item);
+    PinsAppTile *tile = pins_app_tile_new ();
+
+    pins_app_tile_set_desktop_file (tile, desktop_file);
+
+    return GTK_WIDGET (tile);
 }
 
 void
-items_changed_cb (GListModel *model, guint position, guint removed,
-                  guint added, PinsAppGrid *self)
+child_activated_cb (PinsAppGrid *self, GtkFlowBoxChild *child)
 {
-    // Fixes grid not being scrolled to the top when opening the app.
-    if (self->is_loaded)
-        return;
+    guint position = gtk_flow_box_child_get_index (child);
 
-    if (g_list_model_get_n_items (model) > 0)
-        {
-            gtk_grid_view_scroll_to (self->grid_view, 0, GTK_LIST_SCROLL_NONE,
-                                     NULL);
-            self->is_loaded = TRUE;
-        }
+    g_signal_emit (self, signals[ACTIVATE], 0, position);
 }
 
 void
 pins_app_grid_set_model (PinsAppGrid *self, GListModel *model)
 {
-    GtkNoSelection *selection_model = gtk_no_selection_new (model);
+    gtk_flow_box_bind_model (self->flow_box, model, &create_widget_func, NULL,
+                             NULL);
 
-    gtk_grid_view_set_model (self->grid_view,
-                             GTK_SELECTION_MODEL (selection_model));
-
-    g_signal_connect_object (self->grid_view, "activate",
-                             G_CALLBACK (item_activated_cb), self,
+    g_signal_connect_object (self->flow_box, "child-activated",
+                             G_CALLBACK (child_activated_cb), self,
                              G_CONNECT_SWAPPED);
-    g_signal_connect_object (model, "items-changed",
-                             G_CALLBACK (items_changed_cb), self, 0);
 }
 
 static void
@@ -108,42 +100,11 @@ pins_app_grid_class_init (PinsAppGridClass *klass)
 
     gtk_widget_class_set_template_from_resource (
         widget_class, "/io/github/fabrialberio/pinapp/pins-app-grid.ui");
-    gtk_widget_class_bind_template_child (widget_class, PinsAppGrid,
-                                          grid_view);
-}
-
-void
-item_setup_cb (GtkSignalListItemFactory *factory, GtkListItem *item)
-{
-    PinsAppTile *tile = pins_app_tile_new ();
-
-    gtk_list_item_set_child (item, GTK_WIDGET (tile));
-}
-
-void
-item_bind_cb (GtkSignalListItemFactory *factory, GtkListItem *item)
-{
-    PinsDesktopFile *desktop_file = gtk_list_item_get_item (item);
-    PinsAppTile *tile = PINS_APP_TILE (gtk_list_item_get_child (item));
-
-    g_assert (PINS_IS_DESKTOP_FILE (desktop_file));
-
-    pins_app_tile_set_desktop_file (tile, desktop_file);
+    gtk_widget_class_bind_template_child (widget_class, PinsAppGrid, flow_box);
 }
 
 static void
 pins_app_grid_init (PinsAppGrid *self)
 {
-    GtkListItemFactory *factory = gtk_signal_list_item_factory_new ();
-
-    self->is_loaded = FALSE;
-
     gtk_widget_init_template (GTK_WIDGET (self));
-
-    g_signal_connect_object (factory, "setup", G_CALLBACK (item_setup_cb),
-                             NULL, 0);
-    g_signal_connect_object (factory, "bind", G_CALLBACK (item_bind_cb), NULL,
-                             0);
-
-    gtk_grid_view_set_factory (self->grid_view, factory);
 }
