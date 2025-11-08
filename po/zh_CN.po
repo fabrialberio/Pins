@@ -1,0 +1,207 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the pinapp package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Yesionio <yesionio@outlook.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pinapp\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-26 01:33+0800\n"
+"PO-Revision-Date: 2025-11-08 22:08+0800\n"
+"Last-Translator: Yesionio <yesionio@outlook.com>\n"
+"Language-Team: Chinese (China)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 49.0\n"
+
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-app-view.ui:21
+msgid "Pins"
+msgstr "Pins"
+
+#: data/io.github.fabrialberio.pinapp.desktop.in:3
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
+msgid "Create and edit app shortcuts"
+msgstr "创建和编辑应用快捷方式"
+
+#: data/io.github.fabrialberio.pinapp.desktop.in:10
+msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
+msgid "Pins allows you to customize your app menu by editing .desktop files."
+msgstr "Pins 允许你通过编辑 .desktop 文件自定义你的应用菜单"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
+msgid "Some of the things you can do are:"
+msgstr "您可以做的一些事情是："
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:18
+msgid "changing an app icon that doesn't fit in with your theme,"
+msgstr "更改不适合您的主题的应用程序图标，"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:19
+msgid "creating custom shortcuts to websites,"
+msgstr "创建一个网站的快捷方式"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:20
+msgid "hiding apps you don't want to see,"
+msgstr "隐藏你不想要看见的应用"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:21
+msgid "editing properties in .desktop files."
+msgstr "编辑在 .desktop 文件中的属性"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:33
+msgid "Screenshot of Pins showing the app grid"
+msgstr "Pins 显示应用网格时的截图"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:39
+msgid "Screenshot of Pins showing an opened file"
+msgstr "Pins 显示一个编辑中文件的截图"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
+msgid "Screenshot of Pins showing an opened file on a small screen"
+msgstr "Pins 在小屏幕中显示一个编辑中文件的截图"
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:6
+msgid "Show all apps"
+msgstr "显示所有应用"
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:18
+msgid "List of desktop file search paths in order of priority"
+msgstr "按优先级顺序排列的桌面文件搜索路径列表"
+
+#: src/pins-add-key-dialog.ui:4
+msgid "Add New Key"
+msgstr "添加新的 Key"
+
+#: src/pins-add-key-dialog.ui:11
+msgid "Key"
+msgstr ""
+
+#: src/pins-add-key-dialog.ui:17
+msgid "_Cancel"
+msgstr ""
+
+#: src/pins-add-key-dialog.ui:18
+msgid "_Add"
+msgstr ""
+
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:103 src/shortcuts-dialog.ui:21
+msgid "Add New App"
+msgstr "添加新应用"
+
+#: src/pins-app-view.ui:26
+msgid "Main Menu"
+msgstr "主菜单"
+
+#: src/pins-app-view.ui:33 src/shortcuts-dialog.ui:27
+msgid "Search"
+msgstr "搜索"
+
+#: src/pins-app-view.ui:76
+msgid "Loading Apps"
+msgstr "正在加载应用"
+
+#: src/pins-app-view.ui:91
+msgid "No Apps Found"
+msgstr "未找到应用"
+
+#: src/pins-app-view.ui:122
+msgid "Show _All Apps"
+msgstr "显示所有应用"
+
+#: src/pins-app-view.ui:128
+msgid "_Keyboard Shortcuts"
+msgstr "快捷键"
+
+#: src/pins-app-view.ui:132
+msgid "_About Pins"
+msgstr "关于 Pins"
+
+#: src/pins-file-view.ui:18
+msgid "Duplicate"
+msgstr "重复"
+
+#: src/pins-file-view.ui:24
+msgid "Delete"
+msgstr "删除"
+
+#: src/pins-file-view.ui:73 src/pins-key-row.ui:9
+msgid "Erase Changes"
+msgstr "擦除变更"
+
+#: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
+msgid "Pick Icon"
+msgstr "选择图标"
+
+#: src/pins-file-view.ui:138
+msgid "Autostart"
+msgstr "自启动"
+
+#: src/pins-file-view.ui:141
+msgid "Launch this application on login"
+msgstr "登录时启动该应用"
+
+#: src/pins-file-view.ui:158
+msgid "Invisible"
+msgstr "不可见"
+
+#: src/pins-file-view.ui:161
+msgid "Hide this application in the app menu"
+msgstr "在应用菜单中隐藏此应用"
+
+#: src/pins-file-view.ui:194
+msgid "Add Key"
+msgstr "添加 Key"
+
+#: src/pins-key-row.ui:21
+msgid "Remove Key"
+msgstr "移除 Key"
+
+#: src/pins-key-row.ui:32
+msgid "Select Locale"
+msgstr "选择区域"
+
+#: src/pins-pick-icon-dialog.ui:13 src/pins-pick-icon-dialog.c:118
+msgid "Load Icon from File"
+msgstr "从文件中加载图标"
+
+#: src/pins-pick-icon-dialog.ui:19
+msgid "Search for icons"
+msgstr "搜索图标"
+
+#: src/pins-window.ui:14
+msgid "All Apps"
+msgstr "全部应用"
+
+#: src/pins-window.ui:46
+msgid "Error Opening File"
+msgstr "打开文件时出错"
+
+#: src/shortcuts-dialog.ui:6
+msgid "General"
+msgstr "通用"
+
+#: src/shortcuts-dialog.ui:9
+msgid "Show Shortcuts"
+msgstr "显示快捷键"
+
+#: src/shortcuts-dialog.ui:15
+msgid "Quit"
+msgstr "退出"
+
+#: src/pins-desktop-file.c:107
+#, c-format
+msgid "Could not open file."
+msgstr "未能打开文件"
+
+#: src/pins-key-row.c:26
+msgid "(Unlocalized)"
+msgstr ""
+
