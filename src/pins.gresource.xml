@@ -7,6 +7,7 @@
     <file>style-dark.css</file>
     <file preprocess="xml-stripblanks">pins-add-key-dialog.ui</file>
     <file preprocess="xml-stripblanks">pins-app-grid.ui</file>
+    <file preprocess="xml-stripblanks">pins-app-group.ui</file>
     <file preprocess="xml-stripblanks">pins-app-tile.ui</file>
     <file preprocess="xml-stripblanks">pins-app-view.ui</file>
     <file preprocess="xml-stripblanks">pins-file-view.ui</file>
