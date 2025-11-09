@@ -93,15 +93,10 @@ show_all_apps_match_func (gpointer desktop_file, gpointer user_data)
                PINS_DESKTOP_FILE (desktop_file));
 }
 
-int
-sort_compare_func (gconstpointer a, gconstpointer b, gpointer user_data)
+gint
+name_compare_func (PinsDesktopFile *first, PinsDesktopFile *second)
 {
-    PinsDesktopFile *first = PINS_DESKTOP_FILE ((gpointer)a);
-    PinsDesktopFile *second = PINS_DESKTOP_FILE ((gpointer)b);
     const gchar *first_key, *second_key, *first_name, *second_name;
-
-    g_return_val_if_fail (PINS_IS_DESKTOP_FILE (first), 0);
-    g_return_val_if_fail (PINS_IS_DESKTOP_FILE (second), 0);
 
     first_key = _pins_join_key_locale (
         G_KEY_FILE_DESKTOP_KEY_NAME, pins_desktop_file_get_locale_for_key (
@@ -115,6 +110,51 @@ sort_compare_func (gconstpointer a, gconstpointer b, gpointer user_data)
 
     /// TODO: Use UTF8 compare
     return g_strcmp0 (first_name, second_name);
+}
+
+gint
+group_compare_func (PinsDesktopFile *first, PinsDesktopFile *second)
+{
+    gboolean first_edited = pins_desktop_file_is_user_edited (first),
+             second_edited = pins_desktop_file_is_user_edited (second),
+             first_shown = pins_desktop_file_is_shown (first),
+             second_shown = pins_desktop_file_is_shown (second);
+
+    if (first_edited != second_edited)
+        {
+
+            if (first_edited)
+                return -1;
+            else
+                // second_edited
+                return 1;
+        }
+
+    if (first_shown != second_shown)
+        {
+            if (first_shown)
+                return -1;
+            else
+                // second_shown
+                return 1;
+        }
+
+    return 0;
+}
+
+gint
+sort_compare_func (gconstpointer a, gconstpointer b, gpointer user_data)
+{
+    PinsDesktopFile *first = PINS_DESKTOP_FILE ((gpointer)a),
+                    *second = PINS_DESKTOP_FILE ((gpointer)b);
+
+    g_return_val_if_fail (PINS_IS_DESKTOP_FILE (first), 0);
+    g_return_val_if_fail (PINS_IS_DESKTOP_FILE (second), 0);
+
+    if (group_compare_func (first, second) != 0)
+        return group_compare_func (first, second);
+
+    return name_compare_func (first, second);
 }
 
 static void
