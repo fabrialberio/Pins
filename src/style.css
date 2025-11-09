@@ -21,15 +21,8 @@
     padding: 2px;
 }
 
-.app-grid {
-    padding: 12px;
-    background: transparent;
-}
-
-.app-grid>child {
+.app-grid>* {
     border-radius: 24px;
-    margin-left: 6px;
-    margin-right: 6px;
 }
 
 .icon-grid {
