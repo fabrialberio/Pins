@@ -6,8 +6,10 @@
     <child>
       <object class="GtkLabel" id="title">
         <property name="halign">start</property>
+        <property name="margin-start">8</property>
         <style>
           <class name="heading" />
+          <class name="dim-label" />
         </style>
       </object>
     </child>
