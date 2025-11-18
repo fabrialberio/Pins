@@ -27,6 +27,8 @@ struct _PinsAppGroup
 {
     GtkBox parent_instance;
 
+    GtkSliceListModel *slice_model;
+
     GtkLabel *title;
     GtkFlowBox *flow_box;
 };
@@ -69,25 +71,48 @@ create_widget_func (gpointer item, gpointer user_data)
 void
 child_activated_cb (PinsAppGroup *self, GtkFlowBoxChild *child)
 {
-    guint position = gtk_flow_box_child_get_index (child);
+    guint position = gtk_flow_box_child_get_index (child)
+                     + gtk_slice_list_model_get_offset (self->slice_model);
 
     g_signal_emit (self, signals[ACTIVATE], 0, position);
 }
 
 void
-pins_app_group_set_model (PinsAppGroup *self, GListModel *model)
+pins_app_group_set_model (PinsAppGroup *self, GListModel *model, guint offset,
+                          guint size)
 {
-    gtk_flow_box_bind_model (self->flow_box, model, &create_widget_func, NULL,
-                             NULL);
+    // if (self->slice_model != NULL)
+    //     g_object_unref (self->slice_model);
+
+    self->slice_model = gtk_slice_list_model_new (model, offset, size);
+
+    gtk_flow_box_bind_model (self->flow_box, G_LIST_MODEL (self->slice_model),
+                             &create_widget_func, NULL, NULL);
 
     g_signal_connect_object (self->flow_box, "child-activated",
                              G_CALLBACK (child_activated_cb), self,
                              G_CONNECT_SWAPPED);
 }
 
+void
+pins_app_group_set_offset (PinsAppGroup *self, guint offset)
+{
+    gtk_slice_list_model_set_offset (self->slice_model, offset);
+}
+
+void
+pins_app_group_set_size (PinsAppGroup *self, guint size)
+{
+    gtk_slice_list_model_set_size (self->slice_model, size);
+}
+
 static void
 pins_app_group_dispose (GObject *object)
 {
+    PinsAppGroup *self = PINS_APP_GROUP (object);
+
+    // g_clear_object (&self->slice_model);
+
     gtk_widget_dispose_template (GTK_WIDGET (object), PINS_TYPE_APP_GROUP);
 
     G_OBJECT_CLASS (pins_app_group_parent_class)->dispose (object);

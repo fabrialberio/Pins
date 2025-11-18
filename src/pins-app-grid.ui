@@ -8,20 +8,38 @@
           <object class="AdwClamp">
             <property name="maximum-size">960</property>
             <child>
-              <object class="GtkFlowBox" id="flow_box">
-                <property name="activate-on-single-click">true</property>
-                <property name="column-spacing">6</property>
-                <property name="homogeneous">true</property>
+              <object class="GtkBox">
                 <property name="margin-start">12</property>
                 <property name="margin-end">12</property>
                 <property name="margin-top">12</property>
                 <property name="margin-bottom">12</property>
-                <property name="min-children-per-line">3</property>
-                <property name="row-spacing">6</property>
-                <property name="selection-mode">none</property>
-                <style>
-                  <class name="app-grid" />
-                </style>
+                <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="PinsAppGroup" id="edited_apps_group">
+                    <property name="title" translatable="yes">Edited apps</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSeparator">
+                    <property name="margin-top">12</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="PinsAppGroup" id="system_apps_group">
+                    <property name="title" translatable="yes">System apps</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSeparator">
+                    <property name="margin-top">12</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="PinsAppGroup" id="hidden_apps_group">
+                    <property name="title" translatable="yes">Hidden apps</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

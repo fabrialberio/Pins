@@ -29,6 +29,9 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (PinsAppGroup, pins_app_group, PINS, APP_GROUP, GtkBox)
 
 PinsAppGroup *pins_app_group_new (void);
-void pins_app_group_set_model (PinsAppGroup *self, GListModel *model);
+void pins_app_group_set_model (PinsAppGroup *self, GListModel *model,
+                               guint offset, guint size);
+void pins_app_group_set_offset (PinsAppGroup *self, guint offset);
+void pins_app_group_set_size (PinsAppGroup *self, guint size);
 
 G_END_DECLS

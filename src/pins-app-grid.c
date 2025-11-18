@@ -20,13 +20,18 @@
 
 #include "pins-app-grid.h"
 
-#include "pins-app-tile.h"
+#include "pins-app-group.h"
+#include "pins-desktop-file.h"
 
 struct _PinsAppGrid
 {
     AdwBin parent_instance;
 
-    GtkFlowBox *flow_box;
+    GListModel *model;
+
+    PinsAppGroup *edited_apps_group;
+    PinsAppGroup *system_apps_group;
+    PinsAppGroup *hidden_apps_group;
 };
 
 G_DEFINE_TYPE (PinsAppGrid, pins_app_grid, ADW_TYPE_BIN);
@@ -45,34 +50,64 @@ pins_app_grid_new (void)
     return g_object_new (PINS_TYPE_APP_GRID, NULL);
 }
 
-GtkWidget *
-create_widget_func (gpointer item, gpointer user_data)
-{
-    PinsDesktopFile *desktop_file = PINS_DESKTOP_FILE (item);
-    PinsAppTile *tile = pins_app_tile_new ();
-
-    pins_app_tile_set_desktop_file (tile, desktop_file);
-
-    return GTK_WIDGET (tile);
-}
-
 void
-child_activated_cb (PinsAppGrid *self, GtkFlowBoxChild *child)
+pins_app_grid_items_changed_cb (GListModel *model, guint position,
+                                guint removed, guint added, PinsAppGrid *self)
 {
-    guint position = gtk_flow_box_child_get_index (child);
+    g_autoptr (PinsDesktopFile) current = NULL;
+    guint i, edited_section_end = 0, system_section_end = 0,
+             hidden_section_end = 0;
 
-    g_signal_emit (self, signals[ACTIVATE], 0, position);
+    for (i = 0; i < g_list_model_get_n_items (model); i++)
+        {
+            current = PINS_DESKTOP_FILE (g_list_model_get_item (model, i));
+
+            if (pins_desktop_file_is_user_edited (current))
+                edited_section_end = i + 1;
+            else if (pins_desktop_file_is_shown (current))
+                system_section_end = i + 1;
+        }
+
+    if (system_section_end < edited_section_end)
+        system_section_end = edited_section_end;
+
+    hidden_section_end = i;
+
+    g_warning ("Items-changed @%d -%d +%d, 0 - %d - %d - %d", position,
+               removed, added, edited_section_end, system_section_end,
+               hidden_section_end);
+
+    pins_app_group_set_model (self->edited_apps_group, self->model, 0,
+                              edited_section_end);
+    pins_app_group_set_model (self->system_apps_group, self->model,
+                              edited_section_end,
+                              system_section_end - edited_section_end);
+    pins_app_group_set_model (self->hidden_apps_group, self->model,
+                              system_section_end,
+                              hidden_section_end - edited_section_end);
+
+    // pins_app_group_set_size (self->edited_apps_group, edited_section_end);
+    // pins_app_group_set_size (self->system_apps_group,
+    //                          system_section_end - edited_section_end);
+    // pins_app_group_set_offset (self->system_apps_group, edited_section_end);
+    // pins_app_group_set_size (self->hidden_apps_group,
+    //                          hidden_section_end - system_section_end);
+    // pins_app_group_set_offset (self->hidden_apps_group, system_section_end);
 }
 
 void
 pins_app_grid_set_model (PinsAppGrid *self, GListModel *model)
 {
-    gtk_flow_box_bind_model (self->flow_box, model, &create_widget_func, NULL,
-                             NULL);
+    self->model = model;
 
-    g_signal_connect_object (self->flow_box, "child-activated",
-                             G_CALLBACK (child_activated_cb), self,
-                             G_CONNECT_SWAPPED);
+    g_signal_connect_object (G_LIST_MODEL (model), "items-changed",
+                             G_CALLBACK (pins_app_grid_items_changed_cb), self,
+                             0);
+
+    pins_app_group_set_model (self->edited_apps_group, self->model, 0, 26);
+    pins_app_group_set_model (self->system_apps_group, self->model, 26, 48);
+    pins_app_group_set_model (self->hidden_apps_group, self->model, 26 + 48,
+                              100);
 }
 
 static void
@@ -100,11 +135,34 @@ pins_app_grid_class_init (PinsAppGridClass *klass)
 
     gtk_widget_class_set_template_from_resource (
         widget_class, "/io/github/fabrialberio/pinapp/pins-app-grid.ui");
-    gtk_widget_class_bind_template_child (widget_class, PinsAppGrid, flow_box);
+    g_type_ensure (PINS_TYPE_APP_GROUP);
+
+    gtk_widget_class_bind_template_child (widget_class, PinsAppGrid,
+                                          edited_apps_group);
+    gtk_widget_class_bind_template_child (widget_class, PinsAppGrid,
+                                          system_apps_group);
+    gtk_widget_class_bind_template_child (widget_class, PinsAppGrid,
+                                          hidden_apps_group);
+}
+
+void
+group_activated_cb (PinsAppGrid *self, guint position)
+{
+    g_signal_emit (self, signals[ACTIVATE], 0, position);
 }
 
 static void
 pins_app_grid_init (PinsAppGrid *self)
 {
     gtk_widget_init_template (GTK_WIDGET (self));
+
+    g_signal_connect_object (self->edited_apps_group, "activate",
+                             G_CALLBACK (group_activated_cb), self,
+                             G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->system_apps_group, "activate",
+                             G_CALLBACK (group_activated_cb), self,
+                             G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->hidden_apps_group, "activate",
+                             G_CALLBACK (group_activated_cb), self,
+                             G_CONNECT_SWAPPED);
 }
