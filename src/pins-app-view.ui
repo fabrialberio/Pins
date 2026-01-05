@@ -61,7 +61,7 @@
                         <property name="align">0.5</property>
                         <property name="child-spacing">6</property>
                         <child>
-                          <object class="GtkToggleButton" id="edited-search-chip">
+                          <object class="GtkToggleButton" id="edited_search_chip">
                             <property name="label" translatable="yes">Edited</property>
                             <style>
                               <class name="search-chip" />
@@ -69,7 +69,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkToggleButton" id="system-search-chip">
+                          <object class="GtkToggleButton" id="system_search_chip">
                             <property name="label" translatable="yes">System</property>
                             <style>
                               <class name="search-chip" />
@@ -77,7 +77,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkToggleButton" id="hidden-search-chip">
+                          <object class="GtkToggleButton" id="hidden_search_chip">
                             <property name="label" translatable="yes">Hidden</property>
                             <style>
                               <class name="search-chip" />

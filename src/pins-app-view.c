@@ -36,6 +36,9 @@ struct _PinsAppView
 
     GtkSearchBar *search_bar;
     GtkSearchEntry *search_entry;
+    GtkToggleButton *edited_search_chip;
+    GtkToggleButton *system_search_chip;
+    GtkToggleButton *hidden_search_chip;
     AdwViewStack *view_stack;
     PinsAppGrid *app_grid;
 };
@@ -131,6 +134,12 @@ pins_app_view_class_init (PinsAppViewClass *klass)
                                           search_bar);
     gtk_widget_class_bind_template_child (widget_class, PinsAppView,
                                           search_entry);
+    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+                                          edited_search_chip);
+    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+                                          system_search_chip);
+    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+                                          hidden_search_chip);
     gtk_widget_class_bind_template_child (widget_class, PinsAppView,
                                           view_stack);
     gtk_widget_class_bind_template_child (widget_class, PinsAppView, app_grid);
