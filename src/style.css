@@ -39,3 +39,9 @@
 .glyph {
     color: var(--dark-1);
 }
+
+@media (prefers-color-scheme: dark) {
+    .glyph {
+        color: var(--light-4);
+    }
+}
