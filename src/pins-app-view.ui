@@ -43,13 +43,49 @@
                   bind-property="active" bind-flags="sync-create|bidirectional" />
                 <property name="key-capture-widget">toolbar_view</property>
                 <property name="child">
-                  <object class="AdwClamp">
-                    <property name="maximum-size">360</property>
-                    <property name="child">
-                      <object class="GtkSearchEntry" id="search_entry">
-                        <property name="hexpand">true</property>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="AdwClamp">
+                        <property name="maximum-size">360</property>
+                        <property name="child">
+                          <object class="GtkSearchEntry" id="search_entry">
+                            <property name="hexpand">true</property>
+                          </object>
+                        </property>
                       </object>
-                    </property>
+                    </child>
+                    <child>
+                      <object class="AdwWrapBox">
+                        <property name="align">0.5</property>
+                        <property name="child-spacing">6</property>
+                        <child>
+                          <object class="GtkToggleButton" id="edited-search-chip">
+                            <property name="label" translatable="yes">Edited</property>
+                            <style>
+                              <class name="search-chip" />
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkToggleButton" id="system-search-chip">
+                            <property name="label" translatable="yes">System</property>
+                            <style>
+                              <class name="search-chip" />
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkToggleButton" id="hidden-search-chip">
+                            <property name="label" translatable="yes">Hidden</property>
+                            <style>
+                              <class name="search-chip" />
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                 </property>
               </object>
