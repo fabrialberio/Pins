@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-25 19:33+0200\n"
+"POT-Creation-Date: 2026-01-07 12:09+0100\n"
 "PO-Revision-Date: 2025-07-09 07:39+0300\n"
 "Last-Translator: Ahmed Najmawi <iramosu@protonmail.com>\n"
 "Language-Team: \n"
@@ -91,7 +91,7 @@ msgstr "ا_لغِ"
 msgid "_Add"
 msgstr "أَ_ضف"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:103 src/shortcuts-dialog.ui:21
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:157 src/shortcuts-dialog.ui:21
 msgid "Add New App"
 msgstr "أضف تطبيقًا جديدًا"
 
@@ -103,23 +103,43 @@ msgstr ""
 msgid "Search"
 msgstr "ابحث"
 
-#: src/pins-app-view.ui:76
+#: src/pins-app-view.ui:55
+msgid "Search apps by name or field content"
+msgstr ""
+
+#: src/pins-app-view.ui:73
+msgid "Edited"
+msgstr ""
+
+#: src/pins-app-view.ui:81
+msgid "System"
+msgstr ""
+
+#: src/pins-app-view.ui:89
+msgid "Hidden"
+msgstr ""
+
+#: src/pins-app-view.ui:97 src/pins-file-view.ui:138
+msgid "Autostart"
+msgstr "التشغيل التلقائي"
+
+#: src/pins-app-view.ui:130
 msgid "Loading Apps"
 msgstr "يجري تحميل التطبيقات"
 
-#: src/pins-app-view.ui:91
+#: src/pins-app-view.ui:145
 msgid "No Apps Found"
 msgstr "لم يُعثر على أيّ تطبيقات"
 
-#: src/pins-app-view.ui:122
+#: src/pins-app-view.ui:176
 msgid "Show _All Apps"
 msgstr "أظهر _كل التطبيقات"
 
-#: src/pins-app-view.ui:128
+#: src/pins-app-view.ui:182
 msgid "_Keyboard Shortcuts"
 msgstr "ا_ختصارات لوحة المفاتيح"
 
-#: src/pins-app-view.ui:132
+#: src/pins-app-view.ui:186
 msgid "_About Pins"
 msgstr "_عن دبابيس"
 
@@ -138,10 +158,6 @@ msgstr "امسح التغييرات"
 #: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
 msgid "Pick Icon"
 msgstr "اختر أيقونة"
-
-#: src/pins-file-view.ui:138
-msgid "Autostart"
-msgstr "التشغيل التلقائي"
 
 #: src/pins-file-view.ui:141
 msgid "Launch this application on login"

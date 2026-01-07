@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-25 19:33+0200\n"
+"POT-Creation-Date: 2026-01-07 12:09+0100\n"
 "PO-Revision-Date: 2025-07-30 21:37+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -93,7 +93,7 @@ msgstr "_Annuleren"
 msgid "_Add"
 msgstr "_Toevoegen"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:103 src/shortcuts-dialog.ui:21
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:157 src/shortcuts-dialog.ui:21
 msgid "Add New App"
 msgstr "Toepassing toevoegen"
 
@@ -105,23 +105,43 @@ msgstr ""
 msgid "Search"
 msgstr "Zoeken"
 
-#: src/pins-app-view.ui:76
+#: src/pins-app-view.ui:55
+msgid "Search apps by name or field content"
+msgstr ""
+
+#: src/pins-app-view.ui:73
+msgid "Edited"
+msgstr ""
+
+#: src/pins-app-view.ui:81
+msgid "System"
+msgstr ""
+
+#: src/pins-app-view.ui:89
+msgid "Hidden"
+msgstr ""
+
+#: src/pins-app-view.ui:97 src/pins-file-view.ui:138
+msgid "Autostart"
+msgstr "Automatisch opstarten"
+
+#: src/pins-app-view.ui:130
 msgid "Loading Apps"
 msgstr "Bezig met laden…"
 
-#: src/pins-app-view.ui:91
+#: src/pins-app-view.ui:145
 msgid "No Apps Found"
 msgstr "Er zĳn geen toepassingen beschikbaar"
 
-#: src/pins-app-view.ui:122
+#: src/pins-app-view.ui:176
 msgid "Show _All Apps"
 msgstr "_Alle toepassingen tonen"
 
-#: src/pins-app-view.ui:128
+#: src/pins-app-view.ui:182
 msgid "_Keyboard Shortcuts"
 msgstr "_Sneltoetsen"
 
-#: src/pins-app-view.ui:132
+#: src/pins-app-view.ui:186
 msgid "_About Pins"
 msgstr "_Over Snelkoppelingen"
 
@@ -140,10 +160,6 @@ msgstr "Wĳzigingen wissen"
 #: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
 msgid "Pick Icon"
 msgstr "Kies een pictogram"
-
-#: src/pins-file-view.ui:138
-msgid "Autostart"
-msgstr "Automatisch opstarten"
 
 #: src/pins-file-view.ui:141
 msgid "Launch this application on login"
