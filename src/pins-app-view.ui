@@ -84,6 +84,14 @@
                             </style>
                           </object>
                         </child>
+                        <child>
+                          <object class="GtkToggleButton" id="autostart_search_chip">
+                            <property name="label" translatable="yes">Autostart</property>
+                            <style>
+                              <class name="search-chip" />
+                            </style>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>

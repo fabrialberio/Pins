@@ -109,6 +109,8 @@ category_match_func (gpointer desktop_file, gpointer user_data)
                    && !pins_desktop_file_is_user_edited (file);
         case PINS_APP_FILTER_CATEGORY_HIDDEN:
             return !pins_desktop_file_is_shown (file);
+        case PINS_APP_FILTER_CATEGORY_AUTOSTART:
+            return pins_desktop_file_is_autostart (file);
         default:
             g_warning ("Invalid PinsAppFilterCategory");
             return FALSE;
@@ -206,7 +208,7 @@ pins_app_filter_class_init (PinsAppFilterClass *klass)
 
     properties[PROP_CATEGORY] = g_param_spec_uint (
         "category", "Category", "Category of apps to be shown",
-        PINS_APP_FILTER_CATEGORY_ALL, PINS_APP_FILTER_CATEGORY_HIDDEN,
+        PINS_APP_FILTER_CATEGORY_ALL, PINS_APP_FILTER_CATEGORY_AUTOSTART,
         PINS_APP_FILTER_CATEGORY_VISIBLE,
         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 

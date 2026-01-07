@@ -39,6 +39,7 @@ struct _PinsAppView
     GtkToggleButton *edited_search_chip;
     GtkToggleButton *system_search_chip;
     GtkToggleButton *hidden_search_chip;
+    GtkToggleButton *autostart_search_chip;
     AdwViewStack *view_stack;
     PinsAppGrid *app_grid;
 };
@@ -140,6 +141,8 @@ pins_app_view_class_init (PinsAppViewClass *klass)
                                           system_search_chip);
     gtk_widget_class_bind_template_child (widget_class, PinsAppView,
                                           hidden_search_chip);
+    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+                                          autostart_search_chip);
     gtk_widget_class_bind_template_child (widget_class, PinsAppView,
                                           view_stack);
     gtk_widget_class_bind_template_child (widget_class, PinsAppView, app_grid);
@@ -252,6 +255,11 @@ pins_app_view_init (PinsAppView *self)
         G_BINDING_BIDIRECTIONAL, search_chip_transform_to_func,
         search_chip_transform_from_func,
         (gpointer)PINS_APP_FILTER_CATEGORY_HIDDEN, NULL);
+    g_object_bind_property_full (
+        self->autostart_search_chip, "active", self->app_filter, "category",
+        G_BINDING_BIDIRECTIONAL, search_chip_transform_to_func,
+        search_chip_transform_from_func,
+        (gpointer)PINS_APP_FILTER_CATEGORY_AUTOSTART, NULL);
 
     g_signal_connect_object (self->search_entry, "search-changed",
                              G_CALLBACK (pins_app_view_search_changed_cb),
