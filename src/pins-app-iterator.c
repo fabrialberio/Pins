@@ -22,6 +22,7 @@
 
 #include "pins-desktop-file.h"
 #include "pins-directories.h"
+#include "pins-locale-utils-private.h"
 
 #define DESKTOP_FILE_ATTRIBUTES                                               \
     g_strjoin (",", G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,                   \
@@ -66,7 +67,8 @@ pins_app_iterator_key_set_cb (PinsAppIterator *self, gchar *key,
 {
     guint position;
 
-    if (!g_strcmp0 (key, G_KEY_FILE_DESKTOP_KEY_NAME))
+    if (!g_strcmp0 (_pins_split_key_locale (key).key,
+                    G_KEY_FILE_DESKTOP_KEY_NAME))
         {
             g_ptr_array_find (self->desktop_files_array, desktop_file,
                               &position);
