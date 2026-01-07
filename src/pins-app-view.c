@@ -182,12 +182,10 @@ search_chip_transform_from_func (GBinding *binding, const GValue *from_value,
 }
 
 void
-pins_app_view_search_changed_cb (GtkSearchEntry *entry, PinsAppView *self)
+pins_app_view_items_changed_cb (GListModel *list, guint position,
+                                guint removed, guint added, PinsAppView *self)
 {
     g_assert (PINS_IS_APP_VIEW (self));
-
-    pins_app_filter_set_search (self->app_filter,
-                                gtk_editable_get_text (GTK_EDITABLE (entry)));
 
     if (g_list_model_get_n_items (G_LIST_MODEL (self->app_filter)) == 0)
         adw_view_stack_set_visible_child_name (self->view_stack,
@@ -195,6 +193,15 @@ pins_app_view_search_changed_cb (GtkSearchEntry *entry, PinsAppView *self)
     else
         adw_view_stack_set_visible_child_name (self->view_stack,
                                                pages[PAGE_APPS]);
+}
+
+void
+pins_app_view_search_changed_cb (GtkSearchEntry *entry, PinsAppView *self)
+{
+    g_assert (PINS_IS_APP_VIEW (self));
+
+    pins_app_filter_set_search (self->app_filter,
+                                gtk_editable_get_text (GTK_EDITABLE (entry)));
 }
 
 void
@@ -269,6 +276,9 @@ pins_app_view_init (PinsAppView *self)
         search_chip_transform_from_func,
         (gpointer)PINS_APP_FILTER_CATEGORY_AUTOSTART, NULL);
 
+    g_signal_connect_object (self->app_filter, "items-changed",
+                             G_CALLBACK (pins_app_view_items_changed_cb), self,
+                             0);
     g_signal_connect_object (self->search_entry, "search-changed",
                              G_CALLBACK (pins_app_view_search_changed_cb),
                              self, 0);
