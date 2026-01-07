@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-25 19:33+0200\n"
-"PO-Revision-Date: 2025-10-25 19:35+0200\n"
+"POT-Creation-Date: 2026-01-07 12:09+0100\n"
+"PO-Revision-Date: 2026-01-07 12:12+0100\n"
 "Last-Translator: Fabrizio Alberio <fabrizio.alberio@gmail.com>\n"
 "Language-Team: Italian <fabrizio.alberio@gmail.com>\n"
 "Language: it\n"
@@ -93,7 +93,7 @@ msgstr "Annulla"
 msgid "_Add"
 msgstr "Aggiungi"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:103 src/shortcuts-dialog.ui:21
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:157 src/shortcuts-dialog.ui:21
 msgid "Add New App"
 msgstr "Aggiungi applicazione"
 
@@ -105,23 +105,43 @@ msgstr "Menù principale"
 msgid "Search"
 msgstr "Cerca"
 
-#: src/pins-app-view.ui:76
+#: src/pins-app-view.ui:55
+msgid "Search apps by name or field content"
+msgstr "Cerca applicazioni per nome o per contenuto"
+
+#: src/pins-app-view.ui:73
+msgid "Edited"
+msgstr "Modificate"
+
+#: src/pins-app-view.ui:81
+msgid "System"
+msgstr "Sistema"
+
+#: src/pins-app-view.ui:89
+msgid "Hidden"
+msgstr "Nascoste"
+
+#: src/pins-app-view.ui:97 src/pins-file-view.ui:138
+msgid "Autostart"
+msgstr "Avvio automatico"
+
+#: src/pins-app-view.ui:130
 msgid "Loading Apps"
 msgstr "Caricamento applicazioni…"
 
-#: src/pins-app-view.ui:91
+#: src/pins-app-view.ui:145
 msgid "No Apps Found"
 msgstr "Nessuna applicazione trovata"
 
-#: src/pins-app-view.ui:122
+#: src/pins-app-view.ui:176
 msgid "Show _All Apps"
 msgstr "_Mostra tutte le app"
 
-#: src/pins-app-view.ui:128
+#: src/pins-app-view.ui:182
 msgid "_Keyboard Shortcuts"
 msgstr "_Scorciatoie da tastiera"
 
-#: src/pins-app-view.ui:132
+#: src/pins-app-view.ui:186
 msgid "_About Pins"
 msgstr "_Informazioni su Pins"
 
@@ -140,10 +160,6 @@ msgstr "Cancella modifiche"
 #: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
 msgid "Pick Icon"
 msgstr "Scegli icona"
-
-#: src/pins-file-view.ui:138
-msgid "Autostart"
-msgstr "Avvio automatico"
 
 #: src/pins-file-view.ui:141
 msgid "Launch this application on login"
