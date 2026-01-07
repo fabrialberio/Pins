@@ -198,6 +198,14 @@ pins_app_view_search_changed_cb (GtkSearchEntry *entry, PinsAppView *self)
 }
 
 void
+pins_app_view_search_mode_notify_cb (GtkSearchBar *search_bar,
+                                     GParamSpec *pspec, PinsAppView *self)
+{
+    if (!gtk_search_bar_get_search_mode (search_bar))
+        pins_app_filter_reset_category (self->app_filter);
+}
+
+void
 pins_app_view_item_activated_cb (GtkListView *self, guint position,
                                  PinsAppView *user_data)
 {
@@ -263,6 +271,9 @@ pins_app_view_init (PinsAppView *self)
 
     g_signal_connect_object (self->search_entry, "search-changed",
                              G_CALLBACK (pins_app_view_search_changed_cb),
+                             self, 0);
+    g_signal_connect_object (self->search_bar, "notify::search-mode-enabled",
+                             G_CALLBACK (pins_app_view_search_mode_notify_cb),
                              self, 0);
     g_signal_connect_object (self->app_grid, "activate",
                              G_CALLBACK (pins_app_view_item_activated_cb),
