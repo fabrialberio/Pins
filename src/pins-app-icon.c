@@ -50,10 +50,10 @@ pins_app_icon_set_icon_name (PinsAppIcon *self, gchar *icon_name)
 
     if (!g_strcmp0 (icon_name, ""))
         gtk_image_set_from_icon_name (self->image, DEFAULT_ICON_NAME);
-
-    if (gtk_icon_theme_has_icon (theme, icon_name)
-        || gtk_icon_theme_has_icon (
-            theme, g_strconcat (icon_name, "-symbolic", NULL)))
+    else if (gtk_icon_theme_has_icon (theme, icon_name)
+             || gtk_icon_theme_has_icon (
+                 theme, g_strconcat (icon_name, "-symbolic", NULL)))
+        // TODO: This line slows down search.
         gtk_image_set_from_icon_name (self->image, icon_name);
     else if (g_file_test (icon_name, G_FILE_TEST_IS_REGULAR))
         gtk_image_set_from_file (self->image, icon_name);
