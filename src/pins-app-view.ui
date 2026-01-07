@@ -52,6 +52,7 @@
                         <property name="child">
                           <object class="GtkSearchEntry" id="search_entry">
                             <property name="hexpand">true</property>
+                            <property name="placeholder-text" translatable="yes">Search apps by name or field content</property>
                           </object>
                         </property>
                       </object>
