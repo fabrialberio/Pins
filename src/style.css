@@ -45,3 +45,8 @@
         color: var(--light-4);
     }
 }
+
+.search-chip {
+    border-radius: 20px;
+    min-height: 20px;
+}

@@ -28,10 +28,12 @@ struct _PinsAppFilter
     GObject parent_instance;
 
     gboolean show_all_apps;
-    GtkCustomFilter *show_all_apps_filter;
+    PinsAppFilterCategory category;
+
+    GtkCustomFilter *category_filter;
     GtkStringFilter *search_filter;
     GtkSortListModel *sort_model;
-    GtkFilterListModel *show_all_apps_model;
+    GtkFilterListModel *category_model;
     GtkFilterListModel *search_model;
 };
 
@@ -45,6 +47,7 @@ enum
 {
     PROP_0,
     PROP_SHOW_ALL_APPS,
+    PROP_CATEGORY,
     N_PROPS,
 };
 
@@ -69,28 +72,49 @@ pins_app_filter_set_search (PinsAppFilter *self, const gchar *search)
 }
 
 void
-show_all_apps_notify_cb (PinsAppFilter *self, GParamSpec *pspec)
+pins_app_filter_reset_category (PinsAppFilter *self)
 {
-    GtkFilterChange change = self->show_all_apps
-                                 ? GTK_FILTER_CHANGE_LESS_STRICT
-                                 : GTK_FILTER_CHANGE_MORE_STRICT;
+    if (self->show_all_apps)
+        self->category = PINS_APP_FILTER_CATEGORY_ALL;
+    else
+        self->category = PINS_APP_FILTER_CATEGORY_VISIBLE;
 
-    gtk_filter_changed (GTK_FILTER (self->show_all_apps_filter), change);
+    g_object_notify (G_OBJECT (self), "category");
+}
+
+void
+category_notify_cb (PinsAppFilter *self, GParamSpec *pspec)
+{
+    gtk_filter_changed (GTK_FILTER (self->category_filter),
+                        GTK_FILTER_CHANGE_DIFFERENT);
 }
 
 gboolean
-show_all_apps_match_func (gpointer desktop_file, gpointer user_data)
+category_match_func (gpointer desktop_file, gpointer user_data)
 {
     PinsAppFilter *self = PINS_APP_FILTER (user_data);
+    PinsDesktopFile *file = PINS_DESKTOP_FILE (desktop_file);
 
-    g_assert (PINS_IS_DESKTOP_FILE (desktop_file));
-
-    if (self->show_all_apps)
-        return TRUE;
-
-    return pins_desktop_file_is_shown (PINS_DESKTOP_FILE (desktop_file))
-           || pins_desktop_file_is_user_edited (
-               PINS_DESKTOP_FILE (desktop_file));
+    switch (self->category)
+        {
+        case PINS_APP_FILTER_CATEGORY_ALL:
+            return TRUE;
+        case PINS_APP_FILTER_CATEGORY_VISIBLE:
+            return pins_desktop_file_is_shown (file)
+                   || pins_desktop_file_is_user_edited (file);
+        case PINS_APP_FILTER_CATEGORY_EDITED:
+            return pins_desktop_file_is_user_edited (file);
+        case PINS_APP_FILTER_CATEGORY_SYSTEM:
+            return pins_desktop_file_is_shown (file)
+                   && !pins_desktop_file_is_user_edited (file);
+        case PINS_APP_FILTER_CATEGORY_HIDDEN:
+            return !pins_desktop_file_is_shown (file);
+        case PINS_APP_FILTER_CATEGORY_AUTOSTART:
+            return pins_desktop_file_is_autostart (file);
+        default:
+            g_warning ("Invalid PinsAppFilterCategory");
+            return FALSE;
+        }
 }
 
 int
@@ -122,10 +146,10 @@ pins_app_filter_dispose (GObject *object)
 {
     PinsAppFilter *self = PINS_APP_FILTER (object);
 
-    g_clear_object (&self->show_all_apps_filter);
+    g_clear_object (&self->category_filter);
     g_clear_object (&self->search_filter);
     g_clear_object (&self->sort_model);
-    g_clear_object (&self->show_all_apps_model);
+    g_clear_object (&self->category_model);
     g_clear_object (&self->search_model);
 }
 
@@ -139,6 +163,9 @@ pins_app_filter_get_property (GObject *object, guint prop_id, GValue *value,
         {
         case PROP_SHOW_ALL_APPS:
             g_value_set_boolean (value, self->show_all_apps);
+            break;
+        case PROP_CATEGORY:
+            g_value_set_uint (value, self->category);
             break;
         default:
             G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -155,6 +182,10 @@ pins_app_filter_set_property (GObject *object, guint prop_id,
         {
         case PROP_SHOW_ALL_APPS:
             self->show_all_apps = g_value_get_boolean (value);
+            pins_app_filter_reset_category (self);
+            break;
+        case PROP_CATEGORY:
+            self->category = g_value_get_uint (value);
             break;
         default:
             G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -171,7 +202,14 @@ pins_app_filter_class_init (PinsAppFilterClass *klass)
     object_class->set_property = pins_app_filter_set_property;
 
     properties[PROP_SHOW_ALL_APPS] = g_param_spec_boolean (
-        "show-all-apps", "Show All Apps", "Whether all apps are shown", FALSE,
+        "show-all-apps", "Show All Apps",
+        "Whether all apps are shown when no other filters are applied", FALSE,
+        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+    properties[PROP_CATEGORY] = g_param_spec_uint (
+        "category", "Category", "Category of apps to be shown",
+        PINS_APP_FILTER_CATEGORY_ALL, PINS_APP_FILTER_CATEGORY_AUTOSTART,
+        PINS_APP_FILTER_CATEGORY_VISIBLE,
         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
     g_object_class_install_properties (object_class, N_PROPS, properties);
@@ -180,8 +218,8 @@ pins_app_filter_class_init (PinsAppFilterClass *klass)
 static void
 pins_app_filter_init (PinsAppFilter *self)
 {
-    self->show_all_apps_filter
-        = gtk_custom_filter_new (&show_all_apps_match_func, self, NULL);
+    self->category_filter
+        = gtk_custom_filter_new (&category_match_func, self, NULL);
 
     self->search_filter = gtk_string_filter_new (gtk_property_expression_new (
         PINS_TYPE_DESKTOP_FILE, NULL, "search-string"));
@@ -190,20 +228,20 @@ pins_app_filter_init (PinsAppFilter *self)
         NULL,
         GTK_SORTER (gtk_custom_sorter_new (&sort_compare_func, NULL, NULL)));
 
-    self->show_all_apps_model
-        = gtk_filter_list_model_new (G_LIST_MODEL (self->sort_model),
-                                     GTK_FILTER (self->show_all_apps_filter));
+    self->category_model = gtk_filter_list_model_new (
+        G_LIST_MODEL (self->sort_model), GTK_FILTER (self->category_filter));
 
-    self->search_model
-        = gtk_filter_list_model_new (G_LIST_MODEL (self->show_all_apps_model),
-                                     GTK_FILTER (self->search_filter));
+    self->search_model = gtk_filter_list_model_new (
+        G_LIST_MODEL (self->category_model), GTK_FILTER (self->search_filter));
 
     g_signal_connect_object (self->search_model, "items-changed",
                              G_CALLBACK (g_list_model_items_changed), self,
                              G_CONNECT_SWAPPED);
 
     g_signal_connect_object (self, "notify::show-all-apps",
-                             G_CALLBACK (show_all_apps_notify_cb), self, 0);
+                             G_CALLBACK (category_notify_cb), self, 0);
+    g_signal_connect_object (self, "notify::category",
+                             G_CALLBACK (category_notify_cb), self, 0);
 }
 
 gpointer

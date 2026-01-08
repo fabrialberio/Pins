@@ -36,6 +36,10 @@ struct _PinsAppView
 
     GtkSearchBar *search_bar;
     GtkSearchEntry *search_entry;
+    GtkToggleButton *edited_search_chip;
+    GtkToggleButton *system_search_chip;
+    GtkToggleButton *hidden_search_chip;
+    GtkToggleButton *autostart_search_chip;
     AdwViewStack *view_stack;
     PinsAppGrid *app_grid;
 };
@@ -132,8 +136,63 @@ pins_app_view_class_init (PinsAppViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, PinsAppView,
                                           search_entry);
     gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+                                          edited_search_chip);
+    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+                                          system_search_chip);
+    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+                                          hidden_search_chip);
+    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+                                          autostart_search_chip);
+    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
                                           view_stack);
     gtk_widget_class_bind_template_child (widget_class, PinsAppView, app_grid);
+}
+
+gboolean
+search_chip_transform_to_func (GBinding *binding, const GValue *from_value,
+                               GValue *to_value, gpointer user_data)
+{
+    g_autoptr (PinsAppFilter) app_filter
+        = PINS_APP_FILTER (g_binding_dup_target (binding));
+
+    PinsAppFilterCategory category = (size_t)user_data;
+
+    if (g_value_get_boolean (from_value))
+        {
+            g_value_set_uint (to_value, category);
+            return TRUE;
+        }
+    else
+        {
+            pins_app_filter_reset_category (app_filter);
+            // app_filter->category has already been updated.
+            return FALSE;
+        }
+}
+
+gboolean
+search_chip_transform_from_func (GBinding *binding, const GValue *from_value,
+                                 GValue *to_value, gpointer user_data)
+{
+    PinsAppFilterCategory category = (size_t)user_data;
+
+    g_value_set_boolean (to_value, g_value_get_uint (from_value) == category);
+
+    return TRUE;
+}
+
+void
+pins_app_view_items_changed_cb (GListModel *list, guint position,
+                                guint removed, guint added, PinsAppView *self)
+{
+    g_assert (PINS_IS_APP_VIEW (self));
+
+    if (g_list_model_get_n_items (G_LIST_MODEL (self->app_filter)) == 0)
+        adw_view_stack_set_visible_child_name (self->view_stack,
+                                               pages[PAGE_EMPTY]);
+    else
+        adw_view_stack_set_visible_child_name (self->view_stack,
+                                               pages[PAGE_APPS]);
 }
 
 void
@@ -143,13 +202,14 @@ pins_app_view_search_changed_cb (GtkSearchEntry *entry, PinsAppView *self)
 
     pins_app_filter_set_search (self->app_filter,
                                 gtk_editable_get_text (GTK_EDITABLE (entry)));
+}
 
-    if (g_list_model_get_n_items (G_LIST_MODEL (self->app_filter)) == 0)
-        adw_view_stack_set_visible_child_name (self->view_stack,
-                                               pages[PAGE_EMPTY]);
-    else
-        adw_view_stack_set_visible_child_name (self->view_stack,
-                                               pages[PAGE_APPS]);
+void
+pins_app_view_search_mode_notify_cb (GtkSearchBar *search_bar,
+                                     GParamSpec *pspec, PinsAppView *self)
+{
+    if (!gtk_search_bar_get_search_mode (search_bar))
+        pins_app_filter_reset_category (self->app_filter);
 }
 
 void
@@ -194,8 +254,36 @@ pins_app_view_init (PinsAppView *self)
     gtk_search_bar_connect_entry (self->search_bar,
                                   GTK_EDITABLE (self->search_entry));
 
+    // Hacky way to pass a PinsAppFilterCategory as user_data, but it works.
+    g_object_bind_property_full (
+        self->edited_search_chip, "active", self->app_filter, "category",
+        G_BINDING_BIDIRECTIONAL, search_chip_transform_to_func,
+        search_chip_transform_from_func,
+        (gpointer)PINS_APP_FILTER_CATEGORY_EDITED, NULL);
+    g_object_bind_property_full (
+        self->system_search_chip, "active", self->app_filter, "category",
+        G_BINDING_BIDIRECTIONAL, search_chip_transform_to_func,
+        search_chip_transform_from_func,
+        (gpointer)PINS_APP_FILTER_CATEGORY_SYSTEM, NULL);
+    g_object_bind_property_full (
+        self->hidden_search_chip, "active", self->app_filter, "category",
+        G_BINDING_BIDIRECTIONAL, search_chip_transform_to_func,
+        search_chip_transform_from_func,
+        (gpointer)PINS_APP_FILTER_CATEGORY_HIDDEN, NULL);
+    g_object_bind_property_full (
+        self->autostart_search_chip, "active", self->app_filter, "category",
+        G_BINDING_BIDIRECTIONAL, search_chip_transform_to_func,
+        search_chip_transform_from_func,
+        (gpointer)PINS_APP_FILTER_CATEGORY_AUTOSTART, NULL);
+
+    g_signal_connect_object (self->app_filter, "items-changed",
+                             G_CALLBACK (pins_app_view_items_changed_cb), self,
+                             0);
     g_signal_connect_object (self->search_entry, "search-changed",
                              G_CALLBACK (pins_app_view_search_changed_cb),
+                             self, 0);
+    g_signal_connect_object (self->search_bar, "notify::search-mode-enabled",
+                             G_CALLBACK (pins_app_view_search_mode_notify_cb),
                              self, 0);
     g_signal_connect_object (self->app_grid, "activate",
                              G_CALLBACK (pins_app_view_item_activated_cb),

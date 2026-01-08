@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-25 19:33+0200\n"
+"POT-Creation-Date: 2026-01-07 12:09+0100\n"
 "PO-Revision-Date: 2025-02-05 18:05+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: \n"
@@ -93,7 +93,7 @@ msgstr "Anullar"
 msgid "_Add"
 msgstr ""
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:103 src/shortcuts-dialog.ui:21
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:157 src/shortcuts-dialog.ui:21
 #, fuzzy
 msgid "Add New App"
 msgstr "Apondre apli novèla"
@@ -106,26 +106,46 @@ msgstr ""
 msgid "Search"
 msgstr "Recercar"
 
-#: src/pins-app-view.ui:76
+#: src/pins-app-view.ui:55
+msgid "Search apps by name or field content"
+msgstr ""
+
+#: src/pins-app-view.ui:73
+msgid "Edited"
+msgstr ""
+
+#: src/pins-app-view.ui:81
+msgid "System"
+msgstr ""
+
+#: src/pins-app-view.ui:89
+msgid "Hidden"
+msgstr ""
+
+#: src/pins-app-view.ui:97 src/pins-file-view.ui:138
+msgid "Autostart"
+msgstr ""
+
+#: src/pins-app-view.ui:130
 #, fuzzy
 msgid "Loading Apps"
 msgstr "Cargament de las aplicacions…"
 
-#: src/pins-app-view.ui:91
+#: src/pins-app-view.ui:145
 #, fuzzy
 msgid "No Apps Found"
 msgstr "Cap d'aplicacion pas trobada"
 
-#: src/pins-app-view.ui:122
+#: src/pins-app-view.ui:176
 msgid "Show _All Apps"
 msgstr ""
 
-#: src/pins-app-view.ui:128
+#: src/pins-app-view.ui:182
 #, fuzzy
 msgid "_Keyboard Shortcuts"
 msgstr "Acorchis de clavièr"
 
-#: src/pins-app-view.ui:132
+#: src/pins-app-view.ui:186
 #, fuzzy
 msgid "_About Pins"
 msgstr "A prepaus de PinApp"
@@ -145,10 +165,6 @@ msgstr "Enregistrar las modificacions ?"
 
 #: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
 msgid "Pick Icon"
-msgstr ""
-
-#: src/pins-file-view.ui:138
-msgid "Autostart"
 msgstr ""
 
 #: src/pins-file-view.ui:141

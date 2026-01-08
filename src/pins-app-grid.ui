@@ -19,6 +19,7 @@
                 <property name="min-children-per-line">3</property>
                 <property name="row-spacing">6</property>
                 <property name="selection-mode">none</property>
+                <property name="valign">start</property>
                 <style>
                   <class name="app-grid" />
                 </style>

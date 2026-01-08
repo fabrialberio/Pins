@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-25 19:33+0200\n"
+"POT-Creation-Date: 2026-01-07 12:09+0100\n"
 "PO-Revision-Date: 2025-03-26 02:44-0300\n"
 "Last-Translator: Filipe Motta <luizfilipemotta@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -97,7 +97,7 @@ msgstr "_Cancelar"
 msgid "_Add"
 msgstr "_Adicionar"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:103 src/shortcuts-dialog.ui:21
+#: src/pins-app-view.ui:15 src/pins-app-view.ui:157 src/shortcuts-dialog.ui:21
 #, fuzzy
 msgid "Add New App"
 msgstr "Adicionar novo aplicativo"
@@ -110,26 +110,46 @@ msgstr ""
 msgid "Search"
 msgstr "Pesquisar"
 
-#: src/pins-app-view.ui:76
+#: src/pins-app-view.ui:55
+msgid "Search apps by name or field content"
+msgstr ""
+
+#: src/pins-app-view.ui:73
+msgid "Edited"
+msgstr ""
+
+#: src/pins-app-view.ui:81
+msgid "System"
+msgstr ""
+
+#: src/pins-app-view.ui:89
+msgid "Hidden"
+msgstr ""
+
+#: src/pins-app-view.ui:97 src/pins-file-view.ui:138
+msgid "Autostart"
+msgstr "Início automático"
+
+#: src/pins-app-view.ui:130
 #, fuzzy
 msgid "Loading Apps"
 msgstr "Carregando aplicativos…"
 
-#: src/pins-app-view.ui:91
+#: src/pins-app-view.ui:145
 #, fuzzy
 msgid "No Apps Found"
 msgstr "Nenhum aplicativo encontrado"
 
-#: src/pins-app-view.ui:122
+#: src/pins-app-view.ui:176
 #, fuzzy
 msgid "Show _All Apps"
 msgstr "Mostrar _todos os aplicativos"
 
-#: src/pins-app-view.ui:128
+#: src/pins-app-view.ui:182
 msgid "_Keyboard Shortcuts"
 msgstr "Atalhos de _teclado"
 
-#: src/pins-app-view.ui:132
+#: src/pins-app-view.ui:186
 msgid "_About Pins"
 msgstr "_ Sobre o Pins"
 
@@ -149,10 +169,6 @@ msgstr "Apagar mudanças"
 #: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
 msgid "Pick Icon"
 msgstr ""
-
-#: src/pins-file-view.ui:138
-msgid "Autostart"
-msgstr "Início automático"
 
 #: src/pins-file-view.ui:141
 msgid "Launch this application on login"
