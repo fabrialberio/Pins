@@ -47,12 +47,19 @@ struct _PinsFileView
     GtkSwitch *invisible_switch;
     GtkListBox *keys_listbox;
     AdwButtonRow *add_key_button;
-    GtkButton *duplicate_button;
     GtkButton *delete_button;
     AdwBreakpoint *breakpoint;
 };
 
 G_DEFINE_TYPE (PinsFileView, pins_file_view, ADW_TYPE_BREAKPOINT_BIN);
+
+enum
+{
+    DUPLICATE,
+    N_SIGNALS
+};
+
+static guint signals[N_SIGNALS];
 
 void
 pins_file_view_setup_row (PinsKeyRow *row, PinsDesktopFile *desktop_file,
@@ -270,11 +277,6 @@ pins_file_view_set_desktop_file (PinsFileView *self,
                              G_CALLBACK (invisible_switch_state_set_cb), self,
                              G_CONNECT_SWAPPED);
 
-    gtk_actionable_set_action_target_value (
-        GTK_ACTIONABLE (self->duplicate_button),
-        g_variant_new_string (
-            pins_desktop_file_get_desktop_id (self->desktop_file)));
-
     gtk_widget_set_visible (GTK_WIDGET (self->delete_button),
                             pins_desktop_file_is_user_only (self->desktop_file)
                                 && self->opened_from_file == NULL);
@@ -308,6 +310,10 @@ pins_file_view_class_init (PinsFileViewClass *klass)
 
     object_class->dispose = pins_file_view_dispose;
 
+    signals[DUPLICATE] = g_signal_new ("duplicate", G_TYPE_FROM_CLASS (klass),
+                                       G_SIGNAL_RUN_LAST, 0, NULL, NULL, NULL,
+                                       G_TYPE_NONE, 1, G_TYPE_OBJECT);
+
     gtk_widget_class_set_template_from_resource (
         widget_class, "/io/github/fabrialberio/pinapp/pins-file-view.ui");
     g_type_ensure (PINS_TYPE_APP_ICON);
@@ -336,11 +342,16 @@ pins_file_view_class_init (PinsFileViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           add_key_button);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
-                                          duplicate_button);
-    gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           delete_button);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           breakpoint);
+}
+
+void
+pins_file_view_duplicate_cb (GSimpleAction *action, GVariant *param,
+                             PinsFileView *self)
+{
+    g_signal_emit (self, signals[DUPLICATE], 0, self->desktop_file);
 }
 
 void
@@ -382,12 +393,22 @@ breakpoint_unapply_cb (PinsFileView *self)
 static void
 pins_file_view_init (PinsFileView *self)
 {
-    gtk_widget_init_template (GTK_WIDGET (self));
+    g_autoptr (GSimpleActionGroup) group = NULL;
+    g_autoptr (GSimpleAction) duplicate_action = NULL;
 
-    gtk_actionable_set_action_name (GTK_ACTIONABLE (self->duplicate_button),
-                                    "win.duplicate-app");
-    gtk_actionable_set_action_target_value (
-        GTK_ACTIONABLE (self->duplicate_button), g_variant_new_string (""));
+    group = g_simple_action_group_new ();
+
+    duplicate_action = g_simple_action_new ("duplicate", NULL);
+    g_signal_connect_object (duplicate_action, "activate",
+                             G_CALLBACK (pins_file_view_duplicate_cb), self,
+                             0);
+    g_action_map_add_action (G_ACTION_MAP (group),
+                             G_ACTION (duplicate_action));
+
+    gtk_widget_insert_action_group (GTK_WIDGET (self), "file",
+                                    G_ACTION_GROUP (group));
+
+    gtk_widget_init_template (GTK_WIDGET (self));
 
     g_signal_connect_object (self->reset_icon_button, "clicked",
                              G_CALLBACK (reset_icon_button_clicked_cb), self,
