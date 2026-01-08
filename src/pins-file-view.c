@@ -26,7 +26,7 @@
 #include "pins-app-icon.h"
 #include "pins-key-row.h"
 #include "pins-locale-utils-private.h"
-#include "pins-pick-icon-dialog.h"
+#include "pins-pick-icon-popover.h"
 
 struct _PinsFileView
 {
@@ -40,7 +40,7 @@ struct _PinsFileView
     GtkScrolledWindow *scrolled_window;
     PinsAppIcon *icon;
     GtkButton *reset_icon_button;
-    GtkButton *pick_icon_button;
+    PinsPickIconPopover *pick_icon_popover;
     PinsKeyRow *name_row;
     PinsKeyRow *comment_row;
     GtkSwitch *autostart_switch;
@@ -248,6 +248,8 @@ pins_file_view_set_desktop_file (PinsFileView *self,
     pins_file_view_update_title (self);
     pins_file_view_update_reset_icon_button_visible (self);
     pins_app_icon_set_desktop_file (self->icon, self->desktop_file);
+    pins_pick_icon_popover_set_desktop_file (self->pick_icon_popover,
+                                             self->desktop_file);
     gtk_switch_set_active (
         self->autostart_switch,
         pins_desktop_file_is_autostart (self->desktop_file));
@@ -309,6 +311,7 @@ pins_file_view_class_init (PinsFileViewClass *klass)
     gtk_widget_class_set_template_from_resource (
         widget_class, "/io/github/fabrialberio/pinapp/pins-file-view.ui");
     g_type_ensure (PINS_TYPE_APP_ICON);
+    g_type_ensure (PINS_TYPE_PICK_ICON_POPOVER);
     g_type_ensure (PINS_TYPE_KEY_ROW);
 
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
@@ -317,7 +320,7 @@ pins_file_view_class_init (PinsFileViewClass *klass)
                                           scrolled_window);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView, icon);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
-                                          pick_icon_button);
+                                          pick_icon_popover);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           reset_icon_button);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
@@ -345,16 +348,6 @@ reset_icon_button_clicked_cb (PinsFileView *self)
 {
     pins_desktop_file_reset_key (self->desktop_file,
                                  G_KEY_FILE_DESKTOP_KEY_ICON);
-}
-
-void
-pick_icon_button_clicked_cb (PinsFileView *self)
-{
-    PinsPickIconDialog *dialog
-        = pins_pick_icon_dialog_new (self->desktop_file);
-
-    adw_dialog_present (ADW_DIALOG (dialog),
-                        GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self))));
 }
 
 void
@@ -398,9 +391,6 @@ pins_file_view_init (PinsFileView *self)
 
     g_signal_connect_object (self->reset_icon_button, "clicked",
                              G_CALLBACK (reset_icon_button_clicked_cb), self,
-                             G_CONNECT_SWAPPED);
-    g_signal_connect_object (self->pick_icon_button, "clicked",
-                             G_CALLBACK (pick_icon_button_clicked_cb), self,
                              G_CONNECT_SWAPPED);
 
     g_signal_connect_object (self->add_key_button, "activated",

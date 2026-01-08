@@ -1,4 +1,4 @@
-/* pins-pick-icon-dialog.c
+/* pins-pick-icon-popover.c
  *
  * Copyright 2024 Fabrizio
  *
@@ -18,12 +18,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "pins-pick-icon-dialog.h"
+#include "pins-pick-icon-popover.h"
 #include "pins-desktop-file.h"
 
-struct _PinsPickIconDialog
+struct _PinsPickIconPopover
 {
-    AdwDialog parent_instance;
+    GtkPopover parent_instance;
 
     PinsDesktopFile *desktop_file;
     GtkFilterListModel *model;
@@ -34,48 +34,44 @@ struct _PinsPickIconDialog
     GtkGridView *grid_view;
 };
 
-G_DEFINE_TYPE (PinsPickIconDialog, pins_pick_icon_dialog, ADW_TYPE_DIALOG);
+G_DEFINE_TYPE (PinsPickIconPopover, pins_pick_icon_popover, GTK_TYPE_POPOVER);
 
-PinsPickIconDialog *
-pins_pick_icon_dialog_new (PinsDesktopFile *desktop_file)
+void
+pins_pick_icon_popover_set_desktop_file (PinsPickIconPopover *self,
+                                         PinsDesktopFile *desktop_file)
 {
-    PinsPickIconDialog *dialog
-        = g_object_new (PINS_TYPE_PICK_ICON_DIALOG, NULL);
-
-    dialog->desktop_file = g_object_ref (desktop_file);
-
-    return dialog;
+    self->desktop_file = g_object_ref (desktop_file);
 }
 
 void
-pins_pick_icon_dialog_dispose (GObject *object)
+pins_pick_icon_popover_dispose (GObject *object)
 {
-    PinsPickIconDialog *self = PINS_PICK_ICON_DIALOG (object);
+    PinsPickIconPopover *self = PINS_PICK_ICON_POPOVER (object);
 
     g_clear_object (&self->desktop_file);
 
     gtk_widget_dispose_template (GTK_WIDGET (object),
-                                 PINS_TYPE_PICK_ICON_DIALOG);
+                                 PINS_TYPE_PICK_ICON_POPOVER);
 
-    G_OBJECT_CLASS (pins_pick_icon_dialog_parent_class)->dispose (object);
+    G_OBJECT_CLASS (pins_pick_icon_popover_parent_class)->dispose (object);
 }
 
 static void
-pins_pick_icon_dialog_class_init (PinsPickIconDialogClass *klass)
+pins_pick_icon_popover_class_init (PinsPickIconPopoverClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-    object_class->dispose = pins_pick_icon_dialog_dispose;
+    object_class->dispose = pins_pick_icon_popover_dispose;
 
     gtk_widget_class_set_template_from_resource (
         widget_class,
-        "/io/github/fabrialberio/pinapp/pins-pick-icon-dialog.ui");
-    gtk_widget_class_bind_template_child (widget_class, PinsPickIconDialog,
+        "/io/github/fabrialberio/pinapp/pins-pick-icon-popover.ui");
+    gtk_widget_class_bind_template_child (widget_class, PinsPickIconPopover,
                                           load_from_file_button);
-    gtk_widget_class_bind_template_child (widget_class, PinsPickIconDialog,
+    gtk_widget_class_bind_template_child (widget_class, PinsPickIconPopover,
                                           search_entry);
-    gtk_widget_class_bind_template_child (widget_class, PinsPickIconDialog,
+    gtk_widget_class_bind_template_child (widget_class, PinsPickIconPopover,
                                           grid_view);
 }
 
@@ -83,7 +79,7 @@ void
 load_icon_dialog_closed_cb (GObject *dialog, GAsyncResult *res,
                             gpointer user_data)
 {
-    PinsPickIconDialog *self = PINS_PICK_ICON_DIALOG (user_data);
+    PinsPickIconPopover *self = PINS_PICK_ICON_POPOVER (user_data);
     g_autoptr (GFile) sandbox_file = NULL;
     g_autoptr (GFile) file = NULL;
 
@@ -92,7 +88,6 @@ load_icon_dialog_closed_cb (GObject *dialog, GAsyncResult *res,
 
     if (sandbox_file == NULL)
         {
-            adw_dialog_close (ADW_DIALOG (self));
             return;
         }
 
@@ -106,12 +101,10 @@ load_icon_dialog_closed_cb (GObject *dialog, GAsyncResult *res,
     pins_desktop_file_set_string (self->desktop_file,
                                   G_KEY_FILE_DESKTOP_KEY_ICON,
                                   g_file_get_path (file));
-
-    adw_dialog_close (ADW_DIALOG (self));
 }
 
 void
-load_from_file_button_clicked_cb (PinsPickIconDialog *self)
+load_from_file_button_clicked_cb (PinsPickIconPopover *self)
 {
     GtkFileDialog *dialog = gtk_file_dialog_new ();
 
@@ -124,14 +117,14 @@ load_from_file_button_clicked_cb (PinsPickIconDialog *self)
 }
 
 void
-search_changed_cb (PinsPickIconDialog *self, GtkSearchEntry *entry)
+search_changed_cb (PinsPickIconPopover *self, GtkSearchEntry *entry)
 {
     gtk_string_filter_set_search (
         self->search_filter, gtk_editable_get_text (GTK_EDITABLE (entry)));
 }
 
 void
-icon_activated_cb (PinsPickIconDialog *self, guint position)
+icon_activated_cb (PinsPickIconPopover *self, guint position)
 {
     g_autoptr (GtkStringObject) string_object = GTK_STRING_OBJECT (
         g_list_model_get_item (G_LIST_MODEL (self->model), position));
@@ -140,7 +133,7 @@ icon_activated_cb (PinsPickIconDialog *self, guint position)
         self->desktop_file, G_KEY_FILE_DESKTOP_KEY_ICON,
         gtk_string_object_get_string (string_object));
 
-    adw_dialog_close (ADW_DIALOG (self));
+    gtk_popover_popdown (GTK_POPOVER (self));
 }
 
 void
@@ -165,7 +158,7 @@ icon_bind_cb (GtkSignalListItemFactory *factory, GtkListItem *item)
 }
 
 static void
-pins_pick_icon_dialog_init (PinsPickIconDialog *self)
+pins_pick_icon_popover_init (PinsPickIconPopover *self)
 {
     GtkIconTheme *theme;
     GtkStringList *string_list = NULL;

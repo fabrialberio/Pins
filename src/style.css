@@ -25,12 +25,16 @@
     border-radius: 24px;
 }
 
-.icon-grid {
+.pick-icon-popover contents {
+    padding: 0px;
+}
+
+.pick-icon-grid {
     padding: 12px;
     background: transparent;
 }
 
-.icon-grid>child {
+.pick-icon-grid>child {
     min-height: 42px;
     min-width: 42px;
     border-radius: 8px;
