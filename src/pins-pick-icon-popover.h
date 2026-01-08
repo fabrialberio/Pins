@@ -1,4 +1,4 @@
-/* pins-pick-icon-dialog.h
+/* pins-pick-icon-popover.h
  *
  * Copyright 2024 Fabrizio
  *
@@ -26,11 +26,12 @@
 
 G_BEGIN_DECLS
 
-#define PINS_TYPE_PICK_ICON_DIALOG (pins_pick_icon_dialog_get_type ())
+#define PINS_TYPE_PICK_ICON_POPOVER (pins_pick_icon_popover_get_type ())
 
-G_DECLARE_FINAL_TYPE (PinsPickIconDialog, pins_pick_icon_dialog, PINS,
-                      PICK_ICON_DIALOG, AdwDialog)
+G_DECLARE_FINAL_TYPE (PinsPickIconPopover, pins_pick_icon_popover, PINS,
+                      PICK_ICON_POPOVER, GtkPopover)
 
-PinsPickIconDialog *pins_pick_icon_dialog_new (PinsDesktopFile *desktop_file);
+void pins_pick_icon_popover_set_desktop_file (PinsPickIconPopover *self,
+                                              PinsDesktopFile *desktop_file);
 
 G_END_DECLS

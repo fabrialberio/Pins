@@ -89,10 +89,13 @@
                                   <class name="background" />
                                 </style>
                                 <property name="child">
-                                  <object class="GtkButton" id="pick_icon_button">
+                                  <object class="GtkMenuButton">
                                     <property name="tooltip-text" translatable="yes">Pick Icon</property>
-                                    <property name="focusable">True</property>
+                                    <property name="focusable">true</property>
                                     <property name="icon-name">document-edit-symbolic</property>
+                                    <property name="popover">
+                                      <object class="PinsPickIconPopover" id="pick_icon_popover" />
+                                    </property>
                                     <style>
                                       <class name="circular" />
                                     </style>

@@ -11,7 +11,7 @@
     <file preprocess="xml-stripblanks">pins-file-view.ui</file>
     <file preprocess="xml-stripblanks">pins-key-row-locale-menu-item.ui</file>
     <file preprocess="xml-stripblanks">pins-key-row.ui</file>
-    <file preprocess="xml-stripblanks">pins-pick-icon-dialog.ui</file>
+    <file preprocess="xml-stripblanks">pins-pick-icon-popover.ui</file>
     <file preprocess="xml-stripblanks">shortcuts-dialog.ui</file>
     <file preprocess="xml-stripblanks">pins-window.ui</file>
   </gresource>
