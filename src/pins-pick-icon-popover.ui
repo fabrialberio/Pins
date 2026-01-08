@@ -4,8 +4,6 @@
     <style>
       <class name="pick-icon-popover" />
     </style>
-    <property name="width-request">320</property>
-    <property name="height-request">400</property>
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
@@ -33,11 +31,14 @@
             <style>
               <class name="undershoot-top" />
             </style>
+            <property name="propagate-natural-width">true</property>
+            <property name="propagate-natural-height">true</property>
+            <property name="max-content-height">400</property>
             <property name="vexpand">true</property>
             <property name="child">
               <object class="GtkGridView" id="grid_view">
                 <property name="single-click-activate">true</property>
-                <property name="max-columns">9</property>
+                <property name="max-columns">6</property>
                 <style>
                   <class name="pick-icon-grid" />
                 </style>
