@@ -39,28 +39,47 @@ enum
 };
 
 static GParamSpec *properties[N_PROPS];
+static GHashTable *icon_cache;
 
-void
-pins_app_icon_set_icon_name (PinsAppIcon *self, gchar *icon_name)
+GdkPaintable *
+pins_app_icon_get_paintable (PinsAppIcon *self, gchar *icon_key)
 {
     GtkIconTheme *theme
         = gtk_icon_theme_get_for_display (gdk_display_get_default ());
     g_autofree gchar *host_filename
-        = g_build_filename ("/run/host", icon_name, NULL);
+        = g_build_filename ("/run/host", icon_key, NULL);
+    int size = gtk_image_get_pixel_size (self->image),
+        scale = gtk_widget_get_scale_factor (GTK_WIDGET (self));
+    GtkIconPaintable *paintable;
 
-    if (!g_strcmp0 (icon_name, ""))
-        gtk_image_set_from_icon_name (self->image, DEFAULT_ICON_NAME);
-    else if (gtk_icon_theme_has_icon (theme, icon_name)
-             || gtk_icon_theme_has_icon (
-                 theme, g_strconcat (icon_name, "-symbolic", NULL)))
-        // TODO: This line slows down search.
-        gtk_image_set_from_icon_name (self->image, icon_name);
-    else if (g_file_test (icon_name, G_FILE_TEST_IS_REGULAR))
-        gtk_image_set_from_file (self->image, icon_name);
+    if (g_hash_table_contains (icon_cache, icon_key))
+        return GDK_PAINTABLE (g_hash_table_lookup (icon_cache, icon_key));
+
+    if (gtk_icon_theme_has_icon (theme, icon_key)
+        || gtk_icon_theme_has_icon (theme,
+                                    g_strconcat (icon_key, "-symbolic", NULL)))
+        paintable = gtk_icon_theme_lookup_icon (theme, icon_key, NULL, size,
+                                                scale, GTK_TEXT_DIR_NONE,
+                                                GTK_ICON_LOOKUP_PRELOAD);
+    else if (g_file_test (icon_key, G_FILE_TEST_IS_REGULAR))
+        paintable = gtk_icon_paintable_new_for_file (
+            g_file_new_for_path (icon_key), size, scale);
     else if (g_file_test (host_filename, G_FILE_TEST_IS_REGULAR))
-        gtk_image_set_from_file (self->image, host_filename);
+        paintable = gtk_icon_paintable_new_for_file (
+            g_file_new_for_path (host_filename), size, scale);
     else
-        gtk_image_set_from_icon_name (self->image, DEFAULT_ICON_NAME);
+        {
+            if (g_hash_table_contains (icon_cache, DEFAULT_ICON_NAME))
+                return GDK_PAINTABLE (
+                    g_hash_table_lookup (icon_cache, DEFAULT_ICON_NAME));
+
+            paintable = gtk_icon_theme_lookup_icon (
+                theme, DEFAULT_ICON_NAME, NULL, size, scale, GTK_TEXT_DIR_NONE,
+                GTK_ICON_LOOKUP_PRELOAD);
+        }
+
+    g_hash_table_insert (icon_cache, icon_key, paintable);
+    return GDK_PAINTABLE (paintable);
 }
 
 void
@@ -71,10 +90,11 @@ pins_app_icon_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
 
     if (g_strcmp0 (key, G_KEY_FILE_DESKTOP_KEY_ICON) == 0)
         {
-            gchar *icon_name = pins_desktop_file_get_string (
+            gchar *icon_key = pins_desktop_file_get_string (
                 desktop_file, G_KEY_FILE_DESKTOP_KEY_ICON);
 
-            pins_app_icon_set_icon_name (self, icon_name);
+            gtk_image_set_from_paintable (
+                self->image, pins_app_icon_get_paintable (self, icon_key));
         }
 }
 
@@ -82,17 +102,19 @@ void
 pins_app_icon_set_desktop_file (PinsAppIcon *self,
                                 PinsDesktopFile *desktop_file)
 {
-    gchar *icon_name = NULL;
+    gchar *icon_key = NULL;
 
     g_assert (PINS_IS_DESKTOP_FILE (desktop_file));
 
-    icon_name = pins_desktop_file_get_string (desktop_file,
-                                              G_KEY_FILE_DESKTOP_KEY_ICON);
+    icon_key = pins_desktop_file_get_string (desktop_file,
+                                             G_KEY_FILE_DESKTOP_KEY_ICON);
 
     g_signal_connect_object (desktop_file, "key-set",
                              G_CALLBACK (pins_app_icon_key_set_cb), self, 0);
 
-    pins_app_icon_set_icon_name (self, icon_name);
+    gtk_image_set_from_paintable (
+        self->image, pins_app_icon_get_paintable (self, icon_key));
+    ;
 }
 
 static void
@@ -150,6 +172,8 @@ pins_app_icon_class_init (PinsAppIconClass *klass)
     properties[PROP_PIXEL_SIZE] = g_param_spec_int (
         "pixel-size", "Pixel Size", "Pixel size of the app icon", 0, G_MAXINT,
         32, (G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+    icon_cache = g_hash_table_new (g_str_hash, g_str_equal);
 
     g_object_class_install_properties (object_class, N_PROPS, properties);
 
