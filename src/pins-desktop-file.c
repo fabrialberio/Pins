@@ -236,12 +236,9 @@ pins_desktop_file_save (PinsDesktopFile *self, GError **error,
 {
     gsize lenght;
 
-    if (remove_unedited_user_files
-        && !pins_desktop_file_has_unsaved_changes (self))
-        return;
-
     self->saved_data = g_key_file_to_data (self->key_file, &lenght, NULL);
 
+    // Avoid redundant shadowing.
     if (remove_unedited_user_files && self->system_file != NULL
         && !g_strcmp0 (self->saved_data,
                        g_key_file_to_data (self->backup_key_file, NULL, NULL)))
@@ -249,6 +246,10 @@ pins_desktop_file_save (PinsDesktopFile *self, GError **error,
             g_file_delete (self->user_file, NULL, NULL);
             return;
         }
+
+    if (remove_unedited_user_files
+        && !pins_desktop_file_has_unsaved_changes (self))
+        return;
 
     g_file_replace_contents (self->user_file, self->saved_data, lenght, NULL,
                              FALSE, G_FILE_CREATE_REPLACE_DESTINATION, NULL,

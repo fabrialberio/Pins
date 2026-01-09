@@ -429,6 +429,7 @@ erase_all_button_clicked_cb (PinsFileView *self)
         pins_desktop_file_reset_key (self->desktop_file, keys[i]);
 
     g_strfreev (keys);
+    pins_desktop_file_save (self->desktop_file, NULL, TRUE);
 }
 
 void
