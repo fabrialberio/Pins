@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-07 12:09+0100\n"
-"PO-Revision-Date: 2026-01-07 12:12+0100\n"
+"POT-Creation-Date: 2026-01-09 21:52+0100\n"
+"PO-Revision-Date: 2026-01-09 21:53+0100\n"
 "Last-Translator: Fabrizio Alberio <fabrizio.alberio@gmail.com>\n"
 "Language-Team: Italian <fabrizio.alberio@gmail.com>\n"
 "Language: it\n"
@@ -121,7 +121,7 @@ msgstr "Sistema"
 msgid "Hidden"
 msgstr "Nascoste"
 
-#: src/pins-app-view.ui:97 src/pins-file-view.ui:138
+#: src/pins-app-view.ui:97 src/pins-file-view.ui:142
 msgid "Autostart"
 msgstr "Avvio automatico"
 
@@ -146,36 +146,48 @@ msgid "_About Pins"
 msgstr "_Informazioni su Pins"
 
 #: src/pins-file-view.ui:18
-msgid "Duplicate"
-msgstr "Duplica"
+msgid "More Options"
+msgstr "Altre opzioni"
 
-#: src/pins-file-view.ui:24
+#: src/pins-file-view.ui:25
 msgid "Delete"
 msgstr "Elimina"
 
-#: src/pins-file-view.ui:73 src/pins-key-row.ui:9
+#: src/pins-file-view.ui:74 src/pins-key-row.ui:9
 msgid "Erase Changes"
 msgstr "Cancella modifiche"
 
-#: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
+#: src/pins-file-view.ui:94
 msgid "Pick Icon"
 msgstr "Scegli icona"
 
-#: src/pins-file-view.ui:141
+#: src/pins-file-view.ui:145
 msgid "Launch this application on login"
 msgstr "Avvia quest'applicazione all'accesso"
 
-#: src/pins-file-view.ui:158
+#: src/pins-file-view.ui:162
 msgid "Invisible"
 msgstr "Invisibile"
 
-#: src/pins-file-view.ui:161
+#: src/pins-file-view.ui:165
 msgid "Hide this application in the app menu"
 msgstr "Nascondi quest'applicazione nel menù"
 
-#: src/pins-file-view.ui:194
+#: src/pins-file-view.ui:198
 msgid "Add Key"
 msgstr "Aggiungi chiave"
+
+#: src/pins-file-view.ui:224
+msgid "Open With…"
+msgstr "Apri con…"
+
+#: src/pins-file-view.ui:228
+msgid "Open Containing Folder…"
+msgstr "Apri cartella superiore…"
+
+#: src/pins-file-view.ui:232
+msgid "Duplicate"
+msgstr "Duplica"
 
 #: src/pins-key-row.ui:21
 msgid "Remove Key"
@@ -185,13 +197,13 @@ msgstr "Rimuovi chiave"
 msgid "Select Locale"
 msgstr "Seleziona localizzazione"
 
-#: src/pins-pick-icon-dialog.ui:13 src/pins-pick-icon-dialog.c:118
-msgid "Load Icon from File"
-msgstr "Carica icona da file"
-
-#: src/pins-pick-icon-dialog.ui:19
+#: src/pins-pick-icon-popover.ui:18
 msgid "Search for icons"
 msgstr "Cerca tra le icone"
+
+#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
+msgid "Load Icon from File"
+msgstr "Carica icona da file"
 
 #: src/pins-window.ui:14
 msgid "All Apps"
