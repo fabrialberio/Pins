@@ -47,7 +47,8 @@ gboolean pins_desktop_file_is_user_edited (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_autostart (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_shown (PinsDesktopFile *self);
 
-void pins_desktop_file_save (PinsDesktopFile *self, GError **error);
+void pins_desktop_file_save (PinsDesktopFile *self, GError **error,
+                             gboolean remove_unedited_user_files);
 void pins_desktop_file_trash (PinsDesktopFile *self);
 void pins_desktop_file_set_autostart (PinsDesktopFile *self, gboolean value);
 

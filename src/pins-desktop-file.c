@@ -224,19 +224,21 @@ pins_desktop_file_trash (PinsDesktopFile *self)
 }
 
 void
-pins_desktop_file_save (PinsDesktopFile *self, GError **error)
+pins_desktop_file_save (PinsDesktopFile *self, GError **error,
+                        gboolean remove_unedited_user_files)
 {
     g_autoptr (GOutputStream) stream = NULL;
     g_autoptr (GError) err = NULL;
     gsize lenght;
 
-    if (!g_strcmp0 (g_key_file_to_data (self->key_file, NULL, NULL),
-                    self->saved_data))
+    if (remove_unedited_user_files
+        && !g_strcmp0 (g_key_file_to_data (self->key_file, NULL, NULL),
+                       self->saved_data))
         return;
 
     self->saved_data = g_key_file_to_data (self->key_file, &lenght, NULL);
 
-    if (self->system_file != NULL
+    if (remove_unedited_user_files && self->system_file != NULL
         && !g_strcmp0 (self->saved_data,
                        g_key_file_to_data (self->backup_key_file, NULL, NULL)))
         {
