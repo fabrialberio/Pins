@@ -48,6 +48,7 @@ struct _PinsFileView
     GtkListBox *keys_listbox;
     AdwButtonRow *add_key_button;
     GtkButton *delete_button;
+    GtkButton *erase_all_button;
     AdwBreakpoint *breakpoint;
 };
 
@@ -94,14 +95,27 @@ pins_file_view_update_title (PinsFileView *self)
 }
 
 void
+pins_file_view_update_reset_all_button_visible (PinsFileView *self)
+{
+    // TODO: Sometimes visibility is not updated correctly, like when changing
+    // "Invisible" switch.
+    gboolean visible
+        = !pins_desktop_file_is_user_only (self->desktop_file)
+          && self->opened_from_file == NULL
+          && (pins_desktop_file_is_user_edited (self->desktop_file)
+              || pins_desktop_file_has_unsaved_changes (self->desktop_file));
+
+    gtk_widget_set_visible (GTK_WIDGET (self->erase_all_button), visible);
+}
+
+void
 pins_file_view_update_reset_icon_button_visible (PinsFileView *self)
 {
-    gboolean icon_edited = pins_desktop_file_is_key_edited (
-        self->desktop_file, G_KEY_FILE_DESKTOP_KEY_ICON);
+    gboolean visible = !pins_desktop_file_is_user_only (self->desktop_file)
+                       && pins_desktop_file_is_key_edited (
+                           self->desktop_file, G_KEY_FILE_DESKTOP_KEY_ICON);
 
-    gtk_widget_set_visible (
-        GTK_WIDGET (self->reset_icon_button),
-        icon_edited && !pins_desktop_file_is_user_only (self->desktop_file));
+    gtk_widget_set_visible (GTK_WIDGET (self->reset_icon_button), visible);
 }
 
 void
@@ -151,6 +165,8 @@ pins_file_view_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
                            PinsFileView *self)
 {
     g_assert (PINS_IS_FILE_VIEW (self));
+
+    pins_file_view_update_reset_all_button_visible (self);
 
     if (!g_strv_contains ((const gchar *const *)self->keys, key))
         {
@@ -253,6 +269,7 @@ pins_file_view_set_desktop_file (PinsFileView *self,
     self->keys = pins_desktop_file_get_keys (self->desktop_file);
 
     pins_file_view_update_title (self);
+    pins_file_view_update_reset_all_button_visible (self);
     pins_file_view_update_reset_icon_button_visible (self);
     pins_app_icon_set_desktop_file (self->icon, self->desktop_file);
     pins_pick_icon_popover_set_desktop_file (self->pick_icon_popover,
@@ -344,6 +361,8 @@ pins_file_view_class_init (PinsFileViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           delete_button);
     gtk_widget_class_bind_template_child (widget_class, PinsFileView,
+                                          erase_all_button);
+    gtk_widget_class_bind_template_child (widget_class, PinsFileView,
                                           breakpoint);
 }
 
@@ -399,6 +418,17 @@ void
 delete_button_clicked_cb (PinsFileView *self)
 {
     pins_desktop_file_trash (self->desktop_file);
+}
+
+void
+erase_all_button_clicked_cb (PinsFileView *self)
+{
+    gchar **keys = pins_desktop_file_get_keys (self->desktop_file);
+
+    for (int i = 0; keys[i] != NULL; i++)
+        pins_desktop_file_reset_key (self->desktop_file, keys[i]);
+
+    g_strfreev (keys);
 }
 
 void
@@ -460,6 +490,9 @@ pins_file_view_init (PinsFileView *self)
                              G_CONNECT_SWAPPED);
     g_signal_connect_object (self->delete_button, "clicked",
                              G_CALLBACK (delete_button_clicked_cb), self,
+                             G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->erase_all_button, "clicked",
+                             G_CALLBACK (erase_all_button_clicked_cb), self,
                              G_CONNECT_SWAPPED);
 
     g_signal_connect_object (self->breakpoint, "apply",

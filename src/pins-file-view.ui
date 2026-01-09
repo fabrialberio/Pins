@@ -29,6 +29,16 @@
                 </style>
               </object>
             </child>
+            <child type="end">
+              <object class="GtkButton" id="erase_all_button">
+                <property name="icon-name">erase-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Erase all changes</property>
+                <style>
+                  <class name="destructive-action" />
+                  <class name="flat" />
+                </style>
+              </object>
+            </child>
           </object>
         </child>
         <property name="content">
