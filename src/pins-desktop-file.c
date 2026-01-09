@@ -156,6 +156,13 @@ pins_desktop_file_new (GFile *file, GError **error)
 }
 
 gboolean
+pins_desktop_file_has_unsaved_changes (PinsDesktopFile *self)
+{
+    return g_strcmp0 (self->saved_data,
+                      g_key_file_to_data (self->key_file, NULL, NULL));
+}
+
+gboolean
 pins_desktop_file_is_user_only (PinsDesktopFile *self)
 {
     return self->system_file == NULL;
@@ -230,8 +237,7 @@ pins_desktop_file_save (PinsDesktopFile *self, GError **error,
     gsize lenght;
 
     if (remove_unedited_user_files
-        && !g_strcmp0 (g_key_file_to_data (self->key_file, NULL, NULL),
-                       self->saved_data))
+        && !pins_desktop_file_has_unsaved_changes (self))
         return;
 
     self->saved_data = g_key_file_to_data (self->key_file, &lenght, NULL);

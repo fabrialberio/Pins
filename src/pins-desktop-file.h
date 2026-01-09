@@ -42,6 +42,7 @@ PinsDesktopFile *pins_desktop_file_new_full (GFile *user_file,
                                              GError **error);
 PinsDesktopFile *pins_desktop_file_new (GFile *file, GError **error);
 
+gboolean pins_desktop_file_has_unsaved_changes (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_user_only (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_user_edited (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_autostart (PinsDesktopFile *self);
