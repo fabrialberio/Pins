@@ -13,9 +13,10 @@
               </object>
             </property>
             <child type="end">
-              <object class="GtkButton" id="duplicate_button">
-                <property name="icon-name">edit-copy-symbolic</property>
-                <property name="tooltip-text" translatable="yes">Duplicate</property>
+              <object class="GtkMenuButton">
+                <property name="icon-name">view-more-symbolic</property>
+                <property name="tooltip-text" translatable="yes">More Options</property>
+                <property name="menu-model">file_menu</property>
               </object>
             </child>
             <child type="end">
@@ -215,4 +216,22 @@
       </object>
     </child>
   </template>
+
+
+  <menu id="file_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Open With…</attribute>
+        <attribute name="action">file.open-with</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Open Containing Folder…</attribute>
+        <attribute name="action">file.open-folder</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Duplicate</attribute>
+        <attribute name="action">file.duplicate</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>

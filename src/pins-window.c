@@ -73,7 +73,7 @@ pins_window_save_current_desktop_file (PinsWindow *self)
 
     if (desktop_file != NULL)
         {
-            pins_desktop_file_save (desktop_file, &err);
+            pins_desktop_file_save (desktop_file, &err, TRUE);
             if (err != NULL)
                 g_warning ("Error saving file: %s", err->message);
         }
@@ -141,7 +141,7 @@ pins_window_set_desktop_file (PinsWindow *self, PinsDesktopFile *desktop_file,
     pins_file_view_set_desktop_file (self->file_view, desktop_file,
                                      opened_from_file);
 
-    g_signal_connect_object (desktop_file, "file-deleted",
+    g_signal_connect_object (desktop_file, "deleted",
                              G_CALLBACK (pins_window_file_deleted_cb), self,
                              0);
 
@@ -211,13 +211,14 @@ pins_window_add_new_app_cb (GSimpleAction *action, GVariant *param,
 }
 
 void
-pins_window_duplicate_app_cb (GSimpleAction *action, GVariant *param,
-                              PinsWindow *self)
+pins_window_file_view_duplicate_cb (PinsWindow *self,
+                                    PinsDesktopFile *desktop_file)
 {
-    const gchar *desktop_id = g_variant_get_string (param, NULL);
     GError *err = NULL;
 
-    pins_app_iterator_duplicate_file (self->app_iterator, desktop_id, &err);
+    pins_app_iterator_duplicate_file (
+        self->app_iterator, pins_desktop_file_get_desktop_id (desktop_file),
+        &err);
     if (err != NULL)
         g_warning ("Error duplicating file: %s", err->message);
 
@@ -233,9 +234,7 @@ pins_window_file_activated_cb (PinsWindow *self, PinsDesktopFile *desktop_file)
 static void
 pins_window_init (PinsWindow *self)
 {
-    g_autoptr (GSimpleAction) new_app_action = NULL,
-                              duplicate_app_action = NULL,
-                              search_action = NULL;
+    g_autoptr (GSimpleAction) new_app_action = NULL, search_action = NULL;
 
     gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -249,14 +248,6 @@ pins_window_init (PinsWindow *self)
                              self->app_iterator, 0);
     g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (new_app_action));
 
-    duplicate_app_action
-        = g_simple_action_new ("duplicate-app", G_VARIANT_TYPE_STRING);
-    g_signal_connect_object (duplicate_app_action, "activate",
-                             G_CALLBACK (pins_window_duplicate_app_cb), self,
-                             0);
-    g_action_map_add_action (G_ACTION_MAP (self),
-                             G_ACTION (duplicate_app_action));
-
     search_action = g_simple_action_new_stateful (
         "search", NULL, g_variant_new_boolean (FALSE));
     g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (search_action));
@@ -266,6 +257,9 @@ pins_window_init (PinsWindow *self)
     g_signal_connect_object (self->app_view, "activate",
                              G_CALLBACK (pins_window_file_activated_cb), self,
                              G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->file_view, "duplicate",
+                             G_CALLBACK (pins_window_file_view_duplicate_cb),
+                             self, G_CONNECT_SWAPPED);
 
     g_signal_connect_object (
         adw_navigation_view_find_page (self->navigation_view,

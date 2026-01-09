@@ -47,12 +47,13 @@ gboolean pins_desktop_file_is_user_edited (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_autostart (PinsDesktopFile *self);
 gboolean pins_desktop_file_is_shown (PinsDesktopFile *self);
 
-void pins_desktop_file_save (PinsDesktopFile *self, GError **error);
+void pins_desktop_file_save (PinsDesktopFile *self, GError **error,
+                             gboolean remove_unedited_user_files);
 void pins_desktop_file_trash (PinsDesktopFile *self);
 void pins_desktop_file_set_autostart (PinsDesktopFile *self, gboolean value);
 
 gchar *pins_desktop_file_get_desktop_id (PinsDesktopFile *self);
-GFile *pins_desktop_file_get_copy_file (PinsDesktopFile *self);
+GFile *pins_desktop_file_get_user_file (PinsDesktopFile *self);
 gchar **pins_desktop_file_get_keys (PinsDesktopFile *self);
 gchar **pins_desktop_file_get_locales (PinsDesktopFile *self);
 

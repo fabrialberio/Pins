@@ -67,6 +67,8 @@ pins_app_iterator_key_set_cb (PinsAppIterator *self, gchar *key,
 {
     guint position;
 
+    // TODO: Even when it emits items-changed on every key-set event, the
+    // filter list models of PinsAppFilter do not update immediately.
     if (!g_strcmp0 (_pins_split_key_locale (key).key,
                     G_KEY_FILE_DESKTOP_KEY_NAME))
         {
@@ -106,7 +108,7 @@ desktop_files_by_id_insert_file (PinsAppIterator *self, GFile *file,
     g_signal_connect_object (desktop_file, "key-set",
                              G_CALLBACK (pins_app_iterator_key_set_cb), self,
                              G_CONNECT_SWAPPED);
-    g_signal_connect_object (desktop_file, "file-deleted",
+    g_signal_connect_object (desktop_file, "deleted",
                              G_CALLBACK (pins_app_iterator_file_deleted_cb),
                              self, G_CONNECT_SWAPPED);
 }

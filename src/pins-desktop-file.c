@@ -52,7 +52,7 @@ enum
 {
     KEY_SET,
     KEY_REMOVED,
-    FILE_DELETED,
+    DELETED,
     N_SIGNALS,
 };
 
@@ -220,23 +220,23 @@ pins_desktop_file_trash (PinsDesktopFile *self)
     if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED))
         g_file_delete (self->user_file, NULL, NULL);
 
-    g_signal_emit (self, signals[FILE_DELETED], 0);
+    g_signal_emit (self, signals[DELETED], 0);
 }
 
 void
-pins_desktop_file_save (PinsDesktopFile *self, GError **error)
+pins_desktop_file_save (PinsDesktopFile *self, GError **error,
+                        gboolean remove_unedited_user_files)
 {
-    g_autoptr (GOutputStream) stream = NULL;
-    g_autoptr (GError) err = NULL;
     gsize lenght;
 
-    if (!g_strcmp0 (g_key_file_to_data (self->key_file, NULL, NULL),
-                    self->saved_data))
+    if (remove_unedited_user_files
+        && !g_strcmp0 (g_key_file_to_data (self->key_file, NULL, NULL),
+                       self->saved_data))
         return;
 
     self->saved_data = g_key_file_to_data (self->key_file, &lenght, NULL);
 
-    if (self->system_file != NULL
+    if (remove_unedited_user_files && self->system_file != NULL
         && !g_strcmp0 (self->saved_data,
                        g_key_file_to_data (self->backup_key_file, NULL, NULL)))
         {
@@ -269,24 +269,11 @@ pins_desktop_file_get_desktop_id (PinsDesktopFile *self)
 }
 
 GFile *
-pins_desktop_file_get_copy_file (PinsDesktopFile *self)
+pins_desktop_file_get_user_file (PinsDesktopFile *self)
 {
     GFile *file = self->user_file;
 
-    // Copy system file to data folder to ensure other apps can access it
-    if (!g_file_query_exists (file, NULL))
-        {
-            file = g_file_new_build_filename (
-                g_get_user_data_dir (), "tmp-applications",
-                pins_desktop_file_get_desktop_id (self), NULL);
-
-            g_file_make_directory_with_parents (g_file_get_parent (file), NULL,
-                                                NULL);
-
-            g_file_replace_contents (file, self->saved_data,
-                                     strlen (self->saved_data), NULL, FALSE,
-                                     G_FILE_CREATE_NONE, NULL, NULL, NULL);
-        }
+    pins_desktop_file_save (self, NULL, FALSE);
 
     return file;
 }
@@ -367,9 +354,9 @@ pins_desktop_file_class_init (PinsDesktopFileClass *klass)
         "key-removed", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_FIRST, 0, NULL,
         NULL, NULL, G_TYPE_NONE, 1, G_TYPE_STRING);
 
-    signals[FILE_DELETED] = g_signal_new (
-        "file-deleted", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST, 0, NULL,
-        NULL, NULL, G_TYPE_NONE, 0);
+    signals[DELETED] = g_signal_new ("deleted", G_TYPE_FROM_CLASS (klass),
+                                     G_SIGNAL_RUN_LAST, 0, NULL, NULL, NULL,
+                                     G_TYPE_NONE, 0);
 }
 
 static void
