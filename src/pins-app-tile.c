@@ -119,7 +119,7 @@ static GdkContentProvider *
 pins_app_tile_drag_prepare_cb (PinsAppTile *self, double x, double y,
                                GtkDragSource *source)
 {
-    GFile *file = pins_desktop_file_get_copy_file (self->desktop_file);
+    GFile *file = pins_desktop_file_get_user_file (self->desktop_file);
 
     return gdk_content_provider_new_typed (G_TYPE_FILE, file);
 }
