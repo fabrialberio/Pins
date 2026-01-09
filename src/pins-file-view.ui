@@ -225,6 +225,10 @@
         <attribute name="action">file.open-with</attribute>
       </item>
       <item>
+        <attribute name="label" translatable="yes">Open Containing Folder…</attribute>
+        <attribute name="action">file.open-folder</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">Duplicate</attribute>
         <attribute name="action">file.duplicate</attribute>
       </item>

@@ -348,6 +348,31 @@ pins_file_view_class_init (PinsFileViewClass *klass)
 }
 
 void
+pins_file_view_open_with_cb (GSimpleAction *action, GVariant *param,
+                             PinsFileView *self)
+{
+    GtkFileLauncher *launcher = gtk_file_launcher_new (
+        pins_desktop_file_get_user_file (self->desktop_file));
+
+    gtk_file_launcher_set_always_ask (launcher, TRUE);
+    gtk_file_launcher_launch (
+        launcher, GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))), NULL,
+        (void (*))gtk_file_launcher_launch_finish, NULL);
+}
+
+void
+pins_file_view_open_folder_cb (GSimpleAction *action, GVariant *param,
+                               PinsFileView *self)
+{
+    GtkFileLauncher *launcher = gtk_file_launcher_new (
+        pins_desktop_file_get_user_file (self->desktop_file));
+
+    gtk_file_launcher_open_containing_folder (
+        launcher, GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))), NULL,
+        (void (*))gtk_file_launcher_open_containing_folder_finish, NULL);
+}
+
+void
 pins_file_view_duplicate_cb (GSimpleAction *action, GVariant *param,
                              PinsFileView *self)
 {
@@ -394,9 +419,25 @@ static void
 pins_file_view_init (PinsFileView *self)
 {
     g_autoptr (GSimpleActionGroup) group = NULL;
-    g_autoptr (GSimpleAction) duplicate_action = NULL;
+    g_autoptr (GSimpleAction) open_with_action = NULL,
+                              open_folder_action = NULL,
+                              duplicate_action = NULL;
 
     group = g_simple_action_group_new ();
+
+    open_with_action = g_simple_action_new ("open-with", NULL);
+    g_signal_connect_object (open_with_action, "activate",
+                             G_CALLBACK (pins_file_view_open_with_cb), self,
+                             0);
+    g_action_map_add_action (G_ACTION_MAP (group),
+                             G_ACTION (open_with_action));
+
+    open_folder_action = g_simple_action_new ("open-folder", NULL);
+    g_signal_connect_object (open_folder_action, "activate",
+                             G_CALLBACK (pins_file_view_open_folder_cb), self,
+                             0);
+    g_action_map_add_action (G_ACTION_MAP (group),
+                             G_ACTION (open_folder_action));
 
     duplicate_action = g_simple_action_new ("duplicate", NULL);
     g_signal_connect_object (duplicate_action, "activate",
