@@ -6,7 +6,7 @@ src/pins-add-key-dialog.ui
 src/pins-app-view.ui
 src/pins-file-view.ui
 src/pins-key-row.ui
-src/pins-pick-icon-dialog.ui
+src/pins-pick-icon-popover.ui
 src/pins-window.ui
 src/shortcuts-dialog.ui
 
@@ -14,4 +14,4 @@ src/pins-application.c
 src/pins-desktop-file.c
 src/pins-file-view.c
 src/pins-key-row.c
-src/pins-pick-icon-dialog.c
+src/pins-pick-icon-popover.c
