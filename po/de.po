@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-07 12:09+0100\n"
+"POT-Creation-Date: 2026-01-09 21:52+0100\n"
 "PO-Revision-Date: 2025-04-06 14:29+0200\n"
 "Last-Translator: Gabriel Brand <gabr.brand@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -125,7 +125,7 @@ msgstr ""
 msgid "Hidden"
 msgstr ""
 
-#: src/pins-app-view.ui:97 src/pins-file-view.ui:138
+#: src/pins-app-view.ui:97 src/pins-file-view.ui:142
 msgid "Autostart"
 msgstr "Autostart"
 
@@ -153,38 +153,50 @@ msgid "_About Pins"
 msgstr "_Info zu Pins"
 
 #: src/pins-file-view.ui:18
-msgid "Duplicate"
+msgid "More Options"
 msgstr ""
 
-#: src/pins-file-view.ui:24
+#: src/pins-file-view.ui:25
 msgid "Delete"
 msgstr "Löschen"
 
-#: src/pins-file-view.ui:73 src/pins-key-row.ui:9
+#: src/pins-file-view.ui:74 src/pins-key-row.ui:9
 #, fuzzy
 msgid "Erase Changes"
 msgstr "Änderungen löschen"
 
-#: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
+#: src/pins-file-view.ui:94
 msgid "Pick Icon"
 msgstr ""
 
-#: src/pins-file-view.ui:141
+#: src/pins-file-view.ui:145
 msgid "Launch this application on login"
 msgstr "Diese Anwendung bei der Anmeldung starten"
 
-#: src/pins-file-view.ui:158
+#: src/pins-file-view.ui:162
 msgid "Invisible"
 msgstr "Unsichtbar"
 
-#: src/pins-file-view.ui:161
+#: src/pins-file-view.ui:165
 msgid "Hide this application in the app menu"
 msgstr "Diese Anwendung im Anwendungsmenü ausblenden"
 
-#: src/pins-file-view.ui:194
+#: src/pins-file-view.ui:198
 #, fuzzy
 msgid "Add Key"
 msgstr "Schlüssel hinzufügen"
+
+#: src/pins-file-view.ui:224
+msgid "Open With…"
+msgstr ""
+
+#: src/pins-file-view.ui:228
+msgid "Open Containing Folder…"
+msgstr ""
+
+#: src/pins-file-view.ui:232
+msgid "Duplicate"
+msgstr ""
 
 #: src/pins-key-row.ui:21
 #, fuzzy
@@ -196,14 +208,14 @@ msgstr "Schlüssel entfernen"
 msgid "Select Locale"
 msgstr "Locale auswählen"
 
-#: src/pins-pick-icon-dialog.ui:13 src/pins-pick-icon-dialog.c:118
+#: src/pins-pick-icon-popover.ui:18
+msgid "Search for icons"
+msgstr ""
+
+#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
 #, fuzzy
 msgid "Load Icon from File"
 msgstr "Symbol aus Datei laden"
-
-#: src/pins-pick-icon-dialog.ui:19
-msgid "Search for icons"
-msgstr ""
 
 #: src/pins-window.ui:14
 #, fuzzy

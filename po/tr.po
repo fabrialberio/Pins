@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.fabrialberio.pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-07 12:09+0100\n"
+"POT-Creation-Date: 2026-01-09 21:52+0100\n"
 "PO-Revision-Date: 2025-02-05 18:05+0100\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
@@ -129,7 +129,7 @@ msgstr ""
 msgid "Hidden"
 msgstr ""
 
-#: src/pins-app-view.ui:97 src/pins-file-view.ui:138
+#: src/pins-app-view.ui:97 src/pins-file-view.ui:142
 msgid "Autostart"
 msgstr ""
 
@@ -158,39 +158,51 @@ msgid "_About Pins"
 msgstr "PinApp Hakkında"
 
 #: src/pins-file-view.ui:18
-#, fuzzy
-msgid "Duplicate"
-msgstr "Dosyayı Çoğalt"
+msgid "More Options"
+msgstr ""
 
-#: src/pins-file-view.ui:24
+#: src/pins-file-view.ui:25
 msgid "Delete"
 msgstr ""
 
-#: src/pins-file-view.ui:73 src/pins-key-row.ui:9
+#: src/pins-file-view.ui:74 src/pins-key-row.ui:9
 #, fuzzy
 msgid "Erase Changes"
 msgstr "Değişiklikler kaydedilsin mi?"
 
-#: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
+#: src/pins-file-view.ui:94
 msgid "Pick Icon"
 msgstr ""
 
-#: src/pins-file-view.ui:141
+#: src/pins-file-view.ui:145
 msgid "Launch this application on login"
 msgstr ""
 
-#: src/pins-file-view.ui:158
+#: src/pins-file-view.ui:162
 msgid "Invisible"
 msgstr ""
 
-#: src/pins-file-view.ui:161
+#: src/pins-file-view.ui:165
 msgid "Hide this application in the app menu"
 msgstr ""
 
-#: src/pins-file-view.ui:194
+#: src/pins-file-view.ui:198
 #, fuzzy
 msgid "Add Key"
 msgstr "Yeni anahtar ekle"
+
+#: src/pins-file-view.ui:224
+msgid "Open With…"
+msgstr ""
+
+#: src/pins-file-view.ui:228
+msgid "Open Containing Folder…"
+msgstr ""
+
+#: src/pins-file-view.ui:232
+#, fuzzy
+msgid "Duplicate"
+msgstr "Dosyayı Çoğalt"
 
 #: src/pins-key-row.ui:21
 msgid "Remove Key"
@@ -201,12 +213,12 @@ msgstr ""
 msgid "Select Locale"
 msgstr "Yerel"
 
-#: src/pins-pick-icon-dialog.ui:13 src/pins-pick-icon-dialog.c:118
-msgid "Load Icon from File"
+#: src/pins-pick-icon-popover.ui:18
+msgid "Search for icons"
 msgstr ""
 
-#: src/pins-pick-icon-dialog.ui:19
-msgid "Search for icons"
+#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
+msgid "Load Icon from File"
 msgstr ""
 
 #: src/pins-window.ui:14

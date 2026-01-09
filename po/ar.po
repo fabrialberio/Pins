@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-07 12:09+0100\n"
+"POT-Creation-Date: 2026-01-09 21:52+0100\n"
 "PO-Revision-Date: 2025-07-09 07:39+0300\n"
 "Last-Translator: Ahmed Najmawi <iramosu@protonmail.com>\n"
 "Language-Team: \n"
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Hidden"
 msgstr ""
 
-#: src/pins-app-view.ui:97 src/pins-file-view.ui:138
+#: src/pins-app-view.ui:97 src/pins-file-view.ui:142
 msgid "Autostart"
 msgstr "التشغيل التلقائي"
 
@@ -144,36 +144,48 @@ msgid "_About Pins"
 msgstr "_عن دبابيس"
 
 #: src/pins-file-view.ui:18
-msgid "Duplicate"
+msgid "More Options"
 msgstr ""
 
-#: src/pins-file-view.ui:24
+#: src/pins-file-view.ui:25
 msgid "Delete"
 msgstr "احذف"
 
-#: src/pins-file-view.ui:73 src/pins-key-row.ui:9
+#: src/pins-file-view.ui:74 src/pins-key-row.ui:9
 msgid "Erase Changes"
 msgstr "امسح التغييرات"
 
-#: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
+#: src/pins-file-view.ui:94
 msgid "Pick Icon"
 msgstr "اختر أيقونة"
 
-#: src/pins-file-view.ui:141
+#: src/pins-file-view.ui:145
 msgid "Launch this application on login"
 msgstr "شغّل هذا التطبيق عند الولوج"
 
-#: src/pins-file-view.ui:158
+#: src/pins-file-view.ui:162
 msgid "Invisible"
 msgstr "مخفي"
 
-#: src/pins-file-view.ui:161
+#: src/pins-file-view.ui:165
 msgid "Hide this application in the app menu"
 msgstr "أخفِ هذا التطبيق من قائمة التطبيقات"
 
-#: src/pins-file-view.ui:194
+#: src/pins-file-view.ui:198
 msgid "Add Key"
 msgstr "أضف مفتاحًا"
+
+#: src/pins-file-view.ui:224
+msgid "Open With…"
+msgstr ""
+
+#: src/pins-file-view.ui:228
+msgid "Open Containing Folder…"
+msgstr ""
+
+#: src/pins-file-view.ui:232
+msgid "Duplicate"
+msgstr ""
 
 #: src/pins-key-row.ui:21
 msgid "Remove Key"
@@ -183,13 +195,13 @@ msgstr "أزل المفتاح"
 msgid "Select Locale"
 msgstr "اختر المحليّة"
 
-#: src/pins-pick-icon-dialog.ui:13 src/pins-pick-icon-dialog.c:118
-msgid "Load Icon from File"
-msgstr "حمّل أيقونة من ملف"
-
-#: src/pins-pick-icon-dialog.ui:19
+#: src/pins-pick-icon-popover.ui:18
 msgid "Search for icons"
 msgstr "ابحث عن أيقونات"
+
+#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
+msgid "Load Icon from File"
+msgstr "حمّل أيقونة من ملف"
 
 #: src/pins-window.ui:14
 msgid "All Apps"

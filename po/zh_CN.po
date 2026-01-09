@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-07 12:09+0100\n"
+"POT-Creation-Date: 2026-01-09 21:52+0100\n"
 "PO-Revision-Date: 2025-11-10 14:09+0800\n"
 "Last-Translator: 浅夏随风 <yesionio@outlook.com>\n"
 "Language-Team: Chinese (China)\n"
@@ -121,7 +121,7 @@ msgstr ""
 msgid "Hidden"
 msgstr ""
 
-#: src/pins-app-view.ui:97 src/pins-file-view.ui:138
+#: src/pins-app-view.ui:97 src/pins-file-view.ui:142
 msgid "Autostart"
 msgstr "自启动"
 
@@ -146,36 +146,48 @@ msgid "_About Pins"
 msgstr "关于 Pins"
 
 #: src/pins-file-view.ui:18
-msgid "Duplicate"
-msgstr "重复"
+msgid "More Options"
+msgstr ""
 
-#: src/pins-file-view.ui:24
+#: src/pins-file-view.ui:25
 msgid "Delete"
 msgstr "删除"
 
-#: src/pins-file-view.ui:73 src/pins-key-row.ui:9
+#: src/pins-file-view.ui:74 src/pins-key-row.ui:9
 msgid "Erase Changes"
 msgstr "擦除变更"
 
-#: src/pins-file-view.ui:93 src/pins-pick-icon-dialog.ui:4
+#: src/pins-file-view.ui:94
 msgid "Pick Icon"
 msgstr "选择图标"
 
-#: src/pins-file-view.ui:141
+#: src/pins-file-view.ui:145
 msgid "Launch this application on login"
 msgstr "登录时启动该应用"
 
-#: src/pins-file-view.ui:158
+#: src/pins-file-view.ui:162
 msgid "Invisible"
 msgstr "不可见"
 
-#: src/pins-file-view.ui:161
+#: src/pins-file-view.ui:165
 msgid "Hide this application in the app menu"
 msgstr "在应用菜单中隐藏此应用"
 
-#: src/pins-file-view.ui:194
+#: src/pins-file-view.ui:198
 msgid "Add Key"
 msgstr "添加 Key"
+
+#: src/pins-file-view.ui:224
+msgid "Open With…"
+msgstr ""
+
+#: src/pins-file-view.ui:228
+msgid "Open Containing Folder…"
+msgstr ""
+
+#: src/pins-file-view.ui:232
+msgid "Duplicate"
+msgstr "重复"
 
 #: src/pins-key-row.ui:21
 msgid "Remove Key"
@@ -185,13 +197,13 @@ msgstr "移除 Key"
 msgid "Select Locale"
 msgstr "选择区域"
 
-#: src/pins-pick-icon-dialog.ui:13 src/pins-pick-icon-dialog.c:118
-msgid "Load Icon from File"
-msgstr "从文件中加载图标"
-
-#: src/pins-pick-icon-dialog.ui:19
+#: src/pins-pick-icon-popover.ui:18
 msgid "Search for icons"
 msgstr "搜索图标"
+
+#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
+msgid "Load Icon from File"
+msgstr "从文件中加载图标"
 
 #: src/pins-window.ui:14
 msgid "All Apps"
