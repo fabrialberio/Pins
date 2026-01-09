@@ -141,7 +141,7 @@ pins_window_set_desktop_file (PinsWindow *self, PinsDesktopFile *desktop_file,
     pins_file_view_set_desktop_file (self->file_view, desktop_file,
                                      opened_from_file);
 
-    g_signal_connect_object (desktop_file, "file-deleted",
+    g_signal_connect_object (desktop_file, "deleted",
                              G_CALLBACK (pins_window_file_deleted_cb), self,
                              0);
 

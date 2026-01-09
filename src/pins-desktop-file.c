@@ -52,7 +52,7 @@ enum
 {
     KEY_SET,
     KEY_REMOVED,
-    FILE_DELETED,
+    DELETED,
     N_SIGNALS,
 };
 
@@ -220,15 +220,13 @@ pins_desktop_file_trash (PinsDesktopFile *self)
     if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED))
         g_file_delete (self->user_file, NULL, NULL);
 
-    g_signal_emit (self, signals[FILE_DELETED], 0);
+    g_signal_emit (self, signals[DELETED], 0);
 }
 
 void
 pins_desktop_file_save (PinsDesktopFile *self, GError **error,
                         gboolean remove_unedited_user_files)
 {
-    g_autoptr (GOutputStream) stream = NULL;
-    g_autoptr (GError) err = NULL;
     gsize lenght;
 
     if (remove_unedited_user_files
@@ -356,9 +354,9 @@ pins_desktop_file_class_init (PinsDesktopFileClass *klass)
         "key-removed", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_FIRST, 0, NULL,
         NULL, NULL, G_TYPE_NONE, 1, G_TYPE_STRING);
 
-    signals[FILE_DELETED] = g_signal_new (
-        "file-deleted", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST, 0, NULL,
-        NULL, NULL, G_TYPE_NONE, 0);
+    signals[DELETED] = g_signal_new ("deleted", G_TYPE_FROM_CLASS (klass),
+                                     G_SIGNAL_RUN_LAST, 0, NULL, NULL, NULL,
+                                     G_TYPE_NONE, 0);
 }
 
 static void
