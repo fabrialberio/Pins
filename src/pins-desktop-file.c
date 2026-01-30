@@ -36,6 +36,7 @@ struct _PinsDesktopFile
     GFile *autostart_file;
     GKeyFile *key_file;
     GKeyFile *backup_key_file;
+    GFileMonitor *monitor;
     gchar *saved_data;
 };
 
@@ -53,11 +54,25 @@ enum
     KEY_SET,
     KEY_REMOVED,
     DELETED,
+    CHANGED_EXTERNALLY,
     N_SIGNALS,
 };
 
 static GParamSpec *properties[N_PROPS];
 static guint signals[N_SIGNALS];
+
+void
+pins_desktop_file_monitor_changed_cb (GFileMonitor *monitor, GFile *file,
+                                      GFile *other_file,
+                                      GFileMonitorEvent event_type,
+                                      PinsDesktopFile *self)
+{
+    g_assert (PINS_IS_DESKTOP_FILE (self));
+
+    if (event_type == G_FILE_MONITOR_EVENT_CHANGED
+        || event_type == G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT)
+        g_signal_emit (self, signals[CHANGED_EXTERNALLY], 0);
+}
 
 PinsDesktopFile *
 pins_desktop_file_new_full (GFile *user_file, GFile *system_file,
@@ -116,6 +131,12 @@ pins_desktop_file_new_full (GFile *user_file, GFile *system_file,
 
     desktop_file->saved_data
         = g_key_file_to_data (desktop_file->key_file, NULL, NULL);
+
+    desktop_file->monitor
+        = g_file_monitor_file (desktop_file->user_file, 0, NULL, NULL);
+    g_signal_connect_object (desktop_file->monitor, "changed",
+                             G_CALLBACK (pins_desktop_file_monitor_changed_cb),
+                             desktop_file, 0);
 
     return desktop_file;
 }
@@ -216,9 +237,17 @@ pins_desktop_file_trash (PinsDesktopFile *self)
 {
     g_autoptr (GError) err = NULL;
 
+    g_signal_handlers_block_matched (self, G_SIGNAL_MATCH_ID,
+                                     signals[CHANGED_EXTERNALLY], 0, NULL,
+                                     NULL, NULL);
+
     g_file_trash (self->user_file, NULL, &err);
     if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED))
         g_file_delete (self->user_file, NULL, NULL);
+
+    g_signal_handlers_unblock_matched (self, G_SIGNAL_MATCH_ID,
+                                       signals[CHANGED_EXTERNALLY], 0, NULL,
+                                       NULL, NULL);
 
     g_signal_emit (self, signals[DELETED], 0);
 }
@@ -236,17 +265,30 @@ pins_desktop_file_save (PinsDesktopFile *self, GError **error,
 
     self->saved_data = g_key_file_to_data (self->key_file, &lenght, NULL);
 
+    g_signal_handlers_block_matched (self, G_SIGNAL_MATCH_ID,
+                                     signals[CHANGED_EXTERNALLY], 0, NULL,
+                                     NULL, NULL);
+
     if (remove_unedited_user_files && self->system_file != NULL
         && !g_strcmp0 (self->saved_data,
                        g_key_file_to_data (self->backup_key_file, NULL, NULL)))
         {
             g_file_delete (self->user_file, NULL, NULL);
+
+            g_signal_handlers_unblock_matched (self, G_SIGNAL_MATCH_ID,
+                                               signals[CHANGED_EXTERNALLY], 0,
+                                               NULL, NULL, NULL);
+
             return;
         }
 
     g_file_replace_contents (self->user_file, self->saved_data, lenght, NULL,
                              FALSE, G_FILE_CREATE_REPLACE_DESTINATION, NULL,
                              NULL, error);
+
+    g_signal_handlers_unblock_matched (self, G_SIGNAL_MATCH_ID,
+                                       signals[CHANGED_EXTERNALLY], 0, NULL,
+                                       NULL, NULL);
 }
 
 void
@@ -271,11 +313,9 @@ pins_desktop_file_get_desktop_id (PinsDesktopFile *self)
 GFile *
 pins_desktop_file_get_user_file (PinsDesktopFile *self)
 {
-    GFile *file = self->user_file;
-
     pins_desktop_file_save (self, NULL, FALSE);
 
-    return file;
+    return self->user_file;
 }
 
 gchar **
@@ -308,11 +348,14 @@ pins_desktop_file_dispose (GObject *object)
 {
     PinsDesktopFile *self = PINS_DESKTOP_FILE (object);
 
+    g_file_monitor_cancel (self->monitor);
+
     g_clear_object (&self->user_file);
     g_clear_object (&self->system_file);
     g_clear_object (&self->autostart_file);
     g_clear_object (&self->key_file);
     g_clear_object (&self->backup_key_file);
+    g_clear_object (&self->monitor);
 }
 
 static void
@@ -357,6 +400,10 @@ pins_desktop_file_class_init (PinsDesktopFileClass *klass)
     signals[DELETED] = g_signal_new ("deleted", G_TYPE_FROM_CLASS (klass),
                                      G_SIGNAL_RUN_LAST, 0, NULL, NULL, NULL,
                                      G_TYPE_NONE, 0);
+
+    signals[CHANGED_EXTERNALLY] = g_signal_new (
+        "changed-externally", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST, 0,
+        NULL, NULL, NULL, G_TYPE_NONE, 0);
 }
 
 static void

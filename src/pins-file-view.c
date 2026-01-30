@@ -192,6 +192,13 @@ pins_file_view_key_removed_cb (PinsDesktopFile *desktop_file, gchar *key,
 }
 
 void
+pins_file_view_changed_externally_cb (PinsDesktopFile *desktop_file,
+                                      PinsFileView *self)
+{
+    g_warning ("Changed externally!");
+}
+
+void
 pins_file_view_setup_keys_listbox (PinsFileView *self)
 {
     g_auto (GStrv) locales = _pins_locales_from_keys (self->keys);
@@ -243,6 +250,9 @@ pins_file_view_set_desktop_file (PinsFileView *self,
             g_signal_handlers_disconnect_by_func (
                 self->desktop_file, pins_file_view_key_removed_cb, self);
             g_signal_handlers_disconnect_by_func (
+                self->desktop_file, pins_file_view_changed_externally_cb,
+                self);
+            g_signal_handlers_disconnect_by_func (
                 self->desktop_file, autostart_switch_state_set_cb, self);
             g_signal_handlers_disconnect_by_func (
                 self->desktop_file, invisible_switch_state_set_cb, self);
@@ -270,6 +280,9 @@ pins_file_view_set_desktop_file (PinsFileView *self,
     g_signal_connect_object (self->desktop_file, "key-removed",
                              G_CALLBACK (pins_file_view_key_removed_cb), self,
                              0);
+    g_signal_connect_object (self->desktop_file, "changed-externally",
+                             G_CALLBACK (pins_file_view_changed_externally_cb),
+                             self, 0);
     g_signal_connect_object (self->autostart_switch, "state-set",
                              G_CALLBACK (autostart_switch_state_set_cb), self,
                              G_CONNECT_SWAPPED);
