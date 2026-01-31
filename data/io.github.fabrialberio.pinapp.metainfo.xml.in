@@ -57,6 +57,19 @@
     <control>touch</control>
   </recommends>
   <releases>
+    <release version="2.4.4" date="2026-01-31">
+      <description translate="no">
+        <p>What's new:</p>
+        <ul>
+          <li>@Yesionio added a Chinese translation;</li>
+          <li>added search chips, based on a suggestion by @jck2000;</li>
+          <li>added icon caching to improve performance;</li>
+          <li>added "Open with…" and "Open containing folder…" options in file view menu, based on a
+            suggestion by @ArijanJ;</li>
+          <li>changed icon picker to a popover instead of a modal dialog.</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.4.3" date="2025-09-29">
       <description translate="no">
         <p>What's new:</p>
@@ -87,21 +100,6 @@
         <p>Fixes:</p>
         <ul>
           <li>@ARAKHN1D fixed a crash when closing the app on aarch64 systems.</li>
-        </ul>
-      </description>
-    </release>
-    <release version="2.4.0" date="2025-06-27">
-      <description translate="no">
-        <p>What's new:</p>
-        <ul>
-          <li>@agvantibo-again fixed loading apps on NixOS;</li>
-          <li>@OleksiiGrinka added Ukrainian translation;</li>
-          <li>added icon picker dialog;</li>
-          <li>a new error page is shown when a file can't be opened.</li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li>app crashes when it does not have read access to a file.</li>
         </ul>
       </description>
     </release>
