@@ -19,6 +19,7 @@
  */
 
 #include "pins-pick-icon-popover.h"
+#include "pins-app-icon.h"
 #include "pins-desktop-file.h"
 
 struct _PinsPickIconPopover
@@ -82,22 +83,37 @@ load_icon_dialog_closed_cb (GObject *dialog, GAsyncResult *res,
     PinsPickIconPopover *self = PINS_PICK_ICON_POPOVER (user_data);
     g_autoptr (GFile) sandbox_file = NULL;
     g_autoptr (GFile) file = NULL;
+    g_autofree gchar *filename = NULL, *desktop_id = NULL, *basename = NULL;
+    gsize prefix_lenght = 0, suffix_lenght = 0;
 
     sandbox_file
         = gtk_file_dialog_open_finish (GTK_FILE_DIALOG (dialog), res, NULL);
 
     if (sandbox_file == NULL)
-        {
-            return;
-        }
+        return;
 
-    file
-        = g_file_new_build_filename (g_get_user_data_dir (), "user-icons",
-                                     g_file_get_basename (sandbox_file), NULL);
+    desktop_id = pins_desktop_file_get_desktop_id (self->desktop_file);
+    basename = g_file_get_basename (sandbox_file);
+
+    prefix_lenght
+        = g_strrstr (desktop_id, PINS_DESKTOP_FILE_SUFFIX) - desktop_id;
+    suffix_lenght = strlen (basename) - (g_strrstr (basename, ".") - basename);
+
+    // Use desktop id (without .desktop) as prefix and sandbox_file extension
+    // as suffix.
+    filename = g_malloc ((prefix_lenght + suffix_lenght) * sizeof (gchar));
+    g_strlcpy (filename, desktop_id, prefix_lenght + 1);
+    g_strlcpy (filename + prefix_lenght, g_strrstr (basename, "."),
+               prefix_lenght + suffix_lenght);
+
+    file = g_file_new_build_filename (g_get_user_data_dir (), "user-icons",
+                                      filename, NULL);
 
     g_file_make_directory_with_parents (g_file_get_parent (file), NULL, NULL);
-    g_file_copy (sandbox_file, file, G_FILE_COPY_NONE, NULL, NULL, NULL, NULL);
+    g_file_copy (sandbox_file, file, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL,
+                 NULL);
 
+    pins_app_icon_invalidate_cached_key (g_file_get_path (file));
     pins_desktop_file_set_string (self->desktop_file,
                                   G_KEY_FILE_DESKTOP_KEY_ICON,
                                   g_file_get_path (file));

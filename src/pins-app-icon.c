@@ -41,6 +41,12 @@ enum
 static GParamSpec *properties[N_PROPS];
 static GHashTable *icon_cache;
 
+void
+pins_app_icon_invalidate_cached_key (gchar *icon_key)
+{
+    g_hash_table_remove (icon_cache, icon_key);
+}
+
 GdkPaintable *
 pins_app_icon_get_paintable (PinsAppIcon *self, gchar *icon_key)
 {
@@ -86,16 +92,15 @@ void
 pins_app_icon_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
                           PinsAppIcon *self)
 {
+    g_autofree gchar *icon_key = NULL;
+
     g_assert (PINS_IS_APP_ICON (self));
 
-    if (g_strcmp0 (key, G_KEY_FILE_DESKTOP_KEY_ICON) == 0)
-        {
-            gchar *icon_key = pins_desktop_file_get_string (
-                desktop_file, G_KEY_FILE_DESKTOP_KEY_ICON);
+    icon_key = pins_desktop_file_get_string (desktop_file,
+                                             G_KEY_FILE_DESKTOP_KEY_ICON);
 
-            gtk_image_set_from_paintable (
-                self->image, pins_app_icon_get_paintable (self, icon_key));
-        }
+    gtk_image_set_from_paintable (
+        self->image, pins_app_icon_get_paintable (self, icon_key));
 }
 
 void
