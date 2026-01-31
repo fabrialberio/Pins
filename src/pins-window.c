@@ -221,8 +221,6 @@ pins_window_file_view_duplicate_cb (PinsWindow *self,
         &err);
     if (err != NULL)
         g_warning ("Error duplicating file: %s", err->message);
-
-    adw_navigation_view_pop (self->navigation_view);
 }
 
 void
@@ -260,6 +258,9 @@ pins_window_init (PinsWindow *self)
     g_signal_connect_object (self->file_view, "duplicate",
                              G_CALLBACK (pins_window_file_view_duplicate_cb),
                              self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->file_view, "pop-request",
+                             G_CALLBACK (adw_navigation_view_pop),
+                             self->navigation_view, G_CONNECT_SWAPPED);
 
     g_signal_connect_object (
         adw_navigation_view_find_page (self->navigation_view,

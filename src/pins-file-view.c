@@ -56,6 +56,7 @@ G_DEFINE_TYPE (PinsFileView, pins_file_view, ADW_TYPE_BREAKPOINT_BIN);
 enum
 {
     DUPLICATE,
+    POP_REQUEST,
     N_SIGNALS
 };
 
@@ -313,6 +314,9 @@ pins_file_view_class_init (PinsFileViewClass *klass)
     signals[DUPLICATE] = g_signal_new ("duplicate", G_TYPE_FROM_CLASS (klass),
                                        G_SIGNAL_RUN_LAST, 0, NULL, NULL, NULL,
                                        G_TYPE_NONE, 1, G_TYPE_OBJECT);
+    signals[POP_REQUEST] = g_signal_new (
+        "pop-request", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST, 0, NULL,
+        NULL, NULL, G_TYPE_NONE, 0);
 
     gtk_widget_class_set_template_from_resource (
         widget_class, "/io/github/fabrialberio/pinapp/pins-file-view.ui");
@@ -358,6 +362,8 @@ pins_file_view_open_with_cb (GSimpleAction *action, GVariant *param,
     gtk_file_launcher_launch (
         launcher, GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))), NULL,
         (void (*))gtk_file_launcher_launch_finish, NULL);
+
+    g_signal_emit (self, signals[POP_REQUEST], 0);
 }
 
 void
@@ -377,6 +383,7 @@ pins_file_view_duplicate_cb (GSimpleAction *action, GVariant *param,
                              PinsFileView *self)
 {
     g_signal_emit (self, signals[DUPLICATE], 0, self->desktop_file);
+    g_signal_emit (self, signals[POP_REQUEST], 0);
 }
 
 void
