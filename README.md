@@ -10,3 +10,6 @@ Some of the things you can do are:
 - creating custom shortcuts to websites;
 - hiding apps you don't want to see;
 - ediying other properties in .desktop files.
+
+## Installation
+<a href='https://flathub.org/apps/io.github.fabrialberio.pinapp'><img width='240' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.svg'/></a>
