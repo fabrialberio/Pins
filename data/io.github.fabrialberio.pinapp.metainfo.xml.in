@@ -28,19 +28,25 @@
   <screenshots>
     <screenshot type="default">
       <image>
-        https://raw.githubusercontent.com/fabrialberio/Pins/c9425e1c8062bab60319dd77710ab6f05f5e2a8c/data/appstream/1.png
+        https://raw.githubusercontent.com/fabrialberio/Pins/663db59bc836b2cbb50dded7dc25675bc36212fa/data/appstream/apps.png
       </image>
       <caption>Screenshot of Pins showing the app grid</caption>
     </screenshot>
     <screenshot>
       <image>
-        https://raw.githubusercontent.com/fabrialberio/Pins/c9425e1c8062bab60319dd77710ab6f05f5e2a8c/data/appstream/2.png
+        https://raw.githubusercontent.com/fabrialberio/Pins/663db59bc836b2cbb50dded7dc25675bc36212fa/data/appstream/apps-search.png
+      </image>
+      <caption>Screenshot of Pins showing the search view</caption>
+    </screenshot>
+    <screenshot>
+      <image>
+        https://raw.githubusercontent.com/fabrialberio/Pins/663db59bc836b2cbb50dded7dc25675bc36212fa/data/appstream/file.png
       </image>
       <caption>Screenshot of Pins showing an opened file</caption>
     </screenshot>
     <screenshot>
       <image>
-        https://raw.githubusercontent.com/fabrialberio/Pins/c9425e1c8062bab60319dd77710ab6f05f5e2a8c/data/appstream/3.png
+        https://raw.githubusercontent.com/fabrialberio/Pins/663db59bc836b2cbb50dded7dc25675bc36212fa/data/appstream/file-mobile.png
       </image>
       <caption>Screenshot of Pins showing an opened file on a small screen</caption>
     </screenshot>

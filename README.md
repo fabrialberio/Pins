@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/fabrialberio/Pins/blob/33129b3c4da9d4d192dc01a893991ca1b6b30162/data/appstream/2.png">
+  <img src="https://raw.githubusercontent.com/fabrialberio/Pins/663db59bc836b2cbb50dded7dc25675bc36212fa/data/appstream/file.png">
 </div>
 
 ## Features
