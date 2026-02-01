@@ -95,13 +95,12 @@ load_icon_dialog_closed_cb (GObject *dialog, GAsyncResult *res,
     desktop_id = pins_desktop_file_get_desktop_id (self->desktop_file);
     basename = g_file_get_basename (sandbox_file);
 
-    prefix_lenght
-        = g_strrstr (desktop_id, PINS_DESKTOP_FILE_SUFFIX) - desktop_id;
+    prefix_lenght = g_strrstr (desktop_id, ".") - desktop_id;
     suffix_lenght = strlen (basename) - (g_strrstr (basename, ".") - basename);
 
     // Use desktop id (without .desktop) as prefix and sandbox_file extension
     // as suffix.
-    filename = g_malloc ((prefix_lenght + suffix_lenght) * sizeof (gchar));
+    filename = g_malloc0_n (prefix_lenght + suffix_lenght + 1, sizeof (gchar));
     g_strlcpy (filename, desktop_id, prefix_lenght + 1);
     g_strlcpy (filename + prefix_lenght, g_strrstr (basename, "."),
                prefix_lenght + suffix_lenght);
