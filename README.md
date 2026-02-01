@@ -3,11 +3,10 @@
 </div>
 
 ## Features
-- Easily change an app icon that doesn't fit in
-- Create custom shortcuts to websites
-- Hide apps you don't want to see
-- Change properties in .desktop files
-- GTK4 & libadwaita
+Pins allows you to customize your app menu by editing .desktop files.
 
-## Known issues
-The app has ben rewritten, and some translations are no longer complete. Any help with that is greatly appreciated.
+Some of the things you can do are:
+- changing an app icon that doesn't fit in with your theme;
+- creating custom shortcuts to websites;
+- hiding apps you don't want to see;
+- ediying other properties in .desktop files.
