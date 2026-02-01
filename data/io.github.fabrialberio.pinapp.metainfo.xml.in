@@ -57,6 +57,14 @@
     <control>touch</control>
   </recommends>
   <releases>
+    <release version="2.4.5" date="2026-02-01">
+      <description translate="no">
+        <p>Fixes:</p>
+        <ul>
+          <li>memory allocation bug when choosing an icon from file.</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.4.4" date="2026-01-31">
       <description translate="no">
         <p>What's new:</p>
@@ -86,20 +94,6 @@
           <li>@Vistaus updated the Dutch translation;</li>
           <li>@OleksiiGrinka updated the Ukrainian translation;</li>
           <li>added ability to duplicate apps.</li>
-        </ul>
-      </description>
-    </release>
-    <release version="2.4.1" date="2025-07-28">
-      <description translate="no">
-        <p>What's new:</p>
-        <ul>
-          <li>@abrusle updated the French translation;</li>
-          <li>@x9a added Arabic translation;</li>
-          <li>@ARAKHN1D changed the "Main Menu" tooltip to comply with GNOME guidelines.</li>
-        </ul>
-        <p>Fixes:</p>
-        <ul>
-          <li>@ARAKHN1D fixed a crash when closing the app on aarch64 systems.</li>
         </ul>
       </description>
     </release>
