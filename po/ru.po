@@ -3,20 +3,22 @@
 # This file is distributed under the same license as the pinapp package.
 # Fyodor Sobolev, 2022.
 #
+# SPDX-FileCopyrightText: 2026 Alevtina <alevkarash@altlinux.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-09 21:52+0100\n"
-"PO-Revision-Date: 2025-03-25 13:00+0300\n"
-"Last-Translator: Vladimir Kosolapov\n"
-"Language-Team: Russian\n"
+"PO-Revision-Date: 2026-03-03 09:30+0300\n"
+"Last-Translator: Alevtina <alevkarash@altlinux.org>\n"
+"Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
+"=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-app-view.ui:21
 msgid "Pins"
@@ -29,12 +31,12 @@ msgstr "Создавайте и редактируйте ярлыки прило
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:10
 msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
-msgstr "GNOME;GTK;Приложения;Ярлыки;Иконки;"
+msgstr "GNOME;GTK;Apps;Shortcuts;Icons;Приложения;Ярлыки;Значки;"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
 msgid "Pins allows you to customize your app menu by editing .desktop files."
 msgstr ""
-"Pins позволяет настраивать меню приложений путем редактирования .desktop "
+"Pins позволяет настраивать меню приложений путём редактирования .desktop "
 "файлов."
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
@@ -43,7 +45,7 @@ msgstr "Вот что вы можете делать:"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:18
 msgid "changing an app icon that doesn't fit in with your theme,"
-msgstr "изменять иконки приложений, не соответствующие вашей теме,"
+msgstr "изменять значки приложений, не соответствующие вашей теме,"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:19
 msgid "creating custom shortcuts to websites,"
@@ -78,7 +80,6 @@ msgid "List of desktop file search paths in order of priority"
 msgstr "Список путей для поиска .desktop файлов по приоритетности"
 
 #: src/pins-add-key-dialog.ui:4
-#, fuzzy
 msgid "Add New Key"
 msgstr "Добавить новый ключ"
 
@@ -95,13 +96,12 @@ msgid "_Add"
 msgstr "_Добавить"
 
 #: src/pins-app-view.ui:15 src/pins-app-view.ui:157 src/shortcuts-dialog.ui:21
-#, fuzzy
 msgid "Add New App"
 msgstr "Добавить новое приложение"
 
 #: src/pins-app-view.ui:26
 msgid "Main Menu"
-msgstr ""
+msgstr "Главное меню"
 
 #: src/pins-app-view.ui:33 src/shortcuts-dialog.ui:27
 msgid "Search"
@@ -109,36 +109,33 @@ msgstr "Поиск"
 
 #: src/pins-app-view.ui:55
 msgid "Search apps by name or field content"
-msgstr ""
+msgstr "Поиск приложений по имени или содержимому поля"
 
 #: src/pins-app-view.ui:73
 msgid "Edited"
-msgstr ""
+msgstr "Изменённые"
 
 #: src/pins-app-view.ui:81
 msgid "System"
-msgstr ""
+msgstr "Системные"
 
 #: src/pins-app-view.ui:89
 msgid "Hidden"
-msgstr ""
+msgstr "Скрытые"
 
 #: src/pins-app-view.ui:97 src/pins-file-view.ui:142
 msgid "Autostart"
 msgstr "Автозапуск"
 
 #: src/pins-app-view.ui:130
-#, fuzzy
 msgid "Loading Apps"
-msgstr "Загрузка приложений…"
+msgstr "Загрузка приложений"
 
 #: src/pins-app-view.ui:145
-#, fuzzy
 msgid "No Apps Found"
 msgstr "Приложения не найдены"
 
 #: src/pins-app-view.ui:176
-#, fuzzy
 msgid "Show _All Apps"
 msgstr "Показать _все приложения"
 
@@ -152,20 +149,19 @@ msgstr "_О приложении"
 
 #: src/pins-file-view.ui:18
 msgid "More Options"
-msgstr ""
+msgstr "Другие параметры"
 
 #: src/pins-file-view.ui:25
 msgid "Delete"
 msgstr "Удалить"
 
 #: src/pins-file-view.ui:74 src/pins-key-row.ui:9
-#, fuzzy
 msgid "Erase Changes"
 msgstr "Отменить изменения"
 
 #: src/pins-file-view.ui:94
 msgid "Pick Icon"
-msgstr ""
+msgstr "Выбрать значок"
 
 #: src/pins-file-view.ui:145
 msgid "Launch this application on login"
@@ -180,69 +176,61 @@ msgid "Hide this application in the app menu"
 msgstr "Скрыть этот ярлык в меню приложений"
 
 #: src/pins-file-view.ui:198
-#, fuzzy
 msgid "Add Key"
 msgstr "Добавить ключ"
 
 #: src/pins-file-view.ui:224
 msgid "Open With…"
-msgstr ""
+msgstr "Открыть с помощью…"
 
 #: src/pins-file-view.ui:228
 msgid "Open Containing Folder…"
-msgstr ""
+msgstr "Открыть папку, содержащую файл…"
 
 #: src/pins-file-view.ui:232
 msgid "Duplicate"
-msgstr ""
+msgstr "Создать копию"
 
 #: src/pins-key-row.ui:21
-#, fuzzy
 msgid "Remove Key"
 msgstr "Удалить ключ"
 
 #: src/pins-key-row.ui:32
-#, fuzzy
 msgid "Select Locale"
 msgstr "Выбрать язык"
 
 #: src/pins-pick-icon-popover.ui:18
 msgid "Search for icons"
-msgstr ""
+msgstr "Поиск значков"
 
 #: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
-#, fuzzy
 msgid "Load Icon from File"
-msgstr "Загрузить иконку из файла"
+msgstr "Загрузить значок из файла"
 
 #: src/pins-window.ui:14
-#, fuzzy
 msgid "All Apps"
-msgstr "Показать _все приложения"
+msgstr "Все приложения"
 
 #: src/pins-window.ui:46
 msgid "Error Opening File"
-msgstr ""
+msgstr "Ошибка открытия файла"
 
 #: src/shortcuts-dialog.ui:6
-#, fuzzy
 msgid "General"
 msgstr "Общие"
 
 #: src/shortcuts-dialog.ui:9
-#, fuzzy
 msgid "Show Shortcuts"
 msgstr "Показать комбинации клавиш"
 
 #: src/shortcuts-dialog.ui:15
-#, fuzzy
 msgid "Quit"
 msgstr "Выход"
 
 #: src/pins-desktop-file.c:107
 #, c-format
 msgid "Could not open file."
-msgstr ""
+msgstr "Не удалось открыть файл."
 
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
@@ -267,3 +255,4 @@ msgstr "(Без локализации)"
 
 #~ msgid "Load icon"
 #~ msgstr "Загрузить иконку"
+
