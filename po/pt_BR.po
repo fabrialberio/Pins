@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the pinapp package.
 # johnpeter19 <johnppetersa@gmail.com>, 2025.
 # Filipe Motta <luizfilipemotta@gmail.com>, 2025.
+# Amora Celeste <amoracmelo@gmail.com>, 2026.
 #
 msgid ""
 msgstr ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-09 21:52+0100\n"
 "PO-Revision-Date: 2025-03-26 02:44-0300\n"
-"Last-Translator: Filipe Motta <luizfilipemotta@gmail.com>\n"
+"Last-Translator: Amora Celeste <amoracmelo@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -104,7 +105,7 @@ msgstr "Adicionar novo aplicativo"
 
 #: src/pins-app-view.ui:26
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu Principal"
 
 #: src/pins-app-view.ui:33 src/shortcuts-dialog.ui:27
 msgid "Search"
@@ -112,19 +113,19 @@ msgstr "Pesquisar"
 
 #: src/pins-app-view.ui:55
 msgid "Search apps by name or field content"
-msgstr ""
+msgstr "Pesquisar aplicativos por nome ou campo do seu conteúdo"
 
 #: src/pins-app-view.ui:73
 msgid "Edited"
-msgstr ""
+msgstr "Editado"
 
 #: src/pins-app-view.ui:81
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #: src/pins-app-view.ui:89
 msgid "Hidden"
-msgstr ""
+msgstr "Escondido"
 
 #: src/pins-app-view.ui:97 src/pins-file-view.ui:142
 msgid "Autostart"
@@ -151,11 +152,11 @@ msgstr "Atalhos de _teclado"
 
 #: src/pins-app-view.ui:186
 msgid "_About Pins"
-msgstr "_ Sobre o Pins"
+msgstr "_Sobre o Pins"
 
 #: src/pins-file-view.ui:18
 msgid "More Options"
-msgstr ""
+msgstr "Mais Opções"
 
 #: src/pins-file-view.ui:25
 msgid "Delete"
@@ -168,7 +169,7 @@ msgstr "Apagar mudanças"
 
 #: src/pins-file-view.ui:94
 msgid "Pick Icon"
-msgstr ""
+msgstr "Escolher Ícone"
 
 #: src/pins-file-view.ui:145
 msgid "Launch this application on login"
@@ -189,15 +190,15 @@ msgstr "Adicionar chave"
 
 #: src/pins-file-view.ui:224
 msgid "Open With…"
-msgstr ""
+msgstr "Abrir Com…"
 
 #: src/pins-file-view.ui:228
 msgid "Open Containing Folder…"
-msgstr ""
+msgstr "Abrir Pasta…"
 
 #: src/pins-file-view.ui:232
 msgid "Duplicate"
-msgstr ""
+msgstr "Duplicar"
 
 #: src/pins-key-row.ui:21
 #, fuzzy
@@ -211,7 +212,7 @@ msgstr "Selecionar localidade"
 
 #: src/pins-pick-icon-popover.ui:18
 msgid "Search for icons"
-msgstr ""
+msgstr "Pesquisar por ícones"
 
 #: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
 #, fuzzy
@@ -225,7 +226,7 @@ msgstr "Mostrar _todos os aplicativos"
 
 #: src/pins-window.ui:46
 msgid "Error Opening File"
-msgstr ""
+msgstr "Erro Abrindo Arquivo"
 
 #: src/shortcuts-dialog.ui:6
 #, fuzzy
@@ -245,7 +246,7 @@ msgstr "Sair"
 #: src/pins-desktop-file.c:107
 #, c-format
 msgid "Could not open file."
-msgstr ""
+msgstr "Não foi possível abrir o arquivo."
 
 #: src/pins-key-row.c:26
 msgid "(Unlocalized)"
