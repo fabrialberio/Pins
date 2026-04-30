@@ -63,6 +63,15 @@
     <control>touch</control>
   </recommends>
   <releases>
+    <release version="2.4.6" date="2026-04-30">
+      <description translate="no">
+        <p>What's new:</p>
+        <ul>
+          <li>@amoraseca updated the Brazilian Portuguese translation;</li>
+          <li>@yakushabb removed ineffective uninstall cleanup commands.</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.4.5" date="2026-02-01">
       <description translate="no">
         <p>Fixes:</p>
@@ -90,16 +99,6 @@
         <ul>
           <li>new Libadwaita 1.8 keyboard shortcuts dialog;</li>
           <li>minor accessibility improvements.</li>
-        </ul>
-      </description>
-    </release>
-    <release version="2.4.2" date="2025-08-27">
-      <description translate="no">
-        <p>What's new:</p>
-        <ul>
-          <li>@Vistaus updated the Dutch translation;</li>
-          <li>@OleksiiGrinka updated the Ukrainian translation;</li>
-          <li>added ability to duplicate apps.</li>
         </ul>
       </description>
     </release>
