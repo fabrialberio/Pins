@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="PinsAppGrid" parent="AdwBin">
+  <template class="PinsShortcutsGrid" parent="AdwBin">
     <property name="child">
       <object class="GtkScrolledWindow">
         <property name="vexpand">true</property>
@@ -21,7 +21,7 @@
                 <property name="selection-mode">none</property>
                 <property name="valign">start</property>
                 <style>
-                  <class name="app-grid" />
+                  <class name="shortcuts-grid" />
                 </style>
               </object>
             </child>

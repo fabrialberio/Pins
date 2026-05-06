@@ -1,4 +1,4 @@
-/* pins-app-grid.h
+/* pins-shortcuts-grid.h
  *
  * Copyright 2024 Fabrizio
  *
@@ -24,11 +24,13 @@
 
 G_BEGIN_DECLS
 
-#define PINS_TYPE_APP_GRID (pins_app_grid_get_type ())
+#define PINS_TYPE_SHORTCUTS_GRID (pins_shortcuts_grid_get_type ())
 
-G_DECLARE_FINAL_TYPE (PinsAppGrid, pins_app_grid, PINS, APP_GRID, AdwBin)
+G_DECLARE_FINAL_TYPE (PinsShortcutsGrid, pins_shortcuts_grid, PINS,
+                      SHORTCUTS_GRID, AdwBin)
 
-PinsAppGrid *pins_app_grid_new (void);
-void pins_app_grid_set_model (PinsAppGrid *self, GListModel *model);
+PinsShortcutsGrid *pins_shortcuts_grid_new (void);
+void pins_shortcuts_grid_set_model (PinsShortcutsGrid *self,
+                                    GListModel *model);
 
 G_END_DECLS

@@ -1,4 +1,4 @@
-/* pins-app-grid.c
+/* pins-shortcuts-grid.c
  *
  * Copyright 2024 Fabrizio
  *
@@ -18,18 +18,18 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "pins-app-grid.h"
+#include "pins-shortcuts-grid.h"
 
 #include "pins-app-tile.h"
 
-struct _PinsAppGrid
+struct _PinsShortcutsGrid
 {
     AdwBin parent_instance;
 
     GtkFlowBox *flow_box;
 };
 
-G_DEFINE_TYPE (PinsAppGrid, pins_app_grid, ADW_TYPE_BIN);
+G_DEFINE_TYPE (PinsShortcutsGrid, pins_shortcuts_grid, ADW_TYPE_BIN);
 
 enum
 {
@@ -39,10 +39,10 @@ enum
 
 static guint signals[N_SIGNALS];
 
-PinsAppGrid *
-pins_app_grid_new (void)
+PinsShortcutsGrid *
+pins_shortcuts_grid_new (void)
 {
-    return g_object_new (PINS_TYPE_APP_GRID, NULL);
+    return g_object_new (PINS_TYPE_SHORTCUTS_GRID, NULL);
 }
 
 GtkWidget *
@@ -57,7 +57,7 @@ create_widget_func (gpointer item, gpointer user_data)
 }
 
 void
-child_activated_cb (PinsAppGrid *self, GtkFlowBoxChild *child)
+child_activated_cb (PinsShortcutsGrid *self, GtkFlowBoxChild *child)
 {
     guint position = gtk_flow_box_child_get_index (child);
 
@@ -65,7 +65,7 @@ child_activated_cb (PinsAppGrid *self, GtkFlowBoxChild *child)
 }
 
 void
-pins_app_grid_set_model (PinsAppGrid *self, GListModel *model)
+pins_shortcuts_grid_set_model (PinsShortcutsGrid *self, GListModel *model)
 {
     gtk_flow_box_bind_model (self->flow_box, model, &create_widget_func, NULL,
                              NULL);
@@ -76,20 +76,21 @@ pins_app_grid_set_model (PinsAppGrid *self, GListModel *model)
 }
 
 static void
-pins_app_grid_dispose (GObject *object)
+pins_shortcuts_grid_dispose (GObject *object)
 {
-    gtk_widget_dispose_template (GTK_WIDGET (object), PINS_TYPE_APP_GRID);
+    gtk_widget_dispose_template (GTK_WIDGET (object),
+                                 PINS_TYPE_SHORTCUTS_GRID);
 
-    G_OBJECT_CLASS (pins_app_grid_parent_class)->dispose (object);
+    G_OBJECT_CLASS (pins_shortcuts_grid_parent_class)->dispose (object);
 }
 
 static void
-pins_app_grid_class_init (PinsAppGridClass *klass)
+pins_shortcuts_grid_class_init (PinsShortcutsGridClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-    object_class->dispose = pins_app_grid_dispose;
+    object_class->dispose = pins_shortcuts_grid_dispose;
 
     signals[ACTIVATE] = g_signal_new (
         "activate", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST, 0, NULL,
@@ -99,12 +100,13 @@ pins_app_grid_class_init (PinsAppGridClass *klass)
                                 g_cclosure_marshal_VOID__UINTv);
 
     gtk_widget_class_set_template_from_resource (
-        widget_class, "/io/github/fabrialberio/pinapp/pins-app-grid.ui");
-    gtk_widget_class_bind_template_child (widget_class, PinsAppGrid, flow_box);
+        widget_class, "/io/github/fabrialberio/pinapp/pins-shortcuts-grid.ui");
+    gtk_widget_class_bind_template_child (widget_class, PinsShortcutsGrid,
+                                          flow_box);
 }
 
 static void
-pins_app_grid_init (PinsAppGrid *self)
+pins_shortcuts_grid_init (PinsShortcutsGrid *self)
 {
     gtk_widget_init_template (GTK_WIDGET (self));
 }

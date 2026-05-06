@@ -24,9 +24,9 @@
 
 #include "pins-home-view.h"
 
-#include "pins-app-grid.h"
 #include "pins-desktop-file.h"
 #include "pins-shortcut-filter.h"
+#include "pins-shortcuts-grid.h"
 
 struct _PinsHomeView
 {
@@ -41,7 +41,7 @@ struct _PinsHomeView
     GtkToggleButton *hidden_search_chip;
     GtkToggleButton *autostart_search_chip;
     AdwViewStack *view_stack;
-    PinsAppGrid *app_grid;
+    PinsShortcutsGrid *shortcuts_grid;
 };
 
 G_DEFINE_TYPE (PinsHomeView, pins_home_view, ADW_TYPE_BIN);
@@ -97,8 +97,8 @@ pins_home_view_set_app_iterator (PinsHomeView *self,
     pins_shortcut_filter_set_model (self->shortcut_filter,
                                     G_LIST_MODEL (app_iterator));
 
-    pins_app_grid_set_model (self->app_grid,
-                             G_LIST_MODEL (self->shortcut_filter));
+    pins_shortcuts_grid_set_model (self->shortcuts_grid,
+                                   G_LIST_MODEL (self->shortcut_filter));
 
     g_signal_connect_object (app_iterator, "loading",
                              G_CALLBACK (app_iterator_loading_cb), self,
@@ -132,7 +132,7 @@ pins_home_view_class_init (PinsHomeViewClass *klass)
 
     gtk_widget_class_set_template_from_resource (
         widget_class, "/io/github/fabrialberio/pinapp/pins-home-view.ui");
-    g_type_ensure (PINS_TYPE_APP_GRID);
+    g_type_ensure (PINS_TYPE_SHORTCUTS_GRID);
 
     gtk_widget_class_bind_template_child (widget_class, PinsHomeView,
                                           search_bar);
@@ -149,7 +149,7 @@ pins_home_view_class_init (PinsHomeViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, PinsHomeView,
                                           view_stack);
     gtk_widget_class_bind_template_child (widget_class, PinsHomeView,
-                                          app_grid);
+                                          shortcuts_grid);
 }
 
 gboolean
@@ -289,7 +289,7 @@ pins_home_view_init (PinsHomeView *self)
     g_signal_connect_object (self->search_bar, "notify::search-mode-enabled",
                              G_CALLBACK (pins_home_view_search_mode_notify_cb),
                              self, 0);
-    g_signal_connect_object (self->app_grid, "activate",
+    g_signal_connect_object (self->shortcuts_grid, "activate",
                              G_CALLBACK (pins_home_view_item_activated_cb),
                              self, 0);
 }

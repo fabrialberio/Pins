@@ -117,7 +117,7 @@
               <object class="AdwViewStackPage">
                 <property name="name">apps</property>
                 <property name="child">
-                  <object class="PinsAppGrid" id="app_grid">
+                  <object class="PinsShortcutsGrid" id="shortcuts_grid">
                   </object>
                 </property>
               </object>

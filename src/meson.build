@@ -1,19 +1,19 @@
 pinapp_sources = [
     'main.c',
     'pins-add-key-dialog.c',
-    'pins-shortcut-filter.c',
-    'pins-app-grid.c',
     'pins-app-icon.c',
     'pins-app-iterator.c',
     'pins-app-tile.c',
-    'pins-home-view.c',
     'pins-application.c',
     'pins-desktop-file.c',
     'pins-directories.c',
     'pins-file-view.c',
+    'pins-home-view.c',
     'pins-key-row.c',
     'pins-locale-utils.c',
     'pins-pick-icon-popover.c',
+    'pins-shortcut-filter.c',
+    'pins-shortcuts-grid.c',
     'pins-window.c',
 ]
 
