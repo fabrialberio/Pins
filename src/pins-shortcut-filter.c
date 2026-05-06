@@ -1,4 +1,4 @@
-/* pins-app-filter.c
+/* pins-shortcut-filter.c
  *
  * Copyright 2024 Fabrizio
  *
@@ -18,17 +18,17 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "pins-app-filter.h"
+#include "pins-shortcut-filter.h"
 
 #include "pins-desktop-file.h"
 #include "pins-locale-utils-private.h"
 
-struct _PinsAppFilter
+struct _PinsShortcutFilter
 {
     GObject parent_instance;
 
     gboolean show_all_apps;
-    PinsAppFilterCategory category;
+    PinsShortcutFilterCategory category;
 
     GtkCustomFilter *category_filter;
     GtkStringFilter *search_filter;
@@ -39,7 +39,8 @@ struct _PinsAppFilter
 
 static void list_model_iface_init (GListModelInterface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (PinsAppFilter, pins_app_filter, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (PinsShortcutFilter, pins_shortcut_filter,
+                         G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (G_TYPE_LIST_MODEL,
                                                 list_model_iface_init));
 
@@ -53,37 +54,37 @@ enum
 
 static GParamSpec *properties[N_PROPS];
 
-PinsAppFilter *
-pins_app_filter_new (void)
+PinsShortcutFilter *
+pins_shortcut_filter_new (void)
 {
-    return g_object_new (PINS_TYPE_APP_FILTER, NULL);
+    return g_object_new (PINS_TYPE_SHORTCUT_FILTER, NULL);
 }
 
 void
-pins_app_filter_set_model (PinsAppFilter *self, GListModel *model)
+pins_shortcut_filter_set_model (PinsShortcutFilter *self, GListModel *model)
 {
     gtk_sort_list_model_set_model (self->sort_model, model);
 }
 
 void
-pins_app_filter_set_search (PinsAppFilter *self, const gchar *search)
+pins_shortcut_filter_set_search (PinsShortcutFilter *self, const gchar *search)
 {
     gtk_string_filter_set_search (self->search_filter, search);
 }
 
 void
-pins_app_filter_reset_category (PinsAppFilter *self)
+pins_shortcut_filter_reset_category (PinsShortcutFilter *self)
 {
     if (self->show_all_apps)
-        self->category = PINS_APP_FILTER_CATEGORY_ALL;
+        self->category = PINS_SHORTCUT_FILTER_CATEGORY_ALL;
     else
-        self->category = PINS_APP_FILTER_CATEGORY_VISIBLE;
+        self->category = PINS_SHORTCUT_FILTER_CATEGORY_VISIBLE;
 
     g_object_notify (G_OBJECT (self), "category");
 }
 
 void
-category_notify_cb (PinsAppFilter *self, GParamSpec *pspec)
+category_notify_cb (PinsShortcutFilter *self, GParamSpec *pspec)
 {
     gtk_filter_changed (GTK_FILTER (self->category_filter),
                         GTK_FILTER_CHANGE_DIFFERENT);
@@ -92,27 +93,27 @@ category_notify_cb (PinsAppFilter *self, GParamSpec *pspec)
 gboolean
 category_match_func (gpointer desktop_file, gpointer user_data)
 {
-    PinsAppFilter *self = PINS_APP_FILTER (user_data);
+    PinsShortcutFilter *self = PINS_SHORTCUT_FILTER (user_data);
     PinsDesktopFile *file = PINS_DESKTOP_FILE (desktop_file);
 
     switch (self->category)
         {
-        case PINS_APP_FILTER_CATEGORY_ALL:
+        case PINS_SHORTCUT_FILTER_CATEGORY_ALL:
             return TRUE;
-        case PINS_APP_FILTER_CATEGORY_VISIBLE:
+        case PINS_SHORTCUT_FILTER_CATEGORY_VISIBLE:
             return pins_desktop_file_is_shown (file)
                    || pins_desktop_file_is_user_edited (file);
-        case PINS_APP_FILTER_CATEGORY_EDITED:
+        case PINS_SHORTCUT_FILTER_CATEGORY_EDITED:
             return pins_desktop_file_is_user_edited (file);
-        case PINS_APP_FILTER_CATEGORY_SYSTEM:
+        case PINS_SHORTCUT_FILTER_CATEGORY_SYSTEM:
             return pins_desktop_file_is_shown (file)
                    && !pins_desktop_file_is_user_edited (file);
-        case PINS_APP_FILTER_CATEGORY_HIDDEN:
+        case PINS_SHORTCUT_FILTER_CATEGORY_HIDDEN:
             return !pins_desktop_file_is_shown (file);
-        case PINS_APP_FILTER_CATEGORY_AUTOSTART:
+        case PINS_SHORTCUT_FILTER_CATEGORY_AUTOSTART:
             return pins_desktop_file_is_autostart (file);
         default:
-            g_warning ("Invalid PinsAppFilterCategory");
+            g_warning ("Invalid PinsShortcutFilterCategory");
             return FALSE;
         }
 }
@@ -142,9 +143,9 @@ sort_compare_func (gconstpointer a, gconstpointer b, gpointer user_data)
 }
 
 static void
-pins_app_filter_dispose (GObject *object)
+pins_shortcut_filter_dispose (GObject *object)
 {
-    PinsAppFilter *self = PINS_APP_FILTER (object);
+    PinsShortcutFilter *self = PINS_SHORTCUT_FILTER (object);
 
     g_clear_object (&self->category_filter);
     g_clear_object (&self->search_filter);
@@ -154,10 +155,10 @@ pins_app_filter_dispose (GObject *object)
 }
 
 static void
-pins_app_filter_get_property (GObject *object, guint prop_id, GValue *value,
-                              GParamSpec *pspec)
+pins_shortcut_filter_get_property (GObject *object, guint prop_id,
+                                   GValue *value, GParamSpec *pspec)
 {
-    PinsAppFilter *self = PINS_APP_FILTER (object);
+    PinsShortcutFilter *self = PINS_SHORTCUT_FILTER (object);
 
     switch (prop_id)
         {
@@ -173,16 +174,16 @@ pins_app_filter_get_property (GObject *object, guint prop_id, GValue *value,
 }
 
 static void
-pins_app_filter_set_property (GObject *object, guint prop_id,
-                              const GValue *value, GParamSpec *pspec)
+pins_shortcut_filter_set_property (GObject *object, guint prop_id,
+                                   const GValue *value, GParamSpec *pspec)
 {
-    PinsAppFilter *self = PINS_APP_FILTER (object);
+    PinsShortcutFilter *self = PINS_SHORTCUT_FILTER (object);
 
     switch (prop_id)
         {
         case PROP_SHOW_ALL_APPS:
             self->show_all_apps = g_value_get_boolean (value);
-            pins_app_filter_reset_category (self);
+            pins_shortcut_filter_reset_category (self);
             break;
         case PROP_CATEGORY:
             self->category = g_value_get_uint (value);
@@ -193,13 +194,13 @@ pins_app_filter_set_property (GObject *object, guint prop_id,
 }
 
 static void
-pins_app_filter_class_init (PinsAppFilterClass *klass)
+pins_shortcut_filter_class_init (PinsShortcutFilterClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-    object_class->dispose = pins_app_filter_dispose;
-    object_class->get_property = pins_app_filter_get_property;
-    object_class->set_property = pins_app_filter_set_property;
+    object_class->dispose = pins_shortcut_filter_dispose;
+    object_class->get_property = pins_shortcut_filter_get_property;
+    object_class->set_property = pins_shortcut_filter_set_property;
 
     properties[PROP_SHOW_ALL_APPS] = g_param_spec_boolean (
         "show-all-apps", "Show All Apps",
@@ -208,15 +209,16 @@ pins_app_filter_class_init (PinsAppFilterClass *klass)
 
     properties[PROP_CATEGORY] = g_param_spec_uint (
         "category", "Category", "Category of apps to be shown",
-        PINS_APP_FILTER_CATEGORY_ALL, PINS_APP_FILTER_CATEGORY_AUTOSTART,
-        PINS_APP_FILTER_CATEGORY_VISIBLE,
+        PINS_SHORTCUT_FILTER_CATEGORY_ALL,
+        PINS_SHORTCUT_FILTER_CATEGORY_AUTOSTART,
+        PINS_SHORTCUT_FILTER_CATEGORY_VISIBLE,
         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
     g_object_class_install_properties (object_class, N_PROPS, properties);
 }
 
 static void
-pins_app_filter_init (PinsAppFilter *self)
+pins_shortcut_filter_init (PinsShortcutFilter *self)
 {
     self->category_filter
         = gtk_custom_filter_new (&category_match_func, self, NULL);
@@ -245,23 +247,23 @@ pins_app_filter_init (PinsAppFilter *self)
 }
 
 gpointer
-pins_app_filter_get_item (GListModel *list, guint position)
+pins_shortcut_filter_get_item (GListModel *list, guint position)
 {
-    PinsAppFilter *self = PINS_APP_FILTER (list);
+    PinsShortcutFilter *self = PINS_SHORTCUT_FILTER (list);
 
     return g_list_model_get_item (G_LIST_MODEL (self->search_model), position);
 }
 
 GType
-pins_app_filter_get_item_type (GListModel *list)
+pins_shortcut_filter_get_item_type (GListModel *list)
 {
     return PINS_TYPE_DESKTOP_FILE;
 }
 
 guint
-pins_app_filter_get_n_items (GListModel *list)
+pins_shortcut_filter_get_n_items (GListModel *list)
 {
-    PinsAppFilter *self = PINS_APP_FILTER (list);
+    PinsShortcutFilter *self = PINS_SHORTCUT_FILTER (list);
 
     return g_list_model_get_n_items (G_LIST_MODEL (self->search_model));
 }
@@ -269,7 +271,7 @@ pins_app_filter_get_n_items (GListModel *list)
 static void
 list_model_iface_init (GListModelInterface *iface)
 {
-    iface->get_item = pins_app_filter_get_item;
-    iface->get_item_type = pins_app_filter_get_item_type;
-    iface->get_n_items = pins_app_filter_get_n_items;
+    iface->get_item = pins_shortcut_filter_get_item;
+    iface->get_item_type = pins_shortcut_filter_get_item_type;
+    iface->get_n_items = pins_shortcut_filter_get_n_items;
 }

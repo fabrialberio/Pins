@@ -24,15 +24,15 @@
 
 #include "pins-home-view.h"
 
-#include "pins-app-filter.h"
 #include "pins-app-grid.h"
 #include "pins-desktop-file.h"
+#include "pins-shortcut-filter.h"
 
 struct _PinsHomeView
 {
     AdwBin parent_instance;
 
-    PinsAppFilter *app_filter;
+    PinsShortcutFilter *shortcut_filter;
 
     GtkSearchBar *search_bar;
     GtkSearchEntry *search_entry;
@@ -94,9 +94,11 @@ pins_home_view_set_app_iterator (PinsHomeView *self,
     adw_view_stack_set_visible_child_name (self->view_stack,
                                            pages[PAGE_LOADING]);
 
-    pins_app_filter_set_model (self->app_filter, G_LIST_MODEL (app_iterator));
+    pins_shortcut_filter_set_model (self->shortcut_filter,
+                                    G_LIST_MODEL (app_iterator));
 
-    pins_app_grid_set_model (self->app_grid, G_LIST_MODEL (self->app_filter));
+    pins_app_grid_set_model (self->app_grid,
+                             G_LIST_MODEL (self->shortcut_filter));
 
     g_signal_connect_object (app_iterator, "loading",
                              G_CALLBACK (app_iterator_loading_cb), self,
@@ -154,10 +156,10 @@ gboolean
 search_chip_transform_to_func (GBinding *binding, const GValue *from_value,
                                GValue *to_value, gpointer user_data)
 {
-    g_autoptr (PinsAppFilter) app_filter
-        = PINS_APP_FILTER (g_binding_dup_target (binding));
+    g_autoptr (PinsShortcutFilter) shorctut_filter
+        = PINS_SHORTCUT_FILTER (g_binding_dup_target (binding));
 
-    PinsAppFilterCategory category = GPOINTER_TO_INT (user_data);
+    PinsShortcutFilterCategory category = GPOINTER_TO_INT (user_data);
 
     if (g_value_get_boolean (from_value))
         {
@@ -166,8 +168,8 @@ search_chip_transform_to_func (GBinding *binding, const GValue *from_value,
         }
     else
         {
-            pins_app_filter_reset_category (app_filter);
-            // app_filter->category has already been updated.
+            pins_shortcut_filter_reset_category (shorctut_filter);
+            // shortcut_filter->category has already been updated.
             return FALSE;
         }
 }
@@ -176,7 +178,7 @@ gboolean
 search_chip_transform_from_func (GBinding *binding, const GValue *from_value,
                                  GValue *to_value, gpointer user_data)
 {
-    PinsAppFilterCategory category = GPOINTER_TO_INT (user_data);
+    PinsShortcutFilterCategory category = GPOINTER_TO_INT (user_data);
 
     g_value_set_boolean (to_value, g_value_get_uint (from_value) == category);
 
@@ -190,7 +192,7 @@ pins_home_view_items_changed_cb (GListModel *list, guint position,
 {
     g_assert (PINS_IS_HOME_VIEW (self));
 
-    if (g_list_model_get_n_items (G_LIST_MODEL (self->app_filter)) == 0)
+    if (g_list_model_get_n_items (G_LIST_MODEL (self->shortcut_filter)) == 0)
         adw_view_stack_set_visible_child_name (self->view_stack,
                                                pages[PAGE_EMPTY]);
     else
@@ -203,8 +205,8 @@ pins_home_view_search_changed_cb (GtkSearchEntry *entry, PinsHomeView *self)
 {
     g_assert (PINS_IS_HOME_VIEW (self));
 
-    pins_app_filter_set_search (self->app_filter,
-                                gtk_editable_get_text (GTK_EDITABLE (entry)));
+    pins_shortcut_filter_set_search (
+        self->shortcut_filter, gtk_editable_get_text (GTK_EDITABLE (entry)));
 }
 
 void
@@ -212,7 +214,7 @@ pins_home_view_search_mode_notify_cb (GtkSearchBar *search_bar,
                                       GParamSpec *pspec, PinsHomeView *self)
 {
     if (!gtk_search_bar_get_search_mode (search_bar))
-        pins_app_filter_reset_category (self->app_filter);
+        pins_shortcut_filter_reset_category (self->shortcut_filter);
 }
 
 void
@@ -223,8 +225,8 @@ pins_home_view_item_activated_cb (GtkListView *self, guint position,
 
     g_assert (PINS_IS_HOME_VIEW (user_data));
 
-    desktop_file = g_list_model_get_item (G_LIST_MODEL (user_data->app_filter),
-                                          position);
+    desktop_file = g_list_model_get_item (
+        G_LIST_MODEL (user_data->shortcut_filter), position);
 
     g_signal_emit (user_data, signals[ACTIVATE], 0, desktop_file);
 }
@@ -246,9 +248,9 @@ pins_home_view_init (PinsHomeView *self)
 
     gtk_widget_init_template (GTK_WIDGET (self));
 
-    self->app_filter = pins_app_filter_new ();
+    self->shortcut_filter = pins_shortcut_filter_new ();
 
-    g_settings_bind (settings, "show-all-apps", self->app_filter,
+    g_settings_bind (settings, "show-all-apps", self->shortcut_filter,
                      "show-all-apps", G_SETTINGS_BIND_DEFAULT);
 
     adw_view_stack_set_visible_child_name (self->view_stack,
@@ -258,27 +260,27 @@ pins_home_view_init (PinsHomeView *self)
                                   GTK_EDITABLE (self->search_entry));
 
     g_object_bind_property_full (
-        self->edited_search_chip, "active", self->app_filter, "category",
+        self->edited_search_chip, "active", self->shortcut_filter, "category",
         G_BINDING_BIDIRECTIONAL, search_chip_transform_to_func,
         search_chip_transform_from_func,
-        GINT_TO_POINTER (PINS_APP_FILTER_CATEGORY_EDITED), NULL);
+        GINT_TO_POINTER (PINS_SHORTCUT_FILTER_CATEGORY_EDITED), NULL);
     g_object_bind_property_full (
-        self->system_search_chip, "active", self->app_filter, "category",
+        self->system_search_chip, "active", self->shortcut_filter, "category",
         G_BINDING_BIDIRECTIONAL, search_chip_transform_to_func,
         search_chip_transform_from_func,
-        GINT_TO_POINTER (PINS_APP_FILTER_CATEGORY_SYSTEM), NULL);
+        GINT_TO_POINTER (PINS_SHORTCUT_FILTER_CATEGORY_SYSTEM), NULL);
     g_object_bind_property_full (
-        self->hidden_search_chip, "active", self->app_filter, "category",
+        self->hidden_search_chip, "active", self->shortcut_filter, "category",
         G_BINDING_BIDIRECTIONAL, search_chip_transform_to_func,
         search_chip_transform_from_func,
-        GINT_TO_POINTER (PINS_APP_FILTER_CATEGORY_HIDDEN), NULL);
+        GINT_TO_POINTER (PINS_SHORTCUT_FILTER_CATEGORY_HIDDEN), NULL);
     g_object_bind_property_full (
-        self->autostart_search_chip, "active", self->app_filter, "category",
-        G_BINDING_BIDIRECTIONAL, search_chip_transform_to_func,
+        self->autostart_search_chip, "active", self->shortcut_filter,
+        "category", G_BINDING_BIDIRECTIONAL, search_chip_transform_to_func,
         search_chip_transform_from_func,
-        GINT_TO_POINTER (PINS_APP_FILTER_CATEGORY_AUTOSTART), NULL);
+        GINT_TO_POINTER (PINS_SHORTCUT_FILTER_CATEGORY_AUTOSTART), NULL);
 
-    g_signal_connect_object (self->app_filter, "items-changed",
+    g_signal_connect_object (self->shortcut_filter, "items-changed",
                              G_CALLBACK (pins_home_view_items_changed_cb),
                              self, 0);
     g_signal_connect_object (self->search_entry, "search-changed",
