@@ -21,9 +21,9 @@
 #include "pins-window.h"
 
 #include "pins-app-iterator.h"
-#include "pins-app-view.h"
 #include "pins-directories.h"
 #include "pins-file-view.h"
+#include "pins-home-view.h"
 
 struct _PinsWindow
 {
@@ -32,7 +32,7 @@ struct _PinsWindow
     PinsAppIterator *app_iterator;
 
     AdwNavigationView *navigation_view;
-    PinsAppView *app_view;
+    PinsHomeView *home_view;
     PinsFileView *file_view;
     AdwStatusPage *error_status_page;
 };
@@ -101,12 +101,12 @@ pins_window_class_init (PinsWindowClass *klass)
 
     gtk_widget_class_set_template_from_resource (
         widget_class, "/io/github/fabrialberio/pinapp/pins-window.ui");
-    g_type_ensure (PINS_TYPE_APP_VIEW);
+    g_type_ensure (PINS_TYPE_HOME_VIEW);
     g_type_ensure (PINS_TYPE_FILE_VIEW);
 
     gtk_widget_class_bind_template_child (widget_class, PinsWindow,
                                           navigation_view);
-    gtk_widget_class_bind_template_child (widget_class, PinsWindow, app_view);
+    gtk_widget_class_bind_template_child (widget_class, PinsWindow, home_view);
     gtk_widget_class_bind_template_child (widget_class, PinsWindow, file_view);
     gtk_widget_class_bind_template_child (widget_class, PinsWindow,
                                           error_status_page);
@@ -250,9 +250,9 @@ pins_window_init (PinsWindow *self)
         "search", NULL, g_variant_new_boolean (FALSE));
     g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (search_action));
 
-    pins_app_view_set_app_iterator (self->app_view, self->app_iterator);
+    pins_home_view_set_app_iterator (self->home_view, self->app_iterator);
 
-    g_signal_connect_object (self->app_view, "activate",
+    g_signal_connect_object (self->home_view, "activate",
                              G_CALLBACK (pins_window_file_activated_cb), self,
                              G_CONNECT_SWAPPED);
     g_signal_connect_object (self->file_view, "duplicate",

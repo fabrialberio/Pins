@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="PinsAppView" parent="AdwBin">
+  <template class="PinsHomeView" parent="AdwBin">
     <property name="child">
       <object class="AdwToolbarView" id="toolbar_view">
         <child type="top">
@@ -174,7 +174,7 @@
     <section>
       <item>
         <attribute name="label" translatable="yes">Show _All Apps</attribute>
-        <attribute name="action">app-view.show-all-apps</attribute>
+        <attribute name="action">home-view.show-all-apps</attribute>
       </item>
     </section>
     <section>

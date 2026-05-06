@@ -1,4 +1,4 @@
-/* pins-app-view.c
+/* pins-home-view.c
  *
  * Copyright 2024 Fabrizio
  *
@@ -22,13 +22,13 @@
 // - Filtering a model for search
 // - Showing loading / placeholder
 
-#include "pins-app-view.h"
+#include "pins-home-view.h"
 
 #include "pins-app-filter.h"
 #include "pins-app-grid.h"
 #include "pins-desktop-file.h"
 
-struct _PinsAppView
+struct _PinsHomeView
 {
     AdwBin parent_instance;
 
@@ -44,7 +44,7 @@ struct _PinsAppView
     PinsAppGrid *app_grid;
 };
 
-G_DEFINE_TYPE (PinsAppView, pins_app_view, ADW_TYPE_BIN);
+G_DEFINE_TYPE (PinsHomeView, pins_home_view, ADW_TYPE_BIN);
 
 enum
 {
@@ -68,9 +68,9 @@ static gchar *pages[N_PAGES] = {
 };
 
 void
-app_iterator_loading_cb (PinsAppView *self, gboolean is_loading)
+app_iterator_loading_cb (PinsHomeView *self, gboolean is_loading)
 {
-    g_assert (PINS_IS_APP_VIEW (self));
+    g_assert (PINS_IS_HOME_VIEW (self));
 
     if (is_loading)
         adw_view_stack_set_visible_child_name (self->view_stack,
@@ -81,14 +81,15 @@ app_iterator_loading_cb (PinsAppView *self, gboolean is_loading)
 }
 
 void
-app_iterator_file_created_cb (PinsAppView *self, PinsDesktopFile *desktop_file)
+app_iterator_file_created_cb (PinsHomeView *self,
+                              PinsDesktopFile *desktop_file)
 {
     g_signal_emit (self, signals[ACTIVATE], 0, desktop_file);
 }
 
 void
-pins_app_view_set_app_iterator (PinsAppView *self,
-                                PinsAppIterator *app_iterator)
+pins_home_view_set_app_iterator (PinsHomeView *self,
+                                 PinsAppIterator *app_iterator)
 {
     adw_view_stack_set_visible_child_name (self->view_stack,
                                            pages[PAGE_LOADING]);
@@ -108,44 +109,45 @@ pins_app_view_set_app_iterator (PinsAppView *self,
 }
 
 static void
-pins_app_view_dispose (GObject *object)
+pins_home_view_dispose (GObject *object)
 {
-    gtk_widget_dispose_template (GTK_WIDGET (object), PINS_TYPE_APP_VIEW);
+    gtk_widget_dispose_template (GTK_WIDGET (object), PINS_TYPE_HOME_VIEW);
 
-    G_OBJECT_CLASS (pins_app_view_parent_class)->dispose (object);
+    G_OBJECT_CLASS (pins_home_view_parent_class)->dispose (object);
 }
 
 static void
-pins_app_view_class_init (PinsAppViewClass *klass)
+pins_home_view_class_init (PinsHomeViewClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-    object_class->dispose = pins_app_view_dispose;
+    object_class->dispose = pins_home_view_dispose;
 
     signals[ACTIVATE] = g_signal_new ("activate", G_TYPE_FROM_CLASS (klass),
                                       G_SIGNAL_RUN_LAST, 0, NULL, NULL, NULL,
                                       G_TYPE_NONE, 1, G_TYPE_OBJECT);
 
     gtk_widget_class_set_template_from_resource (
-        widget_class, "/io/github/fabrialberio/pinapp/pins-app-view.ui");
+        widget_class, "/io/github/fabrialberio/pinapp/pins-home-view.ui");
     g_type_ensure (PINS_TYPE_APP_GRID);
 
-    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+    gtk_widget_class_bind_template_child (widget_class, PinsHomeView,
                                           search_bar);
-    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+    gtk_widget_class_bind_template_child (widget_class, PinsHomeView,
                                           search_entry);
-    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+    gtk_widget_class_bind_template_child (widget_class, PinsHomeView,
                                           edited_search_chip);
-    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+    gtk_widget_class_bind_template_child (widget_class, PinsHomeView,
                                           system_search_chip);
-    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+    gtk_widget_class_bind_template_child (widget_class, PinsHomeView,
                                           hidden_search_chip);
-    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+    gtk_widget_class_bind_template_child (widget_class, PinsHomeView,
                                           autostart_search_chip);
-    gtk_widget_class_bind_template_child (widget_class, PinsAppView,
+    gtk_widget_class_bind_template_child (widget_class, PinsHomeView,
                                           view_stack);
-    gtk_widget_class_bind_template_child (widget_class, PinsAppView, app_grid);
+    gtk_widget_class_bind_template_child (widget_class, PinsHomeView,
+                                          app_grid);
 }
 
 gboolean
@@ -182,10 +184,11 @@ search_chip_transform_from_func (GBinding *binding, const GValue *from_value,
 }
 
 void
-pins_app_view_items_changed_cb (GListModel *list, guint position,
-                                guint removed, guint added, PinsAppView *self)
+pins_home_view_items_changed_cb (GListModel *list, guint position,
+                                 guint removed, guint added,
+                                 PinsHomeView *self)
 {
-    g_assert (PINS_IS_APP_VIEW (self));
+    g_assert (PINS_IS_HOME_VIEW (self));
 
     if (g_list_model_get_n_items (G_LIST_MODEL (self->app_filter)) == 0)
         adw_view_stack_set_visible_child_name (self->view_stack,
@@ -196,29 +199,29 @@ pins_app_view_items_changed_cb (GListModel *list, guint position,
 }
 
 void
-pins_app_view_search_changed_cb (GtkSearchEntry *entry, PinsAppView *self)
+pins_home_view_search_changed_cb (GtkSearchEntry *entry, PinsHomeView *self)
 {
-    g_assert (PINS_IS_APP_VIEW (self));
+    g_assert (PINS_IS_HOME_VIEW (self));
 
     pins_app_filter_set_search (self->app_filter,
                                 gtk_editable_get_text (GTK_EDITABLE (entry)));
 }
 
 void
-pins_app_view_search_mode_notify_cb (GtkSearchBar *search_bar,
-                                     GParamSpec *pspec, PinsAppView *self)
+pins_home_view_search_mode_notify_cb (GtkSearchBar *search_bar,
+                                      GParamSpec *pspec, PinsHomeView *self)
 {
     if (!gtk_search_bar_get_search_mode (search_bar))
         pins_app_filter_reset_category (self->app_filter);
 }
 
 void
-pins_app_view_item_activated_cb (GtkListView *self, guint position,
-                                 PinsAppView *user_data)
+pins_home_view_item_activated_cb (GtkListView *self, guint position,
+                                  PinsHomeView *user_data)
 {
     g_autoptr (PinsDesktopFile) desktop_file = NULL;
 
-    g_assert (PINS_IS_APP_VIEW (user_data));
+    g_assert (PINS_IS_HOME_VIEW (user_data));
 
     desktop_file = g_list_model_get_item (G_LIST_MODEL (user_data->app_filter),
                                           position);
@@ -227,7 +230,7 @@ pins_app_view_item_activated_cb (GtkListView *self, guint position,
 }
 
 static void
-pins_app_view_init (PinsAppView *self)
+pins_home_view_init (PinsHomeView *self)
 {
     g_autoptr (GSettings) settings = NULL;
     g_autoptr (GSimpleActionGroup) group = NULL;
@@ -238,7 +241,7 @@ pins_app_view_init (PinsAppView *self)
     action = g_settings_create_action (settings, "show-all-apps");
 
     g_action_map_add_action (G_ACTION_MAP (group), action);
-    gtk_widget_insert_action_group (GTK_WIDGET (self), "app-view",
+    gtk_widget_insert_action_group (GTK_WIDGET (self), "home-view",
                                     G_ACTION_GROUP (group));
 
     gtk_widget_init_template (GTK_WIDGET (self));
@@ -276,15 +279,15 @@ pins_app_view_init (PinsAppView *self)
         GINT_TO_POINTER (PINS_APP_FILTER_CATEGORY_AUTOSTART), NULL);
 
     g_signal_connect_object (self->app_filter, "items-changed",
-                             G_CALLBACK (pins_app_view_items_changed_cb), self,
-                             0);
+                             G_CALLBACK (pins_home_view_items_changed_cb),
+                             self, 0);
     g_signal_connect_object (self->search_entry, "search-changed",
-                             G_CALLBACK (pins_app_view_search_changed_cb),
+                             G_CALLBACK (pins_home_view_search_changed_cb),
                              self, 0);
     g_signal_connect_object (self->search_bar, "notify::search-mode-enabled",
-                             G_CALLBACK (pins_app_view_search_mode_notify_cb),
+                             G_CALLBACK (pins_home_view_search_mode_notify_cb),
                              self, 0);
     g_signal_connect_object (self->app_grid, "activate",
-                             G_CALLBACK (pins_app_view_item_activated_cb),
+                             G_CALLBACK (pins_home_view_item_activated_cb),
                              self, 0);
 }

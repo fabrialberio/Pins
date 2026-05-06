@@ -1,4 +1,4 @@
-/* pins-app-view.h
+/* pins-home-view.h
  *
  * Copyright 2024 Fabrizio
  *
@@ -26,11 +26,11 @@
 
 G_BEGIN_DECLS
 
-#define PINS_TYPE_APP_VIEW (pins_app_view_get_type ())
+#define PINS_TYPE_HOME_VIEW (pins_home_view_get_type ())
 
-G_DECLARE_FINAL_TYPE (PinsAppView, pins_app_view, PINS, APP_VIEW, AdwBin)
+G_DECLARE_FINAL_TYPE (PinsHomeView, pins_home_view, PINS, HOME_VIEW, AdwBin)
 
-void pins_app_view_set_app_iterator (PinsAppView *self,
-                                     PinsAppIterator *app_iterator);
+void pins_home_view_set_app_iterator (PinsHomeView *self,
+                                      PinsAppIterator *app_iterator);
 
 G_END_DECLS

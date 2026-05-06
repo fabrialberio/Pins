@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Gtranslator 48.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-app-view.ui:21
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-home-view.ui:21
 msgid "Pins"
 msgstr "Pins"
 
@@ -98,59 +98,59 @@ msgstr "_Cancelar"
 msgid "_Add"
 msgstr "_Adicionar"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:157 src/shortcuts-dialog.ui:21
+#: src/pins-home-view.ui:15 src/pins-home-view.ui:157 src/shortcuts-dialog.ui:21
 #, fuzzy
 msgid "Add New App"
 msgstr "Adicionar novo aplicativo"
 
-#: src/pins-app-view.ui:26
+#: src/pins-home-view.ui:26
 msgid "Main Menu"
 msgstr "Menu Principal"
 
-#: src/pins-app-view.ui:33 src/shortcuts-dialog.ui:27
+#: src/pins-home-view.ui:33 src/shortcuts-dialog.ui:27
 msgid "Search"
 msgstr "Pesquisar"
 
-#: src/pins-app-view.ui:55
+#: src/pins-home-view.ui:55
 msgid "Search apps by name or field content"
 msgstr "Pesquisar aplicativos por nome ou campo do seu conteúdo"
 
-#: src/pins-app-view.ui:73
+#: src/pins-home-view.ui:73
 msgid "Edited"
 msgstr "Editado"
 
-#: src/pins-app-view.ui:81
+#: src/pins-home-view.ui:81
 msgid "System"
 msgstr "Sistema"
 
-#: src/pins-app-view.ui:89
+#: src/pins-home-view.ui:89
 msgid "Hidden"
 msgstr "Escondido"
 
-#: src/pins-app-view.ui:97 src/pins-file-view.ui:142
+#: src/pins-home-view.ui:97 src/pins-file-view.ui:142
 msgid "Autostart"
 msgstr "Início automático"
 
-#: src/pins-app-view.ui:130
+#: src/pins-home-view.ui:130
 #, fuzzy
 msgid "Loading Apps"
 msgstr "Carregando aplicativos…"
 
-#: src/pins-app-view.ui:145
+#: src/pins-home-view.ui:145
 #, fuzzy
 msgid "No Apps Found"
 msgstr "Nenhum aplicativo encontrado"
 
-#: src/pins-app-view.ui:176
+#: src/pins-home-view.ui:176
 #, fuzzy
 msgid "Show _All Apps"
 msgstr "Mostrar _todos os aplicativos"
 
-#: src/pins-app-view.ui:182
+#: src/pins-home-view.ui:182
 msgid "_Keyboard Shortcuts"
 msgstr "Atalhos de _teclado"
 
-#: src/pins-app-view.ui:186
+#: src/pins-home-view.ui:186
 msgid "_About Pins"
 msgstr "_Sobre o Pins"
 

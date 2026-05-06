@@ -3,7 +3,7 @@ data/io.github.fabrialberio.pinapp.metainfo.xml.in
 data/io.github.fabrialberio.pinapp.gschema.xml
 
 src/pins-add-key-dialog.ui
-src/pins-app-view.ui
+src/pins-home-view.ui
 src/pins-file-view.ui
 src/pins-key-row.ui
 src/pins-pick-icon-popover.ui

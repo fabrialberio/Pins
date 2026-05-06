@@ -20,7 +20,7 @@ msgstr ""
 "=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-app-view.ui:21
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-home-view.ui:21
 msgid "Pins"
 msgstr "Pins"
 
@@ -95,55 +95,55 @@ msgstr "_Отмена"
 msgid "_Add"
 msgstr "_Добавить"
 
-#: src/pins-app-view.ui:15 src/pins-app-view.ui:157 src/shortcuts-dialog.ui:21
+#: src/pins-home-view.ui:15 src/pins-home-view.ui:157 src/shortcuts-dialog.ui:21
 msgid "Add New App"
 msgstr "Добавить новое приложение"
 
-#: src/pins-app-view.ui:26
+#: src/pins-home-view.ui:26
 msgid "Main Menu"
 msgstr "Главное меню"
 
-#: src/pins-app-view.ui:33 src/shortcuts-dialog.ui:27
+#: src/pins-home-view.ui:33 src/shortcuts-dialog.ui:27
 msgid "Search"
 msgstr "Поиск"
 
-#: src/pins-app-view.ui:55
+#: src/pins-home-view.ui:55
 msgid "Search apps by name or field content"
 msgstr "Поиск приложений по имени или содержимому поля"
 
-#: src/pins-app-view.ui:73
+#: src/pins-home-view.ui:73
 msgid "Edited"
 msgstr "Изменённые"
 
-#: src/pins-app-view.ui:81
+#: src/pins-home-view.ui:81
 msgid "System"
 msgstr "Системные"
 
-#: src/pins-app-view.ui:89
+#: src/pins-home-view.ui:89
 msgid "Hidden"
 msgstr "Скрытые"
 
-#: src/pins-app-view.ui:97 src/pins-file-view.ui:142
+#: src/pins-home-view.ui:97 src/pins-file-view.ui:142
 msgid "Autostart"
 msgstr "Автозапуск"
 
-#: src/pins-app-view.ui:130
+#: src/pins-home-view.ui:130
 msgid "Loading Apps"
 msgstr "Загрузка приложений"
 
-#: src/pins-app-view.ui:145
+#: src/pins-home-view.ui:145
 msgid "No Apps Found"
 msgstr "Приложения не найдены"
 
-#: src/pins-app-view.ui:176
+#: src/pins-home-view.ui:176
 msgid "Show _All Apps"
 msgstr "Показать _все приложения"
 
-#: src/pins-app-view.ui:182
+#: src/pins-home-view.ui:182
 msgid "_Keyboard Shortcuts"
 msgstr "_Комбинации клавиш"
 
-#: src/pins-app-view.ui:186
+#: src/pins-home-view.ui:186
 msgid "_About Pins"
 msgstr "_О приложении"
 

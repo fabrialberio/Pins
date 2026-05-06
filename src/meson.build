@@ -6,7 +6,7 @@ pinapp_sources = [
     'pins-app-icon.c',
     'pins-app-iterator.c',
     'pins-app-tile.c',
-    'pins-app-view.c',
+    'pins-home-view.c',
     'pins-application.c',
     'pins-desktop-file.c',
     'pins-directories.c',
