@@ -227,7 +227,7 @@ msgstr "Показать комбинации клавиш"
 msgid "Quit"
 msgstr "Выход"
 
-#: src/pins-desktop-file.c:107
+#: src/pins-shortcut.c:107
 #, c-format
 msgid "Could not open file."
 msgstr "Не удалось открыть файл."

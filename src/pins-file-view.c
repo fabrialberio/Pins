@@ -32,7 +32,7 @@ struct _PinsFileView
 {
     AdwBin parent_instance;
 
-    PinsDesktopFile *desktop_file;
+    PinsShortcut *shortcut;
     GFile *opened_from_file;
     gchar **keys;
 
@@ -63,15 +63,15 @@ enum
 static guint signals[N_SIGNALS];
 
 void
-pins_file_view_setup_row (PinsKeyRow *row, PinsDesktopFile *desktop_file,
-                          gchar *key, gchar **all_keys, gchar **all_locales)
+pins_file_view_setup_row (PinsKeyRow *row, PinsShortcut *shortcut, gchar *key,
+                          gchar **all_keys, gchar **all_locales)
 {
     gchar **locales = { NULL };
 
     if (_pins_key_has_locales (all_keys, key))
         locales = all_locales;
 
-    pins_key_row_set_key (row, desktop_file, key, locales);
+    pins_key_row_set_key (row, shortcut, key, locales);
 }
 
 void
@@ -83,13 +83,13 @@ pins_file_view_update_title (PinsFileView *self)
 
     title_key = _pins_join_key_locale (
         G_KEY_FILE_DESKTOP_KEY_NAME,
-        pins_desktop_file_get_locale_for_key (self->desktop_file,
-                                              G_KEY_FILE_DESKTOP_KEY_NAME));
+        pins_shortcut_get_locale_for_key (self->shortcut,
+                                          G_KEY_FILE_DESKTOP_KEY_NAME));
 
     if (gtk_adjustment_get_value (adjustment) > 0)
         adw_window_title_set_title (
             self->window_title,
-            pins_desktop_file_get_string (self->desktop_file, title_key));
+            pins_shortcut_get_string (self->shortcut, title_key));
     else
         adw_window_title_set_title (self->window_title, "");
 }
@@ -97,12 +97,12 @@ pins_file_view_update_title (PinsFileView *self)
 void
 pins_file_view_update_reset_icon_button_visible (PinsFileView *self)
 {
-    gboolean icon_edited = pins_desktop_file_is_key_edited (
-        self->desktop_file, G_KEY_FILE_DESKTOP_KEY_ICON);
+    gboolean icon_edited = pins_shortcut_is_key_edited (
+        self->shortcut, G_KEY_FILE_DESKTOP_KEY_ICON);
 
     gtk_widget_set_visible (
         GTK_WIDGET (self->reset_icon_button),
-        icon_edited && !pins_desktop_file_is_user_only (self->desktop_file));
+        icon_edited && !pins_shortcut_is_user_only (self->shortcut));
 }
 
 void
@@ -135,28 +135,28 @@ pins_file_view_focus_key_row (PinsFileView *self, gchar *key)
 void
 autostart_switch_state_set_cb (PinsFileView *self, gboolean state)
 {
-    pins_desktop_file_set_autostart (self->desktop_file, state);
+    pins_shortcut_set_autostart (self->shortcut, state);
     gtk_switch_set_active (self->autostart_switch, state);
 }
 
 void
 invisible_switch_state_set_cb (PinsFileView *self, gboolean state)
 {
-    pins_desktop_file_set_boolean (self->desktop_file,
-                                   G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY, state);
+    pins_shortcut_set_boolean (self->shortcut,
+                               G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY, state);
     gtk_switch_set_active (self->invisible_switch, state);
 }
 
 void
-pins_file_view_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
+pins_file_view_key_set_cb (PinsShortcut *shortcut, gchar *key,
                            PinsFileView *self)
 {
     g_assert (PINS_IS_FILE_VIEW (self));
 
     if (!g_strv_contains ((const gchar *const *)self->keys, key))
         {
-            pins_file_view_set_desktop_file (self, self->desktop_file,
-                                             self->opened_from_file);
+            pins_file_view_set_shortcut (self, self->shortcut,
+                                         self->opened_from_file);
             pins_file_view_focus_key_row (self, key);
         }
 
@@ -164,8 +164,8 @@ pins_file_view_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
         pins_file_view_update_title (self);
     else if (!g_strcmp0 (key, G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY))
         {
-            gboolean value = pins_desktop_file_get_boolean (
-                self->desktop_file, G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY);
+            gboolean value = pins_shortcut_get_boolean (
+                self->shortcut, G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY);
 
             if (gtk_switch_get_state (self->invisible_switch) != value)
                 {
@@ -185,11 +185,10 @@ pins_file_view_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
 }
 
 void
-pins_file_view_key_removed_cb (PinsDesktopFile *desktop_file, gchar *key,
+pins_file_view_key_removed_cb (PinsShortcut *shortcut, gchar *key,
                                PinsFileView *self)
 {
-    pins_file_view_set_desktop_file (self, self->desktop_file,
-                                     self->opened_from_file);
+    pins_file_view_set_shortcut (self, self->shortcut, self->opened_from_file);
 }
 
 void
@@ -200,10 +199,10 @@ pins_file_view_setup_keys_listbox (PinsFileView *self)
 
     gtk_list_box_remove_all (self->keys_listbox);
 
-    pins_file_view_setup_row (self->name_row, self->desktop_file,
+    pins_file_view_setup_row (self->name_row, self->shortcut,
                               G_KEY_FILE_DESKTOP_KEY_NAME, self->keys,
                               locales);
-    pins_file_view_setup_row (self->comment_row, self->desktop_file,
+    pins_file_view_setup_row (self->comment_row, self->shortcut,
                               G_KEY_FILE_DESKTOP_KEY_COMMENT, self->keys,
                               locales);
 
@@ -221,7 +220,7 @@ pins_file_view_setup_keys_listbox (PinsFileView *self)
             g_hash_table_add (added_keys, current_key);
 
             row = pins_key_row_new ();
-            pins_file_view_setup_row (row, self->desktop_file,
+            pins_file_view_setup_row (row, self->shortcut,
                                       g_strdup (current_key), self->keys,
                                       locales);
 
@@ -233,42 +232,40 @@ pins_file_view_setup_keys_listbox (PinsFileView *self)
 }
 
 void
-pins_file_view_set_desktop_file (PinsFileView *self,
-                                 PinsDesktopFile *desktop_file,
-                                 GFile *opened_from_file)
+pins_file_view_set_shortcut (PinsFileView *self, PinsShortcut *shortcut,
+                             GFile *opened_from_file)
 {
-    if (self->desktop_file != NULL)
+    if (self->shortcut != NULL)
         {
             g_signal_handlers_disconnect_by_func (
-                self->desktop_file, pins_file_view_key_set_cb, self);
+                self->shortcut, pins_file_view_key_set_cb, self);
             g_signal_handlers_disconnect_by_func (
-                self->desktop_file, pins_file_view_key_removed_cb, self);
+                self->shortcut, pins_file_view_key_removed_cb, self);
             g_signal_handlers_disconnect_by_func (
-                self->desktop_file, autostart_switch_state_set_cb, self);
+                self->shortcut, autostart_switch_state_set_cb, self);
             g_signal_handlers_disconnect_by_func (
-                self->desktop_file, invisible_switch_state_set_cb, self);
+                self->shortcut, invisible_switch_state_set_cb, self);
         }
 
-    self->desktop_file = g_object_ref (desktop_file);
+    self->shortcut = g_object_ref (shortcut);
     self->opened_from_file = opened_from_file;
-    self->keys = pins_desktop_file_get_keys (self->desktop_file);
+    self->keys = pins_shortcut_get_keys (self->shortcut);
 
     pins_file_view_update_title (self);
     pins_file_view_update_reset_icon_button_visible (self);
-    pins_app_icon_set_desktop_file (self->icon, self->desktop_file);
-    pins_pick_icon_popover_set_desktop_file (self->pick_icon_popover,
-                                             self->desktop_file);
-    gtk_switch_set_active (
-        self->autostart_switch,
-        pins_desktop_file_is_autostart (self->desktop_file));
+    pins_app_icon_set_shortcut (self->icon, self->shortcut);
+    pins_pick_icon_popover_set_shortcut (self->pick_icon_popover,
+                                         self->shortcut);
+    gtk_switch_set_active (self->autostart_switch,
+                           pins_shortcut_is_autostart (self->shortcut));
     gtk_switch_set_active (
         self->invisible_switch,
-        pins_desktop_file_get_boolean (self->desktop_file,
-                                       G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY));
+        pins_shortcut_get_boolean (self->shortcut,
+                                   G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY));
 
-    g_signal_connect_object (self->desktop_file, "key-set",
+    g_signal_connect_object (self->shortcut, "key-set",
                              G_CALLBACK (pins_file_view_key_set_cb), self, 0);
-    g_signal_connect_object (self->desktop_file, "key-removed",
+    g_signal_connect_object (self->shortcut, "key-removed",
                              G_CALLBACK (pins_file_view_key_removed_cb), self,
                              0);
     g_signal_connect_object (self->autostart_switch, "state-set",
@@ -279,16 +276,16 @@ pins_file_view_set_desktop_file (PinsFileView *self,
                              G_CONNECT_SWAPPED);
 
     gtk_widget_set_visible (GTK_WIDGET (self->delete_button),
-                            pins_desktop_file_is_user_only (self->desktop_file)
+                            pins_shortcut_is_user_only (self->shortcut)
                                 && self->opened_from_file == NULL);
 
     pins_file_view_setup_keys_listbox (self);
 }
 
-PinsDesktopFile *
-pins_file_view_get_desktop_file (PinsFileView *self)
+PinsShortcut *
+pins_file_view_get_shortcut (PinsFileView *self)
 {
-    return self->desktop_file;
+    return self->shortcut;
 }
 
 static void
@@ -296,7 +293,7 @@ pins_file_view_dispose (GObject *object)
 {
     PinsFileView *self = PINS_FILE_VIEW (object);
 
-    g_clear_object (&self->desktop_file);
+    g_clear_object (&self->shortcut);
 
     gtk_widget_dispose_template (GTK_WIDGET (object), PINS_TYPE_FILE_VIEW);
 
@@ -355,8 +352,8 @@ void
 pins_file_view_open_with_cb (GSimpleAction *action, GVariant *param,
                              PinsFileView *self)
 {
-    GtkFileLauncher *launcher = gtk_file_launcher_new (
-        pins_desktop_file_get_user_file (self->desktop_file));
+    GtkFileLauncher *launcher
+        = gtk_file_launcher_new (pins_shortcut_get_user_file (self->shortcut));
 
     gtk_file_launcher_set_always_ask (launcher, TRUE);
     gtk_file_launcher_launch (
@@ -370,8 +367,8 @@ void
 pins_file_view_open_folder_cb (GSimpleAction *action, GVariant *param,
                                PinsFileView *self)
 {
-    GtkFileLauncher *launcher = gtk_file_launcher_new (
-        pins_desktop_file_get_user_file (self->desktop_file));
+    GtkFileLauncher *launcher
+        = gtk_file_launcher_new (pins_shortcut_get_user_file (self->shortcut));
 
     gtk_file_launcher_open_containing_folder (
         launcher, GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))), NULL,
@@ -382,21 +379,20 @@ void
 pins_file_view_duplicate_cb (GSimpleAction *action, GVariant *param,
                              PinsFileView *self)
 {
-    g_signal_emit (self, signals[DUPLICATE], 0, self->desktop_file);
+    g_signal_emit (self, signals[DUPLICATE], 0, self->shortcut);
     g_signal_emit (self, signals[POP_REQUEST], 0);
 }
 
 void
 reset_icon_button_clicked_cb (PinsFileView *self)
 {
-    pins_desktop_file_reset_key (self->desktop_file,
-                                 G_KEY_FILE_DESKTOP_KEY_ICON);
+    pins_shortcut_reset_key (self->shortcut, G_KEY_FILE_DESKTOP_KEY_ICON);
 }
 
 void
 add_key_button_clicked_cb (PinsFileView *self)
 {
-    PinsAddKeyDialog *dialog = pins_add_key_dialog_new (self->desktop_file);
+    PinsAddKeyDialog *dialog = pins_add_key_dialog_new (self->shortcut);
 
     adw_dialog_present (ADW_DIALOG (dialog),
                         GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self))));
@@ -405,7 +401,7 @@ add_key_button_clicked_cb (PinsFileView *self)
 void
 delete_button_clicked_cb (PinsFileView *self)
 {
-    pins_desktop_file_trash (self->desktop_file);
+    pins_shortcut_trash (self->shortcut);
 }
 
 void

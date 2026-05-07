@@ -24,8 +24,8 @@
 
 #include "pins-home-view.h"
 
-#include "pins-desktop-file.h"
 #include "pins-shortcut-filter.h"
+#include "pins-shortcut.h"
 #include "pins-shortcuts-grid.h"
 
 struct _PinsHomeView
@@ -81,10 +81,9 @@ app_iterator_loading_cb (PinsHomeView *self, gboolean is_loading)
 }
 
 void
-app_iterator_file_created_cb (PinsHomeView *self,
-                              PinsDesktopFile *desktop_file)
+app_iterator_file_created_cb (PinsHomeView *self, PinsShortcut *shortcut)
 {
-    g_signal_emit (self, signals[ACTIVATE], 0, desktop_file);
+    g_signal_emit (self, signals[ACTIVATE], 0, shortcut);
 }
 
 void
@@ -221,14 +220,14 @@ void
 pins_home_view_item_activated_cb (GtkListView *self, guint position,
                                   PinsHomeView *user_data)
 {
-    g_autoptr (PinsDesktopFile) desktop_file = NULL;
+    g_autoptr (PinsShortcut) shortcut = NULL;
 
     g_assert (PINS_IS_HOME_VIEW (user_data));
 
-    desktop_file = g_list_model_get_item (
+    shortcut = g_list_model_get_item (
         G_LIST_MODEL (user_data->shortcut_filter), position);
 
-    g_signal_emit (user_data, signals[ACTIVATE], 0, desktop_file);
+    g_signal_emit (user_data, signals[ACTIVATE], 0, shortcut);
 }
 
 static void

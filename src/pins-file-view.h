@@ -22,7 +22,7 @@
 
 #include <adwaita.h>
 
-#include "pins-desktop-file.h"
+#include "pins-shortcut.h"
 
 G_BEGIN_DECLS
 
@@ -31,9 +31,8 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (PinsFileView, pins_file_view, PINS, FILE_VIEW,
                       AdwBreakpointBin)
 
-void pins_file_view_set_desktop_file (PinsFileView *self,
-                                      PinsDesktopFile *desktop_file,
-                                      GFile *opened_from_file);
-PinsDesktopFile *pins_file_view_get_desktop_file (PinsFileView *self);
+void pins_file_view_set_shortcut (PinsFileView *self, PinsShortcut *shortcut,
+                                  GFile *opened_from_file);
+PinsShortcut *pins_file_view_get_shortcut (PinsFileView *self);
 
 G_END_DECLS

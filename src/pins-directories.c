@@ -28,7 +28,7 @@ parse_filename (gchar *parse_name)
 }
 
 gchar *
-pins_desktop_file_user_path (void)
+pins_shortcut_user_path (void)
 {
     g_autoptr (GSettings) settings
         = g_settings_new ("io.github.fabrialberio.pinapp");
@@ -37,7 +37,7 @@ pins_desktop_file_user_path (void)
 }
 
 gchar *
-pins_desktop_file_autostart_path (void)
+pins_shortcut_autostart_path (void)
 {
     g_autoptr (GSettings) settings
         = g_settings_new ("io.github.fabrialberio.pinapp");
@@ -46,7 +46,7 @@ pins_desktop_file_autostart_path (void)
 }
 
 gchar **
-pins_desktop_file_search_paths (void)
+pins_shortcut_search_paths (void)
 {
     GStrvBuilder *builder = g_strv_builder_new ();
     g_autoptr (GSettings) settings
@@ -54,7 +54,7 @@ pins_desktop_file_search_paths (void)
     g_auto (GStrv) search_paths
         = g_settings_get_strv (settings, "search-paths");
 
-    g_strv_builder_add (builder, pins_desktop_file_user_path ());
+    g_strv_builder_add (builder, pins_shortcut_user_path ());
 
     for (int i = 0; i < g_strv_length (search_paths); i++)
         g_strv_builder_add (builder,

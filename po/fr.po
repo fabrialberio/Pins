@@ -239,7 +239,7 @@ msgstr "Afficher les raccourcis"
 msgid "Quit"
 msgstr "Quitter"
 
-#: src/pins-desktop-file.c:107
+#: src/pins-shortcut.c:107
 #, c-format
 msgid "Could not open file."
 msgstr "Impossible d'ouvrir le fichier."

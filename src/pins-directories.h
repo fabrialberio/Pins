@@ -22,9 +22,9 @@
 
 G_BEGIN_DECLS
 
-gchar *pins_desktop_file_user_path (void);
-gchar *pins_desktop_file_autostart_path (void);
-gchar **pins_desktop_file_search_paths (void);
+gchar *pins_shortcut_user_path (void);
+gchar *pins_shortcut_autostart_path (void);
+gchar **pins_shortcut_search_paths (void);
 
 void pins_inject_icon_search_paths (void);
 

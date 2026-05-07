@@ -22,7 +22,7 @@
 
 #include <adwaita.h>
 
-#include <pins-desktop-file.h>
+#include <pins-shortcut.h>
 
 G_BEGIN_DECLS
 
@@ -31,7 +31,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (PinsPickIconPopover, pins_pick_icon_popover, PINS,
                       PICK_ICON_POPOVER, GtkPopover)
 
-void pins_pick_icon_popover_set_desktop_file (PinsPickIconPopover *self,
-                                              PinsDesktopFile *desktop_file);
+void pins_pick_icon_popover_set_shortcut (PinsPickIconPopover *self,
+                                          PinsShortcut *shortcut);
 
 G_END_DECLS

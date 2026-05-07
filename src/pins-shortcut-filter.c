@@ -20,8 +20,8 @@
 
 #include "pins-shortcut-filter.h"
 
-#include "pins-desktop-file.h"
 #include "pins-locale-utils-private.h"
+#include "pins-shortcut.h"
 
 struct _PinsShortcutFilter
 {
@@ -91,27 +91,27 @@ category_notify_cb (PinsShortcutFilter *self, GParamSpec *pspec)
 }
 
 gboolean
-category_match_func (gpointer desktop_file, gpointer user_data)
+category_match_func (gpointer shortcut, gpointer user_data)
 {
     PinsShortcutFilter *self = PINS_SHORTCUT_FILTER (user_data);
-    PinsDesktopFile *file = PINS_DESKTOP_FILE (desktop_file);
+    PinsShortcut *file = PINS_SHORTCUT (shortcut);
 
     switch (self->category)
         {
         case PINS_SHORTCUT_FILTER_CATEGORY_ALL:
             return TRUE;
         case PINS_SHORTCUT_FILTER_CATEGORY_VISIBLE:
-            return pins_desktop_file_is_shown (file)
-                   || pins_desktop_file_is_user_edited (file);
+            return pins_shortcut_is_shown (file)
+                   || pins_shortcut_is_user_edited (file);
         case PINS_SHORTCUT_FILTER_CATEGORY_EDITED:
-            return pins_desktop_file_is_user_edited (file);
+            return pins_shortcut_is_user_edited (file);
         case PINS_SHORTCUT_FILTER_CATEGORY_SYSTEM:
-            return pins_desktop_file_is_shown (file)
-                   && !pins_desktop_file_is_user_edited (file);
+            return pins_shortcut_is_shown (file)
+                   && !pins_shortcut_is_user_edited (file);
         case PINS_SHORTCUT_FILTER_CATEGORY_HIDDEN:
-            return !pins_desktop_file_is_shown (file);
+            return !pins_shortcut_is_shown (file);
         case PINS_SHORTCUT_FILTER_CATEGORY_AUTOSTART:
-            return pins_desktop_file_is_autostart (file);
+            return pins_shortcut_is_autostart (file);
         default:
             g_warning ("Invalid PinsShortcutFilterCategory");
             return FALSE;
@@ -121,22 +121,22 @@ category_match_func (gpointer desktop_file, gpointer user_data)
 int
 sort_compare_func (gconstpointer a, gconstpointer b, gpointer user_data)
 {
-    PinsDesktopFile *first = PINS_DESKTOP_FILE ((gpointer)a);
-    PinsDesktopFile *second = PINS_DESKTOP_FILE ((gpointer)b);
+    PinsShortcut *first = PINS_SHORTCUT ((gpointer)a);
+    PinsShortcut *second = PINS_SHORTCUT ((gpointer)b);
     const gchar *first_key, *second_key, *first_name, *second_name;
 
-    g_return_val_if_fail (PINS_IS_DESKTOP_FILE (first), 0);
-    g_return_val_if_fail (PINS_IS_DESKTOP_FILE (second), 0);
+    g_return_val_if_fail (PINS_IS_SHORTCUT (first), 0);
+    g_return_val_if_fail (PINS_IS_SHORTCUT (second), 0);
 
     first_key = _pins_join_key_locale (
-        G_KEY_FILE_DESKTOP_KEY_NAME, pins_desktop_file_get_locale_for_key (
-                                         first, G_KEY_FILE_DESKTOP_KEY_NAME));
-    first_name = pins_desktop_file_get_string (first, first_key);
+        G_KEY_FILE_DESKTOP_KEY_NAME,
+        pins_shortcut_get_locale_for_key (first, G_KEY_FILE_DESKTOP_KEY_NAME));
+    first_name = pins_shortcut_get_string (first, first_key);
 
     second_key = _pins_join_key_locale (
-        G_KEY_FILE_DESKTOP_KEY_NAME, pins_desktop_file_get_locale_for_key (
+        G_KEY_FILE_DESKTOP_KEY_NAME, pins_shortcut_get_locale_for_key (
                                          second, G_KEY_FILE_DESKTOP_KEY_NAME));
-    second_name = pins_desktop_file_get_string (second, second_key);
+    second_name = pins_shortcut_get_string (second, second_key);
 
     /// TODO: Use UTF8 compare
     return g_strcmp0 (first_name, second_name);
@@ -224,7 +224,7 @@ pins_shortcut_filter_init (PinsShortcutFilter *self)
         = gtk_custom_filter_new (&category_match_func, self, NULL);
 
     self->search_filter = gtk_string_filter_new (gtk_property_expression_new (
-        PINS_TYPE_DESKTOP_FILE, NULL, "search-string"));
+        PINS_TYPE_SHORTCUT, NULL, "search-string"));
 
     self->sort_model = gtk_sort_list_model_new (
         NULL,
@@ -257,7 +257,7 @@ pins_shortcut_filter_get_item (GListModel *list, guint position)
 GType
 pins_shortcut_filter_get_item_type (GListModel *list)
 {
-    return PINS_TYPE_DESKTOP_FILE;
+    return PINS_TYPE_SHORTCUT;
 }
 
 guint

@@ -11,7 +11,7 @@ src/pins-window.ui
 src/shortcuts-dialog.ui
 
 src/pins-application.c
-src/pins-desktop-file.c
+src/pins-shortcut.c
 src/pins-file-view.c
 src/pins-key-row.c
 src/pins-pick-icon-popover.c

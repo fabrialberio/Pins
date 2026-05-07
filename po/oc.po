@@ -238,7 +238,7 @@ msgstr "Afichar los acorchis"
 msgid "Quit"
 msgstr "Sortir"
 
-#: src/pins-desktop-file.c:107
+#: src/pins-shortcut.c:107
 #, c-format
 msgid "Could not open file."
 msgstr ""

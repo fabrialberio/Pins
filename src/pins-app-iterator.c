@@ -20,24 +20,24 @@
 
 #include "pins-app-iterator.h"
 
-#include "pins-desktop-file.h"
 #include "pins-directories.h"
 #include "pins-locale-utils-private.h"
+#include "pins-shortcut.h"
 
-#define DESKTOP_FILE_ATTRIBUTES                                               \
+#define SHORTCUT_ATTRIBUTES                                                   \
     g_strjoin (",", G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,                   \
                G_FILE_ATTRIBUTE_STANDARD_NAME,                                \
                G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,                        \
                G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME, NULL)
-#define DESKTOP_CONTENT_TYPE "application/x-desktop"
+#define SHORTCUT_CONTENT_TYPE "application/x-desktop"
 
 struct _PinsAppIterator
 {
     GObject parent_instance;
 
-    GHashTable *desktop_files_by_id;
+    GHashTable *shortcuts_by_id;
     GHashTable *files_by_id;
-    GPtrArray *desktop_files_array;
+    GPtrArray *shortcuts_array;
 };
 
 static void list_model_iface_init (GListModelInterface *iface);
@@ -63,7 +63,7 @@ pins_app_iterator_new (void)
 
 void
 pins_app_iterator_key_set_cb (PinsAppIterator *self, gchar *key,
-                              PinsDesktopFile *desktop_file)
+                              PinsShortcut *shortcut)
 {
     guint position;
 
@@ -72,8 +72,7 @@ pins_app_iterator_key_set_cb (PinsAppIterator *self, gchar *key,
     if (!g_strcmp0 (_pins_split_key_locale (key).key,
                     G_KEY_FILE_DESKTOP_KEY_NAME))
         {
-            g_ptr_array_find (self->desktop_files_array, desktop_file,
-                              &position);
+            g_ptr_array_find (self->shortcuts_array, shortcut, &position);
 
             g_list_model_items_changed (G_LIST_MODEL (self), position, 1, 1);
         }
@@ -81,34 +80,34 @@ pins_app_iterator_key_set_cb (PinsAppIterator *self, gchar *key,
 
 void
 pins_app_iterator_file_deleted_cb (PinsAppIterator *self,
-                                   PinsDesktopFile *desktop_file)
+                                   PinsShortcut *shortcut)
 {
     g_autofree gchar *desktop_id;
     guint position;
 
-    desktop_id = pins_desktop_file_get_desktop_id (desktop_file);
-    g_ptr_array_find (self->desktop_files_array, desktop_file, &position);
+    desktop_id = pins_shortcut_get_desktop_id (shortcut);
+    g_ptr_array_find (self->shortcuts_array, shortcut, &position);
 
-    g_assert (g_hash_table_remove (self->desktop_files_by_id, desktop_id));
+    g_assert (g_hash_table_remove (self->shortcuts_by_id, desktop_id));
     g_assert (g_hash_table_remove (self->files_by_id, desktop_id));
-    g_assert (g_ptr_array_remove_index (self->desktop_files_array, position));
+    g_assert (g_ptr_array_remove_index (self->shortcuts_array, position));
 
     g_list_model_items_changed (G_LIST_MODEL (self), position, 1, 0);
 }
 
 void
-desktop_files_by_id_insert_file (PinsAppIterator *self, GFile *file,
-                                 PinsDesktopFile *desktop_file)
+shortcuts_by_id_insert_file (PinsAppIterator *self, GFile *file,
+                                 PinsShortcut *shortcut)
 {
     gchar *desktop_id = g_file_get_basename (file);
 
-    g_hash_table_insert (self->desktop_files_by_id, desktop_id, desktop_file);
+    g_hash_table_insert (self->shortcuts_by_id, desktop_id, shortcut);
     g_hash_table_insert (self->files_by_id, g_strdup (desktop_id), file);
 
-    g_signal_connect_object (desktop_file, "key-set",
+    g_signal_connect_object (shortcut, "key-set",
                              G_CALLBACK (pins_app_iterator_key_set_cb), self,
                              G_CONNECT_SWAPPED);
-    g_signal_connect_object (desktop_file, "deleted",
+    g_signal_connect_object (shortcut, "deleted",
                              G_CALLBACK (pins_app_iterator_file_deleted_cb),
                              self, G_CONNECT_SWAPPED);
 }
@@ -116,13 +115,13 @@ desktop_files_by_id_insert_file (PinsAppIterator *self, GFile *file,
 void
 load_file_checked (PinsAppIterator *self, GFileInfo *info, GFile *file)
 {
-    PinsDesktopFile *desktop_file = NULL;
+    PinsShortcut *shortcut = NULL;
     g_autoptr (GError) err = NULL;
 
-    if (g_strcmp0 (g_file_info_get_content_type (info), DESKTOP_CONTENT_TYPE))
+    if (g_strcmp0 (g_file_info_get_content_type (info), SHORTCUT_CONTENT_TYPE))
         return;
 
-    desktop_file = pins_desktop_file_new (file, &err);
+    shortcut = pins_shortcut_new (file, &err);
     if (err != NULL)
         {
             g_warning ("Error loading file «%s»: %s", g_file_get_path (file),
@@ -130,7 +129,7 @@ load_file_checked (PinsAppIterator *self, GFileInfo *info, GFile *file)
             return;
         }
 
-    desktop_files_by_id_insert_file (self, file, g_object_ref (desktop_file));
+    shortcuts_by_id_insert_file (self, file, g_object_ref (shortcut));
 }
 
 void
@@ -144,16 +143,16 @@ pins_app_iterator_load (PinsAppIterator *self)
 
     g_signal_emit (self, signals[LOADING], 0, TRUE);
 
-    g_hash_table_remove_all (self->desktop_files_by_id);
+    g_hash_table_remove_all (self->shortcuts_by_id);
     g_hash_table_remove_all (self->files_by_id);
-    g_ptr_array_free (self->desktop_files_array, TRUE);
+    g_ptr_array_free (self->shortcuts_array, TRUE);
 
-    paths = pins_desktop_file_search_paths ();
+    paths = pins_shortcut_search_paths ();
 
     for (int i = 0; paths[i] != 0 && paths != NULL; i++)
         {
             enumerator = g_file_enumerate_children (
-                g_file_parse_name (paths[i]), DESKTOP_FILE_ATTRIBUTES,
+                g_file_parse_name (paths[i]), SHORTCUT_ATTRIBUTES,
                 G_FILE_QUERY_INFO_NONE, NULL, &err);
             if (err != NULL)
                 {
@@ -175,11 +174,11 @@ pins_app_iterator_load (PinsAppIterator *self)
             g_object_unref (enumerator);
         }
 
-    self->desktop_files_array
-        = g_hash_table_get_values_as_ptr_array (self->desktop_files_by_id);
+    self->shortcuts_array
+        = g_hash_table_get_values_as_ptr_array (self->shortcuts_by_id);
 
     g_list_model_items_changed (G_LIST_MODEL (self), 0, 0,
-                                self->desktop_files_array->len);
+                                self->shortcuts_array->len);
 
     g_signal_emit (self, signals[LOADING], 0, FALSE);
 }
@@ -193,36 +192,36 @@ pins_app_iterator_create_user_file (PinsAppIterator *self,
     g_autoptr (GFile) file;
     g_autoptr (GError) err = NULL;
     gchar *filename;
-    PinsDesktopFile *desktop_file;
+    PinsShortcut *shortcut;
 
     for (int i = 0; i < 999999; i++)
         {
             if (i > 0)
                 sprintf (increment, "-%d", i);
 
-            filename = g_strconcat (basename, increment,
-                                    PINS_DESKTOP_FILE_SUFFIX, NULL);
-            if (!g_hash_table_contains (self->desktop_files_by_id, filename))
+            filename = g_strconcat (basename, increment, PINS_SHORTCUT_SUFFIX,
+                                    NULL);
+            if (!g_hash_table_contains (self->shortcuts_by_id, filename))
                 break;
         }
 
-    file = g_file_new_build_filename (pins_desktop_file_user_path (), filename,
+    file = g_file_new_build_filename (pins_shortcut_user_path (), filename,
                                       NULL);
     g_file_replace_contents (file, contents, strlen (contents), NULL, FALSE,
                              G_FILE_CREATE_NONE, NULL, NULL, &err);
     if (err != NULL)
         return g_propagate_error (error, err);
 
-    desktop_file = pins_desktop_file_new (file, NULL);
+    shortcut = pins_shortcut_new (file, NULL);
 
-    desktop_files_by_id_insert_file (self, file, desktop_file);
-    g_assert (g_hash_table_contains (self->desktop_files_by_id, filename));
+    shortcuts_by_id_insert_file (self, file, shortcut);
+    g_assert (g_hash_table_contains (self->shortcuts_by_id, filename));
 
-    g_ptr_array_add (self->desktop_files_array, desktop_file);
+    g_ptr_array_add (self->shortcuts_array, shortcut);
     g_list_model_items_changed (G_LIST_MODEL (self),
-                                self->desktop_files_array->len - 1, 0, 1);
+                                self->shortcuts_array->len - 1, 0, 1);
 
-    g_signal_emit (self, signals[FILE_CREATED], 0, desktop_file);
+    g_signal_emit (self, signals[FILE_CREATED], 0, shortcut);
 }
 
 void
@@ -252,9 +251,9 @@ pins_app_iterator_dispose (GObject *object)
 {
     PinsAppIterator *self = PINS_APP_ITERATOR (object);
 
-    g_hash_table_unref (self->desktop_files_by_id);
+    g_hash_table_unref (self->shortcuts_by_id);
     g_hash_table_unref (self->files_by_id);
-    g_ptr_array_unref (self->desktop_files_array);
+    g_ptr_array_unref (self->shortcuts_array);
 }
 
 static void
@@ -276,11 +275,11 @@ pins_app_iterator_class_init (PinsAppIteratorClass *klass)
 static void
 pins_app_iterator_init (PinsAppIterator *self)
 {
-    self->desktop_files_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                       g_free, g_object_unref);
+    self->shortcuts_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                   g_free, g_object_unref);
     self->files_by_id = g_hash_table_new_full (g_str_hash, g_str_equal, g_free,
                                                g_object_unref);
-    self->desktop_files_array = g_ptr_array_new ();
+    self->shortcuts_array = g_ptr_array_new ();
 }
 
 gpointer
@@ -288,8 +287,8 @@ pins_app_iterator_get_item (GListModel *list, guint position)
 {
     PinsAppIterator *self = PINS_APP_ITERATOR (list);
 
-    if (position < self->desktop_files_array->len)
-        return g_object_ref (self->desktop_files_array->pdata[position]);
+    if (position < self->shortcuts_array->len)
+        return g_object_ref (self->shortcuts_array->pdata[position]);
     else
         return NULL;
 }
@@ -297,7 +296,7 @@ pins_app_iterator_get_item (GListModel *list, guint position)
 GType
 pins_app_iterator_get_item_type (GListModel *list)
 {
-    return PINS_TYPE_DESKTOP_FILE;
+    return PINS_TYPE_SHORTCUT;
 }
 
 guint
@@ -305,7 +304,7 @@ pins_app_iterator_get_n_items (GListModel *list)
 {
     PinsAppIterator *self = PINS_APP_ITERATOR (list);
 
-    return self->desktop_files_array->len;
+    return self->shortcuts_array->len;
 }
 
 static void

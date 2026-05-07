@@ -26,7 +26,7 @@ struct _PinsAddKeyDialog
 {
     AdwAlertDialog parent_instance;
 
-    PinsDesktopFile *desktop_file;
+    PinsShortcut *shortcut;
     AdwEntryRow *key_row;
 };
 
@@ -42,11 +42,11 @@ enum
 static gchar *responses[N_RESPONSES] = { "cancel", "add" };
 
 PinsAddKeyDialog *
-pins_add_key_dialog_new (PinsDesktopFile *desktop_file)
+pins_add_key_dialog_new (PinsShortcut *shortcut)
 {
     PinsAddKeyDialog *dialog = g_object_new (PINS_TYPE_ADD_KEY_DIALOG, NULL);
 
-    dialog->desktop_file = g_object_ref (desktop_file);
+    dialog->shortcut = g_object_ref (shortcut);
 
     return dialog;
 }
@@ -56,7 +56,7 @@ pins_add_key_dialog_dispose (GObject *object)
 {
     PinsAddKeyDialog *self = PINS_ADD_KEY_DIALOG (object);
 
-    g_clear_object (&self->desktop_file);
+    g_clear_object (&self->shortcut);
 
     gtk_widget_dispose_template (GTK_WIDGET (object),
                                  PINS_TYPE_ADD_KEY_DIALOG);
@@ -86,7 +86,7 @@ response_cb (PinsAddKeyDialog *self, gchar *response)
             const gchar *key
                 = gtk_editable_get_text (GTK_EDITABLE (self->key_row));
 
-            pins_desktop_file_set_string (self->desktop_file, key, "");
+            pins_shortcut_set_string (self->shortcut, key, "");
         }
 }
 
@@ -107,11 +107,11 @@ update_response_enabled (PinsAddKeyDialog *self)
     gboolean text_is_valid = FALSE;
     const gchar *text = gtk_editable_get_text (GTK_EDITABLE (self->key_row));
 
-    text_is_valid = strlen (text) > 0
-                    && !g_strv_contains (
-                        (const gchar *const *)pins_desktop_file_get_keys (
-                            self->desktop_file),
-                        text);
+    text_is_valid
+        = strlen (text) > 0
+          && !g_strv_contains (
+              (const gchar *const *)pins_shortcut_get_keys (self->shortcut),
+              text);
 
     adw_alert_dialog_set_response_enabled (ADW_ALERT_DIALOG (self),
                                            responses[ADD], text_is_valid);

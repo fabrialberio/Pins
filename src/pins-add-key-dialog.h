@@ -22,7 +22,7 @@
 
 #include <adwaita.h>
 
-#include "pins-desktop-file.h"
+#include "pins-shortcut.h"
 
 G_BEGIN_DECLS
 
@@ -31,6 +31,6 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (PinsAddKeyDialog, pins_add_key_dialog, PINS,
                       ADD_KEY_DIALOG, AdwAlertDialog)
 
-PinsAddKeyDialog *pins_add_key_dialog_new (PinsDesktopFile *desktop_file);
+PinsAddKeyDialog *pins_add_key_dialog_new (PinsShortcut *shortcut);
 
 G_END_DECLS

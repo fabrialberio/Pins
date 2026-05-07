@@ -48,10 +48,10 @@ pins_shortcuts_grid_new (void)
 GtkWidget *
 create_widget_func (gpointer item, gpointer user_data)
 {
-    PinsDesktopFile *desktop_file = PINS_DESKTOP_FILE (item);
+    PinsShortcut *shortcut = PINS_SHORTCUT (item);
     PinsAppTile *tile = pins_app_tile_new ();
 
-    pins_app_tile_set_desktop_file (tile, desktop_file);
+    pins_app_tile_set_shortcut (tile, shortcut);
 
     return GTK_WIDGET (tile);
 }

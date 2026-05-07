@@ -22,7 +22,7 @@
 
 #include <adwaita.h>
 
-#include "pins-desktop-file.h"
+#include "pins-shortcut.h"
 
 G_BEGIN_DECLS
 

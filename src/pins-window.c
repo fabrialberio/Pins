@@ -53,27 +53,26 @@ static gchar *pages[N_PAGES] = {
     "error-page",
 };
 
-PinsDesktopFile *
-pins_window_get_current_desktop_file (PinsWindow *self)
+PinsShortcut *
+pins_window_get_current_shortcut (PinsWindow *self)
 {
     AdwNavigationPage *file_page = adw_navigation_view_find_page (
         self->navigation_view, pages[PAGE_FILE]);
     PinsFileView *file_view
         = PINS_FILE_VIEW (adw_navigation_page_get_child (file_page));
 
-    return pins_file_view_get_desktop_file (file_view);
+    return pins_file_view_get_shortcut (file_view);
 }
 
 void
-pins_window_save_current_desktop_file (PinsWindow *self)
+pins_window_save_current_shortcut (PinsWindow *self)
 {
-    PinsDesktopFile *desktop_file
-        = pins_window_get_current_desktop_file (self);
+    PinsShortcut *shortcut = pins_window_get_current_shortcut (self);
     GError *err = NULL;
 
-    if (desktop_file != NULL)
+    if (shortcut != NULL)
         {
-            pins_desktop_file_save (desktop_file, &err, TRUE);
+            pins_shortcut_save (shortcut, &err, TRUE);
             if (err != NULL)
                 g_warning ("Error saving file: %s", err->message);
         }
@@ -113,35 +112,34 @@ pins_window_class_init (PinsWindowClass *klass)
 }
 
 void
-pins_window_file_deleted_cb (PinsDesktopFile *desktop_file, PinsWindow *self)
+pins_window_file_deleted_cb (PinsShortcut *shortcut, PinsWindow *self)
 {
     g_assert (PINS_IS_WINDOW (self));
-    g_assert (PINS_IS_DESKTOP_FILE (desktop_file));
+    g_assert (PINS_IS_SHORTCUT (shortcut));
 
-    if (pins_window_get_current_desktop_file (self) != NULL)
+    if (pins_window_get_current_shortcut (self) != NULL)
         {
             adw_navigation_view_pop (self->navigation_view);
         }
 }
 
 void
-pins_window_set_desktop_file (PinsWindow *self, PinsDesktopFile *desktop_file,
-                              GFile *opened_from_file)
+pins_window_set_shortcut (PinsWindow *self, PinsShortcut *shortcut,
+                          GFile *opened_from_file)
 {
     g_assert (PINS_IS_WINDOW (self));
-    g_assert (PINS_IS_DESKTOP_FILE (desktop_file));
+    g_assert (PINS_IS_SHORTCUT (shortcut));
 
-    if (pins_window_get_current_desktop_file (self) != NULL)
+    if (pins_window_get_current_shortcut (self) != NULL)
         {
             g_signal_handlers_disconnect_by_func (
-                pins_window_get_current_desktop_file (self),
+                pins_window_get_current_shortcut (self),
                 pins_window_file_deleted_cb, self);
         }
 
-    pins_file_view_set_desktop_file (self->file_view, desktop_file,
-                                     opened_from_file);
+    pins_file_view_set_shortcut (self->file_view, shortcut, opened_from_file);
 
-    g_signal_connect_object (desktop_file, "deleted",
+    g_signal_connect_object (shortcut, "deleted",
                              G_CALLBACK (pins_window_file_deleted_cb), self,
                              0);
 
@@ -155,12 +153,12 @@ pins_window_set_desktop_file (PinsWindow *self, PinsDesktopFile *desktop_file,
 void
 pins_window_open_file (PinsWindow *self, GFile *file)
 {
-    PinsDesktopFile *desktop_file;
+    PinsShortcut *shortcut;
     GError *err = NULL;
 
     adw_navigation_view_pop (self->navigation_view);
 
-    desktop_file = pins_desktop_file_new_full (file, NULL, &err);
+    shortcut = pins_shortcut_new_full (file, NULL, &err);
     if (err != NULL)
         {
             adw_status_page_set_description (self->error_status_page,
@@ -170,7 +168,7 @@ pins_window_open_file (PinsWindow *self, GFile *file)
             return;
         }
 
-    pins_window_set_desktop_file (self, desktop_file, file);
+    pins_window_set_shortcut (self, shortcut, file);
 }
 
 void
@@ -179,7 +177,7 @@ pins_window_file_page_hiding_cb (AdwNavigationPage *self,
 {
     g_assert (PINS_IS_WINDOW (user_data));
 
-    pins_window_save_current_desktop_file (user_data);
+    pins_window_save_current_shortcut (user_data);
 }
 
 void
@@ -191,7 +189,7 @@ pins_window_close_request_cb (PinsWindow *self, gpointer user_data)
     g_assert (PINS_IS_WINDOW (self));
 
     if (g_strcmp0 (current_page_tag, pages[PAGE_FILE]) == 0)
-        pins_window_save_current_desktop_file (self);
+        pins_window_save_current_shortcut (self);
 
     gtk_window_destroy (GTK_WINDOW (self));
 }
@@ -204,29 +202,27 @@ pins_window_add_new_app_cb (GSimpleAction *action, GVariant *param,
 
     g_assert (PINS_IS_APP_ITERATOR (app_iterator));
 
-    pins_app_iterator_create_user_file (
-        app_iterator, "pinned-app", PINS_DESKTOP_FILE_DEFAULT_CONTENT, &err);
+    pins_app_iterator_create_user_file (app_iterator, "pinned-app",
+                                        PINS_SHORTCUT_DEFAULT_CONTENT, &err);
     if (err != NULL)
         g_warning ("Error creating file: %s", err->message);
 }
 
 void
-pins_window_file_view_duplicate_cb (PinsWindow *self,
-                                    PinsDesktopFile *desktop_file)
+pins_window_file_view_duplicate_cb (PinsWindow *self, PinsShortcut *shortcut)
 {
     GError *err = NULL;
 
     pins_app_iterator_duplicate_file (
-        self->app_iterator, pins_desktop_file_get_desktop_id (desktop_file),
-        &err);
+        self->app_iterator, pins_shortcut_get_desktop_id (shortcut), &err);
     if (err != NULL)
         g_warning ("Error duplicating file: %s", err->message);
 }
 
 void
-pins_window_file_activated_cb (PinsWindow *self, PinsDesktopFile *desktop_file)
+pins_window_file_activated_cb (PinsWindow *self, PinsShortcut *shortcut)
 {
-    pins_window_set_desktop_file (self, desktop_file, NULL);
+    pins_window_set_shortcut (self, shortcut, NULL);
 }
 
 static void

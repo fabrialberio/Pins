@@ -29,7 +29,7 @@ struct _PinsKeyRow
 {
     AdwEntryRow parent_instance;
 
-    PinsDesktopFile *desktop_file;
+    PinsShortcut *shortcut;
     gchar *key;
     gchar *unlocalized_key;
     GtkSingleSelection *locales_model;
@@ -65,16 +65,16 @@ pins_key_row_update_reset_buttons_visibility (PinsKeyRow *self)
     const gchar *editable_value = gtk_editable_get_text (GTK_EDITABLE (self));
 
     reset_button_visible
-        = !pins_desktop_file_is_user_only (self->desktop_file)
-          && pins_desktop_file_is_key_edited (self->desktop_file, self->key);
+        = !pins_shortcut_is_user_only (self->shortcut)
+          && pins_shortcut_is_key_edited (self->shortcut, self->key);
 
     unlocalized_with_other_locales
         = g_strcmp0 (self->key, self->unlocalized_key) == 0
           && gtk_widget_get_visible (GTK_WIDGET (self->locale_button));
 
     remove_button_visible
-        = pins_desktop_file_is_user_only (self->desktop_file)
-          && pins_desktop_file_has_key (self->desktop_file, self->key)
+        = pins_shortcut_is_user_only (self->shortcut)
+          && pins_shortcut_has_key (self->shortcut, self->key)
           && strlen (editable_value) == 0 && !unlocalized_with_other_locales;
 
     gtk_widget_set_visible (GTK_WIDGET (self->reset_button),
@@ -100,8 +100,8 @@ pins_key_row_text_changed_cb (GtkEditable *editable, PinsKeyRow *self)
 {
     g_assert (PINS_IS_KEY_ROW (self));
 
-    pins_desktop_file_set_string (self->desktop_file, self->key,
-                                  gtk_editable_get_text (editable));
+    pins_shortcut_set_string (self->shortcut, self->key,
+                              gtk_editable_get_text (editable));
 
     pins_key_row_update_reset_buttons_visibility (self);
 }
@@ -124,7 +124,7 @@ pins_key_row_set_locale (PinsKeyRow *self, gchar *selected_locale)
 
     gtk_editable_set_text (
         GTK_EDITABLE (self),
-        pins_desktop_file_get_string (self->desktop_file, self->key));
+        pins_shortcut_get_string (self->shortcut, self->key));
 
     g_signal_handlers_unblock_by_func (GTK_EDITABLE (self),
                                        pins_key_row_text_changed_cb, self);
@@ -134,10 +134,9 @@ pins_key_row_set_locale (PinsKeyRow *self, gchar *selected_locale)
 }
 
 void
-pins_key_row_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
-                         PinsKeyRow *self)
+pins_key_row_key_set_cb (PinsShortcut *shortcut, gchar *key, PinsKeyRow *self)
 {
-    gchar *desktop_file_value;
+    gchar *shortcut_value;
     gchar *editable_value;
 
     if (g_strcmp0 (key, self->key) != 0)
@@ -145,15 +144,15 @@ pins_key_row_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
 
     /// TODO: Sometimes this is slow
 
-    desktop_file_value = pins_desktop_file_get_string (desktop_file, key);
+    shortcut_value = pins_shortcut_get_string (shortcut, key);
     editable_value = (gchar *)gtk_editable_get_text (GTK_EDITABLE (self));
 
-    if (g_strcmp0 (desktop_file_value, editable_value))
+    if (g_strcmp0 (shortcut_value, editable_value))
         {
             g_signal_handlers_block_by_func (
                 GTK_EDITABLE (self), pins_key_row_text_changed_cb, self);
 
-            gtk_editable_set_text (GTK_EDITABLE (self), desktop_file_value);
+            gtk_editable_set_text (GTK_EDITABLE (self), shortcut_value);
 
             g_signal_handlers_unblock_by_func (
                 GTK_EDITABLE (self), pins_key_row_text_changed_cb, self);
@@ -164,7 +163,7 @@ pins_key_row_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
 }
 
 void
-pins_key_row_key_removed_cb (PinsDesktopFile *desktop_file, gchar *key,
+pins_key_row_key_removed_cb (PinsShortcut *shortcut, gchar *key,
                              PinsKeyRow *self)
 {
     g_auto (PinsSplitKey) split = _pins_split_key_locale (key);
@@ -185,21 +184,21 @@ pins_key_row_key_removed_cb (PinsDesktopFile *desktop_file, gchar *key,
 }
 
 void
-pins_key_row_set_key (PinsKeyRow *self, PinsDesktopFile *desktop_file,
-                      gchar *key, gchar **locales)
+pins_key_row_set_key (PinsKeyRow *self, PinsShortcut *shortcut, gchar *key,
+                      gchar **locales)
 {
     GtkStringList *string_list = GTK_STRING_LIST (
         gtk_single_selection_get_model (self->locales_model));
 
-    self->desktop_file = desktop_file;
+    self->shortcut = shortcut;
     self->key = key;
     self->unlocalized_key = key;
 
     adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), key);
 
-    g_signal_connect_object (self->desktop_file, "key-set",
+    g_signal_connect_object (self->shortcut, "key-set",
                              G_CALLBACK (pins_key_row_key_set_cb), self, 0);
-    g_signal_connect_object (self->desktop_file, "key-removed",
+    g_signal_connect_object (self->shortcut, "key-removed",
                              G_CALLBACK (pins_key_row_key_removed_cb), self,
                              0);
 
@@ -210,8 +209,8 @@ pins_key_row_set_key (PinsKeyRow *self, PinsDesktopFile *desktop_file,
     gtk_string_list_append (string_list, UNLOCALIZED_STRING);
     gtk_string_list_splice (string_list, 1, 0, (const gchar *const *)locales);
 
-    pins_key_row_set_locale (
-        self, pins_desktop_file_get_locale_for_key (desktop_file, key));
+    pins_key_row_set_locale (self,
+                             pins_shortcut_get_locale_for_key (shortcut, key));
     pins_key_row_update_locale_button_visibility (self);
     pins_key_row_update_reset_buttons_visibility (self);
 }
@@ -261,7 +260,7 @@ pins_key_row_reset_key_cb (PinsKeyRow *self, gpointer user_data)
 {
     g_assert (PINS_IS_KEY_ROW (self));
 
-    pins_desktop_file_reset_key (self->desktop_file, self->key);
+    pins_shortcut_reset_key (self->shortcut, self->key);
 
     pins_key_row_update_reset_buttons_visibility (self);
 }

@@ -22,7 +22,7 @@
 
 #include <adwaita.h>
 
-#include "pins-desktop-file.h"
+#include "pins-shortcut.h"
 
 G_BEGIN_DECLS
 
@@ -31,7 +31,6 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (PinsAppTile, pins_app_tile, PINS, APP_TILE, GtkBox)
 
 PinsAppTile *pins_app_tile_new (void);
-void pins_app_tile_set_desktop_file (PinsAppTile *self,
-                                     PinsDesktopFile *desktop_file);
+void pins_app_tile_set_shortcut (PinsAppTile *self, PinsShortcut *shortcut);
 
 G_END_DECLS

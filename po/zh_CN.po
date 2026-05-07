@@ -225,7 +225,7 @@ msgstr "显示快捷键"
 msgid "Quit"
 msgstr "退出"
 
-#: src/pins-desktop-file.c:107
+#: src/pins-shortcut.c:107
 #, c-format
 msgid "Could not open file."
 msgstr "未能打开文件"

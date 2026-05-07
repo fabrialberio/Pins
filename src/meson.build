@@ -5,7 +5,6 @@ pinapp_sources = [
     'pins-app-iterator.c',
     'pins-app-tile.c',
     'pins-application.c',
-    'pins-desktop-file.c',
     'pins-directories.c',
     'pins-file-view.c',
     'pins-home-view.c',
@@ -13,6 +12,7 @@ pinapp_sources = [
     'pins-locale-utils.c',
     'pins-pick-icon-popover.c',
     'pins-shortcut-filter.c',
+    'pins-shortcut.c',
     'pins-shortcuts-grid.c',
     'pins-window.c',
 ]

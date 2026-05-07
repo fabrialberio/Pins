@@ -1,4 +1,4 @@
-/* pins-desktop-file.c
+/* pins-shortcut.c
  *
  * Copyright 2024 Fabrizio
  *
@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "pins-desktop-file.h"
+#include "pins-shortcut.h"
 
 #include "pins-directories.h"
 #include "pins-locale-utils-private.h"
@@ -27,7 +27,7 @@
 
 #define KEY_FILE_FLAGS G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS
 
-struct _PinsDesktopFile
+struct _PinsShortcut
 {
     GObject parent_instance;
 
@@ -39,7 +39,7 @@ struct _PinsDesktopFile
     gchar *saved_data;
 };
 
-G_DEFINE_TYPE (PinsDesktopFile, pins_desktop_file, G_TYPE_OBJECT);
+G_DEFINE_TYPE (PinsShortcut, pins_shortcut, G_TYPE_OBJECT);
 
 enum
 {
@@ -59,19 +59,18 @@ enum
 static GParamSpec *properties[N_PROPS];
 static guint signals[N_SIGNALS];
 
-PinsDesktopFile *
-pins_desktop_file_new_full (GFile *user_file, GFile *system_file,
-                            GError **error)
+PinsShortcut *
+pins_shortcut_new_full (GFile *user_file, GFile *system_file, GError **error)
 {
-    PinsDesktopFile *desktop_file = NULL;
+    PinsShortcut *shortcut = NULL;
     g_autoptr (GError) err = NULL;
 
     g_assert_nonnull (user_file);
 
-    desktop_file = g_object_new (PINS_TYPE_DESKTOP_FILE, NULL);
-    desktop_file->user_file = g_object_ref (user_file);
-    desktop_file->autostart_file
-        = g_file_new_build_filename (pins_desktop_file_autostart_path (),
+    shortcut = g_object_new (PINS_TYPE_SHORTCUT, NULL);
+    shortcut->user_file = g_object_ref (user_file);
+    shortcut->autostart_file
+        = g_file_new_build_filename (pins_shortcut_autostart_path (),
                                      g_file_get_basename (user_file), NULL);
 
     if (system_file != NULL)
@@ -79,9 +78,9 @@ pins_desktop_file_new_full (GFile *user_file, GFile *system_file,
             g_assert (!g_strcmp0 (g_file_get_basename (user_file),
                                   g_file_get_basename (system_file)));
 
-            desktop_file->system_file = g_object_ref (system_file);
+            shortcut->system_file = g_object_ref (system_file);
 
-            g_key_file_load_from_file (desktop_file->backup_key_file,
+            g_key_file_load_from_file (shortcut->backup_key_file,
                                        g_file_get_path (system_file),
                                        KEY_FILE_FLAGS, &err);
             if (err != NULL)
@@ -93,13 +92,13 @@ pins_desktop_file_new_full (GFile *user_file, GFile *system_file,
                 }
         }
 
-    if (g_file_query_exists (desktop_file->user_file, NULL))
-        g_key_file_load_from_file (desktop_file->key_file,
-                                   g_file_get_path (desktop_file->user_file),
+    if (g_file_query_exists (shortcut->user_file, NULL))
+        g_key_file_load_from_file (shortcut->key_file,
+                                   g_file_get_path (shortcut->user_file),
                                    KEY_FILE_FLAGS, &err);
     else if (system_file != NULL)
-        g_key_file_load_from_file (desktop_file->key_file,
-                                   g_file_get_path (desktop_file->system_file),
+        g_key_file_load_from_file (shortcut->key_file,
+                                   g_file_get_path (shortcut->system_file),
                                    KEY_FILE_FLAGS, &err);
     else
         {
@@ -114,26 +113,25 @@ pins_desktop_file_new_full (GFile *user_file, GFile *system_file,
             return NULL;
         }
 
-    desktop_file->saved_data
-        = g_key_file_to_data (desktop_file->key_file, NULL, NULL);
+    shortcut->saved_data = g_key_file_to_data (shortcut->key_file, NULL, NULL);
 
-    return desktop_file;
+    return shortcut;
 }
 
 /**
- * Given a `GFile`, it constructs a `PinsDesktopFile` with the following
+ * Given a `GFile`, it constructs a `PinsShortcut` with the following
  * logic:
  *  -  If the file is in the system folder and a file with the same name is
- *     found in the user folder, `PinsDesktopFile` is created with both a user
+ *     found in the user folder, `PinsShortcut` is created with both a user
  *     and a system `GKeyFile`;
  *  -  If the file is in the system folder and no file with the same name is
- *     found in the user folder, `PinsDesktopFile` is created without a user
+ *     found in the user folder, `PinsShortcut` is created without a user
  *     `GKeyFile`;
- *  -  If the file is in the user folder, `PinsDesktopFile` is created
+ *  -  If the file is in the user folder, `PinsShortcut` is created
  *     without a system `GKeyFile`.
  */
-PinsDesktopFile *
-pins_desktop_file_new (GFile *file, GError **error)
+PinsShortcut *
+pins_shortcut_new (GFile *file, GError **error)
 {
     gboolean file_is_user_file;
 
@@ -141,49 +139,47 @@ pins_desktop_file_new (GFile *file, GError **error)
 
     file_is_user_file
         = g_file_equal (g_file_get_parent (file),
-                        g_file_new_for_path (pins_desktop_file_user_path ()));
+                        g_file_new_for_path (pins_shortcut_user_path ()));
 
     if (file_is_user_file)
-        return pins_desktop_file_new_full (file, NULL, error);
+        return pins_shortcut_new_full (file, NULL, error);
     else
         {
-            g_autoptr (GFile) user_file
-                = g_file_new_build_filename (pins_desktop_file_user_path (),
-                                             g_file_get_basename (file), NULL);
+            g_autoptr (GFile) user_file = g_file_new_build_filename (
+                pins_shortcut_user_path (), g_file_get_basename (file), NULL);
 
-            return pins_desktop_file_new_full (user_file, file, error);
+            return pins_shortcut_new_full (user_file, file, error);
         }
 }
 
 gboolean
-pins_desktop_file_is_user_only (PinsDesktopFile *self)
+pins_shortcut_is_user_only (PinsShortcut *self)
 {
     return self->system_file == NULL;
 }
 
 gboolean
-pins_desktop_file_is_user_edited (PinsDesktopFile *self)
+pins_shortcut_is_user_edited (PinsShortcut *self)
 {
     return g_file_query_exists (self->user_file, NULL);
 }
 
 gboolean
-pins_desktop_file_is_autostart (PinsDesktopFile *self)
+pins_shortcut_is_autostart (PinsShortcut *self)
 {
     return g_file_query_exists (self->autostart_file, NULL);
 }
 
 gboolean
-pins_desktop_file_is_shown (PinsDesktopFile *self)
+pins_shortcut_is_shown (PinsShortcut *self)
 {
     gboolean hidden, no_display;
     const gchar *current_desktop = NULL;
     g_auto (GStrv) only_shown_in = NULL, not_shown_in = NULL;
 
-    hidden
-        = pins_desktop_file_get_boolean (self, G_KEY_FILE_DESKTOP_KEY_HIDDEN);
-    no_display = pins_desktop_file_get_boolean (
-        self, G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY);
+    hidden = pins_shortcut_get_boolean (self, G_KEY_FILE_DESKTOP_KEY_HIDDEN);
+    no_display
+        = pins_shortcut_get_boolean (self, G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY);
 
     if (hidden || no_display)
         return FALSE;
@@ -212,7 +208,7 @@ pins_desktop_file_is_shown (PinsDesktopFile *self)
 }
 
 void
-pins_desktop_file_trash (PinsDesktopFile *self)
+pins_shortcut_trash (PinsShortcut *self)
 {
     g_autoptr (GError) err = NULL;
 
@@ -224,8 +220,8 @@ pins_desktop_file_trash (PinsDesktopFile *self)
 }
 
 void
-pins_desktop_file_save (PinsDesktopFile *self, GError **error,
-                        gboolean remove_unedited_user_files)
+pins_shortcut_save (PinsShortcut *self, GError **error,
+                    gboolean remove_unedited_user_files)
 {
     gsize lenght;
 
@@ -250,9 +246,9 @@ pins_desktop_file_save (PinsDesktopFile *self, GError **error,
 }
 
 void
-pins_desktop_file_set_autostart (PinsDesktopFile *self, gboolean value)
+pins_shortcut_set_autostart (PinsShortcut *self, gboolean value)
 {
-    if (value == pins_desktop_file_is_autostart (self))
+    if (value == pins_shortcut_is_autostart (self))
         return;
 
     if (value)
@@ -263,28 +259,28 @@ pins_desktop_file_set_autostart (PinsDesktopFile *self, gboolean value)
 }
 
 gchar *
-pins_desktop_file_get_desktop_id (PinsDesktopFile *self)
+pins_shortcut_get_desktop_id (PinsShortcut *self)
 {
     return g_file_get_basename (self->user_file);
 }
 
 GFile *
-pins_desktop_file_get_user_file (PinsDesktopFile *self)
+pins_shortcut_get_user_file (PinsShortcut *self)
 {
     GFile *file = self->user_file;
 
-    pins_desktop_file_save (self, NULL, FALSE);
+    pins_shortcut_save (self, NULL, FALSE);
 
     return file;
 }
 
 gchar **
-pins_desktop_file_get_keys (PinsDesktopFile *self)
+pins_shortcut_get_keys (PinsShortcut *self)
 {
     gchar **keys;
     GError *err = NULL;
 
-    g_assert (PINS_IS_DESKTOP_FILE (self));
+    g_assert (PINS_IS_SHORTCUT (self));
 
     keys = g_key_file_get_keys (self->key_file, G_KEY_FILE_DESKTOP_GROUP, NULL,
                                 &err);
@@ -298,15 +294,15 @@ pins_desktop_file_get_keys (PinsDesktopFile *self)
 }
 
 gchar **
-pins_desktop_file_get_locales (PinsDesktopFile *self)
+pins_shortcut_get_locales (PinsShortcut *self)
 {
-    return _pins_locales_from_keys (pins_desktop_file_get_keys (self));
+    return _pins_locales_from_keys (pins_shortcut_get_keys (self));
 }
 
 static void
-pins_desktop_file_dispose (GObject *object)
+pins_shortcut_dispose (GObject *object)
 {
-    PinsDesktopFile *self = PINS_DESKTOP_FILE (object);
+    PinsShortcut *self = PINS_SHORTCUT (object);
 
     g_clear_object (&self->user_file);
     g_clear_object (&self->system_file);
@@ -316,10 +312,10 @@ pins_desktop_file_dispose (GObject *object)
 }
 
 static void
-pins_desktop_file_get_property (GObject *object, guint prop_id, GValue *value,
-                                GParamSpec *pspec)
+pins_shortcut_get_property (GObject *object, guint prop_id, GValue *value,
+                            GParamSpec *pspec)
 {
-    PinsDesktopFile *self = PINS_DESKTOP_FILE (object);
+    PinsShortcut *self = PINS_SHORTCUT (object);
 
     switch (prop_id)
         {
@@ -332,12 +328,12 @@ pins_desktop_file_get_property (GObject *object, guint prop_id, GValue *value,
 }
 
 static void
-pins_desktop_file_class_init (PinsDesktopFileClass *klass)
+pins_shortcut_class_init (PinsShortcutClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-    object_class->dispose = pins_desktop_file_dispose;
-    object_class->get_property = pins_desktop_file_get_property;
+    object_class->dispose = pins_shortcut_dispose;
+    object_class->get_property = pins_shortcut_get_property;
 
     properties[PROP_SEARCH_STRING]
         = g_param_spec_string ("search-string", "Search String",
@@ -360,14 +356,14 @@ pins_desktop_file_class_init (PinsDesktopFileClass *klass)
 }
 
 static void
-pins_desktop_file_init (PinsDesktopFile *self)
+pins_shortcut_init (PinsShortcut *self)
 {
     self->key_file = g_key_file_new ();
     self->backup_key_file = g_key_file_new ();
 }
 
 gboolean
-pins_desktop_file_get_boolean (PinsDesktopFile *self, const gchar *key)
+pins_shortcut_get_boolean (PinsShortcut *self, const gchar *key)
 {
     gboolean value;
     GError *err = NULL;
@@ -384,7 +380,7 @@ pins_desktop_file_get_boolean (PinsDesktopFile *self, const gchar *key)
 }
 
 gchar *
-pins_desktop_file_get_string (PinsDesktopFile *self, const gchar *key)
+pins_shortcut_get_string (PinsShortcut *self, const gchar *key)
 {
     gchar *value;
     GError *err = NULL;
@@ -398,8 +394,8 @@ pins_desktop_file_get_string (PinsDesktopFile *self, const gchar *key)
 }
 
 void
-pins_desktop_file_set_boolean (PinsDesktopFile *self, const gchar *key,
-                               const gboolean value)
+pins_shortcut_set_boolean (PinsShortcut *self, const gchar *key,
+                           const gboolean value)
 {
     g_key_file_set_boolean (self->key_file, G_KEY_FILE_DESKTOP_GROUP, key,
                             value);
@@ -408,8 +404,8 @@ pins_desktop_file_set_boolean (PinsDesktopFile *self, const gchar *key,
 }
 
 void
-pins_desktop_file_set_string (PinsDesktopFile *self, const gchar *key,
-                              const gchar *value)
+pins_shortcut_set_string (PinsShortcut *self, const gchar *key,
+                          const gchar *value)
 {
     g_key_file_set_string (self->key_file, G_KEY_FILE_DESKTOP_GROUP, key,
                            value);
@@ -435,7 +431,7 @@ get_locale_for_key_checked (GKeyFile *key_file, const gchar *key)
 }
 
 gchar *
-pins_desktop_file_get_locale_for_key (PinsDesktopFile *self, const gchar *key)
+pins_shortcut_get_locale_for_key (PinsShortcut *self, const gchar *key)
 {
     g_autofree gchar *locale;
 
@@ -448,7 +444,7 @@ pins_desktop_file_get_locale_for_key (PinsDesktopFile *self, const gchar *key)
 }
 
 gboolean
-pins_desktop_file_has_backup_for_key (PinsDesktopFile *self, const gchar *key)
+pins_shortcut_has_backup_for_key (PinsShortcut *self, const gchar *key)
 {
     if (self->system_file == NULL)
         return FALSE;
@@ -458,15 +454,15 @@ pins_desktop_file_has_backup_for_key (PinsDesktopFile *self, const gchar *key)
 }
 
 gboolean
-pins_desktop_file_has_key (PinsDesktopFile *self, const gchar *key)
+pins_shortcut_has_key (PinsShortcut *self, const gchar *key)
 {
     return g_key_file_has_key (self->key_file, G_KEY_FILE_DESKTOP_GROUP, key,
                                NULL)
-           || pins_desktop_file_has_backup_for_key (self, key);
+           || pins_shortcut_has_backup_for_key (self, key);
 }
 
 gboolean
-pins_desktop_file_is_key_edited (PinsDesktopFile *self, const gchar *key)
+pins_shortcut_is_key_edited (PinsShortcut *self, const gchar *key)
 {
     if (self->system_file == NULL)
         return TRUE;
@@ -480,9 +476,9 @@ pins_desktop_file_is_key_edited (PinsDesktopFile *self, const gchar *key)
 }
 
 void
-pins_desktop_file_reset_key (PinsDesktopFile *self, const gchar *key)
+pins_shortcut_reset_key (PinsShortcut *self, const gchar *key)
 {
-    if (pins_desktop_file_has_backup_for_key (self, key))
+    if (pins_shortcut_has_backup_for_key (self, key))
         {
             g_key_file_set_string (
                 self->key_file, G_KEY_FILE_DESKTOP_GROUP, key,

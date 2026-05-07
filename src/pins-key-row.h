@@ -22,7 +22,7 @@
 
 #include <adwaita.h>
 
-#include "pins-desktop-file.h"
+#include "pins-shortcut.h"
 
 G_BEGIN_DECLS
 
@@ -32,7 +32,7 @@ G_DECLARE_FINAL_TYPE (PinsKeyRow, pins_key_row, PINS, KEY_ROW, AdwEntryRow)
 
 PinsKeyRow *pins_key_row_new (void);
 
-void pins_key_row_set_key (PinsKeyRow *self, PinsDesktopFile *desktop_file,
+void pins_key_row_set_key (PinsKeyRow *self, PinsShortcut *shortcut,
                            gchar *key, gchar **locales);
 gchar *pins_key_row_get_key (PinsKeyRow *self);
 

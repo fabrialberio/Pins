@@ -27,7 +27,7 @@ struct _PinsAppTile
 {
     GtkBox parent_instance;
 
-    PinsDesktopFile *desktop_file;
+    PinsShortcut *shortcut;
 
     PinsAppIcon *icon;
     AdwBin *invisible_glyph;
@@ -43,46 +43,44 @@ pins_app_tile_new (void)
 }
 
 void
-pins_app_tile_update_appearance (PinsAppTile *self,
-                                 PinsDesktopFile *desktop_file)
+pins_app_tile_update_appearance (PinsAppTile *self, PinsShortcut *shortcut)
 {
     const gchar *title_key;
     gboolean invisible;
 
-    title_key = _pins_join_key_locale (
-        G_KEY_FILE_DESKTOP_KEY_NAME,
-        pins_desktop_file_get_locale_for_key (desktop_file,
-                                              G_KEY_FILE_DESKTOP_KEY_NAME));
+    title_key
+        = _pins_join_key_locale (G_KEY_FILE_DESKTOP_KEY_NAME,
+                                 pins_shortcut_get_locale_for_key (
+                                     shortcut, G_KEY_FILE_DESKTOP_KEY_NAME));
 
-    gtk_label_set_text (
-        self->title, pins_desktop_file_get_string (desktop_file, title_key));
+    gtk_label_set_text (self->title,
+                        pins_shortcut_get_string (shortcut, title_key));
 
-    invisible = !pins_desktop_file_is_shown (desktop_file);
+    invisible = !pins_shortcut_is_shown (shortcut);
 
     gtk_widget_set_opacity (GTK_WIDGET (self->icon), invisible ? 0.5 : 1);
     gtk_widget_set_visible (GTK_WIDGET (self->invisible_glyph), invisible);
 }
 
 void
-key_set_cb (PinsAppTile *self, gchar *key, PinsDesktopFile *desktop_file)
+key_set_cb (PinsAppTile *self, gchar *key, PinsShortcut *shortcut)
 {
-    pins_app_tile_update_appearance (self, desktop_file);
+    pins_app_tile_update_appearance (self, shortcut);
 }
 
 void
-pins_app_tile_set_desktop_file (PinsAppTile *self,
-                                PinsDesktopFile *desktop_file)
+pins_app_tile_set_shortcut (PinsAppTile *self, PinsShortcut *shortcut)
 {
-    g_assert (PINS_IS_DESKTOP_FILE (desktop_file));
+    g_assert (PINS_IS_SHORTCUT (shortcut));
 
-    self->desktop_file = g_object_ref (desktop_file);
+    self->shortcut = g_object_ref (shortcut);
 
-    g_signal_connect_object (self->desktop_file, "key-set",
+    g_signal_connect_object (self->shortcut, "key-set",
                              G_CALLBACK (key_set_cb), self, G_CONNECT_SWAPPED);
 
-    pins_app_icon_set_desktop_file (self->icon, self->desktop_file);
+    pins_app_icon_set_shortcut (self->icon, self->shortcut);
 
-    pins_app_tile_update_appearance (self, self->desktop_file);
+    pins_app_tile_update_appearance (self, self->shortcut);
 }
 
 static void
@@ -90,7 +88,7 @@ pins_app_tile_dispose (GObject *object)
 {
     PinsAppTile *self = PINS_APP_TILE (object);
 
-    g_clear_object (&self->desktop_file);
+    g_clear_object (&self->shortcut);
 
     gtk_widget_dispose_template (GTK_WIDGET (object), PINS_TYPE_APP_TILE);
 
@@ -119,7 +117,7 @@ static GdkContentProvider *
 pins_app_tile_drag_prepare_cb (PinsAppTile *self, double x, double y,
                                GtkDragSource *source)
 {
-    GFile *file = pins_desktop_file_get_user_file (self->desktop_file);
+    GFile *file = pins_shortcut_get_user_file (self->shortcut);
 
     return gdk_content_provider_new_typed (G_TYPE_FILE, file);
 }

@@ -20,13 +20,13 @@
 
 #include "pins-pick-icon-popover.h"
 #include "pins-app-icon.h"
-#include "pins-desktop-file.h"
+#include "pins-shortcut.h"
 
 struct _PinsPickIconPopover
 {
     GtkPopover parent_instance;
 
-    PinsDesktopFile *desktop_file;
+    PinsShortcut *shortcut;
     GtkFilterListModel *model;
     GtkStringFilter *search_filter;
 
@@ -38,10 +38,10 @@ struct _PinsPickIconPopover
 G_DEFINE_TYPE (PinsPickIconPopover, pins_pick_icon_popover, GTK_TYPE_POPOVER);
 
 void
-pins_pick_icon_popover_set_desktop_file (PinsPickIconPopover *self,
-                                         PinsDesktopFile *desktop_file)
+pins_pick_icon_popover_set_shortcut (PinsPickIconPopover *self,
+                                     PinsShortcut *shortcut)
 {
-    self->desktop_file = g_object_ref (desktop_file);
+    self->shortcut = g_object_ref (shortcut);
 }
 
 void
@@ -49,7 +49,7 @@ pins_pick_icon_popover_dispose (GObject *object)
 {
     PinsPickIconPopover *self = PINS_PICK_ICON_POPOVER (object);
 
-    g_clear_object (&self->desktop_file);
+    g_clear_object (&self->shortcut);
 
     gtk_widget_dispose_template (GTK_WIDGET (object),
                                  PINS_TYPE_PICK_ICON_POPOVER);
@@ -92,7 +92,7 @@ load_icon_dialog_closed_cb (GObject *dialog, GAsyncResult *res,
     if (sandbox_file == NULL)
         return;
 
-    desktop_id = pins_desktop_file_get_desktop_id (self->desktop_file);
+    desktop_id = pins_shortcut_get_desktop_id (self->shortcut);
     basename = g_file_get_basename (sandbox_file);
 
     prefix_lenght = g_strrstr (desktop_id, ".") - desktop_id;
@@ -113,9 +113,8 @@ load_icon_dialog_closed_cb (GObject *dialog, GAsyncResult *res,
                  NULL);
 
     pins_app_icon_invalidate_cached_key (g_file_get_path (file));
-    pins_desktop_file_set_string (self->desktop_file,
-                                  G_KEY_FILE_DESKTOP_KEY_ICON,
-                                  g_file_get_path (file));
+    pins_shortcut_set_string (self->shortcut, G_KEY_FILE_DESKTOP_KEY_ICON,
+                              g_file_get_path (file));
 }
 
 void
@@ -144,9 +143,8 @@ icon_activated_cb (PinsPickIconPopover *self, guint position)
     g_autoptr (GtkStringObject) string_object = GTK_STRING_OBJECT (
         g_list_model_get_item (G_LIST_MODEL (self->model), position));
 
-    pins_desktop_file_set_string (
-        self->desktop_file, G_KEY_FILE_DESKTOP_KEY_ICON,
-        gtk_string_object_get_string (string_object));
+    pins_shortcut_set_string (self->shortcut, G_KEY_FILE_DESKTOP_KEY_ICON,
+                              gtk_string_object_get_string (string_object));
 
     gtk_popover_popdown (GTK_POPOVER (self));
 }

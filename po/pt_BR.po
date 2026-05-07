@@ -243,7 +243,7 @@ msgstr "Mostrar atalhos"
 msgid "Quit"
 msgstr "Sair"
 
-#: src/pins-desktop-file.c:107
+#: src/pins-shortcut.c:107
 #, c-format
 msgid "Could not open file."
 msgstr "Não foi possível abrir o arquivo."

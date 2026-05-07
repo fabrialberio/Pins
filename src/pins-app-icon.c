@@ -89,32 +89,31 @@ pins_app_icon_get_paintable (PinsAppIcon *self, gchar *icon_key)
 }
 
 void
-pins_app_icon_key_set_cb (PinsDesktopFile *desktop_file, gchar *key,
+pins_app_icon_key_set_cb (PinsShortcut *shortcut, gchar *key,
                           PinsAppIcon *self)
 {
     g_autofree gchar *icon_key = NULL;
 
     g_assert (PINS_IS_APP_ICON (self));
 
-    icon_key = pins_desktop_file_get_string (desktop_file,
-                                             G_KEY_FILE_DESKTOP_KEY_ICON);
+    icon_key
+        = pins_shortcut_get_string (shortcut, G_KEY_FILE_DESKTOP_KEY_ICON);
 
     gtk_image_set_from_paintable (
         self->image, pins_app_icon_get_paintable (self, icon_key));
 }
 
 void
-pins_app_icon_set_desktop_file (PinsAppIcon *self,
-                                PinsDesktopFile *desktop_file)
+pins_app_icon_set_shortcut (PinsAppIcon *self, PinsShortcut *shortcut)
 {
     gchar *icon_key = NULL;
 
-    g_assert (PINS_IS_DESKTOP_FILE (desktop_file));
+    g_assert (PINS_IS_SHORTCUT (shortcut));
 
-    icon_key = pins_desktop_file_get_string (desktop_file,
-                                             G_KEY_FILE_DESKTOP_KEY_ICON);
+    icon_key
+        = pins_shortcut_get_string (shortcut, G_KEY_FILE_DESKTOP_KEY_ICON);
 
-    g_signal_connect_object (desktop_file, "key-set",
+    g_signal_connect_object (shortcut, "key-set",
                              G_CALLBACK (pins_app_icon_key_set_cb), self, 0);
 
     gtk_image_set_from_paintable (
