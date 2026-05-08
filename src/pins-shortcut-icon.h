@@ -1,4 +1,4 @@
-/* pins-app-icon.h
+/* pins-shortcut-icon.h
  *
  * Copyright 2024 Fabrizio
  *
@@ -26,11 +26,13 @@
 
 G_BEGIN_DECLS
 
-#define PINS_TYPE_APP_ICON (pins_app_icon_get_type ())
+#define PINS_TYPE_SHORTCUT_ICON (pins_shortcut_icon_get_type ())
 
-G_DECLARE_FINAL_TYPE (PinsAppIcon, pins_app_icon, PINS, APP_ICON, GtkWidget)
+G_DECLARE_FINAL_TYPE (PinsShortcutIcon, pins_shortcut_icon, PINS,
+                      SHORTCUT_ICON, GtkWidget)
 
-void pins_app_icon_invalidate_cached_key (gchar *icon_key);
-void pins_app_icon_set_shortcut (PinsAppIcon *self, PinsShortcut *shortcut);
+void pins_shortcut_icon_invalidate_cached_key (gchar *icon_key);
+void pins_shortcut_icon_set_shortcut (PinsShortcutIcon *self,
+                                      PinsShortcut *shortcut);
 
 G_END_DECLS

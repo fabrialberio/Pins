@@ -23,10 +23,10 @@
 #include "pins-file-view.h"
 
 #include "pins-add-key-dialog.h"
-#include "pins-app-icon.h"
 #include "pins-key-row.h"
 #include "pins-locale-utils-private.h"
 #include "pins-pick-icon-popover.h"
+#include "pins-shortcut-icon.h"
 
 struct _PinsFileView
 {
@@ -38,7 +38,7 @@ struct _PinsFileView
 
     AdwWindowTitle *window_title;
     GtkScrolledWindow *scrolled_window;
-    PinsAppIcon *icon;
+    PinsShortcutIcon *icon;
     GtkButton *reset_icon_button;
     PinsPickIconPopover *pick_icon_popover;
     PinsKeyRow *name_row;
@@ -253,7 +253,7 @@ pins_file_view_set_shortcut (PinsFileView *self, PinsShortcut *shortcut,
 
     pins_file_view_update_title (self);
     pins_file_view_update_reset_icon_button_visible (self);
-    pins_app_icon_set_shortcut (self->icon, self->shortcut);
+    pins_shortcut_icon_set_shortcut (self->icon, self->shortcut);
     pins_pick_icon_popover_set_shortcut (self->pick_icon_popover,
                                          self->shortcut);
     gtk_switch_set_active (self->autostart_switch,
@@ -317,7 +317,7 @@ pins_file_view_class_init (PinsFileViewClass *klass)
 
     gtk_widget_class_set_template_from_resource (
         widget_class, "/io/github/fabrialberio/pinapp/pins-file-view.ui");
-    g_type_ensure (PINS_TYPE_APP_ICON);
+    g_type_ensure (PINS_TYPE_SHORTCUT_ICON);
     g_type_ensure (PINS_TYPE_PICK_ICON_POPOVER);
     g_type_ensure (PINS_TYPE_KEY_ROW);
 

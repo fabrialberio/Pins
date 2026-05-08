@@ -1,4 +1,4 @@
-/* pins-app-icon.c
+/* pins-shortcut-icon.c
  *
  * Copyright 2024 Fabrizio
  *
@@ -18,18 +18,18 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "pins-app-icon.h"
+#include "pins-shortcut-icon.h"
 
 #define DEFAULT_ICON_NAME "application-x-executable"
 
-struct _PinsAppIcon
+struct _PinsShortcutIcon
 {
     GtkWidget parent_instance;
 
     GtkImage *image;
 };
 
-G_DEFINE_TYPE (PinsAppIcon, pins_app_icon, GTK_TYPE_WIDGET)
+G_DEFINE_TYPE (PinsShortcutIcon, pins_shortcut_icon, GTK_TYPE_WIDGET)
 
 enum
 {
@@ -42,13 +42,13 @@ static GParamSpec *properties[N_PROPS];
 static GHashTable *icon_cache;
 
 void
-pins_app_icon_invalidate_cached_key (gchar *icon_key)
+pins_shortcut_icon_invalidate_cached_key (gchar *icon_key)
 {
     g_hash_table_remove (icon_cache, icon_key);
 }
 
 GdkPaintable *
-pins_app_icon_get_paintable (PinsAppIcon *self, gchar *icon_key)
+pins_shortcut_icon_get_paintable (PinsShortcutIcon *self, gchar *icon_key)
 {
     GtkIconTheme *theme
         = gtk_icon_theme_get_for_display (gdk_display_get_default ());
@@ -89,22 +89,23 @@ pins_app_icon_get_paintable (PinsAppIcon *self, gchar *icon_key)
 }
 
 void
-pins_app_icon_key_set_cb (PinsShortcut *shortcut, gchar *key,
-                          PinsAppIcon *self)
+pins_shortcut_icon_key_set_cb (PinsShortcut *shortcut, gchar *key,
+                               PinsShortcutIcon *self)
 {
     g_autofree gchar *icon_key = NULL;
 
-    g_assert (PINS_IS_APP_ICON (self));
+    g_assert (PINS_IS_SHORTCUT_ICON (self));
 
     icon_key
         = pins_shortcut_get_string (shortcut, G_KEY_FILE_DESKTOP_KEY_ICON);
 
     gtk_image_set_from_paintable (
-        self->image, pins_app_icon_get_paintable (self, icon_key));
+        self->image, pins_shortcut_icon_get_paintable (self, icon_key));
 }
 
 void
-pins_app_icon_set_shortcut (PinsAppIcon *self, PinsShortcut *shortcut)
+pins_shortcut_icon_set_shortcut (PinsShortcutIcon *self,
+                                 PinsShortcut *shortcut)
 {
     gchar *icon_key = NULL;
 
@@ -114,28 +115,29 @@ pins_app_icon_set_shortcut (PinsAppIcon *self, PinsShortcut *shortcut)
         = pins_shortcut_get_string (shortcut, G_KEY_FILE_DESKTOP_KEY_ICON);
 
     g_signal_connect_object (shortcut, "key-set",
-                             G_CALLBACK (pins_app_icon_key_set_cb), self, 0);
+                             G_CALLBACK (pins_shortcut_icon_key_set_cb), self,
+                             0);
 
     gtk_image_set_from_paintable (
-        self->image, pins_app_icon_get_paintable (self, icon_key));
+        self->image, pins_shortcut_icon_get_paintable (self, icon_key));
     ;
 }
 
 static void
-pins_app_icon_dispose (GObject *object)
+pins_shortcut_icon_dispose (GObject *object)
 {
-    PinsAppIcon *self = PINS_APP_ICON (object);
+    PinsShortcutIcon *self = PINS_SHORTCUT_ICON (object);
 
     gtk_widget_unparent (GTK_WIDGET (self->image));
 
-    G_OBJECT_CLASS (pins_app_icon_parent_class)->dispose (object);
+    G_OBJECT_CLASS (pins_shortcut_icon_parent_class)->dispose (object);
 }
 
 static void
-pins_app_icon_get_property (GObject *object, guint prop_id, GValue *value,
-                            GParamSpec *pspec)
+pins_shortcut_icon_get_property (GObject *object, guint prop_id, GValue *value,
+                                 GParamSpec *pspec)
 {
-    PinsAppIcon *self = PINS_APP_ICON (object);
+    PinsShortcutIcon *self = PINS_SHORTCUT_ICON (object);
 
     switch (prop_id)
         {
@@ -148,10 +150,10 @@ pins_app_icon_get_property (GObject *object, guint prop_id, GValue *value,
 }
 
 static void
-pins_app_icon_set_property (GObject *object, guint prop_id,
-                            const GValue *value, GParamSpec *pspec)
+pins_shortcut_icon_set_property (GObject *object, guint prop_id,
+                                 const GValue *value, GParamSpec *pspec)
 {
-    PinsAppIcon *self = PINS_APP_ICON (object);
+    PinsShortcutIcon *self = PINS_SHORTCUT_ICON (object);
 
     switch (prop_id)
         {
@@ -164,14 +166,14 @@ pins_app_icon_set_property (GObject *object, guint prop_id,
 }
 
 static void
-pins_app_icon_class_init (PinsAppIconClass *klass)
+pins_shortcut_icon_class_init (PinsShortcutIconClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-    object_class->get_property = pins_app_icon_get_property;
-    object_class->set_property = pins_app_icon_set_property;
-    object_class->dispose = pins_app_icon_dispose;
+    object_class->get_property = pins_shortcut_icon_get_property;
+    object_class->set_property = pins_shortcut_icon_set_property;
+    object_class->dispose = pins_shortcut_icon_dispose;
 
     properties[PROP_PIXEL_SIZE] = g_param_spec_int (
         "pixel-size", "Pixel Size", "Pixel size of the app icon", 0, G_MAXINT,
@@ -186,7 +188,7 @@ pins_app_icon_class_init (PinsAppIconClass *klass)
 }
 
 static void
-pins_app_icon_init (PinsAppIcon *self)
+pins_shortcut_icon_init (PinsShortcutIcon *self)
 {
     self->image = GTK_IMAGE (g_object_new (
         GTK_TYPE_IMAGE, "accessible-role", GTK_ACCESSIBLE_ROLE_PRESENTATION,

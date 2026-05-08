@@ -19,7 +19,7 @@
  */
 
 #include "pins-pick-icon-popover.h"
-#include "pins-app-icon.h"
+#include "pins-shortcut-icon.h"
 #include "pins-shortcut.h"
 
 struct _PinsPickIconPopover
@@ -112,7 +112,7 @@ load_icon_dialog_closed_cb (GObject *dialog, GAsyncResult *res,
     g_file_copy (sandbox_file, file, G_FILE_COPY_OVERWRITE, NULL, NULL, NULL,
                  NULL);
 
-    pins_app_icon_invalidate_cached_key (g_file_get_path (file));
+    pins_shortcut_icon_invalidate_cached_key (g_file_get_path (file));
     pins_shortcut_set_string (self->shortcut, G_KEY_FILE_DESKTOP_KEY_ICON,
                               g_file_get_path (file));
 }

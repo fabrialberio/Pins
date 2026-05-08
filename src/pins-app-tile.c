@@ -20,8 +20,8 @@
 
 #include "pins-app-tile.h"
 
-#include "pins-app-icon.h"
 #include "pins-locale-utils-private.h"
+#include "pins-shortcut-icon.h"
 
 struct _PinsAppTile
 {
@@ -29,7 +29,7 @@ struct _PinsAppTile
 
     PinsShortcut *shortcut;
 
-    PinsAppIcon *icon;
+    PinsShortcutIcon *icon;
     AdwBin *invisible_glyph;
     GtkLabel *title;
 };
@@ -78,7 +78,7 @@ pins_app_tile_set_shortcut (PinsAppTile *self, PinsShortcut *shortcut)
     g_signal_connect_object (self->shortcut, "key-set",
                              G_CALLBACK (key_set_cb), self, G_CONNECT_SWAPPED);
 
-    pins_app_icon_set_shortcut (self->icon, self->shortcut);
+    pins_shortcut_icon_set_shortcut (self->icon, self->shortcut);
 
     pins_app_tile_update_appearance (self, self->shortcut);
 }
@@ -105,7 +105,7 @@ pins_app_tile_class_init (PinsAppTileClass *klass)
 
     gtk_widget_class_set_template_from_resource (
         widget_class, "/io/github/fabrialberio/pinapp/pins-app-tile.ui");
-    g_type_ensure (PINS_TYPE_APP_ICON);
+    g_type_ensure (PINS_TYPE_SHORTCUT_ICON);
 
     gtk_widget_class_bind_template_child (widget_class, PinsAppTile, icon);
     gtk_widget_class_bind_template_child (widget_class, PinsAppTile,

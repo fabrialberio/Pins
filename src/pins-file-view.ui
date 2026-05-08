@@ -52,7 +52,7 @@
                           <object class="GtkOverlay">
                             <property name="halign">center</property>
                             <child>
-                              <object class="PinsAppIcon" id="icon">
+                              <object class="PinsShortcutIcon" id="icon">
                                 <property name="margin-start">12</property>
                                 <property name="margin-end">12</property>
                                 <property name="margin-top">12</property>
