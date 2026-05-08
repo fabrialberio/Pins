@@ -197,15 +197,16 @@ pins_window_close_request_cb (PinsWindow *self, gpointer user_data)
 }
 
 void
-pins_window_add_new_app_cb (GSimpleAction *action, GVariant *param,
-                            PinsShortcutIterator *shortcut_iterator)
+pins_window_add_new_shortcut_cb (GSimpleAction *action, GVariant *param,
+                                 PinsShortcutIterator *shortcut_iterator)
 {
     GError *err = NULL;
 
     g_assert (PINS_IS_SHORTCUT_ITERATOR (shortcut_iterator));
 
     pins_shortcut_iterator_create_user_file (
-        shortcut_iterator, "pinned-app", PINS_SHORTCUT_DEFAULT_CONTENT, &err);
+        shortcut_iterator, "pinned-shortcut", PINS_SHORTCUT_DEFAULT_CONTENT,
+        &err);
     if (err != NULL)
         g_warning ("Error creating shortcut: %s", err->message);
 }
@@ -232,7 +233,7 @@ pins_window_shortcut_activated_cb (PinsWindow *self, PinsShortcut *shortcut)
 static void
 pins_window_init (PinsWindow *self)
 {
-    g_autoptr (GSimpleAction) new_app_action = NULL, search_action = NULL;
+    g_autoptr (GSimpleAction) new_shortcut_action = NULL, search_action = NULL;
 
     gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -240,11 +241,12 @@ pins_window_init (PinsWindow *self)
 
     self->shortcut_iterator = pins_shortcut_iterator_new ();
 
-    new_app_action = g_simple_action_new ("new-app", NULL);
-    g_signal_connect_object (new_app_action, "activate",
-                             G_CALLBACK (pins_window_add_new_app_cb),
+    new_shortcut_action = g_simple_action_new ("new-shortcut", NULL);
+    g_signal_connect_object (new_shortcut_action, "activate",
+                             G_CALLBACK (pins_window_add_new_shortcut_cb),
                              self->shortcut_iterator, 0);
-    g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (new_app_action));
+    g_action_map_add_action (G_ACTION_MAP (self),
+                             G_ACTION (new_shortcut_action));
 
     search_action = g_simple_action_new_stateful (
         "search", NULL, g_variant_new_boolean (FALSE));

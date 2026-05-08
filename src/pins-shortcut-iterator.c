@@ -50,7 +50,7 @@ G_DEFINE_TYPE_WITH_CODE (PinsShortcutIterator, pins_shortcut_iterator,
 enum
 {
     LOADING,
-    FILE_CREATED,
+    SHORTCUT_CREATED,
     N_SIGNALS
 };
 
@@ -80,8 +80,8 @@ pins_shortcut_iterator_key_set_cb (PinsShortcutIterator *self, gchar *key,
 }
 
 void
-pins_shortcut_iterator_file_deleted_cb (PinsShortcutIterator *self,
-                                        PinsShortcut *shortcut)
+pins_shortcut_iterator_shortcut_deleted_cb (PinsShortcutIterator *self,
+                                            PinsShortcut *shortcut)
 {
     g_autofree gchar *desktop_id;
     guint position;
@@ -97,8 +97,8 @@ pins_shortcut_iterator_file_deleted_cb (PinsShortcutIterator *self,
 }
 
 void
-shortcuts_by_id_insert_file (PinsShortcutIterator *self, GFile *file,
-                             PinsShortcut *shortcut)
+shortcuts_by_id_insert_shortcut (PinsShortcutIterator *self, GFile *file,
+                                 PinsShortcut *shortcut)
 {
     gchar *desktop_id = g_file_get_basename (file);
 
@@ -110,7 +110,7 @@ shortcuts_by_id_insert_file (PinsShortcutIterator *self, GFile *file,
                              self, G_CONNECT_SWAPPED);
     g_signal_connect_object (
         shortcut, "deleted",
-        G_CALLBACK (pins_shortcut_iterator_file_deleted_cb), self,
+        G_CALLBACK (pins_shortcut_iterator_shortcut_deleted_cb), self,
         G_CONNECT_SWAPPED);
 }
 
@@ -131,7 +131,7 @@ load_file_checked (PinsShortcutIterator *self, GFileInfo *info, GFile *file)
             return;
         }
 
-    shortcuts_by_id_insert_file (self, file, g_object_ref (shortcut));
+    shortcuts_by_id_insert_shortcut (self, file, g_object_ref (shortcut));
 }
 
 void
@@ -216,14 +216,14 @@ pins_shortcut_iterator_create_user_file (PinsShortcutIterator *self,
 
     shortcut = pins_shortcut_new (file, NULL);
 
-    shortcuts_by_id_insert_file (self, file, shortcut);
+    shortcuts_by_id_insert_shortcut (self, file, shortcut);
     g_assert (g_hash_table_contains (self->shortcuts_by_id, filename));
 
     g_ptr_array_add (self->shortcuts_array, shortcut);
     g_list_model_items_changed (G_LIST_MODEL (self),
                                 self->shortcuts_array->len - 1, 0, 1);
 
-    g_signal_emit (self, signals[FILE_CREATED], 0, shortcut);
+    g_signal_emit (self, signals[SHORTCUT_CREATED], 0, shortcut);
 }
 
 void
@@ -270,7 +270,7 @@ pins_shortcut_iterator_class_init (PinsShortcutIteratorClass *klass)
                                      G_SIGNAL_RUN_FIRST, 0, NULL, NULL, NULL,
                                      G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
 
-    signals[FILE_CREATED] = g_signal_new (
+    signals[SHORTCUT_CREATED] = g_signal_new (
         "shortcut-created", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_FIRST, 0,
         NULL, NULL, NULL, G_TYPE_NONE, 1, G_TYPE_OBJECT);
 }

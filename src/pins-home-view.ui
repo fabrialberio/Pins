@@ -13,7 +13,7 @@
                   <object class="GtkButton">
                     <property name="icon-name">list-add-symbolic</property>
                     <property name="tooltip-text" translatable="yes">Add New App</property>
-                    <property name="action-name">win.new-app</property>
+                    <property name="action-name">win.new-shortcut</property>
                   </object>
                 </child>
                 <property name="title-widget">
@@ -52,7 +52,8 @@
                         <property name="child">
                           <object class="GtkSearchEntry" id="search_entry">
                             <property name="hexpand">true</property>
-                            <property name="placeholder-text" translatable="yes">Search apps by name or field content</property>
+                            <property name="placeholder-text" translatable="yes">Search apps by name
+                              or field content</property>
                           </object>
                         </property>
                       </object>
@@ -144,22 +145,6 @@
                   <object class="AdwStatusPage" id="status_empty">
                     <property name="title" translatable="yes">No Apps Found</property>
                     <property name="icon-name">system-search-symbolic</property>
-                    <property name="child">
-                      <object class="GtkButton" id="new_app_button">
-                        <property name="halign">center</property>
-                        <property name="visible">false</property>
-                        <style>
-                          <class name="suggested-action" />
-                          <class name="pill" />
-                        </style>
-                        <property name="child">
-                          <object class="AdwButtonContent">
-                            <property name="label" translatable="yes">Add New App</property>
-                            <property name="icon-name">list-add-symbolic</property>
-                          </object>
-                        </property>
-                      </object>
-                    </property>
                   </object>
                 </property>
               </object>
@@ -174,7 +159,7 @@
     <section>
       <item>
         <attribute name="label" translatable="yes">Show _All Apps</attribute>
-        <attribute name="action">home-view.show-all-apps</attribute>
+        <attribute name="action">home-view.show-all-shortcuts</attribute>
       </item>
     </section>
     <section>

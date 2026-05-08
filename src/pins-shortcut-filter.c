@@ -27,7 +27,7 @@ struct _PinsShortcutFilter
 {
     GObject parent_instance;
 
-    gboolean show_all_apps;
+    gboolean show_all_shortcuts;
     PinsShortcutFilterCategory category;
 
     GtkCustomFilter *category_filter;
@@ -47,7 +47,7 @@ G_DEFINE_TYPE_WITH_CODE (PinsShortcutFilter, pins_shortcut_filter,
 enum
 {
     PROP_0,
-    PROP_SHOW_ALL_APPS,
+    PROP_SHOW_ALL_SHORTCUTS,
     PROP_CATEGORY,
     N_PROPS,
 };
@@ -75,7 +75,7 @@ pins_shortcut_filter_set_search (PinsShortcutFilter *self, const gchar *search)
 void
 pins_shortcut_filter_reset_category (PinsShortcutFilter *self)
 {
-    if (self->show_all_apps)
+    if (self->show_all_shortcuts)
         self->category = PINS_SHORTCUT_FILTER_CATEGORY_ALL;
     else
         self->category = PINS_SHORTCUT_FILTER_CATEGORY_VISIBLE;
@@ -162,8 +162,8 @@ pins_shortcut_filter_get_property (GObject *object, guint prop_id,
 
     switch (prop_id)
         {
-        case PROP_SHOW_ALL_APPS:
-            g_value_set_boolean (value, self->show_all_apps);
+        case PROP_SHOW_ALL_SHORTCUTS:
+            g_value_set_boolean (value, self->show_all_shortcuts);
             break;
         case PROP_CATEGORY:
             g_value_set_uint (value, self->category);
@@ -181,8 +181,8 @@ pins_shortcut_filter_set_property (GObject *object, guint prop_id,
 
     switch (prop_id)
         {
-        case PROP_SHOW_ALL_APPS:
-            self->show_all_apps = g_value_get_boolean (value);
+        case PROP_SHOW_ALL_SHORTCUTS:
+            self->show_all_shortcuts = g_value_get_boolean (value);
             pins_shortcut_filter_reset_category (self);
             break;
         case PROP_CATEGORY:
@@ -202,8 +202,8 @@ pins_shortcut_filter_class_init (PinsShortcutFilterClass *klass)
     object_class->get_property = pins_shortcut_filter_get_property;
     object_class->set_property = pins_shortcut_filter_set_property;
 
-    properties[PROP_SHOW_ALL_APPS] = g_param_spec_boolean (
-        "show-all-apps", "Show All Apps",
+    properties[PROP_SHOW_ALL_SHORTCUTS] = g_param_spec_boolean (
+        "show-all-shortcuts", "Show All Apps",
         "Whether all apps are shown when no other filters are applied", FALSE,
         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
@@ -240,7 +240,7 @@ pins_shortcut_filter_init (PinsShortcutFilter *self)
                              G_CALLBACK (g_list_model_items_changed), self,
                              G_CONNECT_SWAPPED);
 
-    g_signal_connect_object (self, "notify::show-all-apps",
+    g_signal_connect_object (self, "notify::show-all-shortcuts",
                              G_CALLBACK (category_notify_cb), self, 0);
     g_signal_connect_object (self, "notify::category",
                              G_CALLBACK (category_notify_cb), self, 0);

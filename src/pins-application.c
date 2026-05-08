@@ -150,7 +150,7 @@ pins_application_init (PinsApplication *self)
         GTK_APPLICATION (self), "app.quit",
         (const char *[]){ "<primary>q", NULL });
     gtk_application_set_accels_for_action (
-        GTK_APPLICATION (self), "win.new-app",
+        GTK_APPLICATION (self), "win.new-shortcut",
         (const char *[]){ "<primary>n", NULL });
     gtk_application_set_accels_for_action (
         GTK_APPLICATION (self), "win.search",

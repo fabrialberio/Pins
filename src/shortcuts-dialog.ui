@@ -19,7 +19,7 @@
         <child>
           <object class="AdwShortcutsItem">
             <property name="title" translatable="yes">Add New App</property>
-            <property name="action-name">win.new-app</property>
+            <property name="action-name">win.new-shortcut</property>
           </object>
         </child>
         <child>

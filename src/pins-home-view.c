@@ -81,7 +81,8 @@ shortcut_iterator_loading_cb (PinsHomeView *self, gboolean is_loading)
 }
 
 void
-shortcut_iterator_file_created_cb (PinsHomeView *self, PinsShortcut *shortcut)
+shortcut_iterator_shortcut_created_cb (PinsHomeView *self,
+                                       PinsShortcut *shortcut)
 {
     g_signal_emit (self, signals[ACTIVATE], 0, shortcut);
 }
@@ -102,9 +103,10 @@ pins_home_view_set_shortcut_iterator (PinsHomeView *self,
     g_signal_connect_object (shortcut_iterator, "loading",
                              G_CALLBACK (shortcut_iterator_loading_cb), self,
                              G_CONNECT_SWAPPED);
-    g_signal_connect_object (shortcut_iterator, "shortcut-created",
-                             G_CALLBACK (shortcut_iterator_file_created_cb),
-                             self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (
+        shortcut_iterator, "shortcut-created",
+        G_CALLBACK (shortcut_iterator_shortcut_created_cb), self,
+        G_CONNECT_SWAPPED);
 
     pins_shortcut_iterator_load (shortcut_iterator);
 }
@@ -239,7 +241,7 @@ pins_home_view_init (PinsHomeView *self)
 
     settings = g_settings_new ("io.github.fabrialberio.pinapp");
     group = g_simple_action_group_new ();
-    action = g_settings_create_action (settings, "show-all-apps");
+    action = g_settings_create_action (settings, "show-all-shortcuts");
 
     g_action_map_add_action (G_ACTION_MAP (group), action);
     gtk_widget_insert_action_group (GTK_WIDGET (self), "home-view",
@@ -249,8 +251,8 @@ pins_home_view_init (PinsHomeView *self)
 
     self->shortcut_filter = pins_shortcut_filter_new ();
 
-    g_settings_bind (settings, "show-all-apps", self->shortcut_filter,
-                     "show-all-apps", G_SETTINGS_BIND_DEFAULT);
+    g_settings_bind (settings, "show-all-shortcuts", self->shortcut_filter,
+                     "show-all-shortcuts", G_SETTINGS_BIND_DEFAULT);
 
     adw_view_stack_set_visible_child_name (self->view_stack,
                                            pages[PAGE_LOADING]);

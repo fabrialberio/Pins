@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="pinapp">
   <schema id="io.github.fabrialberio.pinapp" path="/io/github/fabrialberio/pinapp/">
-    <key name="show-all-apps" type="b">
+    <key name="show-all-shortcuts" type="b">
       <default>false</default>
       <summary>Show all apps</summary>
     </key>
