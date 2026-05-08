@@ -20,7 +20,7 @@
 
 #include "pins-shortcuts-grid.h"
 
-#include "pins-app-tile.h"
+#include "pins-shortcut-tile.h"
 
 struct _PinsShortcutsGrid
 {
@@ -49,9 +49,9 @@ GtkWidget *
 create_widget_func (gpointer item, gpointer user_data)
 {
     PinsShortcut *shortcut = PINS_SHORTCUT (item);
-    PinsAppTile *tile = pins_app_tile_new ();
+    PinsShortcutTile *tile = pins_shortcut_tile_new ();
 
-    pins_app_tile_set_shortcut (tile, shortcut);
+    pins_shortcut_tile_set_shortcut (tile, shortcut);
 
     return GTK_WIDGET (tile);
 }

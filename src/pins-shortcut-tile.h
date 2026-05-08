@@ -1,4 +1,4 @@
-/* pins-app-tile.h
+/* pins-shortcut-tile.h
  *
  * Copyright 2024 Fabrizio
  *
@@ -26,11 +26,13 @@
 
 G_BEGIN_DECLS
 
-#define PINS_TYPE_APP_TILE (pins_app_tile_get_type ())
+#define PINS_TYPE_SHORTCUT_TILE (pins_shortcut_tile_get_type ())
 
-G_DECLARE_FINAL_TYPE (PinsAppTile, pins_app_tile, PINS, APP_TILE, GtkBox)
+G_DECLARE_FINAL_TYPE (PinsShortcutTile, pins_shortcut_tile, PINS,
+                      SHORTCUT_TILE, GtkBox)
 
-PinsAppTile *pins_app_tile_new (void);
-void pins_app_tile_set_shortcut (PinsAppTile *self, PinsShortcut *shortcut);
+PinsShortcutTile *pins_shortcut_tile_new (void);
+void pins_shortcut_tile_set_shortcut (PinsShortcutTile *self,
+                                      PinsShortcut *shortcut);
 
 G_END_DECLS

@@ -1,4 +1,4 @@
-/* pins-app-tile.c
+/* pins-shortcut-tile.c
  *
  * Copyright 2024 Fabrizio
  *
@@ -18,12 +18,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "pins-app-tile.h"
+#include "pins-shortcut-tile.h"
 
 #include "pins-locale-utils-private.h"
 #include "pins-shortcut-icon.h"
 
-struct _PinsAppTile
+struct _PinsShortcutTile
 {
     GtkBox parent_instance;
 
@@ -34,16 +34,17 @@ struct _PinsAppTile
     GtkLabel *title;
 };
 
-G_DEFINE_TYPE (PinsAppTile, pins_app_tile, GTK_TYPE_BOX);
+G_DEFINE_TYPE (PinsShortcutTile, pins_shortcut_tile, GTK_TYPE_BOX);
 
-PinsAppTile *
-pins_app_tile_new (void)
+PinsShortcutTile *
+pins_shortcut_tile_new (void)
 {
-    return g_object_new (PINS_TYPE_APP_TILE, NULL);
+    return g_object_new (PINS_TYPE_SHORTCUT_TILE, NULL);
 }
 
 void
-pins_app_tile_update_appearance (PinsAppTile *self, PinsShortcut *shortcut)
+pins_shortcut_tile_update_appearance (PinsShortcutTile *self,
+                                      PinsShortcut *shortcut)
 {
     const gchar *title_key;
     gboolean invisible;
@@ -63,13 +64,14 @@ pins_app_tile_update_appearance (PinsAppTile *self, PinsShortcut *shortcut)
 }
 
 void
-key_set_cb (PinsAppTile *self, gchar *key, PinsShortcut *shortcut)
+key_set_cb (PinsShortcutTile *self, gchar *key, PinsShortcut *shortcut)
 {
-    pins_app_tile_update_appearance (self, shortcut);
+    pins_shortcut_tile_update_appearance (self, shortcut);
 }
 
 void
-pins_app_tile_set_shortcut (PinsAppTile *self, PinsShortcut *shortcut)
+pins_shortcut_tile_set_shortcut (PinsShortcutTile *self,
+                                 PinsShortcut *shortcut)
 {
     g_assert (PINS_IS_SHORTCUT (shortcut));
 
@@ -80,42 +82,44 @@ pins_app_tile_set_shortcut (PinsAppTile *self, PinsShortcut *shortcut)
 
     pins_shortcut_icon_set_shortcut (self->icon, self->shortcut);
 
-    pins_app_tile_update_appearance (self, self->shortcut);
+    pins_shortcut_tile_update_appearance (self, self->shortcut);
 }
 
 static void
-pins_app_tile_dispose (GObject *object)
+pins_shortcut_tile_dispose (GObject *object)
 {
-    PinsAppTile *self = PINS_APP_TILE (object);
+    PinsShortcutTile *self = PINS_SHORTCUT_TILE (object);
 
     g_clear_object (&self->shortcut);
 
-    gtk_widget_dispose_template (GTK_WIDGET (object), PINS_TYPE_APP_TILE);
+    gtk_widget_dispose_template (GTK_WIDGET (object), PINS_TYPE_SHORTCUT_TILE);
 
-    G_OBJECT_CLASS (pins_app_tile_parent_class)->dispose (object);
+    G_OBJECT_CLASS (pins_shortcut_tile_parent_class)->dispose (object);
 }
 
 static void
-pins_app_tile_class_init (PinsAppTileClass *klass)
+pins_shortcut_tile_class_init (PinsShortcutTileClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-    object_class->dispose = pins_app_tile_dispose;
+    object_class->dispose = pins_shortcut_tile_dispose;
 
     gtk_widget_class_set_template_from_resource (
-        widget_class, "/io/github/fabrialberio/pinapp/pins-app-tile.ui");
+        widget_class, "/io/github/fabrialberio/pinapp/pins-shortcut-tile.ui");
     g_type_ensure (PINS_TYPE_SHORTCUT_ICON);
 
-    gtk_widget_class_bind_template_child (widget_class, PinsAppTile, icon);
-    gtk_widget_class_bind_template_child (widget_class, PinsAppTile,
+    gtk_widget_class_bind_template_child (widget_class, PinsShortcutTile,
+                                          icon);
+    gtk_widget_class_bind_template_child (widget_class, PinsShortcutTile,
                                           invisible_glyph);
-    gtk_widget_class_bind_template_child (widget_class, PinsAppTile, title);
+    gtk_widget_class_bind_template_child (widget_class, PinsShortcutTile,
+                                          title);
 }
 
 static GdkContentProvider *
-pins_app_tile_drag_prepare_cb (PinsAppTile *self, double x, double y,
-                               GtkDragSource *source)
+pins_shortcut_tile_drag_prepare_cb (PinsShortcutTile *self, double x, double y,
+                                    GtkDragSource *source)
 {
     GFile *file = pins_shortcut_get_user_file (self->shortcut);
 
@@ -123,8 +127,8 @@ pins_app_tile_drag_prepare_cb (PinsAppTile *self, double x, double y,
 }
 
 static void
-pins_app_tile_drag_begin_cb (PinsAppTile *self, GdkDrag *drag,
-                             GtkDragSource *source)
+pins_shortcut_tile_drag_begin_cb (PinsShortcutTile *self, GdkDrag *drag,
+                                  GtkDragSource *source)
 {
     g_autoptr (GdkPaintable) paintable = gtk_widget_paintable_new (
         gtk_widget_get_first_child (GTK_WIDGET (self->icon)));
@@ -132,7 +136,7 @@ pins_app_tile_drag_begin_cb (PinsAppTile *self, GdkDrag *drag,
 }
 
 static void
-pins_app_tile_init (PinsAppTile *self)
+pins_shortcut_tile_init (PinsShortcutTile *self)
 {
     GtkDragSource *drag_source = gtk_drag_source_new ();
     gtk_drag_source_set_actions (drag_source, GDK_ACTION_LINK);
@@ -140,11 +144,11 @@ pins_app_tile_init (PinsAppTile *self)
     gtk_widget_init_template (GTK_WIDGET (self));
 
     g_signal_connect_object (drag_source, "prepare",
-                             G_CALLBACK (pins_app_tile_drag_prepare_cb), self,
-                             G_CONNECT_SWAPPED);
+                             G_CALLBACK (pins_shortcut_tile_drag_prepare_cb),
+                             self, G_CONNECT_SWAPPED);
     g_signal_connect_object (drag_source, "drag-begin",
-                             G_CALLBACK (pins_app_tile_drag_begin_cb), self,
-                             G_CONNECT_SWAPPED);
+                             G_CALLBACK (pins_shortcut_tile_drag_begin_cb),
+                             self, G_CONNECT_SWAPPED);
 
     gtk_widget_add_controller (GTK_WIDGET (self),
                                GTK_EVENT_CONTROLLER (drag_source));

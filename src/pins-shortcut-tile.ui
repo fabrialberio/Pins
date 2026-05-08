@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="PinsAppTile" parent="GtkBox">
+  <template class="PinsShortcutTile" parent="GtkBox">
     <property name="orientation">vertical</property>
     <property name="hexpand">true</property>
     <property name="margin-top">8</property>
