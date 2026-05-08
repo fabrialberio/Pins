@@ -20,16 +20,16 @@
 
 #include "pins-window.h"
 
-#include "pins-app-iterator.h"
 #include "pins-directories.h"
 #include "pins-file-view.h"
 #include "pins-home-view.h"
+#include "pins-shortcut-iterator.h"
 
 struct _PinsWindow
 {
     AdwApplicationWindow parent_instance;
 
-    PinsAppIterator *app_iterator;
+    PinsShortcutIterator *shortcut_iterator;
 
     AdwNavigationView *navigation_view;
     PinsHomeView *home_view;
@@ -85,7 +85,7 @@ pins_window_dispose (GObject *object)
 
     gtk_widget_dispose_template (GTK_WIDGET (object), PINS_TYPE_WINDOW);
 
-    g_object_unref (self->app_iterator);
+    g_object_unref (self->shortcut_iterator);
 
     G_OBJECT_CLASS (pins_window_parent_class)->dispose (object);
 }
@@ -196,14 +196,14 @@ pins_window_close_request_cb (PinsWindow *self, gpointer user_data)
 
 void
 pins_window_add_new_app_cb (GSimpleAction *action, GVariant *param,
-                            PinsAppIterator *app_iterator)
+                            PinsShortcutIterator *shortcut_iterator)
 {
     GError *err = NULL;
 
-    g_assert (PINS_IS_APP_ITERATOR (app_iterator));
+    g_assert (PINS_IS_SHORTCUT_ITERATOR (shortcut_iterator));
 
-    pins_app_iterator_create_user_file (app_iterator, "pinned-app",
-                                        PINS_SHORTCUT_DEFAULT_CONTENT, &err);
+    pins_shortcut_iterator_create_user_file (
+        shortcut_iterator, "pinned-app", PINS_SHORTCUT_DEFAULT_CONTENT, &err);
     if (err != NULL)
         g_warning ("Error creating file: %s", err->message);
 }
@@ -213,8 +213,9 @@ pins_window_file_view_duplicate_cb (PinsWindow *self, PinsShortcut *shortcut)
 {
     GError *err = NULL;
 
-    pins_app_iterator_duplicate_file (
-        self->app_iterator, pins_shortcut_get_desktop_id (shortcut), &err);
+    pins_shortcut_iterator_duplicate_shortcut (
+        self->shortcut_iterator, pins_shortcut_get_desktop_id (shortcut),
+        &err);
     if (err != NULL)
         g_warning ("Error duplicating file: %s", err->message);
 }
@@ -234,19 +235,20 @@ pins_window_init (PinsWindow *self)
 
     pins_inject_icon_search_paths ();
 
-    self->app_iterator = pins_app_iterator_new ();
+    self->shortcut_iterator = pins_shortcut_iterator_new ();
 
     new_app_action = g_simple_action_new ("new-app", NULL);
     g_signal_connect_object (new_app_action, "activate",
                              G_CALLBACK (pins_window_add_new_app_cb),
-                             self->app_iterator, 0);
+                             self->shortcut_iterator, 0);
     g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (new_app_action));
 
     search_action = g_simple_action_new_stateful (
         "search", NULL, g_variant_new_boolean (FALSE));
     g_action_map_add_action (G_ACTION_MAP (self), G_ACTION (search_action));
 
-    pins_home_view_set_app_iterator (self->home_view, self->app_iterator);
+    pins_home_view_set_shortcut_iterator (self->home_view,
+                                          self->shortcut_iterator);
 
     g_signal_connect_object (self->home_view, "activate",
                              G_CALLBACK (pins_window_file_activated_cb), self,

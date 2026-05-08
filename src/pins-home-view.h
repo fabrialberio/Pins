@@ -20,7 +20,7 @@
 
 #pragma once
 
-#include "pins-app-iterator.h"
+#include "pins-shortcut-iterator.h"
 
 #include <adwaita.h>
 
@@ -30,7 +30,8 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (PinsHomeView, pins_home_view, PINS, HOME_VIEW, AdwBin)
 
-void pins_home_view_set_app_iterator (PinsHomeView *self,
-                                      PinsAppIterator *app_iterator);
+void
+pins_home_view_set_shortcut_iterator (PinsHomeView *self,
+                                      PinsShortcutIterator *shortcut_iterator);
 
 G_END_DECLS

@@ -68,7 +68,7 @@ static gchar *pages[N_PAGES] = {
 };
 
 void
-app_iterator_loading_cb (PinsHomeView *self, gboolean is_loading)
+shortcut_iterator_loading_cb (PinsHomeView *self, gboolean is_loading)
 {
     g_assert (PINS_IS_HOME_VIEW (self));
 
@@ -81,32 +81,32 @@ app_iterator_loading_cb (PinsHomeView *self, gboolean is_loading)
 }
 
 void
-app_iterator_file_created_cb (PinsHomeView *self, PinsShortcut *shortcut)
+shortcut_iterator_file_created_cb (PinsHomeView *self, PinsShortcut *shortcut)
 {
     g_signal_emit (self, signals[ACTIVATE], 0, shortcut);
 }
 
 void
-pins_home_view_set_app_iterator (PinsHomeView *self,
-                                 PinsAppIterator *app_iterator)
+pins_home_view_set_shortcut_iterator (PinsHomeView *self,
+                                      PinsShortcutIterator *shortcut_iterator)
 {
     adw_view_stack_set_visible_child_name (self->view_stack,
                                            pages[PAGE_LOADING]);
 
     pins_shortcut_filter_set_model (self->shortcut_filter,
-                                    G_LIST_MODEL (app_iterator));
+                                    G_LIST_MODEL (shortcut_iterator));
 
     pins_shortcuts_grid_set_model (self->shortcuts_grid,
                                    G_LIST_MODEL (self->shortcut_filter));
 
-    g_signal_connect_object (app_iterator, "loading",
-                             G_CALLBACK (app_iterator_loading_cb), self,
+    g_signal_connect_object (shortcut_iterator, "loading",
+                             G_CALLBACK (shortcut_iterator_loading_cb), self,
                              G_CONNECT_SWAPPED);
-    g_signal_connect_object (app_iterator, "file-created",
-                             G_CALLBACK (app_iterator_file_created_cb), self,
-                             G_CONNECT_SWAPPED);
+    g_signal_connect_object (shortcut_iterator, "file-created",
+                             G_CALLBACK (shortcut_iterator_file_created_cb),
+                             self, G_CONNECT_SWAPPED);
 
-    pins_app_iterator_load (app_iterator);
+    pins_shortcut_iterator_load (shortcut_iterator);
 }
 
 static void

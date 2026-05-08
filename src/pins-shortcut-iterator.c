@@ -1,4 +1,4 @@
-/* pins-app-iterator.c
+/* pins-shortcut-iterator.c
  *
  * Copyright 2024 Fabrizio
  *
@@ -18,7 +18,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "pins-app-iterator.h"
+#include "pins-shortcut-iterator.h"
 
 #include "pins-directories.h"
 #include "pins-locale-utils-private.h"
@@ -31,7 +31,7 @@
                G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME, NULL)
 #define SHORTCUT_CONTENT_TYPE "application/x-desktop"
 
-struct _PinsAppIterator
+struct _PinsShortcutIterator
 {
     GObject parent_instance;
 
@@ -42,7 +42,8 @@ struct _PinsAppIterator
 
 static void list_model_iface_init (GListModelInterface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (PinsAppIterator, pins_app_iterator, G_TYPE_OBJECT,
+G_DEFINE_TYPE_WITH_CODE (PinsShortcutIterator, pins_shortcut_iterator,
+                         G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (G_TYPE_LIST_MODEL,
                                                 list_model_iface_init))
 
@@ -55,15 +56,15 @@ enum
 
 static guint signals[N_SIGNALS];
 
-PinsAppIterator *
-pins_app_iterator_new (void)
+PinsShortcutIterator *
+pins_shortcut_iterator_new (void)
 {
-    return g_object_new (PINS_TYPE_APP_ITERATOR, NULL);
+    return g_object_new (PINS_TYPE_SHORTCUT_ITERATOR, NULL);
 }
 
 void
-pins_app_iterator_key_set_cb (PinsAppIterator *self, gchar *key,
-                              PinsShortcut *shortcut)
+pins_shortcut_iterator_key_set_cb (PinsShortcutIterator *self, gchar *key,
+                                   PinsShortcut *shortcut)
 {
     guint position;
 
@@ -79,8 +80,8 @@ pins_app_iterator_key_set_cb (PinsAppIterator *self, gchar *key,
 }
 
 void
-pins_app_iterator_file_deleted_cb (PinsAppIterator *self,
-                                   PinsShortcut *shortcut)
+pins_shortcut_iterator_file_deleted_cb (PinsShortcutIterator *self,
+                                        PinsShortcut *shortcut)
 {
     g_autofree gchar *desktop_id;
     guint position;
@@ -96,8 +97,8 @@ pins_app_iterator_file_deleted_cb (PinsAppIterator *self,
 }
 
 void
-shortcuts_by_id_insert_file (PinsAppIterator *self, GFile *file,
-                                 PinsShortcut *shortcut)
+shortcuts_by_id_insert_file (PinsShortcutIterator *self, GFile *file,
+                             PinsShortcut *shortcut)
 {
     gchar *desktop_id = g_file_get_basename (file);
 
@@ -105,15 +106,16 @@ shortcuts_by_id_insert_file (PinsAppIterator *self, GFile *file,
     g_hash_table_insert (self->files_by_id, g_strdup (desktop_id), file);
 
     g_signal_connect_object (shortcut, "key-set",
-                             G_CALLBACK (pins_app_iterator_key_set_cb), self,
-                             G_CONNECT_SWAPPED);
-    g_signal_connect_object (shortcut, "deleted",
-                             G_CALLBACK (pins_app_iterator_file_deleted_cb),
+                             G_CALLBACK (pins_shortcut_iterator_key_set_cb),
                              self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (
+        shortcut, "deleted",
+        G_CALLBACK (pins_shortcut_iterator_file_deleted_cb), self,
+        G_CONNECT_SWAPPED);
 }
 
 void
-load_file_checked (PinsAppIterator *self, GFileInfo *info, GFile *file)
+load_file_checked (PinsShortcutIterator *self, GFileInfo *info, GFile *file)
 {
     PinsShortcut *shortcut = NULL;
     g_autoptr (GError) err = NULL;
@@ -133,7 +135,7 @@ load_file_checked (PinsAppIterator *self, GFileInfo *info, GFile *file)
 }
 
 void
-pins_app_iterator_load (PinsAppIterator *self)
+pins_shortcut_iterator_load (PinsShortcutIterator *self)
 {
     GFileEnumerator *enumerator = NULL;
     g_autoptr (GFileInfo) info = NULL;
@@ -184,9 +186,9 @@ pins_app_iterator_load (PinsAppIterator *self)
 }
 
 void
-pins_app_iterator_create_user_file (PinsAppIterator *self,
-                                    const gchar *basename,
-                                    const gchar *contents, GError **error)
+pins_shortcut_iterator_create_user_file (PinsShortcutIterator *self,
+                                         const gchar *basename,
+                                         const gchar *contents, GError **error)
 {
     gchar increment[8] = "";
     g_autoptr (GFile) file;
@@ -225,8 +227,9 @@ pins_app_iterator_create_user_file (PinsAppIterator *self,
 }
 
 void
-pins_app_iterator_duplicate_file (PinsAppIterator *self,
-                                  const gchar *desktop_id, GError **error)
+pins_shortcut_iterator_duplicate_shortcut (PinsShortcutIterator *self,
+                                           const gchar *desktop_id,
+                                           GError **error)
 {
     GFile *file = g_hash_table_lookup (self->files_by_id, desktop_id);
     GError *err = NULL;
@@ -242,14 +245,14 @@ pins_app_iterator_duplicate_file (PinsAppIterator *self,
     split_desktop_id[g_strv_length (split_desktop_id) - 1] = NULL;
     basename = g_strjoinv (".", split_desktop_id);
 
-    return pins_app_iterator_create_user_file (self, basename, contents,
-                                               error);
+    return pins_shortcut_iterator_create_user_file (self, basename, contents,
+                                                    error);
 }
 
 static void
-pins_app_iterator_dispose (GObject *object)
+pins_shortcut_iterator_dispose (GObject *object)
 {
-    PinsAppIterator *self = PINS_APP_ITERATOR (object);
+    PinsShortcutIterator *self = PINS_SHORTCUT_ITERATOR (object);
 
     g_hash_table_unref (self->shortcuts_by_id);
     g_hash_table_unref (self->files_by_id);
@@ -257,11 +260,11 @@ pins_app_iterator_dispose (GObject *object)
 }
 
 static void
-pins_app_iterator_class_init (PinsAppIteratorClass *klass)
+pins_shortcut_iterator_class_init (PinsShortcutIteratorClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-    object_class->dispose = pins_app_iterator_dispose;
+    object_class->dispose = pins_shortcut_iterator_dispose;
 
     signals[LOADING] = g_signal_new ("loading", G_TYPE_FROM_CLASS (klass),
                                      G_SIGNAL_RUN_FIRST, 0, NULL, NULL, NULL,
@@ -273,7 +276,7 @@ pins_app_iterator_class_init (PinsAppIteratorClass *klass)
 }
 
 static void
-pins_app_iterator_init (PinsAppIterator *self)
+pins_shortcut_iterator_init (PinsShortcutIterator *self)
 {
     self->shortcuts_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                    g_free, g_object_unref);
@@ -283,9 +286,9 @@ pins_app_iterator_init (PinsAppIterator *self)
 }
 
 gpointer
-pins_app_iterator_get_item (GListModel *list, guint position)
+pins_shortcut_iterator_get_item (GListModel *list, guint position)
 {
-    PinsAppIterator *self = PINS_APP_ITERATOR (list);
+    PinsShortcutIterator *self = PINS_SHORTCUT_ITERATOR (list);
 
     if (position < self->shortcuts_array->len)
         return g_object_ref (self->shortcuts_array->pdata[position]);
@@ -294,15 +297,15 @@ pins_app_iterator_get_item (GListModel *list, guint position)
 }
 
 GType
-pins_app_iterator_get_item_type (GListModel *list)
+pins_shortcut_iterator_get_item_type (GListModel *list)
 {
     return PINS_TYPE_SHORTCUT;
 }
 
 guint
-pins_app_iterator_get_n_items (GListModel *list)
+pins_shortcut_iterator_get_n_items (GListModel *list)
 {
-    PinsAppIterator *self = PINS_APP_ITERATOR (list);
+    PinsShortcutIterator *self = PINS_SHORTCUT_ITERATOR (list);
 
     return self->shortcuts_array->len;
 }
@@ -310,7 +313,7 @@ pins_app_iterator_get_n_items (GListModel *list)
 static void
 list_model_iface_init (GListModelInterface *iface)
 {
-    iface->get_item = pins_app_iterator_get_item;
-    iface->get_item_type = pins_app_iterator_get_item_type;
-    iface->get_n_items = pins_app_iterator_get_n_items;
+    iface->get_item = pins_shortcut_iterator_get_item;
+    iface->get_item_type = pins_shortcut_iterator_get_item_type;
+    iface->get_n_items = pins_shortcut_iterator_get_n_items;
 }
