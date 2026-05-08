@@ -4,7 +4,7 @@ data/io.github.fabrialberio.pinapp.gschema.xml
 
 src/pins-add-key-dialog.ui
 src/pins-home-view.ui
-src/pins-file-view.ui
+src/pins-shortcut-view.ui
 src/pins-key-row.ui
 src/pins-pick-icon-popover.ui
 src/pins-window.ui
@@ -12,6 +12,6 @@ src/shortcuts-dialog.ui
 
 src/pins-application.c
 src/pins-shortcut.c
-src/pins-file-view.c
+src/pins-shortcut-view.c
 src/pins-key-row.c
 src/pins-pick-icon-popover.c

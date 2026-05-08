@@ -121,7 +121,7 @@ msgstr ""
 msgid "Hidden"
 msgstr ""
 
-#: src/pins-home-view.ui:97 src/pins-file-view.ui:142
+#: src/pins-home-view.ui:97 src/pins-shortcut-view.ui:142
 msgid "Autostart"
 msgstr "Automatisch opstarten"
 
@@ -145,47 +145,47 @@ msgstr "_Sneltoetsen"
 msgid "_About Pins"
 msgstr "_Over Snelkoppelingen"
 
-#: src/pins-file-view.ui:18
+#: src/pins-shortcut-view.ui:18
 msgid "More Options"
 msgstr ""
 
-#: src/pins-file-view.ui:25
+#: src/pins-shortcut-view.ui:25
 msgid "Delete"
 msgstr "Verwĳderen"
 
-#: src/pins-file-view.ui:74 src/pins-key-row.ui:9
+#: src/pins-shortcut-view.ui:74 src/pins-key-row.ui:9
 msgid "Erase Changes"
 msgstr "Wĳzigingen wissen"
 
-#: src/pins-file-view.ui:94
+#: src/pins-shortcut-view.ui:94
 msgid "Pick Icon"
 msgstr "Kies een pictogram"
 
-#: src/pins-file-view.ui:145
+#: src/pins-shortcut-view.ui:145
 msgid "Launch this application on login"
 msgstr "Start de toepassing na het aanmelden"
 
-#: src/pins-file-view.ui:162
+#: src/pins-shortcut-view.ui:162
 msgid "Invisible"
 msgstr "Onzichtbaar"
 
-#: src/pins-file-view.ui:165
+#: src/pins-shortcut-view.ui:165
 msgid "Hide this application in the app menu"
 msgstr "Verberg deze toepassing in het menu"
 
-#: src/pins-file-view.ui:198
+#: src/pins-shortcut-view.ui:198
 msgid "Add Key"
 msgstr "Veld toevoegen"
 
-#: src/pins-file-view.ui:224
+#: src/pins-shortcut-view.ui:224
 msgid "Open With…"
 msgstr ""
 
-#: src/pins-file-view.ui:228
+#: src/pins-shortcut-view.ui:228
 msgid "Open Containing Folder…"
 msgstr ""
 
-#: src/pins-file-view.ui:232
+#: src/pins-shortcut-view.ui:232
 msgid "Duplicate"
 msgstr ""
 

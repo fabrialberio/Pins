@@ -12,7 +12,7 @@
         <child>
           <object class="AdwNavigationPage">
             <property name="title" translatable="yes">All Apps</property>
-            <property name="tag">apps-page</property>
+            <property name="tag">home-page</property>
             <property name="child">
               <object class="PinsHomeView" id="home_view">
               </object>
@@ -22,9 +22,9 @@
         <child>
           <object class="AdwNavigationPage">
             <property name="title">File Page</property>
-            <property name="tag">file-page</property>
+            <property name="tag">shortcut-page</property>
             <property name="child">
-              <object class="PinsFileView" id="file_view">
+              <object class="PinsShortcutView" id="shortcut_view">
               </object>
             </property>
           </object>

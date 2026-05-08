@@ -125,7 +125,7 @@ msgstr ""
 msgid "Hidden"
 msgstr ""
 
-#: src/pins-home-view.ui:97 src/pins-file-view.ui:142
+#: src/pins-home-view.ui:97 src/pins-shortcut-view.ui:142
 msgid "Autostart"
 msgstr "Démarrage automatique"
 
@@ -151,49 +151,49 @@ msgstr "_Raccourcis clavier"
 msgid "_About Pins"
 msgstr "À _propos de Pins"
 
-#: src/pins-file-view.ui:18
+#: src/pins-shortcut-view.ui:18
 msgid "More Options"
 msgstr ""
 
-#: src/pins-file-view.ui:25
+#: src/pins-shortcut-view.ui:25
 msgid "Delete"
 msgstr "Supprimer"
 
-#: src/pins-file-view.ui:74 src/pins-key-row.ui:9
+#: src/pins-shortcut-view.ui:74 src/pins-key-row.ui:9
 #, fuzzy
 msgid "Erase Changes"
 msgstr "Effacer les changements"
 
-#: src/pins-file-view.ui:94
+#: src/pins-shortcut-view.ui:94
 msgid "Pick Icon"
 msgstr "Choisir une icône"
 
-#: src/pins-file-view.ui:145
+#: src/pins-shortcut-view.ui:145
 msgid "Launch this application on login"
 msgstr "Lancer cette application au démarrage"
 
-#: src/pins-file-view.ui:162
+#: src/pins-shortcut-view.ui:162
 msgid "Invisible"
 msgstr "Invisible"
 
-#: src/pins-file-view.ui:165
+#: src/pins-shortcut-view.ui:165
 msgid "Hide this application in the app menu"
 msgstr "Masquer cette application dans la grille des applications"
 
-#: src/pins-file-view.ui:198
+#: src/pins-shortcut-view.ui:198
 #, fuzzy
 msgid "Add Key"
 msgstr "Ajouter une clé"
 
-#: src/pins-file-view.ui:224
+#: src/pins-shortcut-view.ui:224
 msgid "Open With…"
 msgstr ""
 
-#: src/pins-file-view.ui:228
+#: src/pins-shortcut-view.ui:228
 msgid "Open Containing Folder…"
 msgstr ""
 
-#: src/pins-file-view.ui:232
+#: src/pins-shortcut-view.ui:232
 msgid "Duplicate"
 msgstr ""
 

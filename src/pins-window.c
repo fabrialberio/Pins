@@ -21,9 +21,9 @@
 #include "pins-window.h"
 
 #include "pins-directories.h"
-#include "pins-file-view.h"
 #include "pins-home-view.h"
 #include "pins-shortcut-iterator.h"
+#include "pins-shortcut-view.h"
 
 struct _PinsWindow
 {
@@ -33,7 +33,7 @@ struct _PinsWindow
 
     AdwNavigationView *navigation_view;
     PinsHomeView *home_view;
-    PinsFileView *file_view;
+    PinsShortcutView *shortcut_view;
     AdwStatusPage *error_status_page;
 };
 
@@ -41,27 +41,27 @@ G_DEFINE_FINAL_TYPE (PinsWindow, pins_window, ADW_TYPE_APPLICATION_WINDOW)
 
 enum
 {
-    PAGE_APPS,
-    PAGE_FILE,
+    PAGE_HOME,
+    PAGE_SHORTCUT,
     PAGE_ERROR,
     N_PAGES,
 };
 
 static gchar *pages[N_PAGES] = {
-    "apps-page",
-    "file-page",
+    "home-page",
+    "shortcut-page",
     "error-page",
 };
 
 PinsShortcut *
 pins_window_get_current_shortcut (PinsWindow *self)
 {
-    AdwNavigationPage *file_page = adw_navigation_view_find_page (
-        self->navigation_view, pages[PAGE_FILE]);
-    PinsFileView *file_view
-        = PINS_FILE_VIEW (adw_navigation_page_get_child (file_page));
+    AdwNavigationPage *shortcut_page = adw_navigation_view_find_page (
+        self->navigation_view, pages[PAGE_SHORTCUT]);
+    PinsShortcutView *shortcut_view
+        = PINS_SHORTCUT_VIEW (adw_navigation_page_get_child (shortcut_page));
 
-    return pins_file_view_get_shortcut (file_view);
+    return pins_shortcut_view_get_shortcut (shortcut_view);
 }
 
 void
@@ -74,7 +74,7 @@ pins_window_save_current_shortcut (PinsWindow *self)
         {
             pins_shortcut_save (shortcut, &err, TRUE);
             if (err != NULL)
-                g_warning ("Error saving file: %s", err->message);
+                g_warning ("Error saving shortcut: %s", err->message);
         }
 }
 
@@ -101,18 +101,19 @@ pins_window_class_init (PinsWindowClass *klass)
     gtk_widget_class_set_template_from_resource (
         widget_class, "/io/github/fabrialberio/pinapp/pins-window.ui");
     g_type_ensure (PINS_TYPE_HOME_VIEW);
-    g_type_ensure (PINS_TYPE_FILE_VIEW);
+    g_type_ensure (PINS_TYPE_SHORTCUT_VIEW);
 
     gtk_widget_class_bind_template_child (widget_class, PinsWindow,
                                           navigation_view);
     gtk_widget_class_bind_template_child (widget_class, PinsWindow, home_view);
-    gtk_widget_class_bind_template_child (widget_class, PinsWindow, file_view);
+    gtk_widget_class_bind_template_child (widget_class, PinsWindow,
+                                          shortcut_view);
     gtk_widget_class_bind_template_child (widget_class, PinsWindow,
                                           error_status_page);
 }
 
 void
-pins_window_file_deleted_cb (PinsShortcut *shortcut, PinsWindow *self)
+pins_window_shortcut_deleted_cb (PinsShortcut *shortcut, PinsWindow *self)
 {
     g_assert (PINS_IS_WINDOW (self));
     g_assert (PINS_IS_SHORTCUT (shortcut));
@@ -134,20 +135,21 @@ pins_window_set_shortcut (PinsWindow *self, PinsShortcut *shortcut,
         {
             g_signal_handlers_disconnect_by_func (
                 pins_window_get_current_shortcut (self),
-                pins_window_file_deleted_cb, self);
+                pins_window_shortcut_deleted_cb, self);
         }
 
-    pins_file_view_set_shortcut (self->file_view, shortcut, opened_from_file);
+    pins_shortcut_view_set_shortcut (self->shortcut_view, shortcut,
+                                     opened_from_file);
 
     g_signal_connect_object (shortcut, "deleted",
-                             G_CALLBACK (pins_window_file_deleted_cb), self,
-                             0);
+                             G_CALLBACK (pins_window_shortcut_deleted_cb),
+                             self, 0);
 
     if (g_strcmp0 (
             adw_navigation_view_get_visible_page_tag (self->navigation_view),
-            pages[PAGE_FILE]))
+            pages[PAGE_SHORTCUT]))
         adw_navigation_view_push_by_tag (self->navigation_view,
-                                         pages[PAGE_FILE]);
+                                         pages[PAGE_SHORTCUT]);
 }
 
 void
@@ -172,8 +174,8 @@ pins_window_open_file (PinsWindow *self, GFile *file)
 }
 
 void
-pins_window_file_page_hiding_cb (AdwNavigationPage *self,
-                                 PinsWindow *user_data)
+pins_window_shortcut_page_hiding_cb (AdwNavigationPage *self,
+                                     PinsWindow *user_data)
 {
     g_assert (PINS_IS_WINDOW (user_data));
 
@@ -188,7 +190,7 @@ pins_window_close_request_cb (PinsWindow *self, gpointer user_data)
 
     g_assert (PINS_IS_WINDOW (self));
 
-    if (g_strcmp0 (current_page_tag, pages[PAGE_FILE]) == 0)
+    if (g_strcmp0 (current_page_tag, pages[PAGE_SHORTCUT]) == 0)
         pins_window_save_current_shortcut (self);
 
     gtk_window_destroy (GTK_WINDOW (self));
@@ -205,11 +207,12 @@ pins_window_add_new_app_cb (GSimpleAction *action, GVariant *param,
     pins_shortcut_iterator_create_user_file (
         shortcut_iterator, "pinned-app", PINS_SHORTCUT_DEFAULT_CONTENT, &err);
     if (err != NULL)
-        g_warning ("Error creating file: %s", err->message);
+        g_warning ("Error creating shortcut: %s", err->message);
 }
 
 void
-pins_window_file_view_duplicate_cb (PinsWindow *self, PinsShortcut *shortcut)
+pins_window_shortcut_view_duplicate_cb (PinsWindow *self,
+                                        PinsShortcut *shortcut)
 {
     GError *err = NULL;
 
@@ -217,11 +220,11 @@ pins_window_file_view_duplicate_cb (PinsWindow *self, PinsShortcut *shortcut)
         self->shortcut_iterator, pins_shortcut_get_desktop_id (shortcut),
         &err);
     if (err != NULL)
-        g_warning ("Error duplicating file: %s", err->message);
+        g_warning ("Error duplicating shortcut: %s", err->message);
 }
 
 void
-pins_window_file_activated_cb (PinsWindow *self, PinsShortcut *shortcut)
+pins_window_shortcut_activated_cb (PinsWindow *self, PinsShortcut *shortcut)
 {
     pins_window_set_shortcut (self, shortcut, NULL);
 }
@@ -251,19 +254,20 @@ pins_window_init (PinsWindow *self)
                                           self->shortcut_iterator);
 
     g_signal_connect_object (self->home_view, "activate",
-                             G_CALLBACK (pins_window_file_activated_cb), self,
-                             G_CONNECT_SWAPPED);
-    g_signal_connect_object (self->file_view, "duplicate",
-                             G_CALLBACK (pins_window_file_view_duplicate_cb),
+                             G_CALLBACK (pins_window_shortcut_activated_cb),
                              self, G_CONNECT_SWAPPED);
-    g_signal_connect_object (self->file_view, "pop-request",
+    g_signal_connect_object (
+        self->shortcut_view, "duplicate",
+        G_CALLBACK (pins_window_shortcut_view_duplicate_cb), self,
+        G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->shortcut_view, "pop-request",
                              G_CALLBACK (adw_navigation_view_pop),
                              self->navigation_view, G_CONNECT_SWAPPED);
 
     g_signal_connect_object (
         adw_navigation_view_find_page (self->navigation_view,
-                                       pages[PAGE_FILE]),
-        "hiding", G_CALLBACK (pins_window_file_page_hiding_cb), self, 0);
+                                       pages[PAGE_SHORTCUT]),
+        "hiding", G_CALLBACK (pins_window_shortcut_page_hiding_cb), self, 0);
     g_signal_connect_object (self, "close-request",
                              G_CALLBACK (pins_window_close_request_cb), NULL,
                              0);

@@ -54,7 +54,7 @@ enum
 
 enum
 {
-    PAGE_APPS,
+    PAGE_HOME,
     PAGE_EMPTY,
     PAGE_LOADING,
     N_PAGES,
@@ -77,7 +77,7 @@ shortcut_iterator_loading_cb (PinsHomeView *self, gboolean is_loading)
                                                pages[PAGE_LOADING]);
     else
         adw_view_stack_set_visible_child_name (self->view_stack,
-                                               pages[PAGE_APPS]);
+                                               pages[PAGE_HOME]);
 }
 
 void
@@ -102,7 +102,7 @@ pins_home_view_set_shortcut_iterator (PinsHomeView *self,
     g_signal_connect_object (shortcut_iterator, "loading",
                              G_CALLBACK (shortcut_iterator_loading_cb), self,
                              G_CONNECT_SWAPPED);
-    g_signal_connect_object (shortcut_iterator, "file-created",
+    g_signal_connect_object (shortcut_iterator, "shortcut-created",
                              G_CALLBACK (shortcut_iterator_file_created_cb),
                              self, G_CONNECT_SWAPPED);
 
@@ -196,7 +196,7 @@ pins_home_view_items_changed_cb (GListModel *list, guint position,
                                                pages[PAGE_EMPTY]);
     else
         adw_view_stack_set_visible_child_name (self->view_stack,
-                                               pages[PAGE_APPS]);
+                                               pages[PAGE_HOME]);
 }
 
 void

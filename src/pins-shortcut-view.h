@@ -1,4 +1,4 @@
-/* pins-file-view.h
+/* pins-shortcut-view.h
  *
  * Copyright 2024 Fabrizio
  *
@@ -26,13 +26,14 @@
 
 G_BEGIN_DECLS
 
-#define PINS_TYPE_FILE_VIEW (pins_file_view_get_type ())
+#define PINS_TYPE_SHORTCUT_VIEW (pins_shortcut_view_get_type ())
 
-G_DECLARE_FINAL_TYPE (PinsFileView, pins_file_view, PINS, FILE_VIEW,
-                      AdwBreakpointBin)
+G_DECLARE_FINAL_TYPE (PinsShortcutView, pins_shortcut_view, PINS,
+                      SHORTCUT_VIEW, AdwBreakpointBin)
 
-void pins_file_view_set_shortcut (PinsFileView *self, PinsShortcut *shortcut,
-                                  GFile *opened_from_file);
-PinsShortcut *pins_file_view_get_shortcut (PinsFileView *self);
+void pins_shortcut_view_set_shortcut (PinsShortcutView *self,
+                                      PinsShortcut *shortcut,
+                                      GFile *opened_from_file);
+PinsShortcut *pins_shortcut_view_get_shortcut (PinsShortcutView *self);
 
 G_END_DECLS

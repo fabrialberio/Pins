@@ -271,8 +271,8 @@ pins_shortcut_iterator_class_init (PinsShortcutIteratorClass *klass)
                                      G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
 
     signals[FILE_CREATED] = g_signal_new (
-        "file-created", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_FIRST, 0, NULL,
-        NULL, NULL, G_TYPE_NONE, 1, G_TYPE_OBJECT);
+        "shortcut-created", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_FIRST, 0,
+        NULL, NULL, NULL, G_TYPE_NONE, 1, G_TYPE_OBJECT);
 }
 
 static void
