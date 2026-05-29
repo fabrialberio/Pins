@@ -85,6 +85,7 @@ pins_application_about_action (GSimpleAction *action, GVariant *parameter,
         = "Ahmed Najmawi (Arabic) <iramosu@protonmail.com>\n "
           "Yesionio (Chinese) <yesionio@outlook.com>\n"
           "gregorni2 (German) <gregorniehl@web.de>\n "
+          "Milo Ivir (Croatian) <mail@milotype.de>n "
           "Gabriel Brand (German) <gabr.brand@gmail.com>\n "
           "Josué Martell (Spanish) <josue.martell17@gmail.com>\n "
           "Óscar Fernández Díaz (Spanish) <oscfdezdz@tuta.io>\n "

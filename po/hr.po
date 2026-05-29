@@ -1,0 +1,233 @@
+# Croatian translation for pinapp.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the pinapp package.
+# Milo Ivir <mail@milotype.de>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pinapp\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-09 21:52+0100\n"
+"PO-Revision-Date: 2026-05-11 13:39+0200\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language-Team: \n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-home-view.ui:21
+msgid "Pins"
+msgstr "Pins"
+
+#: data/io.github.fabrialberio.pinapp.desktop.in:3
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:9
+msgid "Create and edit app shortcuts"
+msgstr "Stvori i uredi prečace aplikacija"
+
+#: data/io.github.fabrialberio.pinapp.desktop.in:10
+msgid "GNOME;GTK;Apps;Shortcuts;Icons;"
+msgstr "GNOME;GTK;Aplikacije;Prečaci;Ikone;"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
+msgid "Pins allows you to customize your app menu by editing .desktop files."
+msgstr "Pins omogućuje prilagodbu izbornika aplikacija uređivanjem .desktop datoteka."
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
+msgid "Some of the things you can do are:"
+msgstr "Neke od stvari koje se mogu raditi:"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:18
+msgid "changing an app icon that doesn't fit in with your theme,"
+msgstr "mijenjanje ikone aplikacije koja ne odgovara tvojoj temi,"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:19
+msgid "creating custom shortcuts to websites,"
+msgstr "izrada prilagođenih prečaca za web-stranice,"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:20
+msgid "hiding apps you don't want to see,"
+msgstr "skrivanje aplikacija koje ne želiš vidjeti,"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:21
+msgid "editing properties in .desktop files."
+msgstr "uređivanje svojstava u .desktop datotekama."
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:33
+msgid "Screenshot of Pins showing the app grid"
+msgstr "Snimka ekrana Pins-a koja prikazuje mrežu aplikacija"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:39
+msgid "Screenshot of Pins showing an opened file"
+msgstr "Snimka ekrana Pins-a koja prikazuje jednu otvorenu datoteku"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
+msgid "Screenshot of Pins showing an opened file on a small screen"
+msgstr "Snimka ekrana Pins-a koja prikazuje jednu otvorenu datoteku na malom ekranu"
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:6
+msgid "Show all apps"
+msgstr "Prikaži sve aplikacije"
+
+#: data/io.github.fabrialberio.pinapp.gschema.xml:18
+msgid "List of desktop file search paths in order of priority"
+msgstr "Popis staza pretraživanja desktop datoteka po prioritetu"
+
+#: src/pins-add-key-dialog.ui:4
+msgid "Add New Key"
+msgstr "Dodaj novi ključ"
+
+#: src/pins-add-key-dialog.ui:11
+msgid "Key"
+msgstr "Ključ"
+
+#: src/pins-add-key-dialog.ui:17
+msgid "_Cancel"
+msgstr "_Odustani"
+
+#: src/pins-add-key-dialog.ui:18
+msgid "_Add"
+msgstr "_Dodaj"
+
+#: src/pins-home-view.ui:15 src/pins-home-view.ui:157
+#: src/shortcuts-dialog.ui:21
+msgid "Add New App"
+msgstr "Dodaj novu aplikaciju"
+
+#: src/pins-home-view.ui:26
+msgid "Main Menu"
+msgstr "Glavni izbornik"
+
+#: src/pins-home-view.ui:33 src/shortcuts-dialog.ui:27
+msgid "Search"
+msgstr "Traži"
+
+#: src/pins-home-view.ui:55
+msgid "Search apps by name or field content"
+msgstr "Traži aplikacije prema imenu ili sadržaju polja"
+
+#: src/pins-home-view.ui:73
+msgid "Edited"
+msgstr "Uređeno"
+
+#: src/pins-home-view.ui:81
+msgid "System"
+msgstr "Sustav"
+
+#: src/pins-home-view.ui:89
+msgid "Hidden"
+msgstr "Skriveno"
+
+#: src/pins-home-view.ui:97 src/pins-file-view.ui:142
+msgid "Autostart"
+msgstr "Automatsko pokretanje"
+
+#: src/pins-home-view.ui:130
+msgid "Loading Apps"
+msgstr "Učitavanje aplikacija"
+
+#: src/pins-home-view.ui:145
+msgid "No Apps Found"
+msgstr "Nije pronađena nijedna aplikacija"
+
+#: src/pins-home-view.ui:176
+msgid "Show _All Apps"
+msgstr "_Prikaži sve aplikacije"
+
+#: src/pins-home-view.ui:182
+msgid "_Keyboard Shortcuts"
+msgstr "_Tipkovni prečaci"
+
+#: src/pins-home-view.ui:186
+msgid "_About Pins"
+msgstr "_O aplikaciji Pins"
+
+#: src/pins-file-view.ui:18
+msgid "More Options"
+msgstr "Više opcija"
+
+#: src/pins-file-view.ui:25
+msgid "Delete"
+msgstr "Izbriši"
+
+#: src/pins-file-view.ui:74 src/pins-key-row.ui:9
+msgid "Erase Changes"
+msgstr "Izbriši promjene"
+
+#: src/pins-file-view.ui:94
+msgid "Pick Icon"
+msgstr "Odaberi ikonu"
+
+#: src/pins-file-view.ui:145
+msgid "Launch this application on login"
+msgstr "Pokreni ovu aplikaciju prilikom prijave"
+
+#: src/pins-file-view.ui:162
+msgid "Invisible"
+msgstr "Nevidljivo"
+
+#: src/pins-file-view.ui:165
+msgid "Hide this application in the app menu"
+msgstr "Sakrij ovu aplikaciju u izborniku aplikacije"
+
+#: src/pins-file-view.ui:198
+msgid "Add Key"
+msgstr "Dodaj ključ"
+
+#: src/pins-file-view.ui:224
+msgid "Open With…"
+msgstr "Otvori s …"
+
+#: src/pins-file-view.ui:228
+msgid "Open Containing Folder…"
+msgstr "Otvori sadržajnu mapu …"
+
+#: src/pins-file-view.ui:232
+msgid "Duplicate"
+msgstr "Dupliciraj"
+
+#: src/pins-key-row.ui:21
+msgid "Remove Key"
+msgstr "Ukloni ključ"
+
+#: src/pins-key-row.ui:32
+msgid "Select Locale"
+msgstr "Odaberi jezik"
+
+#: src/pins-pick-icon-popover.ui:18
+msgid "Search for icons"
+msgstr "Traži ikone"
+
+#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
+msgid "Load Icon from File"
+msgstr "Učitaj ikonu iz datoteke"
+
+#: src/pins-window.ui:14
+msgid "All Apps"
+msgstr "Sve aplikacije"
+
+#: src/pins-window.ui:46
+msgid "Error Opening File"
+msgstr "Greška prilikom otvaranja datoteke"
+
+#: src/shortcuts-dialog.ui:6
+msgid "General"
+msgstr "Opće"
+
+#: src/shortcuts-dialog.ui:9
+msgid "Show Shortcuts"
+msgstr "Prikaži prečace"
+
+#: src/shortcuts-dialog.ui:15
+msgid "Quit"
+msgstr "Zatvori aplikaciju"
+
+#: src/pins-desktop-file.c:107
+#, c-format
+msgid "Could not open file."
+msgstr "Nije bilo moguće otvoriti datoteku."
+
+#: src/pins-key-row.c:26
+msgid "(Unlocalized)"
+msgstr "(Nelokalizirano)"
