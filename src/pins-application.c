@@ -92,6 +92,7 @@ pins_application_about_action (GSimpleAction *action, GVariant *parameter,
           "Irénée Thirion (French) <irenee.thirion@e.email>\n "
           "abrusle (French)\n "
           "Fabrizio Alberio (Italian)\n"
+          "Ekaterine Papava (Georgian) <papava.e@gtu.ge>\n"
           "Heimen Stoffels (Dutch) <vistausss@fastmail.com>\n"
           "Mejans (Occitan)\n "
           "Filipe Motta (Portoguese) <luizfilipemotta@gmail.com>\n"
