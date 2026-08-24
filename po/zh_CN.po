@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-09 21:52+0100\n"
-"PO-Revision-Date: 2025-11-10 14:09+0800\n"
+"POT-Creation-Date: 2026-08-24 18:18+0200\n"
+"PO-Revision-Date: 2026-08-24 13:05+0200\n"
 "Last-Translator: 浅夏随风 <yesionio@outlook.com>\n"
 "Language-Team: Chinese (China)\n"
 "Language: zh_CN\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Gtranslator 49.0\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-home-view.ui:21
 msgid "Pins"
@@ -62,10 +62,15 @@ msgid "Screenshot of Pins showing the app grid"
 msgstr "Pins 显示应用网格时的截图"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:39
+#, fuzzy
+msgid "Screenshot of Pins showing the search view"
+msgstr "Pins 显示应用网格时的截图"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
 msgid "Screenshot of Pins showing an opened file"
 msgstr "Pins 显示一个编辑中文件的截图"
 
-#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:51
 msgid "Screenshot of Pins showing an opened file on a small screen"
 msgstr "Pins 在小屏幕中显示一个编辑中文件的截图"
 
@@ -93,7 +98,8 @@ msgstr "_取消"
 msgid "_Add"
 msgstr "_新增"
 
-#: src/pins-home-view.ui:15 src/pins-home-view.ui:157 src/shortcuts-dialog.ui:21
+#: src/pins-home-view.ui:15 src/pins-home-view.ui:157
+#: src/shortcuts-dialog.ui:21
 msgid "Add New App"
 msgstr "添加新应用"
 
@@ -201,7 +207,7 @@ msgstr "选择区域"
 msgid "Search for icons"
 msgstr "搜索图标"
 
-#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
+#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:126
 msgid "Load Icon from File"
 msgstr "从文件中加载图标"
 
@@ -224,6 +230,12 @@ msgstr "显示快捷键"
 #: src/shortcuts-dialog.ui:15
 msgid "Quit"
 msgstr "退出"
+
+#: src/pins-application.c:102
+msgid "translator_credits"
+msgstr ""
+"Yesionio <yesionio@outlook.com>\n"
+"浅夏随风 <yesionio@outlook.com>"
 
 #: src/pins-desktop-file.c:107
 #, c-format

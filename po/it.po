@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-09 21:52+0100\n"
-"PO-Revision-Date: 2026-01-09 21:53+0100\n"
+"POT-Creation-Date: 2026-08-24 18:18+0200\n"
+"PO-Revision-Date: 2026-08-24 12:56+0200\n"
 "Last-Translator: Fabrizio Alberio <fabrizio.alberio@gmail.com>\n"
 "Language-Team: Italian <fabrizio.alberio@gmail.com>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-home-view.ui:21
 msgid "Pins"
@@ -62,10 +62,14 @@ msgid "Screenshot of Pins showing the app grid"
 msgstr "Schermata della griglia delle applicazioni di Pins"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:39
+msgid "Screenshot of Pins showing the search view"
+msgstr "Schermata della griglia delle applicazioni di Pins"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
 msgid "Screenshot of Pins showing an opened file"
 msgstr "Schermata di un file aperto in Pins"
 
-#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:51
 msgid "Screenshot of Pins showing an opened file on a small screen"
 msgstr "Schermata di un file aperto in Pins su uno schermo piccolo"
 
@@ -93,7 +97,8 @@ msgstr "Annulla"
 msgid "_Add"
 msgstr "Aggiungi"
 
-#: src/pins-home-view.ui:15 src/pins-home-view.ui:157 src/shortcuts-dialog.ui:21
+#: src/pins-home-view.ui:15 src/pins-home-view.ui:157
+#: src/shortcuts-dialog.ui:21
 msgid "Add New App"
 msgstr "Aggiungi applicazione"
 
@@ -201,7 +206,7 @@ msgstr "Seleziona localizzazione"
 msgid "Search for icons"
 msgstr "Cerca tra le icone"
 
-#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
+#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:126
 msgid "Load Icon from File"
 msgstr "Carica icona da file"
 
@@ -224,6 +229,10 @@ msgstr "Mostra scorciatoie"
 #: src/shortcuts-dialog.ui:15
 msgid "Quit"
 msgstr "Esci"
+
+#: src/pins-application.c:102
+msgid "translator_credits"
+msgstr "Fabrizio Alberio"
 
 #: src/pins-desktop-file.c:107
 #, c-format

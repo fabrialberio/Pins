@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.fabrialberio.pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-09 21:52+0100\n"
-"PO-Revision-Date: 2025-02-05 18:05+0100\n"
+"POT-Creation-Date: 2026-08-24 18:18+0200\n"
+"PO-Revision-Date: 2026-08-24 12:59+0200\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
 "Language: tr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.9\n"
 
 #: data/io.github.fabrialberio.pinapp.desktop.in:2 src/pins-home-view.ui:21
 msgid "Pins"
@@ -67,10 +67,14 @@ msgid "Screenshot of Pins showing the app grid"
 msgstr ""
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:39
-msgid "Screenshot of Pins showing an opened file"
+msgid "Screenshot of Pins showing the search view"
 msgstr ""
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
+msgid "Screenshot of Pins showing an opened file"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:51
 msgid "Screenshot of Pins showing an opened file on a small screen"
 msgstr ""
 
@@ -100,7 +104,8 @@ msgstr "İptal"
 msgid "_Add"
 msgstr ""
 
-#: src/pins-home-view.ui:15 src/pins-home-view.ui:157 src/shortcuts-dialog.ui:21
+#: src/pins-home-view.ui:15 src/pins-home-view.ui:157
+#: src/shortcuts-dialog.ui:21
 #, fuzzy
 msgid "Add New App"
 msgstr "Yeni Uygulama Ekle"
@@ -217,7 +222,7 @@ msgstr "Yerel"
 msgid "Search for icons"
 msgstr ""
 
-#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
+#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:126
 msgid "Load Icon from File"
 msgstr ""
 
@@ -245,6 +250,10 @@ msgstr "Kısayolları Göster"
 #, fuzzy
 msgid "Quit"
 msgstr "Çık"
+
+#: src/pins-application.c:102
+msgid "translator_credits"
+msgstr "Sabri Ünal <libreajans@gmail.com>"
 
 #: src/pins-desktop-file.c:107
 #, c-format

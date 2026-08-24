@@ -80,29 +80,6 @@ pins_application_about_action (GSimpleAction *action, GVariant *parameter,
                                gpointer user_data)
 {
     static const char *developers[] = { "Fabrizio Alberio", NULL };
-    // This would be better handled as _("translator-credits")
-    static const char *translators
-        = "Ahmed Najmawi (Arabic) <iramosu@protonmail.com>\n "
-          "Yesionio (Chinese) <yesionio@outlook.com>\n"
-          "gregorni2 (German) <gregorniehl@web.de>\n "
-          "Milo Ivir (Croatian) <mail@milotype.de>n "
-          "Gabriel Brand (German) <gabr.brand@gmail.com>\n "
-          "Josué Martell (Spanish) <josue.martell17@gmail.com>\n "
-          "Óscar Fernández Díaz (Spanish) <oscfdezdz@tuta.io>\n "
-          "Irénée Thirion (French) <irenee.thirion@e.email>\n "
-          "abrusle (French)\n "
-          "Fabrizio Alberio (Italian)\n"
-          "Ekaterine Papava (Georgian) <papava.e@gtu.ge>\n"
-          "Heimen Stoffels (Dutch) <vistausss@fastmail.com>\n"
-          "Mejans (Occitan)\n "
-          "Filipe Motta (Portoguese) <luizfilipemotta@gmail.com>\n"
-          "johnpeter19 (Portoguese) <johnppetersa@gmail.com>\n"
-          "Fyodor Sobolev (Russian)\n "
-          "David Lapshin (Russian)\n "
-          "Alexmelman88 (Russian)\n "
-          "Vladimir Kosolapov (Russian)\n"
-          "Sabri Ünal (Turkish) <libreajans@gmail.com>\n "
-          "Oleksii \"Grinka\" (Ukrainian) <grinka@tuta.io>";
 
     PinsApplication *self = user_data;
     GtkWindow *window = NULL;
@@ -122,7 +99,7 @@ pins_application_about_action (GSimpleAction *action, GVariant *parameter,
         "license-type", GTK_LICENSE_GPL_3_0,
         "website", "https://github.com/fabrialberio/pinapp",
         "issue-url", "https://github.com/fabrialberio/pinapp/issues",
-        "translator-credits", translators,
+        "translator-credits", _("translator_credits"),
         NULL);
     // clang-format on
 }

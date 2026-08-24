@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-09 21:52+0100\n"
+"POT-Creation-Date: 2026-08-24 18:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,10 +59,14 @@ msgid "Screenshot of Pins showing the app grid"
 msgstr ""
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:39
-msgid "Screenshot of Pins showing an opened file"
+msgid "Screenshot of Pins showing the search view"
 msgstr ""
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
+msgid "Screenshot of Pins showing an opened file"
+msgstr ""
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:51
 msgid "Screenshot of Pins showing an opened file on a small screen"
 msgstr ""
 
@@ -90,7 +94,8 @@ msgstr ""
 msgid "_Add"
 msgstr ""
 
-#: src/pins-home-view.ui:15 src/pins-home-view.ui:157 src/shortcuts-dialog.ui:21
+#: src/pins-home-view.ui:15 src/pins-home-view.ui:157
+#: src/shortcuts-dialog.ui:21
 msgid "Add New App"
 msgstr ""
 
@@ -198,7 +203,7 @@ msgstr ""
 msgid "Search for icons"
 msgstr ""
 
-#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
+#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:126
 msgid "Load Icon from File"
 msgstr ""
 
@@ -220,6 +225,12 @@ msgstr ""
 
 #: src/shortcuts-dialog.ui:15
 msgid "Quit"
+msgstr ""
+
+#: src/pins-application.c:102
+# Add your name here; if you are not the first translator add yourself to the 
+# end of the list instead (see de.po for an example).
+msgid "translator_credits"
 msgstr ""
 
 #: src/pins-desktop-file.c:107

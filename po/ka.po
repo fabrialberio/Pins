@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinapp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-09 21:52+0100\n"
+"POT-Creation-Date: 2026-08-24 18:18+0200\n"
 "PO-Revision-Date: 2026-08-22 09:34+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
@@ -32,7 +32,9 @@ msgstr "GNOME;GTK;Apps;Shortcuts;Icons;ხატულები;აპები;
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:15
 msgid "Pins allows you to customize your app menu by editing .desktop files."
-msgstr "Pins გაძლევთ საშუალებას, მოირგოთ თქვენი აპის მენიუ .desktop ფაილების ჩასწორებით."
+msgstr ""
+"Pins გაძლევთ საშუალებას, მოირგოთ თქვენი აპის მენიუ .desktop ფაილების "
+"ჩასწორებით."
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:16
 msgid "Some of the things you can do are:"
@@ -59,10 +61,15 @@ msgid "Screenshot of Pins showing the app grid"
 msgstr "Pins-ის ეკრანის ანაბეჭდი აპების ბადით"
 
 #: data/io.github.fabrialberio.pinapp.metainfo.xml.in:39
+#, fuzzy
+msgid "Screenshot of Pins showing the search view"
+msgstr "Pins-ის ეკრანის ანაბეჭდი აპების ბადით"
+
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
 msgid "Screenshot of Pins showing an opened file"
 msgstr "Pins-ის ეკრანის ანაბეჭდი გახსნილი ფაილით"
 
-#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:45
+#: data/io.github.fabrialberio.pinapp.metainfo.xml.in:51
 msgid "Screenshot of Pins showing an opened file on a small screen"
 msgstr "Pins-ის ეკრანის ანაბეჭდი გახსნილი ფაილით პატარა ეკრანზე"
 
@@ -199,7 +206,7 @@ msgstr "აირჩიეთ ლოკალი"
 msgid "Search for icons"
 msgstr "ხატულების ძებნა"
 
-#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:111
+#: src/pins-pick-icon-popover.ui:23 src/pins-pick-icon-popover.c:126
 msgid "Load Icon from File"
 msgstr "ხატულას ჩატვირთვა ფაილიდან"
 
@@ -222,6 +229,10 @@ msgstr "მალსახმობების ჩვენება"
 #: src/shortcuts-dialog.ui:15
 msgid "Quit"
 msgstr "გასვლა"
+
+#: src/pins-application.c:102
+msgid "translator_credits"
+msgstr "Ekaterine Papava <papava.e@gtu.ge>"
 
 #: src/pins-desktop-file.c:107
 #, c-format
