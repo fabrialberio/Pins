@@ -235,6 +235,7 @@ msgstr "Beenden"
 #: src/pins-application.c:102
 msgid "translator_credits"
 msgstr ""
+"Uwe Senkler"
 "gregorni <gregorniehl@web.de>\n"
 "Gabriel Brand <gabr.brand@gmail.com>"
 
