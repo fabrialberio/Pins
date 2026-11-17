@@ -1,6 +1,4 @@
-<div align="center">
-  <img src="https://raw.githubusercontent.com/fabrialberio/Pins/663db59bc836b2cbb50dded7dc25675bc36212fa/data/appstream/file.png">
-</div>
+![Screenshot of Pins showing the Pins application file](data/appstream/file.png)
 
 ## Features
 Pins allows you to customize your app menu by editing .desktop files.
