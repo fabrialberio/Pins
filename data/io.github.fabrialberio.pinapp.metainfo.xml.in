@@ -63,6 +63,14 @@
     <control>touch</control>
   </recommends>
   <releases>
+    <release version="2.4.9" date="2026-11-27">
+      <description translate="no">
+        <p>What's new:</p>
+        <ul>
+          <li>@uwe-ss updated the German translation.</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.4.8" date="2026-09-24">
       <description translate="no">
         <p>What's new:</p>
@@ -85,14 +93,6 @@
         <ul>
           <li>@amoraseca updated the Brazilian Portuguese translation;</li>
           <li>@yakushabb removed ineffective uninstall cleanup commands.</li>
-        </ul>
-      </description>
-    </release>
-    <release version="2.4.5" date="2026-02-01">
-      <description translate="no">
-        <p>Fixes:</p>
-        <ul>
-          <li>memory allocation bug when choosing an icon from file.</li>
         </ul>
       </description>
     </release>
